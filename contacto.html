@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 
 <html>
-
+    <meta charset = "utf-8">
+<header>
+    <title>Formulario de contacto</title>
+</header>
+<body>
+    <h2>Formulario de contacto</h2>
+    <form action = "MAILTO:alehuert@ucm.es, christig@ucm.es, jgarri04@ucm.es, hectoval@ucm.es" method = "post" enctype = "text/plain">
+        Nombre:<br>
+        <input type = "text" name = "name"><br><br>
+        Email:<br>
+        <input type = "text" name = "email"><br><br>
+        Motivo de la consulta:<br>
+        <input type = "radio" value = "evaluación" name = "consulta">Evaluación<br>
+        <input type = "radio" value = "sugerencia" name = "consulta">Sugerencia<br>
+        <input type = "radio" value = "critica" name = "consulta">Crítica<br><br>
+        <input type = "checkbox" value = "terminos">Marque esta casilla para verificar que ha leído nuestros términos y condiciones de servicio.<br><br>
+        Escriba aquí la consulta:<br>
+        <textarea rows = "10" cols = "96"></textarea><br><br>
+        <button type = "submit">Enviar</button>
+    </form>
+</body>
 </html>
