@@ -7,6 +7,8 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Nombre usuario</title>
 
+        <link rel="icon" type="image/png" href="../img/Logo.png"/>
+
         <!-- Bootstrap -->
         <link href="../css/bootstrap.css" rel="stylesheet">
 
@@ -26,11 +28,10 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
-                <div class="bar-div">
-                    <pr class="bar-title">WebMusic</pr>
-                </div>
+                <h3 class="bar-title">WebMusic</h3>
                 <button type="button" class="btn btn-primary pull-right">Cerrar sesión</button>
                 <button type="button" class="btn btn-primary pull-right">Mi perfil</button>
+                <button type="button" class="btn btn-primary pull-right glyphicon glyphicon-open" data-toggle="tooltip" title="Subir canción"></button>
             </div>
         </nav>
 
@@ -45,6 +46,174 @@
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>  
                             </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="fb-profile">
+                    <img class="fb-image-lg" src="../img/Header.jpg" alt="Profile image example" height=400>
+                    <img class="fb-image-profile thumbnail" src="../img/FotoPerfil.jpg" alt="Profile image example">
+                    <div class="fb-profile-text">
+                        <h1>Nombre Usuario</h1>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /container fluid-->  
+
+        <div class="container">
+            <div class="col-sm-8">
+                <div data-spy="scroll" class="tabbable-panel">
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs ">
+                            <li class="active">
+                                <a href="#tab_default_1" data-toggle="tab">Descripción</a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_2" data-toggle="tab">Seguidores</a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_3" data-toggle="tab">Seguidos</a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_4" data-toggle="tab">Canciones</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_default_1">
+
+                                <p>
+                                    My daughter  is good looking, with pleasant personality, smart, well educated, from well cultural and  a religious family background. having respect in heart for others.  
+                                    would like to thanks you for visiting through my daughter;s profile. 
+                                    She has done PG in Human Resources after her graduation. 
+                                    At present working IN INSURANCE sector as Manager Training .
+                                </p>
+                                <h4>About her Family</h4>
+                                <p>
+                                    About her family she belongs to a religious and a well cultural family background. 
+                                    Father - Retired from a Co-operate Bank as a Manager. 
+                                    Mother - she is a home maker. 
+                                    1 younger brother - works for Life Insurance n manages cluster. 
+                                </p>
+                                <h4>Education </h4>
+                                <p>I have done PG in Human Resourses</p>
+                                <h4>Occupation</h4>
+                                <p>At present Working in Insurance sector</p>
+
+                            </div>
+                            <div class="tab-pane" id="tab_default_2">
+                                <div class="user-resume">
+                                    <div>
+                                        <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                    </div>
+                                    <div class="user-resume-info">
+                                        <h3>Nombre usuario</h3>
+                                    </div>
+                                    <div class="user-resume-button">
+                                        <button type="button" class="btn btn-primary pull-right" disabled>Seguir</button>
+                                    </div>
+                                </div>
+                                <div class="user-resume">
+                                    <div>
+                                        <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                    </div>
+                                    <div class="user-resume-info">
+                                        <h3>Nombre usuario</h3>
+                                    </div>
+                                    <div class="user-resume-button">
+                                        <button type="button" class="btn btn-primary pull-right">Seguir</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_default_3">
+                                <div class="user-resume">
+                                    <div>
+                                        <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                    </div>
+                                    <div class="user-resume-info">
+                                        <h3>Nombre usuario</h3>
+                                    </div>
+                                    <div class="user-resume-button">
+                                        <button type="button" class="btn btn-primary pull-right">Seguir</button>
+                                    </div>
+                                </div>
+                                <div class="user-resume">
+                                    <div>
+                                        <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                    </div>
+                                    <div class="user-resume-info">
+                                        <h3>Nombre usuario</h3>
+                                    </div>
+                                    <div class="user-resume-button">
+                                        <button type="button" class="btn btn-primary pull-right" disabled>Seguir</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_default_4">
+                                <div class="user-resume">
+                                    <div>
+                                        <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                    </div>
+                                    <div class="user-resume-info">
+                                        <h3>Nombre canción</h3>
+                                    </div>
+                                    <div class="user-resume-button">
+                                        <button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button>
+                                    </div>
+                                </div>
+                                <div class="user-resume">
+                                    <div>
+                                        <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                    </div>
+                                    <div class="user-resume-info">
+                                        <h3>Nombre canción</h3>
+                                    </div>
+                                    <div class="user-resume-button">
+                                        <button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="menu_title">
+                        Gustos musicales
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Pop:</label>
+                                    <p>Pablo ALborán</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rock:</label>
+                                    <p>ACDC</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hip-Hop:</label>
+                                    <p>SFDK</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Reagge:</label>
+                                    <p>Bob Marley</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>House:</label>
+                                    <p>Carl Cox</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Música clásica:</label>
+                                    <p>James Rhodes</p>
+                                </div>
+                                <button type="submit" class="btn btn-danger btn-block">Follow</button>
+                            </div>
                         </div>
                     </div>
                 </div>

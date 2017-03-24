@@ -11,6 +11,8 @@ html {
 }
 body {
     margin: 0;
+    text-align: justify;
+    font-family: 'Raleway';
 }
 article,
 aside,
@@ -268,7 +270,6 @@ th {
 }
 .glyphicon {
     position: relative;
-    top: 2px;
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
@@ -1288,6 +1289,8 @@ h6,
 }
 p {
     margin: 0 0 10px;
+    text-align: justify;
+    font-family: 'Raleway';
 }
 .lead {
     margin-bottom: 20px;
@@ -3370,8 +3373,8 @@ fieldset[disabled] .btn-warning.focus {
 }
 .btn-danger {
     color: #fff;
-    background-color: #d9534f;
-    border-color: #d43f3a;
+    background-color: #337ab7;
+    border-color: #2e6da4;
 }
 .btn-danger:focus,
 .btn-danger.focus {
@@ -6991,5 +6994,168 @@ Image credits: unsplash.com
 
 @media (min-width: 768px) {
     .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns { border-left:solid 1px rgba(255,255,255,0.10); }
+}
+
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body
+{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.fb-profile img.fb-image-lg{
+    z-index: 0;
+    width: 100%;  
+    margin-bottom: 10px;
+    float:  left;
+}
+
+.fb-image-profile
+{
+    margin: -90px 10px 20px 80px;
+    z-index: 9;
+    width: 20%; 
+    float: left;
+}
+
+/***
+Bootstrap Line Tabs by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+/* Tabs panel */
+.tabbable-panel {
+  border:1px solid #eee;
+  padding: 10px;
+}
+
+/* Default mode */
+.tabbable-line > .nav-tabs {
+  border: none;
+  margin: 0px;
+}
+.tabbable-line > .nav-tabs > li {
+  margin-right: 2px;
+}
+.tabbable-line > .nav-tabs > li > a {
+  border: 0;
+  margin-right: 0;
+  color: #737373;
+}
+.tabbable-line > .nav-tabs > li > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+  border-bottom: 4px solid #fbcdcf;
+}
+.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+  border: 0;
+  background: none !important;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
+.tabbable-line > .nav-tabs > li.active {
+  border-bottom: 4px solid #f3565d;
+  position: relative;
+}
+.tabbable-line > .nav-tabs > li.active > a {
+  border: 0 !important;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
+.tabbable-line > .tab-content {
+  margin-top: -3px;
+  background-color: #fff;
+  border: 0;
+  border-top: 1px solid #eee;
+  padding: 15px 0;
+}
+.portlet .tabbable-line > .tab-content {
+  padding-bottom: 0;
+}
+
+/* Below tabs mode */
+
+.tabbable-line.tabs-below > .nav-tabs > li {
+  border-top: 4px solid transparent;
+}
+.tabbable-line.tabs-below > .nav-tabs > li > a {
+  margin-top: 0;
+}
+.tabbable-line.tabs-below > .nav-tabs > li:hover {
+  border-bottom: 0;
+  border-top: 4px solid #fbcdcf;
+}
+.tabbable-line.tabs-below > .nav-tabs > li.active {
+  margin-bottom: -2px;
+  border-bottom: 0;
+  border-top: 4px solid #f3565d;
+}
+.tabbable-line.tabs-below > .tab-content {
+  margin-top: -10px;
+  border-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.menu_title {
+    padding: 15px 10px;
+    border-bottom: 1px solid #eee;
+    margin: 0 5px;
+}
+
+
+@media (max-width:768px){
+    
+.fb-profile-text>h1{
+    font-weight: 700;
+    font-size:16px;
+}
+
+.fb-image-profile
+{
+    margin: -45px 10px 0px 25px;
+    z-index: 9;
+    width: 20%; 
+}
+}
+
+.upload-button {
+    background: .glyphicon-open;
+}
+
+.user-resume {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-bottom: 1px solid #ECEFF1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-resume-img {
+    border-radius: 50%;
+    border: 1px solid #000;
+    margin-right: 10px;
+}
+
+.user-resume-info {
+    font-family: 'Raleway';
+    display: flex;
+}
+
+.user-resume-button {
+    margin-top: 13px;
 }
 /*# sourceMappingURL=bootstrap.css.map */
