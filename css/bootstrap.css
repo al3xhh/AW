@@ -6804,6 +6804,12 @@ button.close {
     display: inline;
 }
 
+.bar-premium {
+    font-family: 'Raleway';
+    display: inline;
+    margin-left: 10px;
+}
+
 /*
 Fade content bs-carousel with hero headers
 Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
@@ -7051,7 +7057,7 @@ Licensed under MIT
   color: #a6a6a6;
 }
 .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
-  border-bottom: 4px solid #fbcdcf;
+  border-bottom: 4px solid #337ab7;
 }
 .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
   border: 0;
@@ -7065,7 +7071,7 @@ Licensed under MIT
   margin-top: 0px;
 }
 .tabbable-line > .nav-tabs > li.active {
-  border-bottom: 4px solid #f3565d;
+  border-bottom: 4px solid #337ab7;
   position: relative;
 }
 .tabbable-line > .nav-tabs > li.active > a {
