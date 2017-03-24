@@ -7244,11 +7244,11 @@ Licensed under MIT
 
 .centrar-registro {
     width: 50%;
-  height: 60%;
-  overflow: auto;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+    height: 60%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
     text-align: center;
 }
 /* End carousel */
