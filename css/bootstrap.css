@@ -5735,6 +5735,10 @@ button.list-group-item-danger.active:focus {
 }
 .panel-primary {
     border-color: #337ab7;
+    margin-left: 16px;
+    margin-right: 60px;
+    min-width: 235px;
+    max-width: 235px;
 }
 .panel-primary > .panel-heading {
     color: #fff;
@@ -6350,7 +6354,7 @@ button.close {
 }
 .carousel-control {
     position: absolute;
-    top: 0;
+    top: 40px;
     bottom: 0;
     left: 0;
     width: 15%;
@@ -7005,8 +7009,8 @@ Image credits: unsplash.com
 
 
 /* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+Author's custom styles
+========================================================================== */
 
 body
 {
@@ -7036,84 +7040,84 @@ Licensed under MIT
 
 /* Tabs panel */
 .tabbable-panel {
-  border:1px solid #eee;
-  padding: 10px;
+    border:1px solid #eee;
+    padding: 10px;
 }
 
 /* Default mode */
 .tabbable-line > .nav-tabs {
-  border: none;
-  margin: 0px;
+    border: none;
+    margin: 0px;
 }
 .tabbable-line > .nav-tabs > li {
-  margin-right: 2px;
+    margin-right: 2px;
 }
 .tabbable-line > .nav-tabs > li > a {
-  border: 0;
-  margin-right: 0;
-  color: #737373;
+    border: 0;
+    margin-right: 0;
+    color: #737373;
 }
 .tabbable-line > .nav-tabs > li > a > i {
-  color: #a6a6a6;
+    color: #a6a6a6;
 }
 .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
-  border-bottom: 4px solid #337ab7;
+    border-bottom: 4px solid #337ab7;
 }
 .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
-  border: 0;
-  background: none !important;
-  color: #333333;
+    border: 0;
+    background: none !important;
+    color: #333333;
 }
 .tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
-  color: #a6a6a6;
+    color: #a6a6a6;
 }
 .tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
-  margin-top: 0px;
+    margin-top: 0px;
 }
 .tabbable-line > .nav-tabs > li.active {
-  border-bottom: 4px solid #337ab7;
-  position: relative;
+    border-bottom: 4px solid #337ab7;
+    position: relative;
 }
 .tabbable-line > .nav-tabs > li.active > a {
-  border: 0 !important;
-  color: #333333;
+    border: 0 !important;
+    color: #333333;
 }
 .tabbable-line > .nav-tabs > li.active > a > i {
-  color: #404040;
+    color: #404040;
 }
 .tabbable-line > .tab-content {
-  margin-top: -3px;
-  background-color: #fff;
-  border: 0;
-  border-top: 1px solid #eee;
-  padding: 15px 0;
+    margin-top: -3px;
+    background-color: #fff;
+    border: 0;
+    border-top: 1px solid #eee;
+    padding: 15px 0;
 }
 .portlet .tabbable-line > .tab-content {
-  padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* Below tabs mode */
 
 .tabbable-line.tabs-below > .nav-tabs > li {
-  border-top: 4px solid transparent;
+    border-top: 4px solid transparent;
 }
 .tabbable-line.tabs-below > .nav-tabs > li > a {
-  margin-top: 0;
+    margin-top: 0;
 }
 .tabbable-line.tabs-below > .nav-tabs > li:hover {
-  border-bottom: 0;
-  border-top: 4px solid #fbcdcf;
+    border-bottom: 0;
+    border-top: 4px solid #fbcdcf;
 }
 .tabbable-line.tabs-below > .nav-tabs > li.active {
-  margin-bottom: -2px;
-  border-bottom: 0;
-  border-top: 4px solid #f3565d;
+    margin-bottom: -2px;
+    border-bottom: 0;
+    border-top: 4px solid #f3565d;
 }
 .tabbable-line.tabs-below > .tab-content {
-  margin-top: -10px;
-  border-top: 0;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 15px;
+    margin-top: -10px;
+    border-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
 }
 
 .menu_title {
@@ -7124,18 +7128,18 @@ Licensed under MIT
 
 
 @media (max-width:768px){
-    
-.fb-profile-text>h1{
-    font-weight: 700;
-    font-size:16px;
-}
 
-.fb-image-profile
-{
-    margin: -45px 10px 0px 25px;
-    z-index: 9;
-    width: 20%; 
-}
+    .fb-profile-text>h1{
+        font-weight: 700;
+        font-size:16px;
+    }
+
+    .fb-image-profile
+    {
+        margin: -45px 10px 0px 25px;
+        z-index: 9;
+        width: 20%; 
+    }
 }
 
 .upload-button {
@@ -7164,4 +7168,74 @@ Licensed under MIT
 .user-resume-button {
     margin-top: 13px;
 }
+/* carousel */
+.media-carousel 
+{
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+    margin-top: 30px;
+}
+/* Previous button  */
+.media-carousel .carousel-control.left 
+{
+    left: -12px;
+    background-image: none;
+    background: none repeat scroll 0 0 #222222;
+    border: 4px solid #FFFFFF;
+    border-radius: 23px 23px 23px 23px;
+    height: 40px;
+    width : 40px;
+    margin-top: 30px
+}
+/* Next button  */
+.media-carousel .carousel-control.right 
+{
+    right: -12px !important;
+    background-image: none;
+    background: none repeat scroll 0 0 #222222;
+    border: 4px solid #FFFFFF;
+    border-radius: 23px 23px 23px 23px;
+    height: 40px;
+    width : 40px;
+    margin-top: 30px
+}
+/* Changes the position of the indicators */
+.media-carousel .carousel-indicators 
+{
+    right: 50%;
+    top: auto;
+    bottom: 0px;
+    margin-right: -19px;
+}
+/* Changes the colour of the indicators */
+.media-carousel .carousel-indicators li 
+{
+    background: #c0c0c0;
+}
+.media-carousel .carousel-indicators .active 
+{
+    background: #333333;
+}
+.media-carousel img
+{
+    width: 250px;
+    height: 100px
+}
+
+.container-carousel-home {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.div-home {
+    display: flex;
+}
+
+.carousel-home {
+    margin-left: 100px;
+}
+/* End carousel */
 /*# sourceMappingURL=bootstrap.css.map */
