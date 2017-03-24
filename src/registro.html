@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Registro</title>
+
+        <link rel="icon" type="image/png" href="../img/Logo.png"/>
+
+        <!-- Bootstrap -->
+        <link href="../css/bootstrap.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../js/bootstrap.min.js"></script>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
+                <h3 class="bar-title">WebMusic</h3>
+            </div>
+        </nav>
+
+        <div class="centrar-registro">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <section>      
+                            <h1 class="entry-title"><span>Registro</span> </h1>
+                            <hr>
+                            <form class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" >        
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Correo electrónico<span class="text-danger">*</span></label>
+                                    <div class="col-md-8 col-sm-9">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                            <input type="email" class="form-control" name="emailid" id="emailid" placeholder="Escribe tu correo electrónico" value="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Contraseña<span class="text-danger">*</span></label>
+                                    <div class="col-md-5 col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Elige una contraseña(5-15 caracteres)" value="">
+                                        </div>   
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Repite la ccontraseña<span class="text-danger">*</span></label>
+                                    <div class="col-md-5 col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Repite la ccontraseña" value="">
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Nombre de usuario<span class="text-danger">*</span></label>
+                                    <div class="col-md-8 col-sm-9">
+                                        <input type="text" class="form-control" name="mem_name" id="mem_name" placeholder="Escribe tu nombre de usuario" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Foto de perfil<br>
+                                        <small>(opcional)</small></label>
+                                    <div class="col-md-5 col-sm-8">
+                                        <div class="input-group"> <span class="input-group-addon" id="file_upload"><i class="glyphicon glyphicon-upload"></i></span>
+                                            <input type="file" name="file_nm" id="file_nm" class="form-control upload" aria-describedby="file_upload">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input name="Submit" type="submit" value="Registrarse" class="btn btn-primary">
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
