@@ -7254,5 +7254,21 @@ Licensed under MIT
 .boton-registrar {
     display: inline;
 }
+
+.colocar-buscar{
+	
+}
+
+.info-buscar{
+	padding-top: 30px;
+	font-weight: 700;
+    font-size:16px;
+	margin-left: 350px;
+}
+
+.img-buscar{
+	margin-left: 100px;
+	float: left;
+}
 /* End carousel */
 /*# sourceMappingURL=bootstrap.css.map */
