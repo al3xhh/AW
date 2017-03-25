@@ -7243,11 +7243,16 @@ Licensed under MIT
 }
 
 .Absolute-Center.is-Responsive {
-  width: 50%; 
-  height: 50%;
-  min-width: 200px;
-  max-width: 400px;
-  padding: 40px;
+    width: 50%; 
+    height: 50%;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 40px;
+    text-align: center;
+}
+
+.boton-registrar {
+    display: inline;
 }
 /* End carousel */
 /*# sourceMappingURL=bootstrap.css.map */
