@@ -7255,9 +7255,6 @@ Licensed under MIT
     display: inline;
 }
 
-.colocar-buscar{
-	
-}
 
 .info-buscar{
 	padding-top: 30px;
@@ -7270,5 +7267,12 @@ Licensed under MIT
 	margin-left: 100px;
 	float: left;
 }
+
+.seguidores-seguidos{
+	margin-left:100px;
+	margin-top:50px;
+	padding-bottom:30px;
+{
+
 /* End carousel */
 /*# sourceMappingURL=bootstrap.css.map */
