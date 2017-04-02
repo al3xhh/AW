@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Webmusic</title>
+        <title>Buscar(registrado)</title>
 
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
 
@@ -28,37 +28,50 @@
 		<nav class="navbar navbar-default">
             <div class="container-fluid">
                 <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
-                <h4 class="bar-premium pull-left">Premium/No premium</h4>
                 <h3 class="bar-title">WebMusic</h3>
-                <button type="button" class="btn btn-primary pull-right">Cerrar sesiÃ³n</button>
-                <button type="button" class="btn btn-primary pull-right">Mi perfil</button>
-                <button type="button" class="btn btn-primary pull-right glyphicon glyphicon-open" data-toggle="tooltip" title="Subir canciÃ³n"></button>
+                <button type="button" class="btn btn-primary pull-right">Inicio sesión</button>
+                <form action="registro.html" class="boton-registrar">
+                    <button type="submit" class="btn btn-primary pull-right">Registrarse</button>
+                </form>
             </div>
         </nav>
 		
 		<div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <div id="imaginary_container"> 
-                        <div class="input-group stylish-input-group">
-                            <input type="text" class="form-control"  placeholder="Buscar" >
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>  
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div class="cuadrar-filtro">
+					<div class="container-option">
+						<select name="Filtro">
+						  <option value="1">Todo</option> 
+						  <option value="2">Cancion</option> 
+						  <option value="3">Artista</option>
+						  <option value="4">Disco</option> 
+						  <option value="5">Fecha de lanzamiento</option> 
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-6 col-sm-offset-3">
+				
+					<div id="imaginary_container"> 
+						<div class="input-group stylish-input-group">
+							<input type="text" class="form-control"  placeholder="Buscar" >
+							<span class="input-group-addon">
+								<button type="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>  
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>	
         </div>
+		  
 		
 		<div class="container-fluid">
 			<div class="row">
 				<div class="fb-profile">
 					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
 					<div class="info-buscar">
-						 <p>Nombre de la canciÃ³n: </p>
+						 <p>Nombre de la canción: </p>
 						 <p>Artista: </p>
 						 <p>Disco: </p>
 						 <p>Duracion: </p>
@@ -72,7 +85,7 @@
 				<div class="fb-profile">
 					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
 					<div class="info-buscar">
-						 <p>Nombre de la canciÃ³n: </p>
+						 <p>Nombre de la canción: </p>
 						 <p>Artista: </p>
 						 <p>Disco: </p>
 						 <p>Duracion: </p>
@@ -86,7 +99,7 @@
 				<div class="fb-profile">
 					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
 					<div class="info-buscar">
-						 <p>Nombre de la canciÃ³n: </p>
+						 <p>Nombre de la canción: </p>
 						 <p>Artista: </p>
 						 <p>Disco: </p>
 						 <p>Duracion: </p>
@@ -100,7 +113,7 @@
 				<div class="fb-profile">
 					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
 					<div class="info-buscar">
-						 <p>Nombre de la canciÃ³n: </p>
+						 <p>Nombre de la canción: </p>
 						 <p>Artista: </p>
 						 <p>Disco: </p>
 						 <p>Duracion: </p>
@@ -118,7 +131,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 footer-nav animated fadeInUp">
-                        <h4>Menu â€”</h4>
+                        <h4>Menu —</h4>
                         <div class="col-md-6">
                             <ul class="pages">
                             </ul>

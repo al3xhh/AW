@@ -7135,7 +7135,22 @@ Licensed under MIT
 	margin-left:100px;
 	margin-top:50px;
 	padding-bottom:30px;
-{
+}
+
+.cuadrar-filtro{
+	margin-left:650px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.alinear-listas{
+	margin-left:120px;
+}
+
+.separa-filas{
+	margin-top:10px;
+	margin-bottom:50px;
+}
 
 /* End carousel */
 /*# sourceMappingURL=bootstrap.css.map */

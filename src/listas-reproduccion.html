@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Buscar(sin registrar)</title>
+        <title>Listas de reproduccion</title>
 
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
 
@@ -29,100 +29,77 @@
             <div class="container-fluid">
                 <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
                 <h3 class="bar-title">WebMusic</h3>
-                <button type="button" class="btn btn-primary pull-right">Inicio sesión</button>
+                <button type="button" class="btn btn-primary pull-right">Inicio sesiÃ³n</button>
                 <form action="registro.html" class="boton-registrar">
                     <button type="submit" class="btn btn-primary pull-right">Registrarse</button>
                 </form>
             </div>
         </nav>
+
 		
-		<div class="container-fluid">
-            <div class="row">
-				<div class="cuadrar-filtro">
-					<div class="container-option">
-						<select name="Filtro">
-						  <option value="1">Todo</option> 
-						  <option value="2">Cancion</option> 
-						  <option value="3">Artista</option>
-						  <option value="4">Disco</option> 
-						  <option value="5">Fecha de lanzamiento</option> 
-						</select>
-					</div>
+		<div class="alinear-listas">
+			<div class="separa-filas">
+				<div class="row">
+				  <div class="col-md-2">Eliminar lista</div>
+				  <div class="col-md-2">Imagen</div>
+				  <div class="col-md-2">Nombre</div>
+				  <div class="col-md-2">Fecha de creacion</div>
+				  <div class="col-md-2">Numero de canciones</div>
 				</div>
-				<div class="col-sm-6 col-sm-offset-3">
+			</div>
 				
-					<div id="imaginary_container"> 
-						<div class="input-group stylish-input-group">
-							<input type="text" class="form-control"  placeholder="Buscar" >
-							<span class="input-group-addon">
-								<button type="submit">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>  
-							</span>
-						</div>
+			<div class="separa-filas">
+				<div class="row">
+					<div class="col-md-2">
+						<button type="button" class="btn btn-default">Eliminar</button>
 					</div>
-				</div>
-			</div>	
-        </div>
-		
-		
-		
-		
-		<div class="container-fluid">
-			<div class="row">
-				<div class="fb-profile">
-					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-					<div class="info-buscar">
-						 <p>Nombre de la canción: </p>
-						 <p>Artista: </p>
-						 <p>Disco: </p>
-						 <p>Duracion: </p>
+					<div class="col-md-2">
+						<img  class="img-lista" src="../img/FotoLista.jpg" alt="img" title="image" height="70" width="70"/>
 					</div>
+					<div class="col-md-2">Lista1</div>
+					<div class="col-md-2">01/04/2017</div>
+					<div class="col-md-2">5</div>
 				</div>
 			</div>
-		</div>
-	
-		<div class="container-fluid">
-			<div class="row">
-				<div class="fb-profile">
-					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-					<div class="info-buscar">
-						 <p>Nombre de la canción: </p>
-						 <p>Artista: </p>
-						 <p>Disco: </p>
-						 <p>Duracion: </p>
+			
+			<div class="separa-filas">
+				<div class="row">
+					<div class="col-md-2">
+						<button type="button" class="btn btn-default">Eliminar</button>
 					</div>
+					<div class="col-md-2">
+						<img  class="img-lista" src="../img/FotoLista.jpg" alt="img" title="image" height="70" width="70"/>
+					</div>
+					<div class="col-md-2">Lista2</div>
+					<div class="col-md-2">17/04/2017</div>
+					<div class="col-md-2">15</div>
 				</div>
 			</div>
-		</div>
-	
-		<div class="container-fluid">
-			<div class="row">
-				<div class="fb-profile">
-					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-					<div class="info-buscar">
-						 <p>Nombre de la canción: </p>
-						 <p>Artista: </p>
-						 <p>Disco: </p>
-						 <p>Duracion: </p>
+			
+			
+			<div class="separa-filas">
+				<div class="row">
+					<div class="col-md-2">
+						<button type="button" class="btn btn-default">Eliminar</button>
 					</div>
+					<div class="col-md-2">
+						<img  class="img-lista" src="../img/FotoLista.jpg" alt="img" title="image" height="70" width="70"/>
+					</div>
+					<div class="col-md-2">Lista3</div>
+					<div class="col-md-2">31/08/2017</div>
+					<div class="col-md-2">86</div>
 				</div>
 			</div>
-		</div>
-	
-		<div class="container-fluid">
-			<div class="row">
-				<div class="fb-profile">
-					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-					<div class="info-buscar">
-						 <p>Nombre de la canción: </p>
-						 <p>Artista: </p>
-						 <p>Disco: </p>
-						 <p>Duracion: </p>
-					</div>
-				</div>
+			
+			
+			<div class="panel-body">
+				Â¿Quieres crear una lista nueva?   
+				<input type="text" placeholder="Introduce el nombre";>
+				<button type="button" class="btn btn-default">Crear</button>
 			</div>
 		</div>
+		
+		
 		
 		<div class="footer-container">
             <footer class="footer-bs">
@@ -133,7 +110,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 footer-nav animated fadeInUp">
-                        <h4>Menu —</h4>
+                        <h4>Menu â€”</h4>
                         <div class="col-md-6">
                             <ul class="pages">
                             </ul>
@@ -155,8 +132,6 @@
                 </div>
             </footer>
         </div>
-		
-		
 		
 	</body>
 </html>
