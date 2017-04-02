@@ -11,8 +11,6 @@ html {
 }
 body {
     margin: 0;
-    text-align: justify;
-    font-family: 'Raleway';
 }
 article,
 aside,
@@ -270,11 +268,12 @@ th {
 }
 .glyphicon {
     position: relative;
+    top: 1px;
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
     font-weight: normal;
-    line-height: 0;
+    line-height: 1;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1289,8 +1288,6 @@ h6,
 }
 p {
     margin: 0 0 10px;
-    text-align: justify;
-    font-family: 'Raleway';
 }
 .lead {
     margin-bottom: 20px;
@@ -1589,14 +1586,7 @@ pre code {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 30px;
 }
-
-.footer-container {
-    padding-right: 15px;
-    padding-left: 15px;
-}
-
 @media (min-width: 768px) {
     .container {
         width: 750px;
@@ -1617,16 +1607,10 @@ pre code {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    padding: 5px 5px;
 }
 .row {
     margin-right: -15px;
     margin-left: -15px;
-}
-
-.footer-row {
-    margin-right: auto;
-    margin-left: auto;
 }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
     position: relative;
@@ -1634,12 +1618,6 @@ pre code {
     padding-right: 15px;
     padding-left: 15px;
 }
-
-.margin-logo-footer {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
     float: left;
 }
@@ -1954,10 +1932,6 @@ pre code {
         margin-left: 0;
     }
 }
-#div-footer {
-    text-align: center;
-}
-
 @media (min-width: 992px) {
     .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
         float: left;
@@ -3028,12 +3002,8 @@ select[multiple].input-lg {
 }
 .btn {
     display: inline-block;
-    padding: 5px 12px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    padding: 6px 12px;
     margin-bottom: 0;
-    margin-left: 12px;
-    height: 30px;
     font-size: 14px;
     font-weight: normal;
     line-height: 1.42857143;
@@ -3373,8 +3343,8 @@ fieldset[disabled] .btn-warning.focus {
 }
 .btn-danger {
     color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    background-color: #d9534f;
+    border-color: #d43f3a;
 }
 .btn-danger:focus,
 .btn-danger.focus {
@@ -4195,6 +4165,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
     position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
     border: 1px solid transparent;
 }
 @media (min-width: 768px) {
@@ -4306,7 +4278,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     font-size: 18px;
     line-height: 20px;
 }
-
 .navbar-brand:hover,
 .navbar-brand:focus {
     text-decoration: none;
@@ -4524,9 +4495,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default {
     background-color: #f8f8f8;
     border-color: #e7e7e7;
-    padding-left: 5px;
-    padding-right: 5px;
-    text-align: center;
 }
 .navbar-default .navbar-brand {
     color: #777;
@@ -5502,9 +5470,8 @@ button.list-group-item-danger.active:focus {
 .panel-title {
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 20px;
-    font-style: 
-        color: inherit;
+    font-size: 16px;
+    color: inherit;
 }
 .panel-title > a,
 .panel-title > small,
@@ -5735,10 +5702,6 @@ button.list-group-item-danger.active:focus {
 }
 .panel-primary {
     border-color: #337ab7;
-    margin-left: 16px;
-    margin-right: 60px;
-    min-width: 235px;
-    max-width: 235px;
 }
 .panel-primary > .panel-heading {
     color: #fff;
@@ -6277,7 +6240,6 @@ button.close {
 .carousel-inner {
     position: relative;
     width: 100%;
-    height: 100%;
     overflow: hidden;
 }
 .carousel-inner > .item {
@@ -6354,7 +6316,7 @@ button.close {
 }
 .carousel-control {
     position: absolute;
-    top: 40px;
+    top: 0;
     bottom: 0;
     left: 0;
     width: 15%;
@@ -6431,7 +6393,6 @@ button.close {
     left: 50%;
     z-index: 15;
     width: 60%;
-    height: -100%;
     padding-left: 0;
     margin-left: -30%;
     text-align: center;
@@ -6793,349 +6754,4 @@ button.close {
         display: none !important;
     }
 }
-
-@font-face {
-    font-family: 'Raleway';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v11/QAUlVt1jXOgQavlW5wEfxQLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
-
-.bar-title {
-    font-family: 'Raleway';
-    font-size: 28px;
-    display: inline;
-}
-
-.bar-premium {
-    font-family: 'Raleway';
-    display: inline;
-    margin-left: 10px;
-}
-
-/*
-Fade content bs-carousel with hero headers
-Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
-Image credits: unsplash.com
-*/
-
-/********************************/
-/*       Fade Bs-carousel       */
-/********************************/
-.fade-carousel {
-    position: relative;
-    height: 80vh;
-}
-.fade-carousel .carousel-inner .item {
-    height: 100vh;
-}
-.fade-carousel .carousel-indicators > li {
-    margin: 0 2px;
-    background-color: #f39c12;
-    border-color: #f39c12;
-    opacity: .7;
-}
-.fade-carousel .carousel-indicators > li.active {
-    width: 10px;
-    height: 10px;
-    opacity: 1;
-}
-
-/********************************/
-/*          Hero Headers        */
-/********************************/
-.hero {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    z-index: 3;
-    color: #fff;
-    text-align: center;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
-    -webkit-transform: translate3d(-50%,-50%,0);
-    -moz-transform: translate3d(-50%,-50%,0);
-    -ms-transform: translate3d(-50%,-50%,0);
-    -o-transform: translate3d(-50%,-50%,0);
-    transform: translate3d(-50%,-50%,0);
-}
-.hero h1 {
-    font-size: 6em;    
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-}
-
-.fade-carousel .carousel-inner .item .hero {
-    opacity: 0;
-    -webkit-transition: 2s all ease-in-out .1s;
-    -moz-transition: 2s all ease-in-out .1s; 
-    -ms-transition: 2s all ease-in-out .1s; 
-    -o-transition: 2s all ease-in-out .1s; 
-    transition: 2s all ease-in-out .1s; 
-}
-.fade-carousel .carousel-inner .item.active .hero {
-    opacity: 1;
-    -webkit-transition: 2s all ease-in-out .1s;
-    -moz-transition: 2s all ease-in-out .1s; 
-    -ms-transition: 2s all ease-in-out .1s; 
-    -o-transition: 2s all ease-in-out .1s; 
-    transition: 2s all ease-in-out .1s;    
-}
-
-/********************************/
-/*            Overlay           */
-/********************************/
-.overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    background-color: #080d15;
-    opacity: .7;
-}
-
-/********************************/
-/*          Custom Buttons      */
-/********************************/
-.btn.btn-lg {padding: 10px 40px;}
-.btn.btn-hero,
-.btn.btn-hero:hover,
-.btn.btn-hero:focus {
-    color: #f5f5f5;
-    background-color: #1abc9c;
-    border-color: #1abc9c;
-    outline: none;
-    margin: 20px auto;
-}
-
-/********************************/
-/*       Slides backgrounds     */
-/********************************/
-.fade-carousel .slides .slide-1, 
-.fade-carousel .slides .slide-2,
-.fade-carousel .slides .slide-3 {
-    height: 100vh;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-.fade-carousel .slides .slide-1 {
-    background-image: url("../img/Bienvenida.jpg")
-}
-.fade-carousel .slides .slide-2 {
-    background-image: url("../img/Premium.jpg");
-}
-.fade-carousel .slides .slide-3 {
-    background-image: url("../img/Unete.jpg");
-}
-
-/********************************/
-/*          Media Queries       */
-/********************************/
-@media screen and (min-width: 980px){
-    .hero { width: 980px; }    
-}
-@media screen and (max-width: 640px){
-    .hero h1 { font-size: 4em; }    
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-Author's custom styles
-========================================================================== */
-
-body
-{
-    font-family: 'Open Sans', sans-serif;
-}
-
-.fb-profile img.fb-image-lg{
-    z-index: 0;
-    width: 100%;  
-    margin-bottom: 10px;
-    float:  left;
-}
-
-.fb-image-profile
-{
-    margin: -90px 10px 20px 80px;
-    z-index: 9;
-    width: 20%; 
-    float: left;
-}
-
-/***
-Bootstrap Line Tabs by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
-***/
-
-/* Tabs panel */
-.tabbable-panel {
-    border:1px solid #eee;
-    padding: 10px;
-}
-
-/* Default mode */
-.tabbable-line > .nav-tabs {
-    border: none;
-    margin: 0px;
-}
-.tabbable-line > .nav-tabs > li {
-    margin-right: 2px;
-}
-.tabbable-line > .nav-tabs > li > a {
-    border: 0;
-    margin-right: 0;
-    color: #737373;
-}
-.tabbable-line > .nav-tabs > li > a > i {
-    color: #a6a6a6;
-}
-.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
-    border-bottom: 4px solid #337ab7;
-}
-.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
-    border: 0;
-    background: none !important;
-    color: #333333;
-}
-.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
-    color: #a6a6a6;
-}
-.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
-    margin-top: 0px;
-}
-.tabbable-line > .nav-tabs > li.active {
-    border-bottom: 4px solid #337ab7;
-    position: relative;
-}
-.tabbable-line > .nav-tabs > li.active > a {
-    border: 0 !important;
-    color: #333333;
-}
-.tabbable-line > .nav-tabs > li.active > a > i {
-    color: #404040;
-}
-.tabbable-line > .tab-content {
-    margin-top: -3px;
-    background-color: #fff;
-    border: 0;
-    border-top: 1px solid #eee;
-    padding: 15px 0;
-}
-.portlet .tabbable-line > .tab-content {
-    padding-bottom: 0;
-}
-
-/* Below tabs mode */
-
-.tabbable-line.tabs-below > .nav-tabs > li {
-    border-top: 4px solid transparent;
-}
-.tabbable-line.tabs-below > .nav-tabs > li > a {
-    margin-top: 0;
-}
-.tabbable-line.tabs-below > .nav-tabs > li:hover {
-    border-bottom: 0;
-    border-top: 4px solid #fbcdcf;
-}
-.tabbable-line.tabs-below > .nav-tabs > li.active {
-    margin-bottom: -2px;
-    border-bottom: 0;
-    border-top: 4px solid #f3565d;
-}
-.tabbable-line.tabs-below > .tab-content {
-    margin-top: -10px;
-    border-top: 0;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
-}
-
-.menu_title {
-    padding: 15px 10px;
-    border-bottom: 1px solid #eee;
-    margin: 0 5px;
-}
-
-
-@media (max-width:768px){
-
-    .fb-profile-text>h1{
-        font-weight: 700;
-        font-size:16px;
-    }
-
-    .fb-image-profile
-    {
-        margin: -45px 10px 0px 25px;
-        z-index: 9;
-        width: 20%; 
-    }
-}
-
-.upload-button {
-    background: .glyphicon-open;
-}
-
-.user-resume {
-    padding-bottom: 15px;
-    padding-top: 15px;
-    border-bottom: 1px solid #ECEFF1;
-    display: flex;
-    justify-content: space-between;
-}
-
-.user-resume-img {
-    border-radius: 50%;
-    border: 1px solid #000;
-    margin-right: 10px;
-}
-
-.user-resume-info {
-    font-family: 'Raleway';
-    display: flex;
-}
-
-.user-resume-button {
-    margin-top: 13px;
-}
-
-
-
-.control-label {
-    color:#333333;
-}
-
-.boton-registrar {
-    display: inline;
-}
-
-
-.info-buscar{
-	padding-top: 30px;
-	font-weight: 700;
-    font-size:16px;
-	margin-left: 350px;
-}
-
-.img-buscar{
-	margin-left: 100px;
-	float: left;
-}
-
-.seguidores-seguidos{
-	margin-left:100px;
-	margin-top:50px;
-	padding-bottom:30px;
-{
-
-/* End carousel */
 /*# sourceMappingURL=bootstrap.css.map */
