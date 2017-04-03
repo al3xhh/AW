@@ -5,9 +5,17 @@ function validarUsuario() {
         usuario = document.getElementById("ID_Usuario"),
         usuario_val = usuario.value;
 
-    if (usuario_val === "" || !reg_usuario.test(usuario_val)) {
+    if (usuario_val === "") {
         document.getElementById("ID_Error_Usuario").style.display = "block";
         document.getElementById("ID_Error_Usuario").innerHTML = "Debes introducir un nombre de usuario";
+        return false;
+    } else if (!reg_usuario.test(usuario_val)) {
+        document.getElementById("ID_Error_Usuario").style.display = "block";
+        document.getElementById("ID_Error_Usuario").innerHTML = "El usuario sólo puede contener números y letras";
+        return false;
+    } else if (usuario_val.length > 15) {
+        document.getElementById("ID_Error_Usuario").style.display = "block";
+        document.getElementById("ID_Error_Usuario").innerHTML = "La longitud del usuario no puede ser mayor que 15 carácteres";
         return false;
     } else {
         document.getElementById("ID_Error_Usuario").style.display = "none";
@@ -22,7 +30,11 @@ function validarCorreo() {
         correo = document.getElementById("ID_Correo"),
         correo_val = correo.value;
 
-    if (correo_val === "" || !reg_correo.test(correo_val)) {
+    if (correo_val === "") {
+        document.getElementById("ID_Error_Correo").style.display = "block";
+        document.getElementById("ID_Error_Correo").innerHTML = "Debes introducir un correo";
+        return false;
+    } else if (!reg_correo.test(correo_val)) {
         document.getElementById("ID_Error_Correo").style.display = "block";
         document.getElementById("ID_Error_Correo").innerHTML = "El formato del correo es erróneo";
         return false;
@@ -35,12 +47,17 @@ function validarCorreo() {
 function validarContrasenya() {
     "use strict";
 
-    var pass = document.getElementById("ID_Pass"),
+    var reg_correo = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,15}$/,
+        pass = document.getElementById("ID_Pass"),
         pass_val = pass.value;
 
-    if (pass_val === "" || pass_val.length < 5 || pass_val.length > 15) {
+    if (pass_val === "") {
         document.getElementById("ID_Error_Pass").style.display = "block";
-        document.getElementById("ID_Error_Pass").innerHTML = "La contraseña debe tener una longitud entre 5 y 15";
+        document.getElementById("ID_Error_Pass").innerHTML = "Debes introducir una contraseña";
+        return false;
+    } else if (!reg_correo.test(pass_val)) {
+        document.getElementById("ID_Error_Pass").style.display = "block";
+        document.getElementById("ID_Error_Pass").innerHTML = "La contraseña debe tener una longitud entre 5 y 15, al menos una mayúscula, una minúscula y un número";
         return false;
     } else {
         document.getElementById("ID_Error_Pass").style.display = "none";
@@ -57,20 +74,18 @@ function validarReContrasenya() {
         pass1_val = pass1.value,
         ret = true;
 
-    if (pass1_val === "" || pass1_val.length < 5 || pass1_val.length > 15) {
+    if (pass1_val === "") {
         document.getElementById("ID_Error_Pass1").style.display = "block";
-        document.getElementById("ID_Error_Pass1").innerHTML = "La contraseña debe tener una longitud entre 5 y 15";
+        document.getElementById("ID_Error_Pass1").innerHTML = "Debes volver a introducir la contraseña";
         ret = false;
     } else {
-        document.getElementById("ID_Error_Pass1").style.display = "none";
-    }
-
-    if (pass_val !== pass1_val || (pass_val === "" || pass1_val === "")) {
-        document.getElementById("ID_Error_Pass1").style.display = "block";
-        document.getElementById("ID_Error_Pass1").innerHTML = "Las contraseñas no coinciden";
-        ret = false;
-    } else {
-        document.getElementById("ID_Error_Pass1").style.display = "none";
+        if (pass_val !== pass1_val && (pass_val !== "" && pass1_val !== "")) {
+            document.getElementById("ID_Error_Pass1").style.display = "block";
+            document.getElementById("ID_Error_Pass1").innerHTML = "Las contraseñas no coinciden";
+            ret = false;
+        } else {
+            document.getElementById("ID_Error_Pass1").style.display = "none";
+        }
     }
 
     return ret;
@@ -78,7 +93,7 @@ function validarReContrasenya() {
 
 function validarCaptcha() {
     "use strict";
-    
+
     var captcha_response = grecaptcha.getResponse();
     if (captcha_response.length === 0) {
         document.getElementById("ID_Error_Captcha").style.display = "block";
@@ -103,4 +118,3 @@ function validarRegistro() {
 
     return ret;
 }
-
