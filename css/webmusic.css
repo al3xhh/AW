@@ -822,7 +822,7 @@ label .fa {
     display: none;
 }
 
-.center {
-    margin: auto;
+#Columna-Registro {
+    margin-left: 30%;
 }
 /*FIN HOME*/
