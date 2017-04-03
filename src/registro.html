@@ -16,77 +16,137 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.js"></script>
 
-        <!-- Barra superior de la página -->
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
-                <h3 class="bar-title">WebMusic</h3>
-            </div>
-        </nav><!-- Fin barra superior -->
-
-        <!-- Container principal de la página -->
-        <div id="centrarRegistro">
-            <div class="container">
-                <!-- Fila que contiene ambos elementos -->
-                <div class="row">
-                    <!-- Columna que contiene los campos de entrada de datos -->
-                    <div class="col-md-8">
-                        <section>      
-                            <h1><span>Registro</span></h1><hr>
-                            <!-- Formulario de registro -->
-                            <form class="form-horizontal" method="post" onsubmit='return validarDatos()' >        
-                                <div class="form-group">
-                                    <label class="control-label col-sm-3">Correo electrónico<span class="text-danger">*</span></label>
-                                    <div class="col-md-8 col-sm-9">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                            <input class="form-control" name="ID_Correo" id="ID_Correo" placeholder="Escribe tu correo electrónico">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-3">Contraseña<span class="text-danger">*</span></label>
-                                    <div class="col-md-5 col-sm-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input type="password" class="form-control" name="ID_Pass" id="ID_Pass" placeholder="Elige una contraseña(5-15 caracteres)">
-                                        </div>   
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-3">Repite la ccontraseña<span class="text-danger">*</span></label>
-                                    <div class="col-md-5 col-sm-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input type="password" class="form-control" name="ID_Pass1" id="ID_Pass1" placeholder="Repite la ccontraseña">
-                                        </div>  
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-3">Nombre de usuario<span class="text-danger">*</span></label>
-                                    <div class="col-md-8 col-sm-9">
-                                        <input type="text" class="form-control" name="ID_Usuario" id="ID_Usuario" placeholder="Escribe tu nombre de usuario">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-3">Hacerme premium<br></label>
-                                    <div class="col-md-1 col-sm-8">
-                                        <div class="checkbox">
-                                            <input type="checkbox" value="Hacerme premium" class="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <input name="ID_Boton" type="submit" value="Registrarse" class="btn btn-primary" id="ID_Boton">
-                            </form><!-- Fin forumlario -->
-                        </section>
-                    </div><!-- Fin columna datos de entrada -->
-                    <!-- Columna que contiene la imagen del registro -->
-                    <div class="col-ld-12">
-                        <img src="../img/ImagenRegistro.jpg" width="350" height="400" class="pull-right" alt="Imagen Registro">
-                    </div><!-- Fin columna imagen -->
-                </div><!-- Fin de la fila -->
-            </div>
-        </div><!-- Fin container principal -->
         <script src="../js/registro.js"></script>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+
+        <!-- Barra superior de la página -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <img src="../img/Logo.png" width="50" height="50">
+                </div>
+                <a class="navbar-brand" href="index.html">Webmusic</a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>Registro</strong>
+                        </div>
+                        <div class="panel-body">
+                            <form action=" " method="" id="" name="" onsubmit="return validarRegistro()">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="center-block">
+                                            <img class="profile-img"
+                                                 src="../img/ImagenRegistroInterior.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </span> 
+                                                    <input class="form-control" placeholder="Nombre de usuario *" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                                                </div>
+                                                <div class="alert alert-danger" id="ID_Error_Usuario">
+                                                    <p>Error</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-envelope"></i>
+                                                    </span>
+                                                    <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" type="text" onchange="validarCorreo()">
+                                                </div>
+                                                <div class="alert alert-danger" id="ID_Error_Correo">
+                                                    <p>Error</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-lock"></i>
+                                                    </span>
+                                                    <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
+                                                </div>
+                                                <div class="alert alert-danger" id="ID_Error_Pass">
+                                                    <p>Error</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-lock"></i>
+                                                    </span>
+                                                    <input class="form-control" placeholder="Repite la contraseña *" id="ID_Pass1" type="password" onchange="validarReContrasenya()">
+                                                </div>
+                                                <div class="alert alert-danger" id="ID_Error_Pass1">
+                                                    <p>Error</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="g-recaptcha" data-sitekey="6LdZVhsUAAAAAA2qkQqHdaL8--EE9iPy0tzretMD" id="Re-Captcha"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>Los campos con * son obligatorios</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Registrarse">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="panel-footer">
+                            Ya tienes cuenta!<a href="#" onClick=""> Inicia sesión aquí </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="footer-container">
+            <footer class="footer-bs">
+                <div class="row">
+                    <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
+                        <div id="div-footer">
+                            <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                        </div>
+                    </div>
+                    <div class="col-md-4 footer-nav animated fadeInUp">
+                        <h4>Menu —</h4>
+                        <div class="col-md-6">
+                            <ul class="pages">
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list">
+                                <li><a href="#">Acerca de</a></li>
+                                <li><a href="#">Miembros</a></li>
+                                <li><a href="#">Contacto</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 footer-social animated fadeInDown">
+
+                    </div>
+                    <div class="col-md-3 footer-ns animated fadeInRight">
+
+                    </div>
+                </div>
+            </footer>
+        </div>
     </body>
 </html>

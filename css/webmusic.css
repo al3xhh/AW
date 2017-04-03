@@ -38,7 +38,9 @@
 }
 
 #carousel-home {
-    margin-left: 100px;
+    position: absolute;
+    margin-left: -50px !important;  /* 50% of your logo width */
+    display: block;
 }
 
 .media-carousel {
@@ -192,3 +194,631 @@
     margin-right: 15px;
     margin-top: 10px;
 }
+
+.panel-heading {
+    padding: 5px 15px;
+}
+
+.panel-footer {
+    padding: 1px 15px;
+    color: #A0A0A0;
+}
+
+.profile-img {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px !important;  /* 50% of your logo width */
+    display: block;
+}
+
+.navbar {
+    position: relative;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v11/QAUlVt1jXOgQavlW5wEfxQLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+.bar-title {
+    font-family: 'Raleway';
+    font-size: 28px;
+    display: inline;
+}
+
+.bar-premium {
+    font-family: 'Raleway';
+    display: inline;
+    margin-left: 10px;
+}
+
+/*
+Fade content bs-carousel with hero headers
+Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
+Image credits: unsplash.com
+*/
+
+/********************************/
+/*       Fade Bs-carousel       */
+/********************************/
+.fade-carousel {
+    position: relative;
+    height: 80vh;
+}
+.fade-carousel .carousel-inner .item {
+    height: 100vh;
+}
+.fade-carousel .carousel-indicators > li {
+    margin: 0 2px;
+    background-color: #f39c12;
+    border-color: #f39c12;
+    opacity: .7;
+}
+.fade-carousel .carousel-indicators > li.active {
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+}
+
+/********************************/
+/*          Hero Headers        */
+/********************************/
+.hero {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    z-index: 3;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+    -webkit-transform: translate3d(-50%,-50%,0);
+    -moz-transform: translate3d(-50%,-50%,0);
+    -ms-transform: translate3d(-50%,-50%,0);
+    -o-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
+}
+.hero h1 {
+    font-size: 6em;    
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.fade-carousel .carousel-inner .item .hero {
+    opacity: 0;
+    -webkit-transition: 2s all ease-in-out .1s;
+    -moz-transition: 2s all ease-in-out .1s; 
+    -ms-transition: 2s all ease-in-out .1s; 
+    -o-transition: 2s all ease-in-out .1s; 
+    transition: 2s all ease-in-out .1s; 
+}
+.fade-carousel .carousel-inner .item.active .hero {
+    opacity: 1;
+    -webkit-transition: 2s all ease-in-out .1s;
+    -moz-transition: 2s all ease-in-out .1s; 
+    -ms-transition: 2s all ease-in-out .1s; 
+    -o-transition: 2s all ease-in-out .1s; 
+    transition: 2s all ease-in-out .1s;    
+}
+
+/********************************/
+/*            Overlay           */
+/********************************/
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #080d15;
+    opacity: .7;
+}
+
+/********************************/
+/*          Custom Buttons      */
+/********************************/
+.btn.btn-lg {padding: 10px 40px;}
+.btn.btn-hero,
+.btn.btn-hero:hover,
+.btn.btn-hero:focus {
+    color: #f5f5f5;
+    background-color: #1abc9c;
+    border-color: #1abc9c;
+    outline: none;
+    margin: 20px auto;
+}
+
+/********************************/
+/*       Slides backgrounds     */
+/********************************/
+.fade-carousel .slides .slide-1, 
+.fade-carousel .slides .slide-2,
+.fade-carousel .slides .slide-3 {
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.fade-carousel .slides .slide-1 {
+    background-image: url("../img/Bienvenida.jpg")
+}
+.fade-carousel .slides .slide-2 {
+    background-image: url("../img/Premium.jpg");
+}
+.fade-carousel .slides .slide-3 {
+    background-image: url("../img/Unete.jpg");
+}
+
+/********************************/
+/*          Media Queries       */
+/********************************/
+@media screen and (min-width: 980px){
+    .hero { width: 980px; }    
+}
+@media screen and (max-width: 640px){
+    .hero h1 { font-size: 4em; }    
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+Author's custom styles
+========================================================================== */
+
+body
+{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.fb-profile img.fb-image-lg{
+    z-index: 0;
+    width: 100%;  
+    margin-bottom: 10px;
+    float:  left;
+}
+
+.fb-image-profile
+{
+    margin: -90px 10px 20px 80px;
+    z-index: 9;
+    width: 20%; 
+    float: left;
+}
+
+/***
+Bootstrap Line Tabs by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+/* Tabs panel */
+.tabbable-panel {
+    border:1px solid #eee;
+    padding: 10px;
+}
+
+/* Default mode */
+.tabbable-line > .nav-tabs {
+    border: none;
+    margin: 0px;
+}
+.tabbable-line > .nav-tabs > li {
+    margin-right: 2px;
+}
+.tabbable-line > .nav-tabs > li > a {
+    border: 0;
+    margin-right: 0;
+    color: #737373;
+}
+.tabbable-line > .nav-tabs > li > a > i {
+    color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+    border-bottom: 4px solid #337ab7;
+}
+.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+    border: 0;
+    background: none !important;
+    color: #333333;
+}
+.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+    color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+    margin-top: 0px;
+}
+.tabbable-line > .nav-tabs > li.active {
+    border-bottom: 4px solid #337ab7;
+    position: relative;
+}
+.tabbable-line > .nav-tabs > li.active > a {
+    border: 0 !important;
+    color: #333333;
+}
+.tabbable-line > .nav-tabs > li.active > a > i {
+    color: #404040;
+}
+.tabbable-line > .tab-content {
+    margin-top: -3px;
+    background-color: #fff;
+    border: 0;
+    border-top: 1px solid #eee;
+    padding: 15px 0;
+}
+.portlet .tabbable-line > .tab-content {
+    padding-bottom: 0;
+}
+
+/* Below tabs mode */
+
+.tabbable-line.tabs-below > .nav-tabs > li {
+    border-top: 4px solid transparent;
+}
+.tabbable-line.tabs-below > .nav-tabs > li > a {
+    margin-top: 0;
+}
+.tabbable-line.tabs-below > .nav-tabs > li:hover {
+    border-bottom: 0;
+    border-top: 4px solid #fbcdcf;
+}
+.tabbable-line.tabs-below > .nav-tabs > li.active {
+    margin-bottom: -2px;
+    border-bottom: 0;
+    border-top: 4px solid #f3565d;
+}
+.tabbable-line.tabs-below > .tab-content {
+    margin-top: -10px;
+    border-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.menu_title {
+    padding: 15px 10px;
+    border-bottom: 1px solid #eee;
+    margin: 0 5px;
+}
+
+
+@media (max-width:768px){
+
+    .fb-profile-text>h1{
+        font-weight: 700;
+        font-size:16px;
+    }
+
+    .fb-image-profile
+    {
+        margin: -45px 10px 0px 25px;
+        z-index: 9;
+        width: 20%; 
+    }
+}
+
+.upload-button {
+    background: .glyphicon-open;
+}
+
+.user-resume {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-bottom: 1px solid #ECEFF1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-resume-img {
+    border-radius: 50%;
+    border: 1px solid #000;
+    margin-right: 10px;
+}
+
+.user-resume-info {
+    font-family: 'Raleway';
+    display: flex;
+}
+
+.user-resume-button {
+    margin-top: 13px;
+}
+
+
+
+.control-label {
+    color:#333333;
+}
+
+.boton-registrar {
+    display: inline;
+}
+
+
+.info-buscar{
+    padding-top: 30px;
+    font-weight: 700;
+    font-size:16px;
+    margin-left: 350px;
+}
+
+.img-buscar{
+    margin-left: 100px;
+    float: left;
+}
+
+.seguidores-seguidos{
+    margin-left:100px;
+    margin-top:50px;
+    padding-bottom:30px;
+}
+
+body {
+    margin: 0;
+    text-align: justify;
+    font-family: 'Raleway';
+}
+
+.carousel-control {
+    top: 40px;
+}
+
+.carousel-indicators {
+    height: -100%;
+}
+
+/*HOME*/
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/*Fun begins*/
+.tab_container {
+	width: 90%;
+	margin: 0 auto;
+	padding-top: 70px;
+	position: relative;
+}
+
+input, section {
+  clear: both;
+  padding-top: 10px;
+  display: none;
+}
+
+.label-home {
+  font-weight: 700;
+  font-size: 18px;
+  display: block;
+  float: left;
+  width: 33%;
+  padding: 1.5em;
+  color: #757575;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+  padding: 20px;
+  background: #fff;
+  color: #999;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.tab_container .tab-content p,
+.tab_container .tab-content h3 {
+  -webkit-animation: fadeInScale 0.7s ease-in-out;
+  -moz-animation: fadeInScale 0.7s ease-in-out;
+  animation: fadeInScale 0.7s ease-in-out;
+}
+.tab_container .tab-content h3  {
+  text-align: center;
+}
+
+.tab_container [id^="tab"]:checked + label {
+  background: #fff;
+  box-shadow: inset 0 3px #337ab7;
+}
+
+.tab_container [id^="tab"]:checked + label .fa {
+  color: #337ab7;
+}
+
+label .fa {
+  font-size: 1.3em;
+  margin: 0 0.4em 0 0;
+}
+
+/*Media query*/
+@media only screen and (max-width: 930px) {
+  label span {
+    font-size: 14px;
+  }
+  label .fa {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  label span {
+    display: none;
+  }
+
+  label .fa {
+    font-size: 16px;
+  }
+
+  .tab_container {
+    width: 98%;
+  }
+}
+
+/*Content Animation*/
+@keyframes fadeInScale {
+  0% {
+  	transform: scale(0.9);
+  	opacity: 0;
+  }
+  
+  100% {
+  	transform: scale(1);
+  	opacity: 1;
+  }
+}
+
+/*
+ * See it in action here: http://jsfiddle.net/seydoggy/6s92p51a/
+ */
+.panel-table {
+    display:table;
+}
+.panel-table > .panel-heading {
+    display: table-header-group;
+    background: transparent;
+}
+.panel-table > .panel-body {
+    display: table-row-group;
+}
+.panel-table > .panel-body:before,
+.panel-table > .panel-body:after {
+    content:none;
+}
+.panel-table > .panel-footer {
+    display: table-footer-group;
+    background: transparent;
+}
+.panel-table > div > .tr {
+    display: table-row;
+}
+.panel-table > div:last-child > .tr:last-child > .td {
+    border-bottom: none;
+}
+.panel-table .td {
+    display: table-cell;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-left: none;
+}
+.panel-table .td:last-child {
+    border-right: none;
+}
+.panel-table > .panel-heading > .tr > .td,
+.panel-table > .panel-footer > .tr > .td {
+    background-color: #f5f5f5;
+}
+.panel-table > .panel-heading > .tr > .td:first-child {
+    border-radius: 4px 0 0 0;
+}
+.panel-table > .panel-heading > .tr > .td:last-child {
+    border-radius: 0 4px 0 0;
+}
+.panel-table > .panel-footer > .tr > .td:first-child {
+    border-radius: 0 0 0 4px;
+}
+.panel-table > .panel-footer > .tr > .td:last-child {
+    border-radius: 0 0 4px 0;
+}
+/* Carousel */
+
+.quote-carousel {
+    padding: 0 10px 30px 10px;
+    margin-top: 30px;
+    /* Control buttons  */
+    /* Previous button  */
+    /* Next button  */
+    /* Changes the position of the indicators */
+    /* Changes the color of the indicators */
+}
+.quote-carousel .carousel-control {
+    background: none;
+    color: #CACACA;
+    font-size: 2.3em;
+    text-shadow: none;
+    margin-top: 30px;
+}
+.quote-carousel .carousel-control.left {
+    left: -60px;
+}
+.quote-carousel .carousel-control.right {
+    right: -60px;
+}
+.quote-carousel .carousel-indicators {
+    right: 50%;
+    top: auto;
+    bottom: 0px;
+    margin-right: -19px;
+}
+.quote-carousel .carousel-indicators li {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    cursor: pointer;
+    border: 4px solid #CCC;
+    border-radius: 50px;
+    opacity: 0.4;
+    overflow: hidden;
+    transition: all 0.4s;
+}
+.quote-carousel .carousel-indicators .active {
+    background: #333333;
+    width: 128px;
+    height: 128px;
+    border-radius: 100px;
+    border-color: #337ab7;
+    opacity: 1;
+    overflow: hidden;
+}
+.carousel-inner {
+    min-height: 300px;
+}
+.item blockquote {
+    border-left: none;
+    margin: 0;
+}
+.item blockquote p:before {
+    content: "\f10d";
+    font-family: 'Fontawesome';
+    float: left;
+    margin-right: 10px;
+}
+
+#Alinear-Home {
+    align: center;
+}
+/*FIN HOME*/

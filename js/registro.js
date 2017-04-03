@@ -1,67 +1,98 @@
-"use strict";
-
-var correo = document.querySelector('input[name="ID_Correo"]');
-var pass = document.querySelector('input[name="ID_Pass"]');
-var pass1 = document.querySelector('input[name="ID_Pass1"]');
-var usuario = document.querySelector('input[name="ID_Usuario"]');
-var boton = document.querySelector('input[name="ID_Boton"]');
-correo.setCustomValidity('Debes introducir un correo');
-pass.setCustomValidity('Debes introducir una contraseña');
-pass1.setCustomValidity('Las contraseñas no coinciden');
-usuario.setCustomValidity('Debes introducir un nombre de usuario');
-
-function validarCorreo(correo) {
-    var reg_correo = /^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}$/;
-    return reg_correo.test(correo);
+function validarUsuario() {
+    "use strict";
+    
+    var usuario = document.getElementById("ID_Usuario"),
+        usuario_val = usuario.value;
+    
+    if (usuario_val === "") {
+        document.getElementById("ID_Error_Usuario").style.display = "block";
+        document.getElementById("ID_Error_Usuario").innerHTML = "Debes introducir un nombre de usuario";
+        return false;
+    } else {
+        document.getElementById("ID_Error_Usuario").style.display = "none";
+        return true;
+    }
 }
 
-correo.addEventListener('input', function () {
-    this.setCustomValidity('');
-}, false);
-
-pass.addEventListener('input', function () {
-    this.setCustomValidity('');
-}, false);
-
-pass1.addEventListener('input', function () {
-    this.setCustomValidity('');
-}, false);
-
-usuario.addEventListener('input', function () {
-    this.setCustomValidity('');
-}, false);
-
-correo.addEventListener('keyup', function () {
-    var dato_correo = document.getElementById('ID_Correo').value;
-
-    if (dato_correo === "") {
-        this.setCustomValidity("Debes introducir un correo");
+function validarCorreo() {
+    "use strict";
+    
+    var reg_correo = /^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}$/,
+        correo = document.getElementById("ID_Correo"),
+        correo_val = correo.value;
+    
+    if (correo_val === "" || !reg_correo.test(correo_val)) {
+        document.getElementById("ID_Error_Correo").style.display = "block";
+        document.getElementById("ID_Error_Correo").innerHTML = "El formato del correo es erróneo";
+        return false;
     } else {
-        if (!validarCorreo(dato_correo)) {
-            this.setCustomValidity("Error en el formato del correo");
-        } else {
-            this.setCustomValidity("");
-        }
+        document.getElementById("ID_Error_Correo").style.display = "none";
+        return true;
     }
-}, false);
+}
 
-pass.addEventListener('keyup', function () {
-    var dato_pass = document.getElementById('ID_Pass').value;
-
-    if (dato_pass.length < 5 || dato_pass.length > 15) {
-        pass.setCustomValidity("La contraseña debe tener una longitud entre 5 y 15 caracteres");
+function validarContrasenya() {
+    "use strict";
+        
+    var pass = document.getElementById("ID_Pass"),
+        pass_val = pass.value;
+    
+    if (pass_val === "" || pass_val.length < 5 || pass_val.length > 15) {
+        document.getElementById("ID_Error_Pass").style.display = "block";
+        document.getElementById("ID_Error_Pass").innerHTML = "La contraseña debe tener una longitud entre 5 y 15";
+        return false;
     } else {
-        this.setCustomValidity("");
+        document.getElementById("ID_Error_Pass").style.display = "none";
+        return true;
     }
-}, false);
+}
 
-pass1.addEventListener('keyup', function () {
-    var dato_pass = document.getElementById('ID_Pass').value,
-        dato_pass1 = document.getElementById('ID_Pass1').value;
-
-    if (dato_pass !== dato_pass1) {
-        this.setCustomValidity("Las contraseñas no coinciden");
+function validarReContrasenya() {
+    "use strict";
+    
+    var pass = document.getElementById("ID_Pass"),
+        pass_val = pass.value,
+        pass1 = document.getElementById("ID_Pass1"),
+        pass1_val = pass1.value,
+        ret = true;
+    
+    if (pass1_val === "" || pass1_val.length < 5 || pass1_val.length > 15) {
+        document.getElementById("ID_Error_Pass1").style.display = "block";
+        document.getElementById("ID_Error_Pass1").innerHTML = "La contraseña debe tener una longitud entre 5 y 15";
+        ret = false;
     } else {
-        this.setCustomValidity("");
+        document.getElementById("ID_Error_Pass1").style.display = "none";
     }
-}, false);
+
+    if (pass_val !== pass1_val || (pass_val === "" || pass1_val === "")) {
+        document.getElementById("ID_Error_Pass1").style.display = "block";
+        document.getElementById("ID_Error_Pass1").innerHTML = "Las contraseñas no coinciden";
+        ret = false;
+    } else {
+        document.getElementById("ID_Error_Pass1").style.display = "none";
+    }
+    
+    return ret;
+}
+
+function validarRegistro() {
+    "use strict";
+    
+    var ret = true;
+
+    ret = validarUsuario();
+    ret = validarCorreo();
+    ret = validarContrasenya();
+    ret = validarReContrasenya();
+    
+    return ret;
+}
+
+window.onload = function () {
+    "use strict";
+    
+    document.getElementById("ID_Error_Usuario").style.display = "none";
+    document.getElementById("ID_Error_Correo").style.display = "none";
+    document.getElementById("ID_Error_Pass").style.display = "none";
+    document.getElementById("ID_Error_Pass1").style.display = "none";
+};
