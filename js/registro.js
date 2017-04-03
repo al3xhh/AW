@@ -104,12 +104,3 @@ function validarRegistro() {
     return ret;
 }
 
-window.onload = function () {
-    "use strict";
-
-    document.getElementById("ID_Error_Usuario").style.display = "none";
-    document.getElementById("ID_Error_Correo").style.display = "none";
-    document.getElementById("ID_Error_Pass").style.display = "none";
-    document.getElementById("ID_Error_Pass1").style.display = "none";
-    document.getElementById("ID_Error_Captcha").style.display = "none";
-};

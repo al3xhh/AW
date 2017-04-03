@@ -586,124 +586,124 @@ body {
 *,
 *:after,
 *:before {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .clearfix:before,
 .clearfix:after {
-	content: " ";
-	display: table;
+    content: " ";
+    display: table;
 }
 
 .clearfix:after {
-	clear: both;
+    clear: both;
 }
 
 /*Fun begins*/
 .tab_container {
-	width: 90%;
-	margin: 0 auto;
-	padding-top: 70px;
-	position: relative;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 70px;
+    position: relative;
 }
 
 input, section {
-  clear: both;
-  padding-top: 10px;
-  display: none;
+    clear: both;
+    padding-top: 10px;
+    display: none;
 }
 
 .label-home {
-  font-weight: 700;
-  font-size: 18px;
-  display: block;
-  float: left;
-  width: 33%;
-  padding: 1.5em;
-  color: #757575;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  background: #f0f0f0;
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+    float: left;
+    width: 33%;
+    padding: 1.5em;
+    color: #757575;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    background: #f0f0f0;
 }
 
 #tab1:checked ~ #content1,
 #tab2:checked ~ #content2,
 #tab3:checked ~ #content3,
 #tab4:checked ~ #content4 {
-  display: block;
-  padding: 20px;
-  background: #fff;
-  color: #999;
-  border-bottom: 2px solid #f0f0f0;
+    display: block;
+    padding: 20px;
+    background: #fff;
+    color: #999;
+    border-bottom: 2px solid #f0f0f0;
 }
 
 .tab_container .tab-content p,
 .tab_container .tab-content h3 {
-  -webkit-animation: fadeInScale 0.7s ease-in-out;
-  -moz-animation: fadeInScale 0.7s ease-in-out;
-  animation: fadeInScale 0.7s ease-in-out;
+    -webkit-animation: fadeInScale 0.7s ease-in-out;
+    -moz-animation: fadeInScale 0.7s ease-in-out;
+    animation: fadeInScale 0.7s ease-in-out;
 }
 .tab_container .tab-content h3  {
-  text-align: center;
+    text-align: center;
 }
 
 .tab_container [id^="tab"]:checked + label {
-  background: #fff;
-  box-shadow: inset 0 3px #337ab7;
+    background: #fff;
+    box-shadow: inset 0 3px #337ab7;
 }
 
 .tab_container [id^="tab"]:checked + label .fa {
-  color: #337ab7;
+    color: #337ab7;
 }
 
 label .fa {
-  font-size: 1.3em;
-  margin: 0 0.4em 0 0;
+    font-size: 1.3em;
+    margin: 0 0.4em 0 0;
 }
 
 /*Media query*/
 @media only screen and (max-width: 930px) {
-  label span {
-    font-size: 14px;
-  }
-  label .fa {
-    font-size: 14px;
-  }
+    label span {
+        font-size: 14px;
+    }
+    label .fa {
+        font-size: 14px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
-  label span {
-    display: none;
-  }
+    label span {
+        display: none;
+    }
 
-  label .fa {
-    font-size: 16px;
-  }
+    label .fa {
+        font-size: 16px;
+    }
 
-  .tab_container {
-    width: 98%;
-  }
+    .tab_container {
+        width: 98%;
+    }
 }
 
 /*Content Animation*/
 @keyframes fadeInScale {
-  0% {
-  	transform: scale(0.9);
-  	opacity: 0;
-  }
-  
-  100% {
-  	transform: scale(1);
-  	opacity: 1;
-  }
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /*
- * See it in action here: http://jsfiddle.net/seydoggy/6s92p51a/
- */
+* See it in action here: http://jsfiddle.net/seydoggy/6s92p51a/
+*/
 .panel-table {
     display:table;
 }
@@ -816,5 +816,13 @@ label .fa {
     font-family: 'Fontawesome';
     float: left;
     margin-right: 10px;
+}
+
+.alertas-registro {
+    display: none;
+}
+
+.center {
+    margin: auto;
 }
 /*FIN HOME*/
