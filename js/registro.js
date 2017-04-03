@@ -1,10 +1,11 @@
 function validarUsuario() {
     "use strict";
-    
-    var usuario = document.getElementById("ID_Usuario"),
+
+    var reg_usuario = /^[a-z0-9]+$/i,
+        usuario = document.getElementById("ID_Usuario"),
         usuario_val = usuario.value;
-    
-    if (usuario_val === "") {
+
+    if (usuario_val === "" || !reg_usuario.test(usuario_val)) {
         document.getElementById("ID_Error_Usuario").style.display = "block";
         document.getElementById("ID_Error_Usuario").innerHTML = "Debes introducir un nombre de usuario";
         return false;
@@ -16,11 +17,11 @@ function validarUsuario() {
 
 function validarCorreo() {
     "use strict";
-    
+
     var reg_correo = /^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}$/,
         correo = document.getElementById("ID_Correo"),
         correo_val = correo.value;
-    
+
     if (correo_val === "" || !reg_correo.test(correo_val)) {
         document.getElementById("ID_Error_Correo").style.display = "block";
         document.getElementById("ID_Error_Correo").innerHTML = "El formato del correo es erróneo";
@@ -33,10 +34,10 @@ function validarCorreo() {
 
 function validarContrasenya() {
     "use strict";
-        
+
     var pass = document.getElementById("ID_Pass"),
         pass_val = pass.value;
-    
+
     if (pass_val === "" || pass_val.length < 5 || pass_val.length > 15) {
         document.getElementById("ID_Error_Pass").style.display = "block";
         document.getElementById("ID_Error_Pass").innerHTML = "La contraseña debe tener una longitud entre 5 y 15";
@@ -49,13 +50,13 @@ function validarContrasenya() {
 
 function validarReContrasenya() {
     "use strict";
-    
+
     var pass = document.getElementById("ID_Pass"),
         pass_val = pass.value,
         pass1 = document.getElementById("ID_Pass1"),
         pass1_val = pass1.value,
         ret = true;
-    
+
     if (pass1_val === "" || pass1_val.length < 5 || pass1_val.length > 15) {
         document.getElementById("ID_Error_Pass1").style.display = "block";
         document.getElementById("ID_Error_Pass1").innerHTML = "La contraseña debe tener una longitud entre 5 y 15";
@@ -71,28 +72,44 @@ function validarReContrasenya() {
     } else {
         document.getElementById("ID_Error_Pass1").style.display = "none";
     }
-    
+
     return ret;
+}
+
+function validarCaptcha() {
+    "use strict";
+    
+    var captcha_response = grecaptcha.getResponse();
+    if (captcha_response.length === 0) {
+        document.getElementById("ID_Error_Captcha").style.display = "block";
+        document.getElementById("ID_Error_Captcha").innerHTML = "El captcha es obligatorio";
+        return false;
+    } else {
+        document.getElementById("ID_Error_Captcha").style.display = "none";
+        return true;
+    }
 }
 
 function validarRegistro() {
     "use strict";
-    
+
     var ret = true;
 
     ret = validarUsuario();
     ret = validarCorreo();
     ret = validarContrasenya();
     ret = validarReContrasenya();
-    
+    ret = validarCaptcha();
+
     return ret;
 }
 
 window.onload = function () {
     "use strict";
-    
+
     document.getElementById("ID_Error_Usuario").style.display = "none";
     document.getElementById("ID_Error_Correo").style.display = "none";
     document.getElementById("ID_Error_Pass").style.display = "none";
     document.getElementById("ID_Error_Pass1").style.display = "none";
+    document.getElementById("ID_Error_Captcha").style.display = "none";
 };
