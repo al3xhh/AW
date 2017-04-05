@@ -1,7 +1,10 @@
+/*Función que se encarga de validar el nombre usuario. Comprueba que no sea vacío,
+que sólo contenga caracteres alfanuméricos y que la longitud sea menor que 17.
+*/
 function validarUsuario() {
     "use strict";
 
-    var reg_usuario = /^[a-z0-9]+$/i,
+    var reg_usuario = /^[a-z0-9].{1,15}$/i,
         usuario = document.getElementById("ID_Usuario"),
         usuario_val = usuario.value;
 
@@ -11,11 +14,7 @@ function validarUsuario() {
         return false;
     } else if (!reg_usuario.test(usuario_val)) {
         document.getElementById("ID_Error_Usuario").style.display = "block";
-        document.getElementById("ID_Error_Usuario").innerHTML = "El usuario sólo puede contener números y letras";
-        return false;
-    } else if (usuario_val.length > 15) {
-        document.getElementById("ID_Error_Usuario").style.display = "block";
-        document.getElementById("ID_Error_Usuario").innerHTML = "La longitud del usuario no puede ser mayor que 15 carácteres";
+        document.getElementById("ID_Error_Usuario").innerHTML = "El usuario sólo puede contener números y letras y debe tener una longitud menor a 17";
         return false;
     } else {
         document.getElementById("ID_Error_Usuario").style.display = "none";
@@ -23,6 +22,7 @@ function validarUsuario() {
     }
 }
 
+//Función que se encarga de validar que el formato del correo sea válido.
 function validarCorreo() {
     "use strict";
 
@@ -44,6 +44,10 @@ function validarCorreo() {
     }
 }
 
+/*
+Función que se encarga de validar la contraseña. Comprueba que no sea vacía,
+que contenga al menos una mayúscula y una minúscula. Y que su longitud esté entre 5 y 15.
+*/
 function validarContrasenya() {
     "use strict";
 
@@ -65,6 +69,7 @@ function validarContrasenya() {
     }
 }
 
+//Función que comprueba que las contraseña coincidan.
 function validarReContrasenya() {
     "use strict";
 
@@ -91,6 +96,7 @@ function validarReContrasenya() {
     return ret;
 }
 
+//Función que comprueba que el usuario ha completado el captcha.
 function validarCaptcha() {
     "use strict";
 
@@ -105,6 +111,7 @@ function validarCaptcha() {
     }
 }
 
+//Función que valida el registro entero con ayuda de las funciones anteriores.
 function validarRegistro() {
     "use strict";
 

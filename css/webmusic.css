@@ -259,7 +259,7 @@ Image credits: unsplash.com
     height: 80vh;
 }
 .fade-carousel .carousel-inner .item {
-    height: 100vh;
+    height: 78vh;
 }
 .fade-carousel .carousel-indicators > li {
     margin: 0 2px;
@@ -385,6 +385,8 @@ Author's custom styles
 body
 {
     font-family: 'Open Sans', sans-serif;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .fb-profile img.fb-image-lg{
@@ -820,9 +822,5 @@ label .fa {
 
 .alertas-registro {
     display: none;
-}
-
-#Columna-Registro {
-    margin-left: 30%;
 }
 /*FIN HOME*/

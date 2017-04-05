@@ -9,350 +9,351 @@
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
         <link href="../css/bootstrap.css" rel="stylesheet">
         <link href="../css/webmusic.css" rel="stylesheet">
-    </head>
-    <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.js"></script>
-
-        <!-- Barra superior de la página -->
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <img src="../img/Logo.png" width="50" height="50">
-                </div>
-                <a class="navbar-brand" href="home.html">Webmusic</a>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
-                    <li><a href="login.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-                    <li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Barra de búsqueda -->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <div id="imaginary_container"> 
-                        <div class="input-group stylish-input-group">
-                            <input type="text" class="form-control"  placeholder="Buscar" >
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>  
-                            </span>
-                        </div>
+    </head>
+    <body>
+        <div>
+            <!-- Barra superior de la página -->
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <img src="../img/Logo.png" width="50" height="50">
                     </div>
+                    <a class="navbar-brand" href="home.html">Webmusic</a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="login.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
+                        <li><a href="login.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+                        <li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+                    </ul>
                 </div>
-            </div>
-        </div><!-- Fin barra de búsqueda -->
+            </nav>
 
-        <div class="tab_container">
-
-            <input id="tab1" type="radio" name="tabs" checked>
-            <label for="tab1" class="label-home"><span>Tus novedades</span></label>
-
-            <input id="tab2" type="radio" name="tabs">
-            <label for="tab2" class="label-home"><span>Tus top</span></label>
-
-            <input id="tab3" type="radio" name="tabs">
-            <label for="tab3" class="label-home"><span>Lo que escuchan tus amigos</span></label>
-
-            <section id="content1" class="tab-content">
-                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-12" data-wow-delay="0.2s">
-                            <div class="carousel slide quote-carousel" data-ride="carousel" id="qc1">
-                                <!-- Bottom Carousel Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#qc1" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc1" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc1" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc1" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc1" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc1" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                </ol>
-
-                                <!-- Carousel Slides / Quotes -->
-                                <div class="carousel-inner text-center">
-                                    <!-- Quote 1 -->
-                                    <div class="item active">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 1</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <!-- Quote 2 -->
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 2</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <!-- Quote 3 -->
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 3</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 4</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 5</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 6</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="content2" class="tab-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12" data-wow-delay="0.2s">
-                            <div class="carousel slide quote-carousel" data-ride="carousel" id="qc2">
-                                <!-- Bottom Carousel Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#qc2" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc2" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc2" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc2" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc2" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc2" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                </ol>
-
-                                <!-- Carousel Slides / Quotes -->
-                                <div class="carousel-inner text-center">
-                                    <!-- Quote 1 -->
-                                    <div class="item active">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 7</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <!-- Quote 2 -->
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 8</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <!-- Quote 3 -->
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 9</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 10</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 11</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 12</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-
-            <section id="content3" class="tab-content">
-                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-12" data-wow-delay="0.2s">
-                            <div class="carousel slide quote-carousel" data-ride="carousel" id="qc3">
-                                <!-- Bottom Carousel Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#qc3" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc3" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc3" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc3" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc3" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                    <li data-target="#qc3" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                    </li>
-                                </ol>
-
-                                <!-- Carousel Slides / Quotes -->
-                                <div class="carousel-inner text-center">
-                                    <!-- Quote 1 -->
-                                    <div class="item active">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 13</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <!-- Quote 2 -->
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 14</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <!-- Quote 3 -->
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 15</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 16</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 17</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                    <div class="item">
-                                        <blockquote>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <h3>Título de la canción 18</h3>
-                                                </div>
-                                            </div>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-        </div>
-        <div class="footer-container">
-            <footer class="footer-bs">
+            <!-- Barra de búsqueda -->
+            <div class="container">
                 <div class="row">
-                    <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
-                        <div id="div-footer">
-                            <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div id="imaginary_container"> 
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control"  placeholder="Buscar" >
+                                <span class="input-group-addon">
+                                    <button type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>  
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 footer-nav animated fadeInUp">
-                        <h4>Menu —</h4>
-                        <div class="col-md-6">
-                            <ul class="pages">
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="list">
-                                <li><a href="#">Acerca de</a></li>
-                                <li><a href="#">Miembros</a></li>
-                                <li><a href="#">Contacto</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2 footer-social animated fadeInDown">
-
-                    </div>
-                    <div class="col-md-3 footer-ns animated fadeInRight">
-
                     </div>
                 </div>
-            </footer>
+            </div><!-- Fin barra de búsqueda -->
+
+            <div class="tab_container">
+
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1" class="label-home"><span>Tus novedades</span></label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2" class="label-home"><span>Tus top</span></label>
+
+                <input id="tab3" type="radio" name="tabs">
+                <label for="tab3" class="label-home"><span>Lo que escuchan tus amigos</span></label>
+
+                <section id="content1" class="tab-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" data-wow-delay="0.2s">
+                                <div class="carousel slide quote-carousel" data-ride="carousel" id="qc1">
+                                    <!-- Bottom Carousel Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#qc1" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc1" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc1" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc1" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc1" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc1" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                    </ol>
+
+                                    <!-- Carousel Slides / Quotes -->
+                                    <div class="carousel-inner text-center">
+                                        <!-- Quote 1 -->
+                                        <div class="item active">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 1</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <!-- Quote 2 -->
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 2</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <!-- Quote 3 -->
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 3</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 4</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 5</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 6</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="content2" class="tab-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" data-wow-delay="0.2s">
+                                <div class="carousel slide quote-carousel" data-ride="carousel" id="qc2">
+                                    <!-- Bottom Carousel Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#qc2" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc2" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc2" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc2" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc2" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc2" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                    </ol>
+
+                                    <!-- Carousel Slides / Quotes -->
+                                    <div class="carousel-inner text-center">
+                                        <!-- Quote 1 -->
+                                        <div class="item active">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 7</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <!-- Quote 2 -->
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 8</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <!-- Quote 3 -->
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 9</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 10</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 11</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 12</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section id="content3" class="tab-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" data-wow-delay="0.2s">
+                                <div class="carousel slide quote-carousel" data-ride="carousel" id="qc3">
+                                    <!-- Bottom Carousel Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#qc3" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc3" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc3" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc3" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc3" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                        <li data-target="#qc3" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
+                                        </li>
+                                    </ol>
+
+                                    <!-- Carousel Slides / Quotes -->
+                                    <div class="carousel-inner text-center">
+                                        <!-- Quote 1 -->
+                                        <div class="item active">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 13</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <!-- Quote 2 -->
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 14</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <!-- Quote 3 -->
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 15</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 16</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 17</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <h3>Título de la canción 18</h3>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+            <div class="footer-container">
+                <footer class="footer-bs">
+                    <div class="row">
+                        <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
+                            <div id="div-footer">
+                                <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                            </div>
+                        </div>
+                        <div class="col-md-4 footer-nav animated fadeInUp">
+                            <h4>Menu —</h4>
+                            <div class="col-md-6">
+                                <ul class="pages">
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list">
+                                    <li><a href="#">Acerca de</a></li>
+                                    <li><a href="#">Miembros</a></li>
+                                    <li><a href="#">Contacto</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 footer-social animated fadeInDown">
+
+                        </div>
+                        <div class="col-md-3 footer-ns animated fadeInRight">
+
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
     </body>
 </html>
