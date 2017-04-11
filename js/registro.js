@@ -114,14 +114,12 @@ function validarCaptcha() {
 //Función que valida el registro entero con ayuda de las funciones anteriores.
 function validarRegistro() {
     "use strict";
-
-    var ret = true;
-
-    ret = validarUsuario();
-    ret = validarCorreo();
-    ret = validarContrasenya();
-    ret = validarReContrasenya();
-    ret = validarCaptcha();
-
-    return ret;
+    
+    var ret = (validarUsuario() & validarCorreo() & validarContrasenya() & validarReContrasenya() & validarCaptcha());
+    
+    if (ret === 0) {
+        return false;
+    } else {
+        return true;
+    }
 }
