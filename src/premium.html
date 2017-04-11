@@ -8,17 +8,18 @@
         <title>Hazte premium!</title>
 
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
-
         <!-- Bootstrap -->
         <link href="../css/bootstrap.css" rel="stylesheet">
         <link href="../css/webmusic.css" rel="stylesheet">
-    </head>
-    <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <!-- Archivo con las validaciones locales del formulario -->
+        <script src="../js/premium.js"></script>
 
+    </head>
+    <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
@@ -66,7 +67,7 @@
                 <h2 class="title-premium">¡Hazte premium ya!</h2>
                 <p class="premium-text-font p-premium">Para hacerte premium ya, solo necesitas rellenar el siguiente formulario.</p>
                 <div class="panel-body"> 
-                    <form class="col-md-4 col-md-push-4" action="">
+                    <form class="col-md-4 col-md-push-4" action="" onsubmit="return validarPremium()">
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
@@ -77,9 +78,9 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
-                                <input class="form-control" placeholder="Número de cuenta *" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                                <input class="form-control" placeholder="Número de cuenta *" id="ID_Cuenta" type="text" onchange="validarCuenta()">
                             </div>
-                            <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
+                            <div class="alert alert-danger alertas-registro" id="ID_Error_Cuenta"></div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
@@ -91,9 +92,9 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
-                                <input class="form-control" placeholder="Número de meses *" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                                <input class="form-control" placeholder="Número de meses *" id="ID_Num_meses" type="text" onchange="validarMeses()">
                             </div>
-                            <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
+                            <div class="alert alert-danger alertas-registro" id="ID_Error_meses"></div>
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary center-block" value="Hazte premium !">
