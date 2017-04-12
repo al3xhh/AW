@@ -10,11 +10,7 @@ html {
       -ms-text-size-adjust: 100%;
 }
 body {
-<<<<<<< HEAD
-    margin: 0;
-=======
   margin: 0;
->>>>>>> christian
 }
 article,
 aside,
@@ -271,15 +267,6 @@ th {
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
-<<<<<<< HEAD
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-=======
   position: relative;
   top: 1px;
   display: inline-block;
@@ -287,7 +274,6 @@ th {
   font-style: normal;
   font-weight: normal;
   line-height: 1;
->>>>>>> christian
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1301,11 +1287,7 @@ h6,
   font-size: 12px;
 }
 p {
-<<<<<<< HEAD
-    margin: 0 0 10px;
-=======
   margin: 0 0 10px;
->>>>>>> christian
 }
 .lead {
   margin-bottom: 20px;
@@ -1600,17 +1582,10 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-<<<<<<< HEAD
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-=======
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
->>>>>>> christian
 }
 @media (min-width: 768px) {
   .container {
@@ -1628,22 +1603,6 @@ pre code {
   }
 }
 .container-fluid {
-<<<<<<< HEAD
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
-}
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-=======
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -1658,7 +1617,6 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
->>>>>>> christian
 }
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   float: left;
@@ -1817,164 +1775,6 @@ pre code {
   margin-left: 0;
 }
 @media (min-width: 768px) {
-<<<<<<< HEAD
-    .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
-        float: left;
-    }
-    .col-sm-12 {
-        width: 100%;
-    }
-    .col-sm-11 {
-        width: 91.66666667%;
-    }
-    .col-sm-10 {
-        width: 83.33333333%;
-    }
-    .col-sm-9 {
-        width: 75%;
-    }
-    .col-sm-8 {
-        width: 66.66666667%;
-    }
-    .col-sm-7 {
-        width: 58.33333333%;
-    }
-    .col-sm-6 {
-        width: 50%;
-    }
-    .col-sm-5 {
-        width: 41.66666667%;
-    }
-    .col-sm-4 {
-        width: 33.33333333%;
-    }
-    .col-sm-3 {
-        width: 25%;
-    }
-    .col-sm-2 {
-        width: 16.66666667%;
-    }
-    .col-sm-1 {
-        width: 8.33333333%;
-    }
-    .col-sm-pull-12 {
-        right: 100%;
-    }
-    .col-sm-pull-11 {
-        right: 91.66666667%;
-    }
-    .col-sm-pull-10 {
-        right: 83.33333333%;
-    }
-    .col-sm-pull-9 {
-        right: 75%;
-    }
-    .col-sm-pull-8 {
-        right: 66.66666667%;
-    }
-    .col-sm-pull-7 {
-        right: 58.33333333%;
-    }
-    .col-sm-pull-6 {
-        right: 50%;
-    }
-    .col-sm-pull-5 {
-        right: 41.66666667%;
-    }
-    .col-sm-pull-4 {
-        right: 33.33333333%;
-    }
-    .col-sm-pull-3 {
-        right: 25%;
-    }
-    .col-sm-pull-2 {
-        right: 16.66666667%;
-    }
-    .col-sm-pull-1 {
-        right: 8.33333333%;
-    }
-    .col-sm-pull-0 {
-        right: auto;
-    }
-    .col-sm-push-12 {
-        left: 100%;
-    }
-    .col-sm-push-11 {
-        left: 91.66666667%;
-    }
-    .col-sm-push-10 {
-        left: 83.33333333%;
-    }
-    .col-sm-push-9 {
-        left: 75%;
-    }
-    .col-sm-push-8 {
-        left: 66.66666667%;
-    }
-    .col-sm-push-7 {
-        left: 58.33333333%;
-    }
-    .col-sm-push-6 {
-        left: 50%;
-    }
-    .col-sm-push-5 {
-        left: 41.66666667%;
-    }
-    .col-sm-push-4 {
-        left: 33.33333333%;
-    }
-    .col-sm-push-3 {
-        left: 25%;
-    }
-    .col-sm-push-2 {
-        left: 16.66666667%;
-    }
-    .col-sm-push-1 {
-        left: 8.33333333%;
-    }
-    .col-sm-push-0 {
-        left: auto;
-    }
-    .col-sm-offset-12 {
-        margin-left: 100%;
-    }
-    .col-sm-offset-11 {
-        margin-left: 91.66666667%;
-    }
-    .col-sm-offset-10 {
-        margin-left: 83.33333333%;
-    }
-    .col-sm-offset-9 {
-        margin-left: 75%;
-    }
-    .col-sm-offset-8 {
-        margin-left: 66.66666667%;
-    }
-    .col-sm-offset-7 {
-        margin-left: 58.33333333%;
-    }
-    .col-sm-offset-6 {
-        margin-left: 50%;
-    }
-    .col-sm-offset-5 {
-        margin-left: 41.66666667%;
-    }
-    .col-sm-offset-4 {
-        margin-left: 33.33333333%;
-    }
-    .col-sm-offset-3 {
-        margin-left: 25%;
-    }
-    .col-sm-offset-2 {
-        margin-left: 16.66666667%;
-    }
-    .col-sm-offset-1 {
-        margin-left: 8.33333333%;
-    }
-    .col-sm-offset-0 {
-        margin-left: 0;
-    }
-=======
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
     float: left;
   }
@@ -2131,7 +1931,6 @@ pre code {
   .col-sm-offset-0 {
     margin-left: 0;
   }
->>>>>>> christian
 }
 @media (min-width: 992px) {
   .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
@@ -3202,27 +3001,6 @@ select[multiple].input-lg {
   }
 }
 .btn {
-<<<<<<< HEAD
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-=======
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
@@ -3242,7 +3020,6 @@ select[multiple].input-lg {
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
->>>>>>> christian
 }
 .btn:focus,
 .btn:active:focus,
@@ -3565,15 +3342,9 @@ fieldset[disabled] .btn-warning.focus {
   background-color: #fff;
 }
 .btn-danger {
-<<<<<<< HEAD
-    color: #fff;
-    background-color: #d9534f;
-    border-color: #d43f3a;
-=======
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
->>>>>>> christian
 }
 .btn-danger:focus,
 .btn-danger.focus {
@@ -4393,17 +4164,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-top-right-radius: 0;
 }
 .navbar {
-<<<<<<< HEAD
-    position: relative;
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-=======
   position: relative;
   min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;
->>>>>>> christian
 }
 @media (min-width: 768px) {
   .navbar {
@@ -4729,13 +4493,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-<<<<<<< HEAD
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-=======
   background-color: #f8f8f8;
   border-color: #e7e7e7;
->>>>>>> christian
 }
 .navbar-default .navbar-brand {
   color: #777;
@@ -5709,17 +5468,10 @@ button.list-group-item-danger.active:focus {
   color: inherit;
 }
 .panel-title {
-<<<<<<< HEAD
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 16px;
-    color: inherit;
-=======
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
   color: inherit;
->>>>>>> christian
 }
 .panel-title > a,
 .panel-title > small,
@@ -5949,11 +5701,7 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #ddd;
 }
 .panel-primary {
-<<<<<<< HEAD
-    border-color: #337ab7;
-=======
   border-color: #337ab7;
->>>>>>> christian
 }
 .panel-primary > .panel-heading {
   color: #fff;
@@ -6490,15 +6238,9 @@ button.close {
   position: relative;
 }
 .carousel-inner {
-<<<<<<< HEAD
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-=======
   position: relative;
   width: 100%;
   overflow: hidden;
->>>>>>> christian
 }
 .carousel-inner > .item {
   position: relative;
@@ -6573,20 +6315,6 @@ button.close {
   left: 100%;
 }
 .carousel-control {
-<<<<<<< HEAD
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 15%;
-    font-size: 20px;
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
-    background-color: rgba(0, 0, 0, 0);
-    filter: alpha(opacity=50);
-    opacity: .5;
-=======
   position: absolute;
   top: 0;
   bottom: 0;
@@ -6599,7 +6327,6 @@ button.close {
   background-color: rgba(0, 0, 0, 0);
   filter: alpha(opacity=50);
   opacity: .5;
->>>>>>> christian
 }
 .carousel-control.left {
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
@@ -6661,17 +6388,6 @@ button.close {
   content: '\203a';
 }
 .carousel-indicators {
-<<<<<<< HEAD
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    z-index: 15;
-    width: 60%;
-    padding-left: 0;
-    margin-left: -30%;
-    text-align: center;
-    list-style: none;
-=======
   position: absolute;
   bottom: 10px;
   left: 50%;
@@ -6681,7 +6397,6 @@ button.close {
   margin-left: -30%;
   text-align: center;
   list-style: none;
->>>>>>> christian
 }
 .carousel-indicators li {
   display: inline-block;
@@ -7035,8 +6750,8 @@ button.close {
   }
 }
 @media print {
-    .hidden-print {
-        display: none !important;
-    }
+  .hidden-print {
+    display: none !important;
+  }
 }
 /*# sourceMappingURL=bootstrap.css.map */
