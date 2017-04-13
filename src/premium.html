@@ -20,120 +20,125 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
-                <h3 class="bar-title">WebMusic</h3>
-                <button type="button" class="btn btn-primary pull-right">Inicio sesión</button>
-                <form action="registro.html" class="boton-registrar">
-                    <button type="submit" class="btn btn-primary pull-right">Registrarse</button>
-                </form>
-            </div>
-        </nav>
+        <div class="col-md-12">
+            <!-- Barra superior de la página -->
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <img src="../img/Logo.png" width="50" height="50">
+                    </div>
+                    <a class="navbar-brand" href="index.html">Webmusic</a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="registro.html"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
+                        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Fin barra superior -->
 
-        <header id="header-premium">
-            <div id="premium-text-header">
-                <h1 class="premium-header-format">Hazte premium!</h1>
-                <h3 class="premium-header-format">Disfruta de toda la música que te gusta de la mejor forma posible.</h2>
-            </div>
-        </header>
+            <header id="header-premium">
+                <div id="premium-text-header">
+                    <h2 class="premium-header-format">Hazte premium!</h2>
+                    <h4 class="premium-header-format">Disfruta de toda la música que te gusta de la mejor forma posible.</h4>
+                </div>
+            </header>
 
-        <article>
-            <!-- Ventajas de ser premium -->
-            <div id="info-about-premium">
-                <h2 class="title-premium">¡Descubre todas las ventajas de ser Premium!</h2>
-                <ul id="premium-list">
-                    <li class="li-premium-list premium-text-font">Descargar toda la música que te guste.</li>
-                    <li class="li-premium-list premium-text-font">Escuchar todas las canciones, incluidas las premium.</li>
-                    <li class="li-premium-list premium-text-font">Tus cancion tendrán preferencia a lo hora de ser mostradas en las diferentes listas de WebMusic.</li>
-                </ul>
-            </div>
-
-            <hr class="separator">
-
-            <div id="prueba-premium">
-                <h2 class="title-premium">¡Pruebalo gratis durante un mes!</h2>
-                <p class="premium-text-font p-premium">Si estas dudando si hacerte premium o no prueba gratis todas las ventajas que te ofrecemos durante un mes y convencete.</p>
-                <p class="premium-text-font p-premium">Solo tienes que pinchar en este botón.</p>
-                <div class="col-sm-2 col-md-2 col-md-push-5 col-sm-push-5">
-                    <button id="prueba-premium-btn" class="btn center-block btn-primary col-md-12">Prueba premium !</button>
+            <article>
+                <!-- Ventajas de ser premium -->
+                <div id="info-about-premium">
+                    <h2 class="title-premium">¡Descubre todas las ventajas de ser Premium!</h2>
+                    <ul id="premium-list">
+                        <li class="li-premium-list premium-text-font">Descargar toda la música que te guste.</li>
+                        <li class="li-premium-list premium-text-font">Escuchar todas las canciones, incluidas las premium.</li>
+                        <li class="li-premium-list premium-text-font">Tus cancion tendrán preferencia a lo hora de ser mostradas en las diferentes listas de WebMusic.</li>
+                    </ul>
                 </div>
 
-            </div>
+                <hr class="separator">
 
-            <hr class="separator">
+                <div id="prueba-premium">
+                    <h2 class="title-premium">¡Pruebalo gratis durante un mes!</h2>
+                    <p class="premium-text-font p-premium">Si estas dudando si hacerte premium o no prueba gratis todas las ventajas que te ofrecemos durante un mes y convencete.</p>
+                    <p class="premium-text-font p-premium">Solo tienes que pinchar en este botón.</p>
+                    <div class="col-sm-2 col-md-2 col-md-push-5 col-sm-push-5">
+                        <button id="prueba-premium-btn" class="btn center-block btn-primary col-md-12">Prueba premium !</button>
+                    </div>
 
-            <div id="hazte-premium">
-                <h2 class="title-premium">¡Hazte premium ya!</h2>
-                <p class="premium-text-font p-premium">Para hacerte premium ya, solo necesitas rellenar el siguiente formulario.</p>
-                <div class="panel-body"> 
-                    <form class="col-md-4 col-md-push-4" action="" onsubmit="return validarPremium()">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-                                <input class="form-control" placeholder="Nombre de usuario o correo electronico*" id="ID_Usuario" type="text" onchange="validarUsuario()">
-                            </div>
-                            <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
-                                <input class="form-control" placeholder="Número de cuenta *" id="ID_Cuenta" type="text" onchange="validarCuenta()">
-                            </div>
-                            <div class="alert alert-danger alertas-registro" id="ID_Error_Cuenta"></div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
-                            </div>
-                            <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
-                                <input class="form-control" placeholder="Número de meses *" id="ID_Num_meses" type="text" onchange="validarMeses()">
-                            </div>
-                            <div class="alert alert-danger alertas-registro" id="ID_Error_meses"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary center-block" value="Hazte premium !">
-                        </div>
-                    </form>
                 </div>
-            </div>
-        </article>
-        <div class="footer-container">
-            <footer class="footer-bs">
-                <div class="row">
-                    <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
-                        <div id="div-footer">
-                            <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
-                        </div>
-                    </div>
-                    <div class="col-md-4 footer-nav animated fadeInUp">
-                        <h4>Menu —</h4>
-                        <div class="col-md-6">
-                            <ul class="pages">
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="list">
-                                <li><a href="#">Acerca de</a></li>
-                                <li><a href="#">Miembros</a></li>
-                                <li><a href="#">Contacto</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2 footer-social animated fadeInDown">
 
-                    </div>
-                    <div class="col-md-3 footer-ns animated fadeInRight">
+                <hr class="separator">
 
+                <div id="hazte-premium">
+                    <h2 class="title-premium">¡Hazte premium ya!</h2>
+                    <p class="premium-text-font p-premium">Para hacerte premium ya, solo necesitas rellenar el siguiente formulario.</p>
+                    <div class="panel-body"> 
+                        <form class="col-md-4 col-md-push-4" action="" onsubmit="return validarPremium()">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+                                    <input class="form-control" placeholder="Nombre de usuario o correo electronico*" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
+                                    <input class="form-control" placeholder="Número de cuenta *" id="ID_Cuenta" type="text" onchange="validarCuenta()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_Cuenta"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
+                                    <input class="form-control" placeholder="Número de meses *" id="ID_Num_meses" type="text" onchange="validarMeses()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_meses"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary center-block" value="Hazte premium !">
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </footer>
+            </article>
+            <div class="footer-container">
+                <footer class="footer-bs">
+                    <div class="row">
+                        <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
+                            <div id="div-footer">
+                                <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                            </div>
+                        </div>
+                        <div class="col-md-4 footer-nav animated fadeInUp">
+                            <h4>Menu —</h4>
+                            <div class="col-md-6">
+                                <ul class="pages">
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list">
+                                    <li><a href="#">Acerca de</a></li>
+                                    <li><a href="#">Miembros</a></li>
+                                    <li><a href="#">Contacto</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 footer-social animated fadeInDown">
+
+                        </div>
+                        <div class="col-md-3 footer-ns animated fadeInRight">
+
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
-
     </body>
 </html>

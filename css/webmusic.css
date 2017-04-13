@@ -141,18 +141,16 @@
 
 #player-header {
     display: flex;
-    margin-left: 150px;
-    margin-top: 40px;
+    margin-top: 7%;
 }
 
 #player-header-info{
-    margin-top: 85px;
-    margin-left: 35px;
+    margin-top: 7%;
+    margin-left: 2%;
 }
 
 #bar-player{
-    margin-left: 150px;
-    margin-top: 40px;
+    margin-top: 2%;
     display: flex;
     width: 100%;
 }
@@ -165,15 +163,14 @@
 }
 
 #comment-title{
-    margin-left: 150px;
-    margin-top: 60px;
+    margin-top: 5%;
+    margin-bottom: 5%;
     font-family: 'Raleway'
 }
 
 .comment-content{
-    margin-left: 150px;
-    margin-top: 30px;
-    width: 75%;
+    margin-bottom: 1%;
+    width: 70%;
 }
 
 #comment-content-text{
@@ -730,8 +727,7 @@ body {
 
 .premium-header-format{
     font-family: 'Raleway';
-    color: aliceblue;
-    text-shadow: -0.2px 0 black, 0 -0.2px black, 0.2px 0 black, 0 -0.2px black;
+    color: black;
 }
 
 #premium-text-header{
@@ -764,4 +760,17 @@ body {
     display: none;
 }
 
+.comment-heading{
+    display: flex;
+}
 
+.comment-img{
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin-right: 15px;
+}
+
+#comment-btn{
+    margin-top: 3%;
+}
