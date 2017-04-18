@@ -11,6 +11,7 @@
 
         <!-- Bootstrap -->
         <link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/webmusic.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,20 +26,27 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.min.js"></script>
 		
-		<nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
-                <h3 class="bar-title">WebMusic</h3>
-                <button type="button" class="btn btn-primary pull-right">Inicio sesión</button>
-                <form action="registro.html" class="boton-registrar">
-                    <button type="submit" class="btn btn-primary pull-right">Registrarse</button>
-                </form>
-            </div>
-        </nav>
+		<!--Barra de navegación de la parte de arriba, donde aparece el nombre de la pagina y algunas opciones-->
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<img src="../img/Logo.png" width="50" height="50" alt="Logo">
+				</div>
+				<a class="navbar-brand" href="home.html">Webmusic</a>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
+					<li><a href="miPergfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+					<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+				</ul>
+			</div>
+		</nav>
 		
+		<!--Este es el contenedor que tiene el filtro de la musica que vamos a buscar-->
 		<div class="container-fluid">
             <div class="row">
-				<div class="cuadrar-filtro">
+				<div class="row">
+				<div class=" col-md-5"></div>
+				<div class=" col-md-1">
 					<div class="container-option">
 						<select name="Filtro">
 						  <option value="1">Todo</option> 
@@ -49,8 +57,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-sm-6 col-sm-offset-3">
-				
+				<div class="col-sm-6 col-sm-offset-3">	
 					<div id="imaginary_container"> 
 						<div class="input-group stylish-input-group">
 							<input type="text" class="form-control"  placeholder="Buscar" >
@@ -65,63 +72,116 @@
 			</div>	
         </div>
 		  
-		
+		<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
 		<div class="container-fluid">
-			<div class="row">
-				<div class="fb-profile">
-					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-					<div class="info-buscar">
-						 <p>Nombre de la canción: </p>
-						 <p>Artista: </p>
-						 <p>Disco: </p>
-						 <p>Duracion: </p>
+			<div class="separar-filas-abajo">
+				<div class="row">
+					<div class=" col-md-2 col-md-push-1">
+						<img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image" border="1"/>
+					</div>
+					<div class=" col-md-3 col-md-push-1">
+						<p>Nombre de la canción: </p>
+						<p>Artista: </p>
+						<p>Disco: </p>
+						<p>Duracion: </p>
+						<p>Fecha de lanzamiento: </p>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+							<li><a href="#">Lista1</a></li>
+							<li><a href="#">Lista2</a></li>
+							<li><a href="#">Lista3</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
+		<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
 		<div class="container-fluid">
-			<div class="row">
-				<div class="fb-profile">
-					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-					<div class="info-buscar">
-						 <p>Nombre de la canción: </p>
-						 <p>Artista: </p>
-						 <p>Disco: </p>
-						 <p>Duracion: </p>
+			<div class="separar-filas-abajo">
+				<div class="row">
+					<div class=" col-md-2 col-md-push-1">
+						<img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image" border="1"/>
+					</div>
+					<div class=" col-md-3 col-md-push-1">
+						<p>Nombre de la canción: </p>
+						<p>Artista: </p>
+						<p>Disco: </p>
+						<p>Duracion: </p>
+						<p>Fecha de lanzamiento: </p>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+							<li><a href="#">Lista1</a></li>
+							<li><a href="#">Lista2</a></li>
+							<li><a href="#">Lista3</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
+		<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
 		<div class="container-fluid">
-			<div class="row">
-				<div class="fb-profile">
-					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-					<div class="info-buscar">
-						 <p>Nombre de la canción: </p>
-						 <p>Artista: </p>
-						 <p>Disco: </p>
-						 <p>Duracion: </p>
+			<div class="separar-filas-abajo">
+				<div class="row">
+					<div class=" col-md-2 col-md-push-1">
+						<img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image" border="1"/>
+					</div>
+					<div class=" col-md-3 col-md-push-1">
+						<p>Nombre de la canción: </p>
+						<p>Artista: </p>
+						<p>Disco: </p>
+						<p>Duracion: </p>
+						<p>Fecha de lanzamiento: </p>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+							<li><a href="#">Lista1</a></li>
+							<li><a href="#">Lista2</a></li>
+							<li><a href="#">Lista3</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
+		<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
 		<div class="container-fluid">
-			<div class="row">
-				<div class="fb-profile">
-					<img  class="img-buscar" src="../img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-					<div class="info-buscar">
-						 <p>Nombre de la canción: </p>
-						 <p>Artista: </p>
-						 <p>Disco: </p>
-						 <p>Duracion: </p>
+			<div class="separar-filas-abajo">
+				<div class="row">
+					<div class=" col-md-2 col-md-push-1">
+						<img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image" border="1"/>
+					</div>
+					<div class=" col-md-3 col-md-push-1">
+						<p>Nombre de la canción: </p>
+						<p>Artista: </p>
+						<p>Disco: </p>
+						<p>Duracion: </p>
+						<p>Fecha de lanzamiento: </p>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+							<li><a href="#">Lista1</a></li>
+							<li><a href="#">Lista2</a></li>
+							<li><a href="#">Lista3</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
+		
+		<!--Pie de pagina-->
 		<div class="footer-container">
             <footer class="footer-bs">
                 <div class="row">
