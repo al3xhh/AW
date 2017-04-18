@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Inicio Sesion</title>
+        <link rel="icon" type="image/png" href="../img/Logo.png"/>
+        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/webmusic.css" rel="stylesheet">
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../js/bootstrap.js"></script>
+        <!-- Archivo con las funciones javascript que se encargan de validar el registro-->
+        <script src="../js/registro.js"></script>
+        <!-- Java script necesario para que funcione el recaptcha de google-->
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    </head>
+
+    <body>
+        <div>
+            <!-- Barra superior de la página -->
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <img src="../img/Logo.png" width="50" height="50" alt="Logo">
+                    </div>
+                    <a class="navbar-brand" href="index.html">Webmusic</a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="registro.html"><span class="glyphicon glyphicon-log-in"></span>Registrarse</a></li>
+                    </ul>
+                </div>
+            </nav><!-- Fin barra superior -->
+            
+            <div><!-- Container principal que contiene todos los campos de inicio de sesion -->
+                <div class="row">
+                    <div class="col-md-4 col-md-push-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Inicio de Sesion</div>
+                            <div class="panel-body">
+                                <form action="index.html" method="POST" onsubmit="return validarRegistro()">
+                                    <div class="row">
+                                        <div class="center-block">
+                                            <img class="profile-img" src="../img/ImagenRegistroInterior.png" alt="Imagen Registro">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 col-md-push-1">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                    <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" type="text" onchange="validarCorreo()">
+                                                </div>
+                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Correo"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                    <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
+                                                </div>
+                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="g-recaptcha" data-sitekey="6LdZVhsUAAAAAA2qkQqHdaL8--EE9iPy0tzretMD"></div>
+                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Captcha"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>Los campos con * son obligatorios</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-primary center-block" value="Registrarse">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Fin container principal -->
+            
+            <!-- Container que contiene el footer de la página -->
+            <div class="footer-container" id="specialFooter">
+                <footer class="footer-bs">
+                    <div class="row">
+                        <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
+                            <div id="div-footer">
+                                <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                            </div>
+                        </div>
+                        <div class="col-md-4 footer-nav animated fadeInUp">
+                            <h4>Menu —</h4>
+                            <div class="col-md-6">
+                                <ul class="pages">
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list">
+                                    <li><a href="#">Acerca de</a></li>
+                                    <li><a href="#">Miembros</a></li>
+                                    <li><a href="#">Contacto</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 footer-social animated fadeInDown">
+                        </div>
+                        <div class="col-md-3 footer-ns animated fadeInRight">
+                        </div>
+                    </div>
+                </footer>
+            </div><!-- Fin container footer -->
+        </div>
+    </body>
+</html>
