@@ -11,6 +11,7 @@
 
         <!-- Bootstrap -->
         <link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/webmusic.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,93 +26,103 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.min.js"></script>
 		
-		<nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <img class="logo pull-left" alt="WebMusic" src="../img/Logo.png" width="40" height="40">
-                <h3 class="bar-title">WebMusic</h3>
-                <button type="button" class="btn btn-primary pull-right">Inicio sesión</button>
-                <form action="registro.html" class="boton-registrar">
-                    <button type="submit" class="btn btn-primary pull-right">Registrarse</button>
-                </form>
-            </div>
-        </nav>
+		<!--Barra de navegación de la parte de arriba, donde aparece el nombre de la pagina y algunas opciones-->
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<img src="../img/Logo.png" width="50" height="50" alt="Logo">
+				</div>
+				<a class="navbar-brand" href="home.html">Webmusic</a>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
+					<li><a href="miPergfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+					<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+				</ul>
+			</div>
+		</nav>
 		
-		
-		<div class="alinear-listas">
-			<div class="separa-filas">
-				<div class="row">
-				  <div class="col-md-2">Eliminar lista</div>
-				  <div class="col-md-2">Cancion</div>
-				  <div class="col-md-2">Artista</div>
-				  <div class="col-md-2">Album</div>
-				  <div class="col-md-2">Fecha de creación</div>
-				  <div class="col-md-2">Duración</div>
+		<div class="container-fluid">
+			<div class="separar-filas">
+				<div class="col-md-2 col-md-push-2">
+					<img  class="img-responsive" src="../img/FotoLista.jpg" alt="img" title="image"/>
+				</div>
+				<div class="col-md-3 col-md-push-2">
+					<p>Nombre del creador: Pablito87</p></br>
+					<p>Fecha de creacion: 18-04-2017</p></br>
+					<p>Descripción</p></br>
+					<p>Las mejores canciones de pop las encontraras en esta lista, si te gusta la buena musica no dudes en unirte ;D</p>
+					
+					
 				</div>
 			</div>
-			
-			<div class="separa-filas">
-				<div class="row">
-					<div class="col-md-2">
-						<button type="button" class="btn btn-default">Eliminar</button>
-					</div>
-					<div class="col-md-2">Nombre1</div>
-					<div class="col-md-2">Artista1</div>
-					<div class="col-md-2">Album1</div>
-					<div class="col-md-2">01/01/2017</div>
-					<div class="col-md-2">3:47</div>
-				</div>
-			</div>
-			
-			<div class="separa-filas">
-				<div class="row">
-					<div class="col-md-2">
-						<button type="button" class="btn btn-default">Eliminar</button>
-					</div>
-					<div class="col-md-2">Nombre2</div>
-					<div class="col-md-2">Artista2</div>
-					<div class="col-md-2">Album2</div>
-					<div class="col-md-2">09/01/2017</div>
-					<div class="col-md-2">0:58</div>
-				</div>
-			</div>
-			
-			<div class="separa-filas">
-				<div class="row">
-					<div class="col-md-2">
-						<button type="button" class="btn btn-default">Eliminar</button>
-					</div>
-					<div class="col-md-2">Nombre3</div>
-					<div class="col-md-2">Artista3</div>
-					<div class="col-md-2">Album3</div>
-					<div class="col-md-2">19/06/2017</div>
-					<div class="col-md-2">2:47</div>
-				</div>
-			</div>
-			
-			<div class="separa-filas">
-				<div class="row">
-					<div class="col-md-2">
-						<button type="button" class="btn btn-default">Eliminar</button>
-					</div>
-					<div class="col-md-2">Nombre4</div>
-					<div class="col-md-2">Artista1</div>
-					<div class="col-md-2">Album2</div>
-					<div class="col-md-2">16/12/2017</div>
-					<div class="col-md-2">4:00</div>
-				</div>
-			</div>
-			
-			
-			<div class="panel-body">
-				¿Quieres añadir una cancion nueva?   
-				<input type="text" placeholder="Introduce el nombre";>
-				<button type="button" class="btn btn-default">Añadir</button>
-			</div>
-			
-			
 		</div>
 		
 		
+		<div class="container-fluid">
+			<div class="separar-filas-arriba">
+				<div class="col-md-2 col-md-push-2">Nombre de la cancion</div>
+				<div class="col-md-1 col-md-push-2">Artista</div>
+				<div class="col-md-1 col-md-push-2">Album</div>
+				<div class="col-md-2 col-md-push-2">Fecha de creación</div>
+				<div class="col-md-1 col-md-push-2">Duración</div>
+			</div>
+		</div>
+			
+		<div class="container-fluid">
+			<div class="separar-filas-arriba">				
+				<div class="col-md-2 col-md-push-2">Nombre1</div>
+				<div class="col-md-1 col-md-push-2">Artista1</div>
+				<div class="col-md-1 col-md-push-2">Album1</div>
+				<div class="col-md-2 col-md-push-2">01/01/2017</div>
+				<div class="col-md-1 col-md-push-2">3:47</div>
+				<div class="col-md-1 col-md-push-2">
+					<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash">
+				</div>
+			</div>
+		</div>
+		
+		<div class="container-fluid">
+			<div class="separar-filas-arriba">
+				<div class="col-md-2 col-md-push-2">Nombre1</div>
+				<div class="col-md-1 col-md-push-2">Artista1</div>
+				<div class="col-md-1 col-md-push-2">Album1</div>
+				<div class="col-md-2 col-md-push-2">01/01/2017</div>
+				<div class="col-md-1 col-md-push-2">3:47</div>
+				<div class="col-md-1 col-md-push-2">
+				<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash">
+				</div>
+			</div>
+		</div>
+			
+		
+		<div class="container-fluid">
+			<div class="separar-filas-arriba">
+				<div class="col-md-2 col-md-push-2">Nombre3</div>
+				<div class="col-md-1 col-md-push-2">Artista3</div>
+				<div class="col-md-1 col-md-push-2">Album3</div>
+				<div class="col-md-2 col-md-push-2">19/06/2017</div>
+				<div class="col-md-1 col-md-push-2">2:47</div>
+				<div class="col-md-1 col-md-push-2">
+					<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash">
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="container-fluid">
+			<div class="separar-filas">
+				<div class="col-md-2 col-md-push-2">Nombre4</div>
+				<div class="col-md-1 col-md-push-2">Artista1</div>
+				<div class="col-md-1 col-md-push-2">Album2</div>
+				<div class="col-md-2 col-md-push-2">16/12/2017</div>
+				<div class="col-md-1 col-md-push-2">4:00</div>
+				<div class="col-md-1 col-md-push-2">
+					<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash">
+				</div>
+			</div>
+		</div>
+		
+		<!--Pie de pagina-->
 		<div class="footer-container">
             <footer class="footer-bs">
                 <div class="row">
