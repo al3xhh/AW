@@ -774,3 +774,7 @@ body {
 #comment-btn{
     margin-top: 3%;
 }
+
+#editarGustos{
+    display: none;
+}
