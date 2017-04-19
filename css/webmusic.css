@@ -711,3 +711,23 @@ body {
     color: white;
     text-decoration: none;
 }
+
+.link-home-carousel-and-search:link {
+    color: #757575;
+    text-decoration: none;
+}
+
+.link-home-carousel-and-search:visited {
+    color: #757575;
+    text-decoration: none;
+}
+
+.link-home-carousel-and-search:hover {
+    color: #757575;
+    text-decoration: none;
+}
+
+.link-home-carousel-and-search:active {
+    color: #757575;
+    text-decoration: none;
+}
