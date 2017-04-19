@@ -1,12 +1,3 @@
-#centrarRegistro {
-    width: 50%; 
-    height: 50%;
-    min-width: 200px;
-    max-width: 400px;
-    padding: 40px;
-    text-align: center;
-}
-
 #imaginary_container{
     margin-top: 5%;
     margin-bottom: 5%;
@@ -23,72 +14,6 @@
 .stylish-input-group button{
     border:0;
     background:transparent;
-}
-
-#div-home {
-    display: flex;
-}
-
-#container-carousel-home {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
-}
-
-#carousel-home {
-    position: absolute;
-    margin-left: -50px !important;  /* 50% of your logo width */
-    display: block;
-}
-
-.media-carousel {
-    margin-bottom: 0;
-    padding: 0 40px 30px 40px;
-    margin-top: 30px;
-}
-
-.media-carousel .carousel-control.left {
-    left: -12px;
-    background-image: none;
-    background: none repeat scroll 0 0 #222222;
-    border: 4px solid #FFFFFF;
-    border-radius: 23px 23px 23px 23px;
-    height: 40px;
-    width : 40px;
-    margin-top: 30px
-}
-
-.media-carousel .carousel-control.right {
-    right: -12px !important;
-    background-image: none;
-    background: none repeat scroll 0 0 #222222;
-    border: 4px solid #FFFFFF;
-    border-radius: 23px 23px 23px 23px;
-    height: 40px;
-    width : 40px;
-    margin-top: 30px
-}
-
-.media-carousel .carousel-indicators {
-    right: 50%;
-    top: auto;
-    bottom: 0px;
-    margin-right: -19px;
-}
-
-.media-carousel .carousel-indicators li {
-    background: #c0c0c0;
-}
-
-.media-carousel .carousel-indicators .active {
-    background: #333333;
-}
-
-.media-carousel img{
-    width: 250px;
-    height: 100px
 }
 
 .footer-bs {
@@ -242,37 +167,28 @@
     margin-left: 10px;
 }
 
-/*
-Fade content bs-carousel with hero headers
-Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
-Image credits: unsplash.com
-*/
-
-/********************************/
-/*       Fade Bs-carousel       */
-/********************************/
 .fade-carousel {
     position: relative;
     height: 80vh;
 }
+
 .fade-carousel .carousel-inner .item {
     height: 78vh;
 }
+
 .fade-carousel .carousel-indicators > li {
     margin: 0 2px;
     background-color: #337ab7;
     border-color: #337ab7;
     opacity: .7;
 }
+
 .fade-carousel .carousel-indicators > li.active {
     width: 10px;
     height: 10px;
     opacity: 1;
 }
 
-/********************************/
-/*          Hero Headers        */
-/********************************/
 .hero {
     position: absolute;
     top: 25%;
@@ -288,6 +204,7 @@ Image credits: unsplash.com
     -o-transform: translate3d(-50%,-50%,0);
     transform: translate3d(-50%,-50%,0);
 }
+
 .hero h1 {
     font-size: 6em;    
     font-weight: bold;
@@ -303,6 +220,7 @@ Image credits: unsplash.com
     -o-transition: 2s all ease-in-out .1s; 
     transition: 2s all ease-in-out .1s; 
 }
+
 .fade-carousel .carousel-inner .item.active .hero {
     opacity: 1;
     -webkit-transition: 2s all ease-in-out .1s;
@@ -312,9 +230,6 @@ Image credits: unsplash.com
     transition: 2s all ease-in-out .1s;    
 }
 
-/********************************/
-/*            Overlay           */
-/********************************/
 .overlay {
     position: absolute;
     width: 100%;
@@ -324,9 +239,6 @@ Image credits: unsplash.com
     opacity: .7;
 }
 
-/********************************/
-/*          Custom Buttons      */
-/********************************/
 .btn.btn-lg {padding: 10px 40px;}
 .btn.btn-hero,
 .btn.btn-hero:hover,
@@ -338,9 +250,6 @@ Image credits: unsplash.com
     margin: 20px auto;
 }
 
-/********************************/
-/*       Slides backgrounds     */
-/********************************/
 .fade-carousel .slides .slide-1, 
 .fade-carousel .slides .slide-2,
 .fade-carousel .slides .slide-3 {
@@ -349,35 +258,25 @@ Image credits: unsplash.com
     background-position: center center;
     background-repeat: no-repeat;
 }
+
 .fade-carousel .slides .slide-1 {
     background-image: url("../img/Bienvenida.jpg")
 }
+
 .fade-carousel .slides .slide-2 {
     background-image: url("../img/Premium.jpg");
 }
+
 .fade-carousel .slides .slide-3 {
     background-image: url("../img/Unete.jpg");
 }
 
-/********************************/
-/*          Media Queries       */
-/********************************/
 @media screen and (min-width: 980px){
     .hero { width: 980px; }    
 }
 @media screen and (max-width: 640px){
     .hero h1 { font-size: 4em; }    
 }
-
-
-
-
-
-
-
-/* ==========================================================================
-Author's custom styles
-========================================================================== */
 
 body
 {
@@ -401,59 +300,62 @@ body
     float: left;
 }
 
-/***
-Bootstrap Line Tabs by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
-***/
-
-/* Tabs panel */
 .tabbable-panel {
     border:1px solid #eee;
     padding: 10px;
 }
 
-/* Default mode */
 .tabbable-line > .nav-tabs {
     border: none;
     margin: 0px;
 }
+
 .tabbable-line > .nav-tabs > li {
     margin-right: 2px;
 }
+
 .tabbable-line > .nav-tabs > li > a {
     border: 0;
     margin-right: 0;
     color: #737373;
 }
+
 .tabbable-line > .nav-tabs > li > a > i {
     color: #a6a6a6;
 }
+
 .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
     border-bottom: 4px solid #337ab7;
 }
+
 .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
     border: 0;
     background: none !important;
     color: #333333;
 }
+
 .tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
     color: #a6a6a6;
 }
+
 .tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
     margin-top: 0px;
 }
+
 .tabbable-line > .nav-tabs > li.active {
     border-bottom: 4px solid #337ab7;
     position: relative;
 }
+
 .tabbable-line > .nav-tabs > li.active > a {
     border: 0 !important;
     color: #333333;
 }
+
 .tabbable-line > .nav-tabs > li.active > a > i {
     color: #404040;
 }
+
 .tabbable-line > .tab-content {
     margin-top: -3px;
     background-color: #fff;
@@ -461,27 +363,30 @@ Licensed under MIT
     border-top: 1px solid #eee;
     padding: 15px 0;
 }
+
 .portlet .tabbable-line > .tab-content {
     padding-bottom: 0;
 }
 
-/* Below tabs mode */
-
 .tabbable-line.tabs-below > .nav-tabs > li {
     border-top: 4px solid transparent;
 }
+
 .tabbable-line.tabs-below > .nav-tabs > li > a {
     margin-top: 0;
 }
+
 .tabbable-line.tabs-below > .nav-tabs > li:hover {
     border-bottom: 0;
     border-top: 4px solid #fbcdcf;
 }
+
 .tabbable-line.tabs-below > .nav-tabs > li.active {
     margin-bottom: -2px;
     border-bottom: 0;
     border-top: 4px solid #f3565d;
 }
+
 .tabbable-line.tabs-below > .tab-content {
     margin-top: -10px;
     border-top: 0;
@@ -494,7 +399,6 @@ Licensed under MIT
     border-bottom: 1px solid #eee;
     margin: 0 5px;
 }
-
 
 @media (max-width:768px){
 
@@ -538,8 +442,6 @@ Licensed under MIT
     margin-top: 13px;
 }
 
-
-
 .control-label {
     color:#333333;
 }
@@ -547,7 +449,6 @@ Licensed under MIT
 .boton-registrar {
     display: inline;
 }
-
 
 .info-buscar{
     padding-top: 30px;
@@ -596,7 +497,7 @@ body {
 }
 
 .label_home {
-  
+
     font-size: 16px;
     display: block;
     float: left;
@@ -765,10 +666,10 @@ body {
 }
 
 .comment-img{
-  width: 60px;
-  height: 60px;
-  display: block;
-  margin-right: 15px;
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin-right: 15px;
 }
 
 #comment-btn{
@@ -780,15 +681,15 @@ body {
 }
 
 .separar-filas-abajo{
-	margin-bottom: 3%;
+    margin-bottom: 3%;
 }
 
 .separar-filas-arriba{
-	margin-top: 3%;
+    margin-top: 3%;
 }
 .separar-filas{
-	margin-top: 3%;
-	margin-bottom: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
 }
 
 .link-index-carousel:link {
