@@ -260,8 +260,8 @@ Image credits: unsplash.com
 }
 .fade-carousel .carousel-indicators > li {
     margin: 0 2px;
-    background-color: #f39c12;
-    border-color: #f39c12;
+    background-color: #337ab7;
+    border-color: #337ab7;
     opacity: .7;
 }
 .fade-carousel .carousel-indicators > li.active {
@@ -789,4 +789,24 @@ body {
 .separar-filas{
 	margin-top: 3%;
 	margin-bottom: 3%;
+}
+
+.link-index-carousel:link {
+    color: white;
+    text-decoration: none;
+}
+
+.link-index-carousel:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.link-index-carousel:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.link-index-carousel:active {
+    color: white;
+    text-decoration: none;
 }
