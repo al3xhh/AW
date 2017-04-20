@@ -55,18 +55,108 @@ function validarCuenta() {
         document.getElementById("ID_Error_Cuenta").style.display = "block";
         document.getElementById("ID_Error_Cuenta").innerHTML = "La cuenta debe tener 16 digitos";
         return false;
-    } else if(isNaN(cuenta_val)) {
+    } else if (isNaN(cuenta_val)) {
         document.getElementById("ID_Error_Cuenta").style.display = "block";
         document.getElementById("ID_Error_Cuenta").innerHTML = "El número de cuenta solo debe contener numeros enteros";
+        return false;
     } else {
-        if (meses_val % 1 !== 0){
+        if (cuenta_val % 1 !== 0) {
             document.getElementById("ID_Error_Cuenta").style.display = "block";
             document.getElementById("ID_Error_Cuenta").innerHTML = "El número de cuenta solo debe contener numeros enteros";
-        }
-        else{
+            return false;
+        } else {
             document.getElementById("ID_Error_Cuenta").style.display = "none";
             return true;
         }
+    }
+}
+
+function validarCVV() {
+    "use strict";
+
+    var cvv = document.getElementById("ID_CVV"),
+        cvv_val = cvv.value;
+
+    if (cvv_val === "") {
+        document.getElementById("ID_Error_CVV").style.display = "block";
+        document.getElementById("ID_Error_CVV").innerHTML = "Debes introducir un CVV (3 digitos)";
+        return false;
+    } else if (cvv_val.length !== 3) {
+        document.getElementById("ID_Error_CVV").style.display = "block";
+        document.getElementById("ID_Error_CVV").innerHTML = "El CVV debe tener 3 digitos, mirar reverso de tarjeta";
+        return false;
+    } else if (isNaN(cvv_val)) {
+        document.getElementById("ID_Error_CVV").style.display = "block";
+        document.getElementById("ID_Error_CVV").innerHTML = "El CVV solo debe contener numeros enteros";
+        return false;
+    } else {
+        if (cvv_val % 1 !== 0) {
+            document.getElementById("ID_Error_CVV").style.display = "block";
+            document.getElementById("ID_Error_CVV").innerHTML = "El número de cuenta solo debe contener numeros enteros";
+            return false;
+        } else {
+            document.getElementById("ID_Error_CVV").style.display = "none";
+            return true;
+        }
+    }
+
+}
+
+function validarFechaCad() {
+    "use strict";
+
+    var fecha = document.getElementById("ID_Fecha_Cad"),
+        fecha_val = fecha.value,
+        reg_fecha = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/,
+        tokens = fecha_val.split("/"),
+        day = tokens[0],
+        month = tokens[1],
+        year = tokens[2],
+        date = new Date(year, month - 1, day),
+        monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ],
+        today = new Date();
+
+    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+        monthLength[1] = 29;
+
+    if (fecha_val === "") {
+        document.getElementById("ID_Error_Fecha_Cad").style.display = "block";
+        document.getElementById("ID_Error_Fecha_Cad").innerHTML = "Debes introducir una fecha de caducidad";
+        return false;
+    } else if (!reg_fecha.test(fecha_val)) {
+        document.getElementById("ID_Error_Fecha_Cad").style.display = "block";
+        document.getElementById("ID_Error_Fecha_Cad").innerHTML = "Debes introducir una fecha con formato dd/mm/aaaa";
+        return false;
+    } else if (year < today.getFullYear() || year > today.getFullYear() + 10 || month <= 0 || month > 12 || today > date) {
+        document.getElementById("ID_Error_Fecha_Cad").style.display = "block";
+        document.getElementById("ID_Error_Fecha_Cad").innerHTML = "Debes introducir una fecha valida, puede que la tarjeta este caducada (dd/mm/aaaa)";
+        return false;
+    } else if (!(day > 0 && day <= monthLength[month - 1])) {
+        document.getElementById("ID_Error_Fecha_Cad").style.display = "block";
+        document.getElementById("ID_Error_Fecha_Cad").innerHTML = "Debes introducir una fecha valida (dd/mm/aaaa)";
+        return false;
+    } else {
+        document.getElementById("ID_Error_Fecha_Cad").style.display = "none";
+        return true;
+    }
+
+}
+
+function validarTitular(){
+    "use strict";
+
+    var titular = document.getElementById("ID_Titular"),
+        titular_val = titular.value,
+        reg_titular = /^[a-zA-Z-].{1,100}$/i
+
+    if (titular_val === ""){
+        document.getElementById("ID_Error_Titular").style.display = "block";
+        document.getElementById("ID_Error_Titular").innerHTML = "Debes introducir el nombre del titular de la cuenta";
+        return false;
+    } else if (!reg_titular.test(titular_val)){
+        document.getElementById("ID_Error_Titular").style.display = "block";
+        document.getElementById("ID_Error_Titular").innerHTML = "El nombre del titular solo debe contener letras";
+        return false;
     }
 }
 
@@ -96,8 +186,9 @@ function validarMeses() {
 }
 
 function validarPremium() {
+    "use strict";
 
-    var ret = (validarContrasenya() & validarUsuario() & validarCuenta() & validarMeses());
+    var ret = (validarContrasenya() & validarUsuario() & validarCuenta() & validarMeses() & validarCVV() & validarFechaCad() & validarTitular());
 
     if (ret === 0) {
         return false;

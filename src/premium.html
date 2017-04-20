@@ -89,6 +89,27 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
+                                    <input class="form-control" placeholder="CVV*" id="ID_CVV" type="text" onchange="validarCVV()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_CVV"></div>
+                            </div>
+                             <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
+                                    <input class="form-control" placeholder="Fecha de caducidad*" id="ID_Fecha_Cad" type="text" onchange="validarFechaCad()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_Fecha_Cad"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
+                                    <input class="form-control" placeholder="Nombre del titular de la cuenta*" id="ID_Titular" type="text" onchange="validarTitular()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_Titular"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
                                 </div>
