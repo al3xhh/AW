@@ -731,3 +731,11 @@ body {
     color: #757575;
     text-decoration: none;
 }
+
+.negrita{
+	font-weight: bold;
+}
+
+.salto-de-linea{
+	margin-bottom: 10%;
+}

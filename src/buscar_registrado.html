@@ -10,8 +10,13 @@
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
 
         <!-- Bootstrap -->
-        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/webmusic.css" rel="stylesheet">
+		
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../js/bootstrap.min.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,198 +26,206 @@
 <![endif]-->
     </head>
     <body>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="../js/bootstrap.min.js"></script>
-		
-		<!--Barra de navegación de la parte de arriba, donde aparece el nombre de la pagina y algunas opciones-->
-		<nav class="navbar navbar-inverse">
+        
+		<div>
+			<!--Barra de navegación de la parte de arriba, donde aparece el nombre de la pagina y algunas opciones-->
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<img src="../img/Logo.png" width="50" height="50" alt="Logo">
+					</div>
+					<a class="navbar-brand" href="home.html">Webmusic</a>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
+						<li><a href="miPergfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+						<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+					</ul>
+				</div>
+			</nav>
+			
+			<!--Este es el contenedor que tiene el filtro de la musica que vamos a buscar-->
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<img src="../img/Logo.png" width="50" height="50" alt="Logo">
-				</div>
-				<a class="navbar-brand" href="home.html">Webmusic</a>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
-					<li><a href="miPergfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-					<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-				</ul>
-			</div>
-		</nav>
-		
-		<!--Este es el contenedor que tiene el filtro de la musica que vamos a buscar-->
-		<div class="container-fluid">
-            <div class="row">
 				<div class="row">
-				<div class=" col-md-5"></div>
-				<div class=" col-md-1">
-					<div class="container-option">
-						<select name="Filtro">
-						  <option value="1">Todo</option> 
-						  <option value="2">Cancion</option> 
-						  <option value="3">Artista</option>
-						  <option value="4">Disco</option> 
-						  <option value="5">Fecha de lanzamiento</option> 
-						</select>
-					</div>
-				</div>
-				<div class="col-sm-6 col-sm-offset-3">	
-					<div id="imaginary_container"> 
-						<div class="input-group stylish-input-group">
-							<input type="text" class="form-control"  placeholder="Buscar" >
-							<span class="input-group-addon">
-								<button type="submit">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>  
-							</span>
+					<div class="row">
+						<div class=" col-md-5"></div>
+						<div class=" col-md-1">
+							<div class="container-option">
+								<div class="negrita">
+									<select name="Filtro">
+									  <option value="1">Todo</option> 
+									  <option value="2">Cancion</option> 
+									  <option value="3">Artista</option>
+									  <option value="4">Disco</option> 
+									  <option value="5">Fecha de lanzamiento</option> 
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-sm-offset-3">	
+							<div id="imaginary_container"> 
+								<div class="input-group stylish-input-group">
+									<input type="text" class="form-control"  placeholder="Buscar" >
+									<span class="input-group-addon">
+										<button type="submit">
+											<span class="glyphicon glyphicon-search"></span>
+										</button>  
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>	
-        </div>
-		  
-		<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
-		<div class="container-fluid">
-			<div class="separar-filas-abajo">
-				<div class="row">
-					<div class=" col-md-2 col-md-push-1">
-						<img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image" border="1"/>
-					</div>
-					<div class=" col-md-3 col-md-push-1">
-						<p>Nombre de la canción: </p>
-						<p>Artista: </p>
-						<p>Disco: </p>
-						<p>Duracion: </p>
-						<p>Fecha de lanzamiento: </p>
-						<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu">
-							<li><a href="#">Lista1</a></li>
-							<li><a href="#">Lista2</a></li>
-							<li><a href="#">Lista3</a></li>
-							</ul>
+				</div>	
+			</div>
+			  
+			<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
+			<div class="container-fluid">
+				<div class="separar-filas-abajo">
+					<div class="row">
+						<div class=" col-md-2 col-md-push-1">
+							<a href="reproductor.html"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image"/></a>
+						</div>
+						<div class=" col-md-3 col-md-push-1">
+							<div class="negrita">
+								<p>Nombre de la canción: </p>
+								<p>Artista: </p>
+								<p>Disco: </p>
+								<p>Duracion: </p>
+								<p>Fecha de lanzamiento: </p>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
+								<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+								<li><a href="#">Lista1</a></li>
+								<li><a href="#">Lista2</a></li>
+								<li><a href="#">Lista3</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
-		<div class="container-fluid">
-			<div class="separar-filas-abajo">
-				<div class="row">
-					<div class=" col-md-2 col-md-push-1">
-						<img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image" border="1"/>
-					</div>
-					<div class=" col-md-3 col-md-push-1">
-						<p>Nombre de la canción: </p>
-						<p>Artista: </p>
-						<p>Disco: </p>
-						<p>Duracion: </p>
-						<p>Fecha de lanzamiento: </p>
-						<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu">
-							<li><a href="#">Lista1</a></li>
-							<li><a href="#">Lista2</a></li>
-							<li><a href="#">Lista3</a></li>
-							</ul>
+			
+			<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
+			<div class="container-fluid">
+				<div class="separar-filas-abajo">
+					<div class="row">
+						<div class=" col-md-2 col-md-push-1">
+							<a href="reproductor.html"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image"/></a>
+						</div>
+						<div class=" col-md-3 col-md-push-1">
+							<div class="negrita">
+								<p>Nombre de la canción: </p>
+								<p>Artista: </p>
+								<p>Disco: </p>
+								<p>Duracion: </p>
+								<p>Fecha de lanzamiento: </p>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
+								<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+								<li><a href="#">Lista1</a></li>
+								<li><a href="#">Lista2</a></li>
+								<li><a href="#">Lista3</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
-		<div class="container-fluid">
-			<div class="separar-filas-abajo">
-				<div class="row">
-					<div class=" col-md-2 col-md-push-1">
-						<img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image" border="1"/>
-					</div>
-					<div class=" col-md-3 col-md-push-1">
-						<p>Nombre de la canción: </p>
-						<p>Artista: </p>
-						<p>Disco: </p>
-						<p>Duracion: </p>
-						<p>Fecha de lanzamiento: </p>
-						<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu">
-							<li><a href="#">Lista1</a></li>
-							<li><a href="#">Lista2</a></li>
-							<li><a href="#">Lista3</a></li>
-							</ul>
+			
+			<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
+			<div class="container-fluid">
+				<div class="separar-filas-abajo">
+					<div class="row">
+						<div class=" col-md-2 col-md-push-1">
+							<a href="reproductor.html"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image"/></a>
+						</div>
+						<div class=" col-md-3 col-md-push-1">
+							<div class="negrita">
+								<p>Nombre de la canción: </p>
+								<p>Artista: </p>
+								<p>Disco: </p>
+								<p>Duracion: </p>
+								<p>Fecha de lanzamiento: </p>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
+								<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+								<li><a href="#">Lista1</a></li>
+								<li><a href="#">Lista2</a></li>
+								<li><a href="#">Lista3</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
-		<div class="container-fluid">
-			<div class="separar-filas-abajo">
-				<div class="row">
-					<div class=" col-md-2 col-md-push-1">
-						<img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image" border="1"/>
-					</div>
-					<div class=" col-md-3 col-md-push-1">
-						<p>Nombre de la canción: </p>
-						<p>Artista: </p>
-						<p>Disco: </p>
-						<p>Duracion: </p>
-						<p>Fecha de lanzamiento: </p>
-						<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu">
-							<li><a href="#">Lista1</a></li>
-							<li><a href="#">Lista2</a></li>
-							<li><a href="#">Lista3</a></li>
-							</ul>
+			
+			<!--Contenedor que tiene tanto la imagen de la cancion buscada como un poco de informacion de la misma-->
+			<div class="container-fluid">
+				<div class="separar-filas-abajo">
+					<div class="row">
+						<div class=" col-md-2 col-md-push-1">
+							<a href="reproductor.html"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="img" title="image"/></a>
+						</div>
+						<div class=" col-md-3 col-md-push-1">
+							<div class="negrita">
+								<p>Nombre de la canción: </p>
+								<p>Artista: </p>
+								<p>Disco: </p>
+								<p>Duracion: </p>
+								<p>Fecha de lanzamiento: </p>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista
+								<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+								<li><a href="#">Lista1</a></li>
+								<li><a href="#">Lista2</a></li>
+								<li><a href="#">Lista3</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		
-		<!--Pie de pagina-->
-		<div class="footer-container">
-            <footer class="footer-bs">
-                <div class="row">
-                    <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
-                        <div id="div-footer">
-                            <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
-                        </div>
-                    </div>
-                    <div class="col-md-4 footer-nav animated fadeInUp">
-                        <h4>Menu —</h4>
-                        <div class="col-md-6">
-                            <ul class="pages">
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="list">
-                                <li><a href="#">Acerca de</a></li>
-                                <li><a href="#">Miembros</a></li>
-                                <li><a href="#">Contacto</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2 footer-social animated fadeInDown">
+			
+			
+			<!--Pie de pagina-->
+			<div class="footer-container">
+				<footer class="footer-bs">
+					<div class="row">
+						<div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
+							<div id="div-footer">
+								<img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+							</div>
+						</div>
+						<div class="col-md-4 footer-nav animated fadeInUp">
+							<h4>Menu —</h4>
+							<div class="col-md-6">
+								<ul class="pages">
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<ul class="list">
+									<li><a href="#">Acerca de</a></li>
+									<li><a href="#">Miembros</a></li>
+									<li><a href="#">Contacto</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-2 footer-social animated fadeInDown">
 
-                    </div>
-                    <div class="col-md-3 footer-ns animated fadeInRight">
+						</div>
+						<div class="col-md-3 footer-ns animated fadeInRight">
 
-                    </div>
-                </div>
-            </footer>
-        </div>
-		
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
 	</body>
 </html>

@@ -12,6 +12,11 @@
         <!-- Bootstrap -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/webmusic.css" rel="stylesheet">
+		
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../js/bootstrap.min.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,137 +26,133 @@
 <![endif]-->
     </head>
     <body>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="../js/bootstrap.min.js"></script>
-		
-		<!--Barra de navegación de la parte de arriba, donde aparece el nombre de la pagina y algunas opciones-->
-		<nav class="navbar navbar-inverse">
+		<div>
+			<!--Barra de navegación de la parte de arriba, donde aparece el nombre de la pagina y algunas opciones-->
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<img src="../img/Logo.png" width="50" height="50" alt="Logo">
+					</div>
+					<a class="navbar-brand" href="home.html">Webmusic</a>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
+						<li><a href="miPergfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+						<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+					</ul>
+				</div>
+			</nav>
+
+			<!--Este contenedor se usa para ver las siguientes categorias en las que separamos las listas de reproduccion-->
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<img src="../img/Logo.png" width="50" height="50" alt="Logo">
-				</div>
-				<a class="navbar-brand" href="home.html">Webmusic</a>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
-					<li><a href="miPergfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-					<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-				</ul>
+				<div class="separar-filas-abajo">
+					<div class="col-md-2 col-md-push-2">Imagen</div>
+					<div class="col-md-2 col-md-push-2">Nombre</div>
+					<div class="col-md-2 col-md-push-2">Fecha de creacion</div>
+					<div class="col-md-2 col-md-push-2">Numero de canciones</div>
+				</div>	
 			</div>
-		</nav>
-
-		<!--Este contenedor se usa para ver las siguientes categorias en las que separamos las listas de reproduccion-->
-		<div class="container-fluid">
-			<div class="separar-filas-abajo">
-				<div class="col-md-2 col-md-push-2">Imagen</div>
-				<div class="col-md-2 col-md-push-2">Nombre</div>
-				<div class="col-md-2 col-md-push-2">Fecha de creacion</div>
-				<div class="col-md-2 col-md-push-2">Numero de canciones</div>
-			</div>	
-		</div>
-		
-		<!--Contenedo que tiene una lista de reproduccion con sus caracteristicas-->
-		<div class="container-fluid">
-			<div class="separar-filas-abajo">
-				
-				<div class="col-md-1 col-md-push-2"> <!--Esta columna es 1 para que la imagen sea pequeña, luego ponemos otra vacia-->
-					<img  class="img-responsive" src="../img/FotoLista.jpg" alt="img" title="image"/>
-				</div>
-				<div class="col-md-2 col-md-push-3">Lista1</div>
-				<div class="col-md-2 col-md-push-3">01/04/2017</div>
-				<div class="col-md-2 col-md-push-3">5</div>
-				<div class="col-md-2 col-md-push-3">
-					<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash">
-				</div>
-			</div>
-		</div>
-		
-		<!--Contenedo que tiene una lista de reproduccion con sus caracteristicas-->
-		<div class="container-fluid">
-			<div class="separar-filas">
-				<div class="col-md-1 col-md-push-2"> <!--Esta columna es 1 para que la imagen sea pequeña, luego ponemos otra vacia-->
-					<img  class="img-responsive" src="../img/FotoLista.jpg" alt="img" title="image"/>
-				</div>
-				<div class="col-md-2 col-md-push-3">Lista2</div>
-				<div class="col-md-2 col-md-push-3">17/04/2017</div>
-				<div class="col-md-2 col-md-push-3">15</div>
-				<div class="col-md-2 col-md-push-3">
-					<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash">
-				</div>
-			</div>
-		</div>
-
-		
-		<!--Contenedo que tiene una lista de reproduccion con sus caracteristicas-->
-		<div class="container-fluid">
-			<div class="separar-filas">
-				<div class="col-md-1 col-md-push-2"> <!--Esta columna es 1 para que la imagen sea pequeña, luego ponemos otra vacia-->
-					<img  class="img-responsive" src="../img/FotoLista.jpg" alt="img" title="image"/>
-				</div>
-				<div class="col-md-2 col-md-push-3">Lista3</div>
-				<div class="col-md-2 col-md-push-3">31/08/2017</div>
-				<div class="col-md-2 col-md-push-3">86</div>
-				<div class="col-md-2 col-md-push-3">
-					<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash">
-				</div>
-			</div>
-		</div>
-		
-		
-		<!--Contenedo que tiene la forma de crear una nueva lisa de reproduccion-->
-		<div class="container-fluid">
-			<div class="separar-filas">
-				<div class="col-md-2 col-md-push-2">
-					<div class="input-group stylish-input-group">
-						¿Quieres crear una lista nueva? 
+			
+			<!--Contenedo que tiene una lista de reproduccion con sus caracteristicas-->
+			<div class="container-fluid">
+				<div class="separar-filas-abajo">
+					
+					<div class="col-md-1 col-md-push-2"> <!--Esta columna es 1 para que la imagen sea pequeña, luego ponemos otra vacia-->
+						<a href="lista-reproduccion-canciones.html"><img  class="img-responsive" src="../img/FotoLista.jpg" alt="img" title="image"/></a>
+					</div>
+					<div class="col-md-2 col-md-push-3">Lista1</div>
+					<div class="col-md-2 col-md-push-3">01/04/2017</div>
+					<div class="col-md-2 col-md-push-3">5</div>
+					<div class="col-md-2 col-md-push-3">
+						<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
 					</div>
 				</div>
-				<div class="col-md-2 col-md-push-1">
-					<div class="input-group stylish-input-group">
-						<input type="text" class="forma-buscar"  placeholder="Nombre de la lista" >
-					</div> 
-				</div>
-				<div class="col-md-1 col-md-push-1">
-					<button type="submit">Crear
-					</button>  
+			</div>
+			
+			<!--Contenedo que tiene una lista de reproduccion con sus caracteristicas-->
+			<div class="container-fluid">
+				<div class="separar-filas">
+					<div class="col-md-1 col-md-push-2"> <!--Esta columna es 1 para que la imagen sea pequeña, luego ponemos otra vacia-->
+						<a href="lista-reproduccion-canciones.html"><img  class="img-responsive" src="../img/FotoLista.jpg" alt="img" title="image"/></a>
+					</div>
+					<div class="col-md-2 col-md-push-3">Lista2</div>
+					<div class="col-md-2 col-md-push-3">17/04/2017</div>
+					<div class="col-md-2 col-md-push-3">15</div>
+					<div class="col-md-2 col-md-push-3">
+						<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
+					</div>
 				</div>
 			</div>
+
+			
+			<!--Contenedo que tiene una lista de reproduccion con sus caracteristicas-->
+			<div class="container-fluid">
+				<div class="separar-filas">
+					<div class="col-md-1 col-md-push-2"> <!--Esta columna es 1 para que la imagen sea pequeña, luego ponemos otra vacia-->
+						<a href="lista-reproduccion-canciones.html"><img  class="img-responsive" src="../img/FotoLista.jpg" alt="img" title="image"/></a>
+					</div>
+					<div class="col-md-2 col-md-push-3">Lista3</div>
+					<div class="col-md-2 col-md-push-3">31/08/2017</div>
+					<div class="col-md-2 col-md-push-3">86</div>
+					<div class="col-md-2 col-md-push-3">
+						<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!--Contenedo que tiene la forma de crear una nueva lisa de reproduccion-->
+			<div class="container-fluid">
+				<div class="separar-filas">
+					<div class="col-md-2 col-md-push-2">
+						<div class="input-group stylish-input-group">
+							¿Quieres crear una lista nueva? 
+						</div>
+					</div>
+					<div class="col-md-2 col-md-push-1">
+						<div class="input-group stylish-input-group">
+							<input type="text" class="forma-buscar"  placeholder="Nombre de la lista" >
+						</div> 
+					</div>
+					<div class="col-md-1 col-md-push-1">
+						<button type="submit">Crear
+						</button>  
+					</div>
+				</div>
+			</div>
+			
+			
+			<!--Pie de pagina-->
+			<div class="footer-container">
+				<footer class="footer-bs">
+					<div class="row">
+						<div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
+							<div id="div-footer">
+								<img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+							</div>
+						</div>
+						<div class="col-md-4 footer-nav animated fadeInUp">
+							<h4>Menu —</h4>
+							<div class="col-md-6">
+								<ul class="pages">
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<ul class="list">
+									<li><a href="#">Acerca de</a></li>
+									<li><a href="#">Miembros</a></li>
+									<li><a href="#">Contacto</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-2 footer-social animated fadeInDown">
+
+						</div>
+						<div class="col-md-3 footer-ns animated fadeInRight">
+
+						</div>
+					</div>
+				</footer>
+			</div>
 		</div>
-		
-		
-		<!--Pie de pagina-->
-		<div class="footer-container">
-            <footer class="footer-bs">
-                <div class="row">
-                    <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
-                        <div id="div-footer">
-                            <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
-                        </div>
-                    </div>
-                    <div class="col-md-4 footer-nav animated fadeInUp">
-                        <h4>Menu —</h4>
-                        <div class="col-md-6">
-                            <ul class="pages">
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="list">
-                                <li><a href="#">Acerca de</a></li>
-                                <li><a href="#">Miembros</a></li>
-                                <li><a href="#">Contacto</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2 footer-social animated fadeInDown">
-
-                    </div>
-                    <div class="col-md-3 footer-ns animated fadeInRight">
-
-                    </div>
-                </div>
-            </footer>
-        </div>
-		
 	</body>
 </html>

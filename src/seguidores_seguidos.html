@@ -10,8 +10,13 @@
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
 
         <!-- Bootstrap -->
-        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/webmusic.css" rel="stylesheet">
+		
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../js/bootstrap.min.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,138 +26,143 @@
 <![endif]-->
     </head>
     <body>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="../js/bootstrap.min.js"></script>
-		
-		<!--Barra de navegación de la parte de arriba, donde aparece el nombre de la pagina y algunas opciones-->
-		<nav class="navbar navbar-inverse">
+        
+		<div>
+			<!--Barra de navegación de la parte de arriba, donde aparece el nombre de la pagina y algunas opciones-->
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<img src="../img/Logo.png" width="50" height="50" alt="Logo">
+					</div>
+					<a class="navbar-brand" href="home.html">Webmusic</a>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
+						<li><a href="miPergfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+						<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+					</ul>
+				</div>
+			</nav>
+			
+			
+			<!--Contenedor que cambiara la palabra de seguidores y seguidos en funcion de lo que se busque en la pagina (esto se hara mas adelante)-->
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<img src="../img/Logo.png" width="50" height="50" alt="Logo">
+				<div class="row">
+					<div class="col-md-2 col-md-push-1">
+						<h1> Seguidores </h1>
+						
+					</div>
 				</div>
-				<a class="navbar-brand" href="home.html">Webmusic</a>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
-					<li><a href="miPergfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-					<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-				</ul>
 			</div>
-		</nav>
-		
-		
-		<!--Contenedor que cambiara la palabra de seguidores y seguidos en funcion de lo que se busque en la pagina (esto se hara mas adelante)-->
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-2 col-md-push-1">
-					<h1> Seguidores </h1>
+			
+			
+			<!--Contenedor que tiene tanto la imagen de perfil del usuario como un poco de informacion-->
+			<div class="container-fluid">
+				<div class="separar-filas">
+					<div class="col-md-2 col-md-push-1">
+						<img  class="img-responsive" src="../img/FotoPerfil.jpg" alt="img" title="image"/>
+					</div>
 					
+					<div class="col-md-2 col-md-push-1">
+						<div class="negrita">
+							 <p>Nombre de usuario: </p>
+							 <p>Pais: </p>
+							 <p>Fecha de nacimiento: </p>
+							 <p>Gustos musicales: </p>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		
-		<!--Contenedor que tiene tanto la imagen de perfil del usuario como un poco de informacion-->
-		<div class="container-fluid">
-			<div class="separar-filas">
-				<div class="col-md-2 col-md-push-1">
-					<img  class="img-responsive" src="../img/FotoPerfil.jpg" alt="img" title="image"/>
-				</div>
-				
-				<div class="col-md-2 col-md-push-1">
-					 <p>Nombre de usuario: </p>
-					 <p>Pais: </p>
-					 <p>Fecha de nacimiento: </p>
-					 <p>Gustos musicales: </p>
-					 
-				</div>
-			</div>
-		</div>
-		
-		<!--Contenedor que tiene tanto la imagen de perfil del usuario como un poco de informacion-->
-		<div class="container-fluid">
-			<div class="separar-filas">
-				<div class="col-md-2 col-md-push-1">
-					<img  class="img-responsive" src="../img/FotoPerfil.jpg" alt="img" title="image"/>
-				</div>
-				
-				<div class="col-md-2 col-md-push-1">
-					 <p>Nombre de usuario: </p>
-					 <p>Pais: </p>
-					 <p>Fecha de nacimiento: </p>
-					 <p>Gustos musicales: </p>
-					 
+			
+			<!--Contenedor que tiene tanto la imagen de perfil del usuario como un poco de informacion-->
+			<div class="container-fluid">
+				<div class="separar-filas">
+					<div class="col-md-2 col-md-push-1">
+						<img  class="img-responsive" src="../img/FotoPerfil.jpg" alt="img" title="image"/>
+					</div>
+					
+					<div class="col-md-2 col-md-push-1">
+						<div class="negrita">
+							 <p>Nombre de usuario: </p>
+							 <p>Pais: </p>
+							 <p>Fecha de nacimiento: </p>
+							 <p>Gustos musicales: </p>
+						</div>
+						 
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		<!--Contenedor que tiene tanto la imagen de perfil del usuario como un poco de informacion-->
-		<div class="container-fluid">
-			<div class="separar-filas">
-				<div class="col-md-2 col-md-push-1">
-					<img  class="img-responsive" src="../img/FotoPerfil.jpg" alt="img" title="image"/>
-				</div>
-				
-				<div class="col-md-2 col-md-push-1">
-					 <p>Nombre de usuario: </p>
-					 <p>Pais: </p>
-					 <p>Fecha de nacimiento: </p>
-					 <p>Gustos musicales: </p>
-					 
-				</div>
-			</div>
-		</div>
-		
-		<!--Contenedor que tiene tanto la imagen de perfil del usuario como un poco de informacion-->
-		<div class="container-fluid">
-			<div class="separar-filas">
-				<div class="col-md-2 col-md-push-1">
-					<img  class="img-responsive" src="../img/FotoPerfil.jpg" alt="img" title="image"/>
-				</div>
-				
-				<div class="col-md-2 col-md-push-1">
-					 <p>Nombre de usuario: </p>
-					 <p>Pais: </p>
-					 <p>Fecha de nacimiento: </p>
-					 <p>Gustos musicales: </p>
-					 
+			
+			<!--Contenedor que tiene tanto la imagen de perfil del usuario como un poco de informacion-->
+			<div class="container-fluid">
+				<div class="separar-filas">
+					<div class="col-md-2 col-md-push-1">
+						<img  class="img-responsive" src="../img/FotoPerfil.jpg" alt="img" title="image"/>
+					</div>
+					
+					<div class="col-md-2 col-md-push-1">
+						<div class="negrita">
+							 <p>Nombre de usuario: </p>
+							 <p>Pais: </p>
+							 <p>Fecha de nacimiento: </p>
+							 <p>Gustos musicales: </p>
+						</div>
+						 
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		<!--Pie de pagina-->
-		<div class="footer-container">
-            <footer class="footer-bs">
-                <div class="row">
-                    <div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
-                        <div id="div-footer">
-                            <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
-                        </div>
-                    </div>
-                    <div class="col-md-4 footer-nav animated fadeInUp">
-                        <h4>Menu —</h4>
-                        <div class="col-md-6">
-                            <ul class="pages">
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="list">
-                                <li><a href="#">Acerca de</a></li>
-                                <li><a href="#">Miembros</a></li>
-                                <li><a href="#">Contacto</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2 footer-social animated fadeInDown">
+			
+			<!--Contenedor que tiene tanto la imagen de perfil del usuario como un poco de informacion-->
+			<div class="container-fluid">
+				<div class="separar-filas">
+					<div class="col-md-2 col-md-push-1">
+						<img  class="img-responsive" src="../img/FotoPerfil.jpg" alt="img" title="image"/>
+					</div>
+					
+					<div class="col-md-2 col-md-push-1">
+						<div class="negrita">
+							 <p>Nombre de usuario: </p>
+							 <p>Pais: </p>
+							 <p>Fecha de nacimiento: </p>
+							 <p>Gustos musicales: </p>
+						</div>
+						 
+					</div>
+				</div>
+			</div>
+			
+			<!--Pie de pagina-->
+			<div class="footer-container">
+				<footer class="footer-bs">
+					<div class="row">
+						<div class="margin-logo-footer col-md-3 footer-brand animated fadeInLeft">
+							<div id="div-footer">
+								<img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+							</div>
+						</div>
+						<div class="col-md-4 footer-nav animated fadeInUp">
+							<h4>Menu —</h4>
+							<div class="col-md-6">
+								<ul class="pages">
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<ul class="list">
+									<li><a href="#">Acerca de</a></li>
+									<li><a href="#">Miembros</a></li>
+									<li><a href="#">Contacto</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-2 footer-social animated fadeInDown">
 
-                    </div>
-                    <div class="col-md-3 footer-ns animated fadeInRight">
+						</div>
+						<div class="col-md-3 footer-ns animated fadeInRight">
 
-                    </div>
-                </div>
-            </footer>
-        </div>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
 		
 	</body>
 </html>
