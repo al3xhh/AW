@@ -15,17 +15,22 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="container-fluid">
             <!-- Barra de navegacion -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <img src="../img/Logo.png" width="50" height="50">
-                    </div>
-                    <a class="navbar-brand" href="../index.html">Webmusic</a>
+            <nav class="navbar navbar-inverse">
+                <a class="navbar-brand" href="index.html">Webmusic</a>
+                <div class="navbar-header">
+                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="registro.html"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
                         <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
@@ -58,6 +63,15 @@ y el nombre del autor de la cancion -->
                 <div id="player-header-info">
                     <p>Titulo-cancion</p>
                     <p>Nombre artista</p>
+                    <p>Nº reproducciones: 22</p>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Lista 1</a></li>
+                            <li><a href="#">Lista 2</a></li>
+                            <li><a href="#">Lista 3</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -81,7 +95,7 @@ y el nombre del autor de la cancion -->
                 </div>
 
                 <div id="info-player">
-                    <p class="info-player-time">0:60</p>
+                    <p class="info-player-time">0:59</p>
                     <div id="player-progres" class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="70"
                              aria-valuemin="0" aria-valuemax="100" style="width:70%">
@@ -103,7 +117,7 @@ y el nombre del autor de la cancion -->
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form action="" id="comment-form">
+                            <form action="#" id="comment-form">
                                 <textarea class="col-md-12 form-control" form="comment-form"></textarea>
                                 <input type="submit" id="comment-btn" value="Comentar" class="btn btn-primary pull-right">
                             </form>
@@ -130,29 +144,29 @@ y el nombre del autor de la cancion -->
             </div>
         </div>
         <!-- Container que contiene el footer de la página -->
-            <div class="footer-container">
-                <footer class="footer-bs">
-                    <div class="row">
-                        <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                            <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+        <div class="footer-container">
+            <footer class="footer-bs">
+                <div class="row">
+                    <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
+                        <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                    </div>
+                    <div class="col-md-10 footer-nav animated fadeInUp">
+                        <div class="col-md-5 col-md-push-1">
+                            <h4>Acerca de</h4>
+                            <p>Webmusic es una página creada para el proyecto de la asignatura Aplicaciones Web, optativa del intinerario tecnologías de la información de la carrera Ingeniería Informática de la UCM.</p>
                         </div>
-                        <div class="col-md-10 footer-nav animated fadeInUp">
-                            <div class="col-md-5 col-md-push-1">
-                                <h4>Acerca de</h4>
-                                <p>Webmusic es una página creada para el proyecto de la asignatura Aplicaciones Web, optativa del intinerario tecnologías de la información de la carrera Ingeniería Informática de la UCM.</p>
-                            </div>
-                            <div class="col-md-5 col-md-push-2">
-                                <h4>Miembros</h4>
-                                <ul class="list">
-                                    <li>José Ángel Garrido Montoya</li>
-                                    <li>Christian Gónzalez García-Muñoz</li>
-                                    <li>Alejandro Huertas Herrero</li>
-                                    <li>Héctor Valverde Bourgon</li>
-                                </ul>
-                            </div>
+                        <div class="col-md-5 col-md-push-2">
+                            <h4>Miembros</h4>
+                            <ul class="list">
+                                <li>José Ángel Garrido Montoya</li>
+                                <li>Christian Gónzalez García-Muñoz</li>
+                                <li>Alejandro Huertas Herrero</li>
+                                <li>Héctor Valverde Bourgon</li>
+                            </ul>
                         </div>
                     </div>
-                </footer>
-            </div><!-- Fin container footer -->
+                </div>
+            </footer>
+        </div><!-- Fin container footer -->
     </body>
 </html>
