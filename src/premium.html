@@ -20,14 +20,23 @@
 
     </head>
     <body>
-        <div class="col-md-12">
+        <noscript>
+            <meta http-equiv="refresh" content="0; url=errorJS.html" />
+        </noscript>
+        <div>
+
             <!-- Barra superior de la página -->
             <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <img src="../img/Logo.png" width="50" height="50">
-                    </div>
-                    <a class="navbar-brand" href="../index.html">Webmusic</a>
+                <a class="navbar-brand" href="index.html">Webmusic</a>
+                <div class="navbar-header">
+                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="registro.html"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
                         <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
@@ -36,14 +45,14 @@
             </nav>
             <!-- Fin barra superior -->
 
-            <header id="header-premium">
-                <div id="premium-text-header">
-                    <h2 class="premium-header-format">Hazte premium!</h2>
-                    <h4 class="premium-header-format">Disfruta de toda la música que te gusta de la mejor forma posible.</h4>
-                </div>
-            </header>
+            <div class="container-fluid">
+                <header id="header-premium">
+                    <div id="premium-text-header">
+                        <h2 class="premium-header-format">Hazte premium!</h2>
+                        <h4 class="premium-header-format">Disfruta de toda la música que te gusta de la mejor forma posible.</h4>
+                    </div>
+                </header>
 
-            <article>
                 <!-- Ventajas de ser premium -->
                 <div id="info-about-premium">
                     <h2 class="title-premium">¡Descubre todas las ventajas de ser Premium!</h2>
@@ -89,6 +98,27 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
+                                    <input class="form-control" placeholder="CVV*" id="ID_CVV" type="text" onchange="validarCVV()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_CVV"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
+                                    <input class="form-control" placeholder="Fecha de caducidad*" id="ID_Fecha_Cad" type="text" onchange="validarFechaCad()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_Fecha_Cad"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
+                                    <input class="form-control" placeholder="Nombre del titular de la cuenta*" id="ID_Titular" type="text" onchange="validarTitular()">
+                                </div>
+                                <div class="alert alert-danger alertas-registro" id="ID_Error_Titular"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
                                 </div>
@@ -107,7 +137,7 @@
                         </form>
                     </div>
                 </div>
-            </article>
+            </div>
             <!-- Container que contiene el footer de la página -->
             <div class="footer-container">
                 <footer class="footer-bs">
