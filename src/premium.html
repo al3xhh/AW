@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-         <noscript>
+
+        <!-- En caso de que este desactivado JavaScript redirigimos a una pagina de error -->
+        <noscript>
             <meta http-equiv="refresh" content="0; url=errorJS.html" />
         </noscript>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
         <title>Hazte premium!</title>
 
+        <!--Logo para el favicon-->
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
         <!-- Bootstrap -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -46,6 +51,8 @@
             <!-- Fin barra superior -->
 
             <div class="container-fluid">
+
+                <!--Cabecera de la pagina-->
                 <header id="header-premium">
                     <div id="premium-text-header">
                         <h2 class="premium-header-format">Hazte premium!</h2>
@@ -62,9 +69,12 @@
                         <li class="li-premium-list premium-text-font">Tus cancion tendrán preferencia a lo hora de ser mostradas en las diferentes listas de WebMusic.</li>
                     </ul>
                 </div>
+                <!-- Fin ventajas de ser premium -->
 
+                <!-- Linea separadora de contenido -->
                 <hr class="separator">
-
+                
+                <!-- Prueba gratuita -->
                 <div id="prueba-premium">
                     <h2 class="title-premium">¡Pruebalo gratis durante un mes!</h2>
                     <p class="premium-text-font p-premium">Si estas dudando si hacerte premium o no prueba gratis todas las ventajas que te ofrecemos durante un mes y convencete.</p>
@@ -72,16 +82,19 @@
                     <div class="col-sm-2 col-md-2 col-md-push-5 col-sm-push-5">
                         <button id="prueba-premium-btn" class="btn center-block btn-primary col-md-12">Prueba premium !</button>
                     </div>
-
                 </div>
-
+                <!-- Fin prueba gratuita -->
+                
+                <!-- Linea separadora de contenido -->
                 <hr class="separator">
-
+                
+                <!-- Formulario para hacerse premium -->
                 <div id="hazte-premium">
                     <h2 class="title-premium">¡Hazte premium ya!</h2>
                     <p class="premium-text-font p-premium">Para hacerte premium ya, solo necesitas rellenar el siguiente formulario.</p>
                     <div class="panel-body"> 
                         <form class="col-md-4 col-md-push-4" action="#" onsubmit="return validarPremium()">
+                            <!-- Campo de Nombre de usuario o correo elctronico -->
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
@@ -89,6 +102,7 @@
                                 </div>
                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
                             </div>
+                            <!-- Campo de Nª de cuenta -->
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
@@ -96,6 +110,7 @@
                                 </div>
                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Cuenta"></div>
                             </div>
+                            <!-- Campo de CVV -->
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
@@ -103,6 +118,7 @@
                                 </div>
                                 <div class="alert alert-danger alertas-registro" id="ID_Error_CVV"></div>
                             </div>
+                            <!-- Campo de fecha de caducidad -->
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
@@ -110,6 +126,7 @@
                                 </div>
                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Fecha_Cad"></div>
                             </div>
+                            <!-- Campo del titular de la cuenta -->
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span> 
@@ -117,6 +134,7 @@
                                 </div>
                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Titular"></div>
                             </div>
+                            <!-- Campo de la contraseña -->
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -124,6 +142,7 @@
                                 </div>
                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
                             </div>
+                            <!-- Campo de Nª de meses -->
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
@@ -138,7 +157,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Container que contiene el footer de la página -->
+            
+            <!-- footer de la página -->
             <div class="footer-container">
                 <footer class="footer-bs">
                     <div class="row">
@@ -162,7 +182,7 @@
                         </div>
                     </div>
                 </footer>
-            </div><!-- Fin container footer -->
+            </div><!-- Fin footer -->
         </div>
     </body>
 </html>
