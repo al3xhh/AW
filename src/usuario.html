@@ -21,19 +21,24 @@
         <div>
             <!-- Barra superior de la página -->
             <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <img src="../img/Logo.png" width="50" height="50">
-                    </div>
-                    <a class="navbar-brand" href="home.html">Webmusic</a>
+                <a class="navbar-brand" href="home.html">Webmusic</a>
+                <div class="navbar-header">
+                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="login.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
-                        <li><a href="login.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-                        <li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+                        <li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
+                        <li><a href="miperfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
+                        <li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
                     </ul>
                 </div>
             </nav>
-
+            
             <!-- Barra de búsqueda -->
             <div class="container">
                 <div class="row">

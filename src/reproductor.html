@@ -15,17 +15,27 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container-fluid">
+        <div>
+            <noscript>
+                <div class="alert alert-danger text-center">
+                    <h4>Esta página requiere JavaScript para su correcto funcionamiento. Compruebe si JavaScript está deshabilitado en el navegador.</h4>
+                </div>
+            </noscript>
             <!-- Barra de navegacion -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <img src="../img/Logo.png" width="50" height="50">
-                    </div>
-                    <a class="navbar-brand" href="../index.html">Webmusic</a>
+            <nav class="navbar navbar-inverse">
+                <a class="navbar-brand" href="../index.html">Webmusic</a>
+                <div class="navbar-header">
+                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="registro.html"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
                         <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
@@ -33,103 +43,114 @@
                 </div>
             </nav>
 
-            <!-- Barra de búsqueda -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <div id="imaginary_container"> 
-                            <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control"  placeholder="Buscar" >
-                                <span class="input-group-addon">
-                                    <a href="buscar_registrado.html" class="link-home-carousel-and-search"><span class="glyphicon glyphicon-search"></span></a>
-                                </span>
+            <div class="container-fluid">
+                <!-- Barra de búsqueda -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div id="imaginary_container"> 
+                                <div class="input-group stylish-input-group">
+                                    <input type="text" class="form-control"  placeholder="Buscar" >
+                                    <span class="input-group-addon">
+                                        <a href="buscar_registrado.html" class="link-home-carousel-and-search"><span class="glyphicon glyphicon-search"></span></a>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><!-- Fin barra de búsqueda -->
+                </div><!-- Fin barra de búsqueda -->
 
-            <!-- Cabecera del reproductor que contiente la caratula del disco, el titulo de la cancion
+                <!-- Cabecera del reproductor que contiente la caratula del disco, el titulo de la cancion
 y el nombre del autor de la cancion -->
-            <div id="player-header" class="col-md-10 col-md-push-2">
-                <div>
-                    <img src="../img/DiscoPortada.jpg" width="150" height="150" alt="Imagen usuario">
-                </div>
-                <div id="player-header-info">
-                    <p>Titulo-cancion</p>
-                    <p>Nombre artista</p>
-                </div>
-            </div>
-
-            <div id="bar-player" class="col-md-10 col-md-push-2">
-                <!-- Botones para el control del reproducotor -->
-                <div id="player-buttons">
-                    <!-- Boton para volver a la cancion anterior -->
-                    <button type="button" class="btn btn-default" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-                    </button>
-
-                    <!-- Boton de play/pause -->
-                    <button type="button" class="btn btn-default" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                    </button>
-
-                    <!-- Boton para pasar a la siguiente cancion -->
-                    <button type="button" class="btn btn-default" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-                    </button>
-                </div>
-
-                <div id="info-player">
-                    <p class="info-player-time">0:60</p>
-                    <div id="player-progres" class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                             aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                <div id="player-header" class="col-md-10 col-md-push-2">
+                    <div>
+                        <img src="../img/DiscoPortada.jpg" width="150" height="150" alt="Imagen usuario">
+                    </div>
+                    <div id="player-header-info">
+                        <p>Titulo-cancion</p>
+                        <p>Nombre artista</p>
+                        <p>Nº reproducciones: 22</p>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Lista 1</a></li>
+                                <li><a href="#">Lista 2</a></li>
+                                <li><a href="#">Lista 3</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <p class="info-player-time">1:40</p>
                 </div>
-            </div>
 
-            <h3 id="comment-title" class="col-md-10 col-md-push-2">Comentarios</h3>
+                <div id="bar-player" class="col-md-10 col-md-push-2">
+                    <!-- Botones para el control del reproducotor -->
+                    <div id="player-buttons">
+                        <!-- Boton para volver a la cancion anterior -->
+                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                        </button>
 
-            <div class="comment-content col-md-10 col-md-push-2">
-                <div class="row">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading comment-heading">
-                            <img src="../img/FotoPerfil.jpg" class="img-circle img-responsive comment-img" alt="user profile image">
-                            <div>
-                                <h4>Nombre usuario</h4>
+                        <!-- Boton de play/pause -->
+                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                        </button>
+
+                        <!-- Boton para pasar a la siguiente cancion -->
+                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                    <div id="info-player">
+                        <p class="info-player-time">0:59</p>
+                        <div id="player-progres" class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                 aria-valuemin="0" aria-valuemax="100" style="width:70%">
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <form action="" id="comment-form">
-                                <textarea class="col-md-12 form-control" form="comment-form"></textarea>
-                                <input type="submit" id="comment-btn" value="Comentar" class="btn btn-primary pull-right">
-                            </form>
-                        </div>
+                        <p class="info-player-time">1:40</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="comment-content col-md-10 col-md-push-2">
-                <div class="row">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading comment-heading">
-                            <img src="../img/FotoPerfil.jpg" class="img-circle img-responsive comment-img" alt="user profile image">
-                            <div>
-                                <h4>Nombre usuario</h4>
-                                <h6>hace 1 minuto</h6>
+                <h3 id="comment-title" class="col-md-10 col-md-push-2">Comentarios</h3>
+
+                <div class="comment-content col-xs-12 col-md-8 col-md-push-2">
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading comment-heading">
+                                <img src="../img/FotoPerfil.jpg" class="img-circle img-responsive comment-img" alt="user profile image">
+                                <div>
+                                    <h4>Nombre usuario</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form action="#" id="comment-form">
+                                    <textarea class="col-md-12 form-control" form="comment-form"></textarea>
+                                    <input type="submit" id="comment-btn" value="Comentar" class="btn btn-primary pull-right">
+                                </form>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <p>Esta página es la mejor!</p>
+                    </div>
+                </div>
+
+                <div class="comment-content col-md-8 col-md-push-2 col-xs-12">
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading comment-heading">
+                                <img src="../img/FotoPerfil.jpg" class="img-circle img-responsive comment-img" alt="user profile image">
+                                <div>
+                                    <h4>Nombre usuario</h4>
+                                    <h6>hace 1 minuto</h6>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <p>Esta página es la mejor!</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Container que contiene el footer de la página -->
+            
+            <!-- Container que contiene el footer de la página -->
             <div class="footer-container">
                 <footer class="footer-bs">
                     <div class="row">
@@ -153,6 +174,9 @@ y el nombre del autor de la cancion -->
                         </div>
                     </div>
                 </footer>
-            </div><!-- Fin container footer -->
+            </div>
+            <!-- Fin container footer -->
+
+        </div>
     </body>
 </html>

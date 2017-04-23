@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Registro</title>
+        <title>Inicio Sesion</title>
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/webmusic.css" rel="stylesheet">
@@ -13,107 +13,82 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.min.js"></script>
-        <!-- Archivo con las funciones javascript que se encargan de validar el registro-->
-        <script src="../js/registro.js"></script>
-        <!-- Java script necesario para que funcione el recaptcha de google-->
-        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <!-- Script para comprobar los datos de la subida de la cancion -->
+        <script src="../js/subirCancion.js"></script>
     </head>
 
     <body>
-        <noscript>
-            <meta http-equiv="refresh" content="0; url=errorJS.html" />
-        </noscript>
-        
         <div>
             <!-- Barra superior de la página -->
-            <nav  class="navbar navbar-inverse">
-                <a class="navbar-brand" href="../index.html">Webmusic</a>
-                <div class="navbar-header">
-                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbarCollapse" class="collapse navbar-collapse">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <img src="../img/Logo.png" width="50" height="50" alt="Logo">
+                    </div>
+                    <a class="navbar-brand" href="../index.html">Webmusic</a>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Pagina desde que llamaste</a></li>
                     </ul>
                 </div>
             </nav><!-- Fin barra superior -->
-
-            <div><!-- Container principal que contiene todo el registro -->
+            
+            <div><!-- Container principal que contiene todos los campos de inicio de sesion -->
                 <div class="row">
                     <div class="col-md-4 col-md-push-4">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Registro</div>
+                            <div class="panel-heading">Subir Cancion</div>
                             <div class="panel-body">
-                                <form action="index.html" method="POST" onsubmit="return validarRegistro()">
+                                <form>
                                     <div class="row">
                                         <div class="center-block">
-                                            <img class="profile-img" src="../img/ImagenRegistroInterior.png" alt="Imagen Registro">
+                                            <img class="profile-img" src="../img/ImagenNota.png" alt="Imagen Registro">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-10 col-md-push-1">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-                                                    <input class="form-control" placeholder="Nombre de usuario *" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-music"></i></span>
+                                                    <input class="form-control" placeholder="Cancion *" id="ID_Cancion" type="text" onchange="validarCancion()">
                                                 </div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
+                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Cancion"></div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                    <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" type="text" onchange="validarCorreo()">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                    <input class="form-control" placeholder="Artista *" id="ID_Artista" type="text" onchange="validarArtista()">
                                                 </div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Correo"></div>
+                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Artista"></div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                    <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                                                    <input class="form-control" id="ID_Imagen" type="file">
                                                 </div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
+                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Imagen"></div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                    <input class="form-control" placeholder="Repite la contraseña *" id="ID_Pass1" type="password" onchange="validarReContrasenya()">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-cloud-upload"></i></span>
+                                                    <input class="form-control" id="ID_Archivo_Cancion" type="file">
                                                 </div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Pass1"></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <div class="checkbox">
-                                                        <label><input type="checkbox" class="checkbox" value="">Hacerme premium</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="g-recaptcha" data-sitekey="6LdZVhsUAAAAAA2qkQqHdaL8--EE9iPy0tzretMD"></div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Captcha"></div>
+                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Archivo_Cancion"></div>
                                             </div>
                                             <div class="form-group">
                                                 <p>Los campos con * son obligatorios</p>
                                             </div>
                                             <div class="form-group">
-                                                <input type="submit" class="btn btn-primary center-block" value="Registrarse">
+                                                <input type="submit" class="btn btn-primary center-block" value="Subir Cancion">
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="panel-footer">
-                                Ya tienes cuenta!<a href="login.html"> Inicia sesión aquí </a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div><!-- Fin container principal -->
-
+            
             <!-- Container que contiene el footer de la página -->
             <div class="footer-container">
                 <footer class="footer-bs">
