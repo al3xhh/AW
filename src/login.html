@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+         <noscript>
+            <meta http-equiv="refresh" content="0; url=errorJS.html" />
+        </noscript>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,15 +24,20 @@
 
     <body>
         <div>
-            <!-- Barra superior de la página -->
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <img src="../img/Logo.png" width="50" height="50" alt="Logo">
-                    </div>
-                    <a class="navbar-brand" href="../index.html">Webmusic</a>
+           <!-- Barra superior de la página -->
+            <nav  class="navbar navbar-inverse">
+                <a class="navbar-brand" href="../index.html">Webmusic</a>
+                <div class="navbar-header">
+                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="registro.html"><span class="glyphicon glyphicon-log-in"></span> Registrarse</a></li>
+                        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
                     </ul>
                 </div>
             </nav><!-- Fin barra superior -->
