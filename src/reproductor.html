@@ -16,9 +16,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/general.js"></script>
     </head>
     <body>
-        <div>
+        <div id="container-principal">
             <!-- En caso de que no haya JavaScript avisamos al usuario de que la pagina podria ir mal pero no redirigimos a error ya que no podrian introducir datos maliciosos por falta de validaciones -->
             <noscript>
                 <div class="alert alert-danger text-center">
@@ -44,7 +45,7 @@
                 </div>
             </nav>
             <!-- Fin barra de navegacion -->
-            
+
             <div class="container-fluid">
                 <!-- Barra de búsqueda -->
                 <div class="container">
@@ -81,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Barra de control del reproductor -->
                 <div id="bar-player" class="col-md-10 col-md-push-2">
                     <!-- Botones para el control del reproducotor -->
@@ -101,7 +102,7 @@
                             <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
                         </button>
                     </div>
-                    
+
                     <!-- Barra de estado de la cancion -->
                     <div id="info-player">
                         <p class="info-player-time">0:59</p>
@@ -152,34 +153,32 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Container que contiene el footer de la página -->
-            <div class="footer-container">
-                <footer class="footer-bs">
-                    <div class="row">
-                        <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                            <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+        </div>
+
+        <!-- Container que contiene el footer de la página -->
+        <div class="footer-container" id="footer">
+            <footer class="footer-bs">
+                <div class="row">
+                    <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
+                        <img alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                    </div>
+                    <div class="col-md-10 footer-nav animated fadeInUp">
+                        <div class="col-md-5 col-md-push-1">
+                            <h4>Acerca de</h4>
+                            <p>Webmusic es una página creada para el proyecto de la asignatura Aplicaciones Web, optativa del intinerario tecnologías de la información de la carrera Ingeniería Informática de la UCM.</p>
                         </div>
-                        <div class="col-md-10 footer-nav animated fadeInUp">
-                            <div class="col-md-5 col-md-push-1">
-                                <h4>Acerca de</h4>
-                                <p>Webmusic es una página creada para el proyecto de la asignatura Aplicaciones Web, optativa del intinerario tecnologías de la información de la carrera Ingeniería Informática de la UCM.</p>
-                            </div>
-                            <div class="col-md-5 col-md-push-2">
-                                <h4>Miembros</h4>
-                                <ul class="list">
-                                    <li>José Ángel Garrido Montoya</li>
-                                    <li>Christian Gónzalez García-Muñoz</li>
-                                    <li>Alejandro Huertas Herrero</li>
-                                    <li>Héctor Valverde Bourgon</li>
-                                </ul>
-                            </div>
+                        <div class="col-md-5 col-md-push-2">
+                            <h4>Miembros</h4>
+                            <ul class="list">
+                                <li>José Ángel Garrido Montoya</li>
+                                <li>Christian Gónzalez García-Muñoz</li>
+                                <li>Alejandro Huertas Herrero</li>
+                                <li>Héctor Valverde Bourgon</li>
+                            </ul>
                         </div>
                     </div>
-                </footer>
-            </div>
-            <!-- Fin container footer -->
-
-        </div>
+                </div>
+            </footer>
+        </div><!-- Fin container footer -->
     </body>
 </html>

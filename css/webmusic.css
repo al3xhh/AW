@@ -743,3 +743,10 @@ body {
 	margin-left: 15%;
     margin-right: 15%;
 }
+
+#footer.stikybottom {
+    position: fixed;
+    bottom:0;
+    left: 0;
+    right:0;
+}
