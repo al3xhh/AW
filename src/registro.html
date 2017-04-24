@@ -20,99 +20,98 @@
         <script src="../js/registro.js"></script>
         <!-- Java script necesario para que funcione el recaptcha de google-->
         <script src='https://www.google.com/recaptcha/api.js'></script>
-        <script src="../js/general.js"></script>
     </head>
 
     <body>
-        
-            <!-- Barra superior de la página -->
-            <nav  class="navbar navbar-inverse">
-                <a class="navbar-brand" href="../index.html">Webmusic</a>
-                <div class="navbar-header">
-                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbarCollapse" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
-                    </ul>
-                </div>
-            </nav><!-- Fin barra superior -->
 
-            <div id="container-principal"><!-- Container principal que contiene todo el registro -->
-                <div class="row">
-                    <div class="col-md-4 col-md-push-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Registro</div>
-                            <div class="panel-body">
-                                <form action="home.html" method="POST" onsubmit="return validarRegistro()">
-                                    <div class="row">
-                                        <div class="center-block">
-                                            <img class="profile-img" src="../img/ImagenRegistroInterior.png" alt="Imagen Registro">
+        <!-- Barra superior de la página -->
+        <nav  class="navbar navbar-inverse">
+            <a class="navbar-brand" href="../index.html">Webmusic</a>
+            <div class="navbar-header">
+                <img src="../img/Logo.png" width="50" height="50" alt="logo">
+                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
+                </ul>
+            </div>
+        </nav><!-- Fin barra superior -->
+
+        <div id="container-principal"><!-- Container principal que contiene todo el registro -->
+            <div class="row">
+                <div class="col-md-4 col-md-push-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Registro</div>
+                        <div class="panel-body">
+                            <form action="home.html" method="POST" onsubmit="return validarRegistro()">
+                                <div class="row">
+                                    <div class="center-block">
+                                        <img class="profile-img" src="../img/ImagenRegistroInterior.png" alt="Imagen Registro">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 col-md-push-1">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+                                                <input class="form-control" placeholder="Nombre de usuario *" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                                            </div>
+                                            <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" type="text" onchange="validarCorreo()">
+                                            </div>
+                                            <div class="alert alert-danger alertas-registro" id="ID_Error_Correo"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
+                                            </div>
+                                            <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                <input class="form-control" placeholder="Repite la contraseña *" id="ID_Pass1" type="password" onchange="validarReContrasenya()">
+                                            </div>
+                                            <div class="alert alert-danger alertas-registro" id="ID_Error_Pass1"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" class="checkbox" value="">Hacerme premium</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="g-recaptcha" data-sitekey="6LdZVhsUAAAAAA2qkQqHdaL8--EE9iPy0tzretMD"></div>
+                                            <div class="alert alert-danger alertas-registro" id="ID_Error_Captcha"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>Los campos con * son obligatorios</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary center-block" value="Registrarse">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-10 col-md-push-1">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-                                                    <input class="form-control" placeholder="Nombre de usuario *" id="ID_Usuario" type="text" onchange="validarUsuario()">
-                                                </div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                    <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" type="text" onchange="validarCorreo()">
-                                                </div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Correo"></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                    <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
-                                                </div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                    <input class="form-control" placeholder="Repite la contraseña *" id="ID_Pass1" type="password" onchange="validarReContrasenya()">
-                                                </div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Pass1"></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <div class="checkbox">
-                                                        <label><input type="checkbox" class="checkbox" value="">Hacerme premium</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="g-recaptcha" data-sitekey="6LdZVhsUAAAAAA2qkQqHdaL8--EE9iPy0tzretMD"></div>
-                                                <div class="alert alert-danger alertas-registro" id="ID_Error_Captcha"></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <p>Los campos con * son obligatorios</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="submit" class="btn btn-primary center-block" value="Registrarse">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="panel-footer">
-                                Ya tienes cuenta!<a href="login.html"> Inicia sesión aquí </a>
-                            </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="panel-footer">
+                            Ya tienes cuenta!<a href="login.html"> Inicia sesión aquí </a>
                         </div>
                     </div>
                 </div>
-            </div><!-- Fin container principal -->
+            </div>
+        </div><!-- Fin container principal -->
 
 
         <!-- Container que contiene el footer de la página -->
