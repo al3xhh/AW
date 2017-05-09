@@ -48,7 +48,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Registro</div>
                         <div class="panel-body">
-                            <form action="home.html" method="POST" onsubmit="return validarRegistro()">
+                            <form action="../php/usuario.php" method="POST" onsubmit="return validarRegistro()">
                                 <div class="row">
                                     <div class="center-block">
                                         <img class="profile-img" src="../img/ImagenRegistroInterior.png" alt="Imagen Registro">
@@ -58,22 +58,22 @@
                                     <div class="col-md-10 col-md-push-1">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-                                                <input class="form-control" placeholder="Nombre de usuario *" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <input class="form-control" placeholder="Nombre de usuario *" id="ID_Usuario" name="usuario" type="text" onchange="validarUsuario()">
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" type="text" onchange="validarCorreo()">
+                                                <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" name="correo" type="text" onchange="validarCorreo()">
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Correo"></div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
+                                                <input class="form-control" placeholder="Contraseña *" id="ID_Pass" name="contrasenya" type="password" onchange="validarContrasenya()">
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
                                         </div>
@@ -99,7 +99,7 @@
                                             <p>Los campos con * son obligatorios</p>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-primary center-block" value="Registrarse">
+                                            <input type="submit" class="btn btn-primary center-block" value="Registrarse" name="registrar">
                                         </div>
                                     </div>
                                 </div>
