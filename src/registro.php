@@ -28,15 +28,15 @@
           $correo = False;
 
           if($_SERVER["REQUEST_METHOD"] == "POST") {
-            require_once('../php/funciones_registro.php');
-            if(existeUsuario()) {
+            require_once('../php/controlador.php');
+            if(existe_usuario()) {
               $usuario = True;
             }
-            if(existeCorreo()) {
+            if(existe_correo()) {
               $correo = True;
             }
             if(!$correo && !$usuario) {
-              if(registraUsuario()) {
+              if(registra_usuario()) {
                 header("Location: ../src/home.html");
               }
             }
