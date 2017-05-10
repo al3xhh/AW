@@ -16,8 +16,9 @@
   }
 
   //Función que comprueba si existe el nombre de usuario en la aplicación.
-  function existeUsuario($usuario) {
+  function existeUsuario() {
     $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+    $usuario = htmlspecialchars(trim(strip_tags($_POST["usuario"])));
     $ret = False;
 
     errorMysql($mysqli);
@@ -38,8 +39,9 @@
   }
 
   //Función que comprueba si existe el correo electrónico en la aplicación.
-  function existeCorreo($correo) {
+  function existeCorreo() {
     $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+    $correo = htmlspecialchars(trim(strip_tags($_POST["correo"])));
     $ret = False;
 
     errorMysql($mysqli);
@@ -73,7 +75,7 @@
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("sss", $correo, $usuario, $contrasenya);
 
-    if(existeUsuario($usuario)) {
+    /*if(existeUsuario($usuario)) {
       //print ("El nombre de usuario ya está en uso.");
       //header("Location: ../src/registro.html");
       //echo '<div class="alert alert-danger alertas-registro" id="ID_Error_Usuario">Patata</div>';
@@ -81,24 +83,15 @@
     } else if (existeCorreo($correo)) {
       //print ("El correo electrónico ya está en uso.");
       $ret = False;
-    } else {
-      if (!$stmt->execute()) {
-        printf("Errormessage: %s\n", $mysqli->error);
-        $ret = False;
-      }
+    } else {*/
+    if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+      $ret = False;
     }
 
     $stmt->close();
     $mysqli->close();
 
     return $ret;
-  }
-
-  if(isset($_POST['registrar'])) {
-    if(!registraUsuario()) {
-      header("Location: ../src/registro.html");
-    } else {
-      header("Location: ../src/home.html");
-    }
   }
 ?>
