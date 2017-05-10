@@ -75,20 +75,60 @@
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("sss", $correo, $usuario, $contrasenya);
 
-    /*if(existeUsuario($usuario)) {
-      //print ("El nombre de usuario ya está en uso.");
-      //header("Location: ../src/registro.html");
-      //echo '<div class="alert alert-danger alertas-registro" id="ID_Error_Usuario">Patata</div>';
-      $ret = False;
-    } else if (existeCorreo($correo)) {
-      //print ("El correo electrónico ya está en uso.");
-      $ret = False;
-    } else {*/
     if (!$stmt->execute()) {
       printf("Errormessage: %s\n", $mysqli->error);
       $ret = False;
+    } else {
+      session_start();
+      $_SESSION['username'] = $usuario;
     }
 
+    $stmt->close();
+    $mysqli->close();
+
+    return $ret;
+  }
+
+  //Función que recupera el top de novedades para el usuario conectado.
+  function tusNovedades() {
+    $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+    $usuario = $_SESSION['username'];
+
+    errorMysql($mysqli);
+
+    //TODO ordenar por fecha de publicación y cambiar el p del html.
+    $sql = "SELECT titulo, autor FROM cancion JOIN sigue ON seguido = autor WHERE seguidor = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $usuario);
+
+    if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+    }
+
+    $ret = $stmt->get_result();
+    $stmt->close();
+    $mysqli->close();
+
+    return $ret;
+  }
+
+  //Función que recupera el top de canciones según los gustos del usuario.
+  function tusTop() {
+    $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+    $usuario = $_SESSION['username'];
+
+    errorMysql($mysqli);
+
+    //TODO ordenar por reproducciones y cambiar el p en el html
+    $sql = "SELECT titulo, autor FROM cancion JOIN gustos ON cancion.genero = gustos.genero WHERE gustos.usuario = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $usuario);
+
+    if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+    }
+
+    $ret = $stmt->get_result();
     $stmt->close();
     $mysqli->close();
 

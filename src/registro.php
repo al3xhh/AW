@@ -37,7 +37,7 @@
             }
             if(!$correo && !$usuario) {
               if(registra_usuario()) {
-                header("Location: ../src/home.html");
+                header("Location: ../src/home.php");
               }
             }
           }

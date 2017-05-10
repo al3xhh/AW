@@ -15,6 +15,11 @@
         <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
+        <?PHP
+          session_start();
+          require_once('../php/controlador.php');
+        ?>
+
         <div id="container-principal">
             <!-- Barra superior de la página -->
             <nav class="navbar navbar-inverse">
@@ -40,7 +45,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
-                        <div id="imaginary_container"> 
+                        <div id="imaginary_container">
                             <div class="input-group stylish-input-group">
                                 <input type="text" class="form-control"  placeholder="Buscar" >
                                 <span class="input-group-addon">
@@ -70,86 +75,33 @@
                         <div class="row">
                             <div class="col-md-12" data-wow-delay="0.2s">
                                 <div class="carousel slide quote-carousel" data-ride="carousel" id="qc1">
-                                    <!-- Bottom Carousel Indicators -->
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#qc1" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc1" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc1" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc1" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc1" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc1" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                    </ol>
-
-                                    <!-- Carousel Slides / Quotes -->
                                     <div class="carousel-inner carousel_inner_home text-center">
-                                        <!-- Quote 1 -->
-                                        <div class="item active">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 1</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <!-- Quote 2 -->
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 2</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <!-- Quote 3 -->
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 3</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 4</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 5</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 6</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
+                                      <?PHP
+                                        $result = tus_novedades();
+                                        $i = 1;
+
+                                        while($registro = $result->fetch_assoc()) {
+
+                                          echo '<div class="item active">
+                                              <blockquote>
+                                                  <div class="row">
+                                                      <div class="col-sm-8 col-sm-offset-2">
+                                                          <a href="reproductor.html" class="link-home-carousel-and-search"><h3>'.$i.": ".$registro["titulo"].'</h3></a>
+                                                          <a href="usuario.html" class="link-home-carousel-and-search"><h5>'.$registro["autor"].'</h5></a>
+                                                      </div>
+                                                  </div>
+                                              </blockquote>
+                                          </div>';
+
+                                          $i ++;
+                                        }
+                                        $result->free();
+                                      ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </section>
 
                 <section id="content2" class="tab-content section_home">
@@ -158,87 +110,32 @@
                         <div class="row">
                             <div class="col-md-12" data-wow-delay="0.2s">
                                 <div class="carousel slide quote-carousel" data-ride="carousel" id="qc2">
-                                    <!-- Bottom Carousel Indicators -->
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#qc2" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc2" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc2" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc2" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc2" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc2" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                    </ol>
-
-                                    <!-- Carousel Slides / Quotes -->
                                     <div class="carousel-inner carousel_inner_home text-center">
-                                        <!-- Quote 1 -->
-                                        <div class="item active">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 7</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <!-- Quote 2 -->
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 8</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <!-- Quote 3 -->
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 9</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 10</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 11</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 12</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
+                                      <?PHP
+                                        $result = tus_top();
+                                        $i = 1;
+
+                                        while($registro = $result->fetch_assoc()) {
+
+                                          echo '<div class="item active">
+                                              <blockquote>
+                                                  <div class="row">
+                                                      <div class="col-sm-8 col-sm-offset-2">
+                                                          <a href="reproductor.html" class="link-home-carousel-and-search"><h3>'.$i.": ".$registro["titulo"].'</h3></a>
+                                                          <a href="usuario.html" class="link-home-carousel-and-search"><h5>'.$registro["autor"].'</h5></a>
+                                                      </div>
+                                                  </div>
+                                              </blockquote>
+                                          </div>';
+
+                                          $i ++;
+                                        }
+                                      ?>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
                 </section>
 
                 <section id="content3" class="tab-content section_home">
@@ -329,6 +226,7 @@
                     </div>
                 </section>
             </div>
+          </div>
         </div>
 
         <!-- Container que contiene el footer de la página -->

@@ -12,4 +12,12 @@
   function registra_usuario() {
     return registraUsuario();
   }
+
+  function tus_novedades() {
+    return tusNovedades();
+  }
+
+  function tus_top() {
+    return tusTop();
+  }
  ?>
