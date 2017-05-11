@@ -17,15 +17,17 @@
     <body>
         <?PHP
           session_start();
+          //TODO eliminar esto, está forzado para hacer pruebas.
+          $_SESSION['username'] = 'alex';
           require_once('../php/controlador.php');
         ?>
 
         <div id="container-principal">
             <!-- Barra superior de la página -->
             <nav class="navbar navbar-inverse">
-                <a class="navbar-brand" href="home.html">Webmusic</a>
+                <a class="navbar-brand" href="home.php">Webmusic</a>
                 <div class="navbar-header">
-                    <a href="home.html"><img src="../img/Logo.png" width="50" height="50" alt="logo"></a>
+                    <a href="home.php"><img src="../img/Logo.png" width="50" height="50" alt="logo"></a>
                     <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -70,12 +72,19 @@
                 <label for="tab3" class="label_home">Social</label>
 
                 <section id="content1" class="tab-content section_home">
-                    <p class="text-center">En esta sección podrás encontrar un top de las nuevas canciones que vayan sacando los artistas a los que sigues. Estarán ordenados por orden de salida y el número será un top 6 canciones. Podrás escuchar la canción pinchando en el título de la misma, eso te llevará al reproductor dónde también podrás dejar comentarios.</p>
+                      <p class="text-center">En esta sección podrás encontrar un top de las nuevas canciones que vayan sacando los artistas a los que sigues.</p>
+                      <p class="text-center">Estarán ordenadas por orden de salida y el número máximo será de diez canciones.</p>
+                      <p class="text-center">Podrás escuchar la canción pinchando en el título de la misma y visitar el perfil del autor pinchando en su nombre.</p>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12" data-wow-delay="0.2s">
                                 <div class="carousel slide quote-carousel" data-ride="carousel" id="qc1">
-                                    <div class="carousel-inner carousel_inner_home text-center">
+                                    <div class="text-center">
+                                      <h4 class="col-md-3">#</h4>
+                                      <h4 class="col-md-3">Título</h4>
+                                      <h4 class="col-md-3">Autor</h4>
+                                      <h4 class="col-md-3">Fecha publicación</h4>
+                                      <hr class="separator">
                                       <?PHP
                                         $result = tus_novedades();
                                         $i = 1;
@@ -85,10 +94,10 @@
                                           echo '<div class="item active">
                                               <blockquote>
                                                   <div class="row">
-                                                      <div class="col-sm-8 col-sm-offset-2">
-                                                          <a href="reproductor.html" class="link-home-carousel-and-search"><h3>'.$i.": ".$registro["titulo"].'</h3></a>
-                                                          <a href="usuario.html" class="link-home-carousel-and-search"><h5>'.$registro["autor"].'</h5></a>
-                                                      </div>
+                                                      <h5 class="col-md-3">'.$i.'</h5>
+                                                      <a href="reproductor.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
+                                                      <a href="usuario.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
+                                                      <h5 class="col-md-3">'.$registro["fechapublicacion"].'</h5>
                                                   </div>
                                               </blockquote>
                                           </div>';
@@ -105,12 +114,19 @@
                 </section>
 
                 <section id="content2" class="tab-content section_home">
-                    <p class="text-center">En esta sección podrás encontrar un top con canciones relacionadas con tus gustos musicales, no tendrán ningún orden específico y el número será un top 6 canciones. Podrás escuchar la canción pinchando en el título de la misma, eso te llevará al reproductor dónde también podrás dejar comentarios.</p>
+                    <p class="text-center">En esta sección podrás encontrar un top con canciones relacionadas con tus gustos musicales.</p>
+                    <p class="text-center">Estarán ordenadas por número de reproducciones y el número máximo será de diez canciones.</p>
+                    <p class="text-center">Podrás escuchar la canción pinchando en el título de la misma y visitar el perfil del autor pinchando en su nombre.</p>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12" data-wow-delay="0.2s">
                                 <div class="carousel slide quote-carousel" data-ride="carousel" id="qc2">
-                                    <div class="carousel-inner carousel_inner_home text-center">
+                                    <div class="text-center">
+                                      <h4 class="col-md-3">#</h4>
+                                      <h4 class="col-md-3">Título</h4>
+                                      <h4 class="col-md-3">Autor</h4>
+                                      <h4 class="col-md-3">Número reproducciones</h4>
+                                      <hr class="separator">
                                       <?PHP
                                         $result = tus_top();
                                         $i = 1;
@@ -120,10 +136,10 @@
                                           echo '<div class="item active">
                                               <blockquote>
                                                   <div class="row">
-                                                      <div class="col-sm-8 col-sm-offset-2">
-                                                          <a href="reproductor.html" class="link-home-carousel-and-search"><h3>'.$i.": ".$registro["titulo"].'</h3></a>
-                                                          <a href="usuario.html" class="link-home-carousel-and-search"><h5>'.$registro["autor"].'</h5></a>
-                                                      </div>
+                                                      <h5 class="col-md-3">'.$i.'</h5>
+                                                      <a href="reproductor.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
+                                                      <a href="usuario.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
+                                                      <h5 class="col-md-3">'.$registro["numeroreproducciones"].'</h5>
                                                   </div>
                                               </blockquote>
                                           </div>';
@@ -139,86 +155,39 @@
                 </section>
 
                 <section id="content3" class="tab-content section_home">
-                    <p class="text-center">En esta sección podrás encontrar un top de las canciones que estén escuchando tus amigos en ese momento, estarán ordenadas saliendo primero las que estén escuchando en ese momento y después las pasadas, el número será un top 6 canciones. Podrás escuchar la canción pinchando en el título de la misma, eso te llevará al reproductor dónde también podrás dejar comentarios.</p>
+                  <p class="text-center">Es esta sección podrás encontrar lo que escuha la gente a la que sigues.</p>
+                  <p class="text-center">Estarán ordenadas por el momento en el que la escuchen y el número máximo será de diez canciones.</p>
+                  <p class="text-center">Podrás escuchar la canción pinchando en el título de la misma y visitar el perfil del autor pinchando en su nombre.</p>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12" data-wow-delay="0.2s">
                                 <div class="carousel slide quote-carousel" data-ride="carousel" id="qc3">
-                                    <!-- Bottom Carousel Indicators -->
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#qc3" data-slide-to="0" class="active"><img class="img-responsive " src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc3" data-slide-to="1"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc3" data-slide-to="2"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc3" data-slide-to="3"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc3" data-slide-to="4"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                        <li data-target="#qc3" data-slide-to="5"><img class="img-responsive" src="../img/DiscoPortada.jpg" alt="">
-                                        </li>
-                                    </ol>
+                                    <div class="text-center">
+                                      <h4 class="col-md-3">#</h4>
+                                      <h4 class="col-md-3">Título</h4>
+                                      <h4 class="col-md-3">Autor</h4>
+                                      <h4 class="col-md-3">Fecha reproduccion</h4>
+                                      <hr class="separator">
+                                      <?PHP
+                                        $result = tus_top_social();
+                                        $i = 1;
 
-                                    <!-- Carousel Slides / Quotes -->
-                                    <div class="carousel-inner carousel_inner_home text-center">
-                                        <!-- Quote 1 -->
-                                        <div class="item active">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 13</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <!-- Quote 2 -->
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 14</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <!-- Quote 3 -->
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 15</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 16</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 17</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
-                                        <div class="item">
-                                            <blockquote>
-                                                <div class="row">
-                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h3>Título de la canción 18</h3></a>
-                                                    </div>
-                                                </div>
-                                            </blockquote>
-                                        </div>
+                                        while($registro = $result->fetch_assoc()) {
+
+                                          echo '<div class="item active">
+                                              <blockquote>
+                                                  <div class="row">
+                                                        <h5 class="col-md-3">'.$i.'</h5>
+                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
+                                                        <a href="usuario.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
+                                                        <h5 class="col-md-3">'.$registro["fechareproduccion"].'</h5>
+                                                  </div>
+                                              </blockquote>
+                                          </div>';
+
+                                          $i ++;
+                                        }
+                                      ?>
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +203,7 @@
             <footer class="footer-bs" id="footer">
                 <div class="row">
                     <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                        <a href="index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
+                        <a href="../index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
                     </div>
                     <div class="col-md-10 footer-nav animated fadeInUp">
                         <div class="col-md-3">

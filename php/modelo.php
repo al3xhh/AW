@@ -96,8 +96,14 @@
 
     errorMysql($mysqli);
 
-    //TODO ordenar por fecha de publicación y cambiar el p del html.
-    $sql = "SELECT titulo, autor FROM cancion JOIN sigue ON seguido = autor WHERE seguidor = ?";
+    //TODO ordenar por fecha de publicación.
+    $sql = "SELECT titulo, autor, fechapublicacion
+            FROM cancion
+            JOIN sigue ON seguido = autor
+            WHERE seguidor = ?
+            ORDER BY fechapublicacion DESC
+            LIMIT 10";
+
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("s", $usuario);
 
@@ -119,8 +125,45 @@
 
     errorMysql($mysqli);
 
-    //TODO ordenar por reproducciones y cambiar el p en el html
-    $sql = "SELECT titulo, autor FROM cancion JOIN gustos ON cancion.genero = gustos.genero WHERE gustos.usuario = ?";
+    $sql = "SELECT titulo, autor, numeroreproducciones
+            FROM cancion
+            JOIN gustos ON cancion.genero = gustos.genero
+            WHERE gustos.usuario = ?
+            ORDER BY numeroreproducciones DESC
+            LIMIT 10";
+
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $usuario);
+
+    if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+    }
+
+    $ret = $stmt->get_result();
+    $stmt->close();
+    $mysqli->close();
+
+    return $ret;
+  }
+
+  //Función que recupera el top social de canciones del usuario.
+  function tusTopSocial() {
+    $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+    $usuario = $_SESSION['username'];
+
+    errorMysql($mysqli);
+
+    //TODO ordenar por fecha.
+    $sql = "SELECT cancion.titulo, cancion.autor, fechareproduccion
+            FROM cancion
+            JOIN reproducciones
+            ON cancion.autor = reproducciones.autor
+            WHERE reproducciones.usuario IN (SELECT seguido
+                                             FROM sigue
+                                             WHERE seguidor = ?)
+            ORDER BY fechareproduccion DESC
+            LIMIT 10";
+
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("s", $usuario);
 

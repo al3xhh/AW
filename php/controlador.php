@@ -20,4 +20,8 @@
   function tus_top() {
     return tusTop();
   }
+
+  function tus_top_social() {
+    return tusTopSocial();
+  }
  ?>
