@@ -97,11 +97,11 @@
     errorMysql($mysqli);
 
     //TODO ordenar por fecha de publicación.
-    $sql = "SELECT titulo, autor, fechapublicacion
+    $sql = "SELECT titulo, autor, fecha
             FROM cancion
             JOIN sigue ON seguido = autor
             WHERE seguidor = ?
-            ORDER BY fechapublicacion DESC
+            ORDER BY fecha DESC
             LIMIT 10";
 
     $stmt = $mysqli->prepare($sql);
@@ -154,14 +154,13 @@
     errorMysql($mysqli);
 
     //TODO ordenar por fecha.
-    $sql = "SELECT cancion.titulo, cancion.autor, fechareproduccion
+    $sql = "SELECT cancion.titulo, cancion.autor, reproducciones.fecha
             FROM cancion
-            JOIN reproducciones
-            ON cancion.autor = reproducciones.autor
+            JOIN reproducciones ON cancion.id = reproducciones.cancion
             WHERE reproducciones.usuario IN (SELECT seguido
                                              FROM sigue
                                              WHERE seguidor = ?)
-            ORDER BY fechareproduccion DESC
+            ORDER BY fecha DESC
             LIMIT 10";
 
     $stmt = $mysqli->prepare($sql);
