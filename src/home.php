@@ -95,8 +95,8 @@
                                               <blockquote>
                                                   <div class="row">
                                                       <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
-                                                      <a href="usuario.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
+                                                      <a href="reproductor.html?titulo='.$registro["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
+                                                      <a href="usuario.html?usuario='.$registro["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
                                                       <h5 class="col-md-3">'.$registro["fecha"].'</h5>
                                                   </div>
                                               </blockquote>
@@ -137,8 +137,8 @@
                                               <blockquote>
                                                   <div class="row">
                                                       <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
-                                                      <a href="usuario.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
+                                                      <a href="reproductor.html?titulo='.$registro["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
+                                                      <a href="usuario.html?usuario='.$registro["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
                                                       <h5 class="col-md-3">'.$registro["numeroreproducciones"].'</h5>
                                                   </div>
                                               </blockquote>
@@ -178,8 +178,8 @@
                                               <blockquote>
                                                   <div class="row">
                                                         <h5 class="col-md-3">'.$i.'</h5>
-                                                        <a href="reproductor.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
-                                                        <a href="usuario.html" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
+                                                        <a href="reproductor.html?titulo='.$registro["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
+                                                        <a href="usuario.html?usuario='.$registro["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
                                                         <h5 class="col-md-3">'.$registro["fecha"].'</h5>
                                                   </div>
                                               </blockquote>
