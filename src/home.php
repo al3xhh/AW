@@ -86,7 +86,7 @@
                                       <h4 class="col-md-3">Fecha publicación</h4>
                                       <hr class="separator">
                                       <?PHP
-                                        $result = tus_novedades();
+                                        $result = tus_novedades(validar_entrada($_SESSION['username']));
                                         $i = 1;
 
                                         while($registro = $result->fetch_assoc()) {
@@ -128,7 +128,7 @@
                                       <h4 class="col-md-3">Número reproducciones</h4>
                                       <hr class="separator">
                                       <?PHP
-                                        $result = tus_top();
+                                        $result = tus_top(validar_entrada($_SESSION['username']));
                                         $i = 1;
 
                                         while($registro = $result->fetch_assoc()) {
@@ -165,11 +165,11 @@
                                     <div class="text-center">
                                       <h4 class="col-md-3">#</h4>
                                       <h4 class="col-md-3">Título</h4>
-                                      <h4 class="col-md-3">Autor</h4>
+                                      <h4 class="col-md-3">Escuchada por</h4>
                                       <h4 class="col-md-3">Fecha reproduccion</h4>
                                       <hr class="separator">
                                       <?PHP
-                                        $result = tus_top_social();
+                                        $result = tus_top_social(validar_entrada($_SESSION['username']));
                                         $i = 1;
 
                                         while($registro = $result->fetch_assoc()) {
@@ -179,7 +179,7 @@
                                                   <div class="row">
                                                         <h5 class="col-md-3">'.$i.'</h5>
                                                         <a href="reproductor.html?titulo='.$registro["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
-                                                        <a href="usuario.html?usuario='.$registro["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
+                                                        <a href="usuario.html?usuario='.$registro["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["usuario"].'</h5></a>
                                                         <h5 class="col-md-3">'.$registro["fecha"].'</h5>
                                                   </div>
                                               </blockquote>

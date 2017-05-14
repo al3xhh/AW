@@ -29,14 +29,16 @@
 
           if($_SERVER["REQUEST_METHOD"] == "POST") {
             require_once('../php/controlador.php');
-            if(existe_usuario()) {
+            if(existe_usuario(validar_entrada($_POST["usuario"]))) {
               $usuario = True;
             }
-            if(existe_correo()) {
+            if(existe_correo(validar_entrada($_POST["correo"]))) {
               $correo = True;
             }
             if(!$correo && !$usuario) {
-              if(registra_usuario()) {
+              if(registra_usuario(validar_entrada($_POST["usuario"]),
+                                  validar_entrada($_POST["correo"]),
+                                  hash('sha256', validar_entrada($_POST["contrasenya"])))) {
                 header("Location: ../src/home.php");
               }
             }
