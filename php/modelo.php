@@ -1,5 +1,22 @@
 <?php
 
+//Transforma el resultado de la consulta SQL en un array.
+function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
+   $stmt->bind_result($col1, $col2, $col3);
+
+   while ($stmt->fetch()){
+      $row = array($col1_n => $col1,
+                    $col2_n => $col2,
+                    $col3_n => $col3);
+      array_push($array, $row);
+   }
+}
+
+//Función para conectar con la base de datos.
+function conectar() {
+   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+}
+
 //Función para limpiar la entrada de cualquier caracter raro.
 function validarEntrada($dato) {
    return htmlspecialchars(trim(strip_tags($dato)));
@@ -22,7 +39,7 @@ function errorMysql($mysqli) {
 
 //Función que comprueba si existe el nombre de usuario en la aplicación.
 function existeUsuario($usuario) {
-   $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   $mysqli = conectar();
    $ret = False;
 
    errorMysql($mysqli);
@@ -49,7 +66,7 @@ function existeUsuario($usuario) {
 
 //Función que comprueba si existe el correo electrónico en la aplicación.
 function existeCorreo($correo) {
-   $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   $mysqli = conectar();
    $ret = False;
 
    errorMysql($mysqli);
@@ -76,7 +93,7 @@ function existeCorreo($correo) {
 
 //Función que se encarga de realizar el registro de un usuario en la aplicación.
 function registraUsuario($usuario, $correo, $contrasenya) {
-   $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   $mysqli = conectar();
    $ret = True;
 
    errorMysql($mysqli);
@@ -90,7 +107,7 @@ function registraUsuario($usuario, $correo, $contrasenya) {
       $ret = False;
    } else {
       session_start();
-      $_SESSION['username'] = $usuario;
+      $_SESSION['usuario'] = $usuario;
    }
 
    $stmt->close();
@@ -101,17 +118,37 @@ function registraUsuario($usuario, $correo, $contrasenya) {
 
 //Función que recupera el top de novedades para el usuario conectado.
 function tusNovedades($usuario) {
-   $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   $mysqli = conectar();
+   $hoy = date("Y-m-d");
+   $array = array();
 
    errorMysql($mysqli);
 
-   //TODO ordenar por fecha de publicación.
+   $sql = "SELECT titulo, autor, fecha
+            FROM cancion
+            JOIN premium ON usuario = autor
+            JOIN sigue ON seguido = autor
+            WHERE seguidor = ? AND fechacaducidad > ?
+            ORDER BY fecha DESC
+            LIMIT 6";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $usuario, $hoy);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   obtenerArray($stmt, $array, "titulo", "autor", "fecha");
+
    $sql = "SELECT titulo, autor, fecha
             FROM cancion
             JOIN sigue ON seguido = autor
-            WHERE seguidor = ?
+            WHERE seguidor = ? AND autor NOT IN (SELECT usuario
+                                                FROM premium
+                                                WHERE usuario = autor)
             ORDER BY fecha DESC
-            LIMIT 10";
+            LIMIT 4";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -120,25 +157,47 @@ function tusNovedades($usuario) {
       printf("Errormessage: %s\n", $mysqli->error);
    }
 
-   $ret = $stmt->get_result();
+   obtenerArray($stmt, $array, "titulo", "autor", "fecha");
+
    $stmt->close();
    $mysqli->close();
 
-   return $ret;
+   return $array;
 }
 
 //Función que recupera el top de canciones según los gustos del usuario.
 function tusTop($usuario) {
-   $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   $mysqli = conectar();
+   $hoy = date("Y-m-d");
+   $array = array();
 
    errorMysql($mysqli);
 
    $sql = "SELECT titulo, autor, numeroreproducciones
             FROM cancion
+            JOIN premium ON usuario = autor
             JOIN gustos ON cancion.genero = gustos.genero
-            WHERE gustos.usuario = ?
+            WHERE gustos.usuario = ? AND fechacaducidad > ?
             ORDER BY numeroreproducciones DESC
-            LIMIT 10";
+            LIMIT 6";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $usuario, $hoy);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   obtenerArray($stmt, $array, "titulo", "autor", "numeroreproducciones");
+
+   $sql = "SELECT titulo, autor, numeroreproducciones
+            FROM cancion
+            JOIN gustos ON cancion.genero = gustos.genero
+            WHERE gustos.usuario = ? AND autor NOT IN (SELECT usuario
+                                                FROM premium
+                                                WHERE usuario = autor)
+            ORDER BY numeroreproducciones DESC
+            LIMIT 4";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -147,21 +206,24 @@ function tusTop($usuario) {
       printf("Errormessage: %s\n", $mysqli->error);
    }
 
-   $ret = $stmt->get_result();
+   obtenerArray($stmt, $array, "titulo", "autor", "numeroreproducciones");
+
    $stmt->close();
    $mysqli->close();
 
-   return $ret;
+   return $array;
 }
 
 //Función que recupera el top social de canciones del usuario.
 function tusTopSocial($usuario) {
-   $mysqli = new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   $mysqli = conectar();
+   $array = array();
 
    errorMysql($mysqli);
 
    $sql = "SELECT cancion.titulo, reproducciones.usuario, reproducciones.fecha
             FROM cancion
+            JOIN premium ON usuario = autor
             JOIN reproducciones ON cancion.id = reproducciones.cancion
             WHERE reproducciones.usuario IN (SELECT seguido
                                              FROM sigue
@@ -176,10 +238,11 @@ function tusTopSocial($usuario) {
       printf("Errormessage: %s\n", $mysqli->error);
    }
 
-   $ret = $stmt->get_result();
+   obtenerArray($stmt, $array, "titulo", "usuario", "fecha");
+
    $stmt->close();
    $mysqli->close();
 
-   return $ret;
+   return $array;
 }
 ?>

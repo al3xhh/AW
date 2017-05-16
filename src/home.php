@@ -18,7 +18,7 @@
         <?PHP
           session_start();
           //TODO eliminar esto, está forzado para hacer pruebas.
-          $_SESSION['username'] = 'alex';
+          $_SESSION['usuario'] = 'alex';
           require_once('../php/controlador.php');
         ?>
 
@@ -63,10 +63,10 @@
             <div id="tab_container_home">
 
                 <input class="input_home" id="tab1" type="radio" name="tabs" checked>
-                <label for="tab1" class="label_home">Tus novedades</label>
+                <label for="tab1" class="label_home">Novedades</label>
 
                 <input class="input_home" id="tab2" type="radio" name="tabs">
-                <label for="tab2" class="label_home">Tus top</label>
+                <label for="tab2" class="label_home">Top</label>
 
                 <input class="input_home" id="tab3" type="radio" name="tabs">
                 <label for="tab3" class="label_home">Social</label>
@@ -86,25 +86,23 @@
                                       <h4 class="col-md-3">Fecha publicación</h4>
                                       <hr class="separator">
                                       <?PHP
-                                        $result = tus_novedades(validar_entrada($_SESSION['username']));
+                                        $resultado = tus_novedades(validar_entrada($_SESSION['usuario']));
                                         $i = 1;
 
-                                        while($registro = $result->fetch_assoc()) {
-
+                                        foreach ($resultado as $fila) {
                                           echo '<div class="item active">
                                               <blockquote>
                                                   <div class="row">
                                                       <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.html?titulo='.$registro["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
-                                                      <a href="usuario.html?usuario='.$registro["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
-                                                      <h5 class="col-md-3">'.$registro["fecha"].'</h5>
+                                                      <a href="reproductor.html?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                      <a href="usuario.html?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
+                                                      <h5 class="col-md-3">'.$fila["fecha"].'</h5>
                                                   </div>
                                               </blockquote>
                                           </div>';
 
                                           $i ++;
                                         }
-                                        $result->free();
                                       ?>
                                         </div>
                                     </div>
@@ -128,18 +126,18 @@
                                       <h4 class="col-md-3">Número reproducciones</h4>
                                       <hr class="separator">
                                       <?PHP
-                                        $result = tus_top(validar_entrada($_SESSION['username']));
+                                        $resultado = tus_top(validar_entrada($_SESSION['usuario']));
                                         $i = 1;
 
-                                        while($registro = $result->fetch_assoc()) {
+                                        foreach ($resultado as $fila) {
 
                                           echo '<div class="item active">
                                               <blockquote>
                                                   <div class="row">
                                                       <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.html?titulo='.$registro["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
-                                                      <a href="usuario.html?usuario='.$registro["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["autor"].'</h5></a>
-                                                      <h5 class="col-md-3">'.$registro["numeroreproducciones"].'</h5>
+                                                      <a href="reproductor.html?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                      <a href="usuario.html?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
+                                                      <h5 class="col-md-3">'.$fila["numeroreproducciones"].'</h5>
                                                   </div>
                                               </blockquote>
                                           </div>';
@@ -169,18 +167,18 @@
                                       <h4 class="col-md-3">Fecha reproduccion</h4>
                                       <hr class="separator">
                                       <?PHP
-                                        $result = tus_top_social(validar_entrada($_SESSION['username']));
+                                        $resultado = tus_top_social(validar_entrada($_SESSION['usuario']));
                                         $i = 1;
 
-                                        while($registro = $result->fetch_assoc()) {
+                                        foreach ($resultado as $fila) {
 
                                           echo '<div class="item active">
                                               <blockquote>
                                                   <div class="row">
                                                         <h5 class="col-md-3">'.$i.'</h5>
-                                                        <a href="reproductor.html?titulo='.$registro["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["titulo"].'</h5></a>
-                                                        <a href="usuario.html?usuario='.$registro["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$registro["usuario"].'</h5></a>
-                                                        <h5 class="col-md-3">'.$registro["fecha"].'</h5>
+                                                        <a href="reproductor.html?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                        <a href="usuario.html?usuario='.$fila["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["usuario"].'</h5></a>
+                                                        <h5 class="col-md-3">'.$fila["fecha"].'</h5>
                                                   </div>
                                               </blockquote>
                                           </div>';

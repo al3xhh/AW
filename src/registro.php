@@ -39,7 +39,11 @@
               if(registra_usuario(validar_entrada($_POST["usuario"]),
                                   validar_entrada($_POST["correo"]),
                                   hash('sha256', validar_entrada($_POST["contrasenya"])))) {
-                header("Location: ../src/home.php");
+                if(isset($_POST['premium'])) {
+                   header("Location: ../src/premium.html");
+                } else {
+                   header("Location: ../src/home.php");
+                }
               }
             }
           }
@@ -115,7 +119,7 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" class="checkbox" value="">Hacerme premium</label>
+                                                    <label><input type="checkbox" class="checkbox" name="premium" value="">Hacerme premium</label>
                                                 </div>
                                             </div>
                                         </div>
