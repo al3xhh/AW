@@ -100,8 +100,8 @@
                   </button>
 
                   <!-- Boton de play/pause -->
-                  <button type="button" class="btn btn-default" aria-label="Left Align" onclick="onPlay()">
-                     <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                  <button id="playPauseButton"type="button" class="btn btn-default" aria-label="Left Align">
+                     <span id="playPauseButtonSpan" class="glyphicon glyphicon-play" aria-hidden="true"></span>
                   </button>
 
                   <!-- Boton para pasar a la siguiente cancion -->
@@ -112,7 +112,7 @@
 
                <!-- Barra de estado de la cancion -->
                <div id="info-player">
-                  <p class="info-player-time">0:59</p>
+                  <p id="reproducido" class="info-player-time">0:0</p>
                   <div id="player-progres" class="progress">
                      <div id="myBar" class="progress-bar" role="progressbar" aria-valuenow="70"
                           aria-valuemin="0" aria-valuemax="100">
