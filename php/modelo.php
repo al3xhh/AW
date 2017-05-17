@@ -185,10 +185,17 @@ function getInfoCancion($titulo){
    $stmt->bind_result($col1, $col2, $col3, $col4);
    $stmt->fetch();
    $ret = array("autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4);
-   
+
    $mysqli->close();
-   
+
    return $ret;
+}
+
+function aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium){
+   $stmt = $mysqli->prepare("INSERT INTO premium VALUES (?, ?, ?, ?, ?, ?, ?)");
+   $stmt->bind_param("sssssss", $usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium);
+   $stmt->execute();
+   $stmt->close();
 }
 
 ?>
