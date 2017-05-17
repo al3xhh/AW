@@ -164,13 +164,16 @@
                                       <h4 class="col-md-3">#</h4>
                                       <h4 class="col-md-3">Título</h4>
                                       <h4 class="col-md-3">Escuchada por</h4>
-                                      <h4 class="col-md-3">Fecha reproduccion</h4>
+                                      <h4 class="col-md-3">Reproducido hace</h4>
                                       <hr class="separator">
                                       <?PHP
                                         $resultado = tus_top_social(validar_entrada($_SESSION['usuario']));
                                         $i = 1;
 
                                         foreach ($resultado as $fila) {
+                                          $fecha = new DateTime($fila["fecha"]);
+                                          $ahora = new DateTime();
+                                          $tiempo = $fecha->diff($ahora)->format("%m meses, %d días, %h horas and %i minutos");
 
                                           echo '<div class="item active">
                                               <blockquote>
@@ -178,7 +181,7 @@
                                                         <h5 class="col-md-3">'.$i.'</h5>
                                                         <a href="reproductor.html?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
                                                         <a href="usuario.html?usuario='.$fila["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["usuario"].'</h5></a>
-                                                        <h5 class="col-md-3">'.$fila["fecha"].'</h5>
+                                                        <h5 class="col-md-3">'.$tiempo.'</h5>
                                                   </div>
                                               </blockquote>
                                           </div>';

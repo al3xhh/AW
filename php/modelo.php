@@ -124,7 +124,7 @@ function tusNovedades($usuario) {
 
    errorMysql($mysqli);
 
-   $sql = "SELECT titulo, autor, fecha
+   $sql = "SELECT titulo, autor, date(fecha)
             FROM cancion
             JOIN premium ON usuario = autor
             JOIN sigue ON seguido = autor
@@ -141,7 +141,7 @@ function tusNovedades($usuario) {
 
    obtenerArray($stmt, $array, "titulo", "autor", "fecha");
 
-   $sql = "SELECT titulo, autor, fecha
+   $sql = "SELECT titulo, autor, date(fecha)
             FROM cancion
             JOIN sigue ON seguido = autor
             WHERE seguidor = ? AND autor NOT IN (SELECT usuario
@@ -223,12 +223,11 @@ function tusTopSocial($usuario) {
 
    $sql = "SELECT cancion.titulo, reproducciones.usuario, reproducciones.fecha
             FROM cancion
-            JOIN premium ON usuario = autor
             JOIN reproducciones ON cancion.id = reproducciones.cancion
             WHERE reproducciones.usuario IN (SELECT seguido
                                              FROM sigue
                                              WHERE seguidor = ?)
-            ORDER BY fecha DESC
+            ORDER BY reproducciones.fecha ASC
             LIMIT 10";
 
    $stmt = $mysqli->prepare($sql);
