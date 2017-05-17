@@ -17,6 +17,17 @@ function validarUsuario() {
         document.getElementById("ID_Error_Usuario").innerHTML = "El usuario sólo puede contener números y letras y debe tener una longitud menor a 17";
         return false;
     } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               if(this.responseText != "") {
+                  document.getElementById("ID_Error_Usuario").style.display = "block";
+                  document.getElementById("ID_Error_Usuario").innerHTML = this.responseText;
+               }
+            }
+        };
+        xmlhttp.open("GET", "../php/registro_usuario.php?usuario=" + usuario_val, true);
+        xmlhttp.send();
         document.getElementById("ID_Error_Usuario").style.display = "none";
         return true;
     }
@@ -39,6 +50,17 @@ function validarCorreo() {
         document.getElementById("ID_Error_Correo").innerHTML = "El formato del correo es erróneo";
         return false;
     } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               if(this.responseText != "") {
+                  document.getElementById("ID_Error_Correo").style.display = "block";
+                  document.getElementById("ID_Error_Correo").innerHTML = this.responseText;
+               }
+            }
+        };
+        xmlhttp.open("GET", "../php/registro_correo.php?correo=" + correo_val, true);
+        xmlhttp.send();
         document.getElementById("ID_Error_Correo").style.display = "none";
         return true;
     }
@@ -114,9 +136,9 @@ function validarCaptcha() {
 //Función que valida el registro entero con ayuda de las funciones anteriores.
 function validarRegistro() {
     "use strict";
-    
+
     var ret = (validarUsuario() & validarCorreo() & validarContrasenya() & validarReContrasenya() & validarCaptcha());
-    
+
     if (ret === 0) {
         return false;
     } else {
