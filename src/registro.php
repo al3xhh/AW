@@ -88,7 +88,7 @@
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
                                             <?php if($usuario) {
-                                              echo '<div class="alert alert-danger" id="ID_Error_Usuario">Usuario ya registrado.</div>';
+                                              echo '<div class="alert alert-danger" id="ID_Error_Usuario_2">Usuario ya registrado.</div>';
                                             } ?>
                                         </div>
                                         <div class="form-group">
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Correo"></div>
                                             <?php if($correo) {
-                                              echo '<div class="alert alert-danger" id="ID_Error_Usuario">Correo ya registrado.</div>';
+                                              echo '<div class="alert alert-danger" id="ID_Error_Correo_2">Correo ya registrado.</div>';
                                             } ?>
                                         </div>
                                         <div class="form-group">

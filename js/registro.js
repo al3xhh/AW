@@ -4,6 +4,10 @@ que sólo contenga caracteres alfanuméricos y que la longitud sea menor que 17.
 function validarUsuario() {
     "use strict";
 
+    if(document.getElementById("ID_Error_Usuario_2") != null) {
+      document.getElementById("ID_Error_Usuario_2").style.display = "none";
+    }
+
     var reg_usuario = /^[a-zA-Z ]{2,30}$/,
         usuario = document.getElementById("ID_Usuario"),
         usuario_val = usuario.value;
@@ -36,6 +40,10 @@ function validarUsuario() {
 //Función que se encarga de validar que el formato del correo sea válido.
 function validarCorreo() {
     "use strict";
+
+    if(document.getElementById("ID_Error_Correo_2") != null) {
+      document.getElementById("ID_Error_Correo_2").style.display = "none";
+    }
 
     var reg_correo = /^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}$/,
         correo = document.getElementById("ID_Correo"),
