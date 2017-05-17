@@ -72,7 +72,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Registro</div>
                         <div class="panel-body">
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" onsubmit="return validarRegistro()">
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
                                 <div class="row">
                                     <div class="center-block">
                                         <img class="profile-img" src="../img/ImagenRegistroInterior.png" alt="Imagen Registro">
@@ -83,7 +83,7 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input class="form-control" placeholder="Nombre de usuario *" id="ID_Usuario" name="usuario" type="text" onchange="validarUsuario()"
+                                                <input class="form-control" placeholder="Nombre de usuario *" id="ID_Usuario" name="usuario" type="text"
                                                 value=<?php if($_SERVER["REQUEST_METHOD"] == "POST"){echo $_POST["usuario"];} ?>>
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
@@ -94,7 +94,7 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" name="correo" type="text" onchange="validarCorreo()"
+                                                <input class="form-control" placeholder="Correo electrónico *" id="ID_Correo" name="correo" type="text"
                                                 value=<?php if($_SERVER["REQUEST_METHOD"] == "POST"){echo $_POST["correo"];} ?>>
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Correo"></div>
@@ -105,14 +105,14 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input class="form-control" placeholder="Contraseña *" id="ID_Pass" name="contrasenya" type="password" onchange="validarContrasenya()">
+                                                <input class="form-control" placeholder="Contraseña *" id="ID_Pass" name="contrasenya" type="password">
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input class="form-control" placeholder="Repite la contraseña *" id="ID_Pass1" type="password" onchange="validarReContrasenya()">
+                                                <input class="form-control" placeholder="Repite la contraseña *" id="ID_Pass1" type="password">
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Pass1"></div>
                                         </div>

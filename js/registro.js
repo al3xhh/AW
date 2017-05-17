@@ -4,7 +4,7 @@ que sólo contenga caracteres alfanuméricos y que la longitud sea menor que 17.
 function validarUsuario() {
     "use strict";
 
-    var reg_usuario = /^[a-z0-9].{1,15}$/i,
+    var reg_usuario = /^[a-zA-Z ]{2,30}$/,
         usuario = document.getElementById("ID_Usuario"),
         usuario_val = usuario.value;
 
@@ -134,14 +134,33 @@ function validarCaptcha() {
 }
 
 //Función que valida el registro entero con ayuda de las funciones anteriores.
-function validarRegistro() {
+function validarRegistro(event) {
     "use strict";
 
     var ret = (validarUsuario() & validarCorreo() & validarContrasenya() & validarReContrasenya() & validarCaptcha());
 
     if (ret === 0) {
+        event.preventDefault();
         return false;
     } else {
         return true;
     }
 }
+
+$( document ).ready(function() {
+   $("#ID_Usuario").bind("change", function () {
+        validarUsuario();
+    });
+   $("#ID_Correo").bind("change", function () {
+     validarCorreo();
+   });
+   $("#ID_Pass").bind("change", function () {
+     validarContrasenya();
+   });
+   $("#ID_Pass1").bind("change", function () {
+     validarReContrasenya();
+   });
+   $("#ID_Formulario").bind("submit", function () {
+     validarRegistro(event);
+   });
+});
