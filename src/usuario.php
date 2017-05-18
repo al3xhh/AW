@@ -28,8 +28,8 @@
       <div id="container-principal">
          <!-- Barra superior de la página -->
          <?php
-         require_once("../php/navbar.php");
-         navbar();
+            require_once("../php/navbar.php");
+            navbar();
          ?>
          <!-- Fin barra superior -->
 
@@ -52,20 +52,20 @@
          <div class="container-fluid">
             <div class="row">
                <?php
-               $resultado = obtener_informacion_usuario(validar_entrada($_GET['usuario']));
+                  $resultado = obtener_informacion_usuario(validar_entrada($_GET['usuario']));
 
-               echo '<div class="fb-profile">
+                  echo '<div class="fb-profile">
                            <img class="fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" height=400>
                            <img class="fb-image-profile thumbnail" src="../img/'.$resultado[0]["foto"].'" alt="Profile image example">
                            <div class="fb-profile-text">
                                <h1>'.$resultado[0]["nombreusuario"].'</h1>
                            </div>
-                           <div class="fb-profile-text">';
-               if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($resultado[0]["nombreusuario"]))) {
-                  echo 'Te sigue!';
-               }
-               echo '</div>
-                       </div>';
+                        <div class="fb-profile-text">';
+                        if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($resultado[0]["nombreusuario"]))) {
+                           echo 'Te sigue!';
+                        }
+                        echo '</div>
+                              </div>';
                ?>
             </div>
          </div> <!-- /container fluid-->
@@ -91,66 +91,66 @@
                      <div class="tab-content">
                         <div class="tab-pane active" id="tab_default_1">
                            <?php
-                           $resultado = obtener_descripcion_usuario(validar_entrada($_GET['usuario']));
-                           echo '<p>'.$resultado.'</p>';
+                              $resultado = obtener_descripcion_usuario(validar_entrada($_GET['usuario']));
+                              echo '<p>'.$resultado.'</p>';
                            ?>
                         </div>
                         <div class="tab-pane" id="tab_default_2">
                            <?PHP
-                           $resultado = obtener_seguidores(validar_entrada($_GET['usuario']));
+                              $resultado = obtener_seguidores(validar_entrada($_GET['usuario']));
 
-                           foreach ($resultado as $fila) {
-                              if($_SESSION['usuario'] != $fila["seguidor"]) {
-                                 echo '<div class="user-resume">
-                                                 <div>
-                                                     <img class="user-resume-img" src="../img/'.$fila["foto"].'" width="64" height="64" alt="Imagen usuario">
-                                                 </div>
-                                                 <div class="user-resume-info">
-                                                     <h3>'.$fila["seguidor"].'</h3>
-                                                 </div>
-                                                 <div class="user-resume-button">
-                                                     <button value="';
-                                 echo $fila["seguidor"];
-                                 echo '"type="submit" class="btn btn-primary pull-right" id="SeguidoresSeguir">';
-                                 if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguidor"]))) {
-                                    echo 'Siguiendo';
-                                 } else {
-                                    echo 'Seguir';
-                                 }
-                                 echo '</button>
-                                                 </div>
-                                              </div>';
+                              foreach ($resultado as $fila) {
+                                 if($_SESSION['usuario'] != $fila["seguidor"]) {
+                                    echo '<div class="user-resume">
+                                              <div>
+                                                  <img class="user-resume-img" src="../img/'.$fila["foto"].'" width="64" height="64" alt="Imagen usuario">
+                                              </div>
+                                              <div class="user-resume-info">
+                                                  <h3>'.$fila["seguidor"].'</h3>
+                                              </div>
+                                              <div class="user-resume-button">
+                                               <button value="';
+                                                echo $fila["seguidor"];
+                                                echo '"type="submit" class="btn btn-primary pull-right" id="SeguidoresSeguir">';
+                                                if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguidor"]))) {
+                                                   echo 'Siguiendo';
+                                                } else {
+                                                   echo 'Seguir';
+                                                }
+                                                echo '</button>
+                                                       </div>
+                                                       </div>';
+                                             }
                               }
-                           }
                            ?>
                         </div>
                         <div class="tab-pane" id="tab_default_3">
                            <?PHP
-                           $resultado = obtener_seguidos(validar_entrada($_GET['usuario']));
+                              $resultado = obtener_seguidos(validar_entrada($_GET['usuario']));
 
-                           foreach ($resultado as $fila) {
-                              if($_SESSION['usuario'] != $fila["seguido"]) {
-                                 echo '<div class="user-resume">
-                                                <div>
-                                                     <img class="user-resume-img" src="../img/'.$fila["foto"].'" width="64" height="64" alt="Imagen usuario">
-                                                </div>
-                                                <div class="user-resume-info">
-                                                     <h3>'.$fila["seguido"].'</h3>
-                                                </div>
-                                                <div class="user-resume-button">
-                                                     <button <button value="';
-                                 echo $fila["seguido"];
-                                 echo '"type="submit" class="btn btn-primary pull-right" id="SeguidosSeguir">';
-                                 if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguido"]))) {
-                                    echo 'Siguiendo';
-                                 } else {
-                                    echo 'Seguir';
+                              foreach ($resultado as $fila) {
+                                 if($_SESSION['usuario'] != $fila["seguido"]) {
+                                    echo '<div class="user-resume">
+                                          <div>
+                                               <img class="user-resume-img" src="../img/'.$fila["foto"].'" width="64" height="64" alt="Imagen usuario">
+                                          </div>
+                                          <div class="user-resume-info">
+                                               <h3>'.$fila["seguido"].'</h3>
+                                          </div>
+                                          <div class="user-resume-button">
+                                               <button <button value="';
+                                                echo $fila["seguido"];
+                                                echo '"type="submit" class="btn btn-primary pull-right" id="SeguidosSeguir">';
+                                                if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguido"]))) {
+                                                   echo 'Siguiendo';
+                                                } else {
+                                                   echo 'Seguir';
+                                                }
+                                                echo '</button>
+                                                      </div>
+                                                      </div>';
                                  }
-                                 echo '</button>
-                                                </div>
-                                              </div>';
                               }
-                           }
                            ?>
                         </div>
                         <div class="tab-pane" id="tab_default_4">
@@ -162,16 +162,16 @@
                            } else {
                               foreach ($resultado as $fila) {
                                  echo '<div class="user-resume">
-                                                    <div>
-                                                        <img class="user-resume-img" src="../img/'.$fila["caratula"].'" width="64" height="64" alt="Imagen usuario">
-                                                    </div>
-                                                    <div class="user-resume-info">
-                                                        <h3>'.$fila["titulo"].'</h3>
-                                                    </div>
-                                                    <div class="user-resume-button">
-                                                       <a href="reproductor.php?titulo='.$fila["titulo"].'"><button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button></a>
-                                                    </div>
-                                                 </div>';
+                                        <div>
+                                            <img class="user-resume-img" src="../img/'.$fila["caratula"].'" width="64" height="64" alt="Imagen usuario">
+                                        </div>
+                                        <div class="user-resume-info">
+                                            <h3>'.$fila["titulo"].'</h3>
+                                        </div>
+                                        <div class="user-resume-button">
+                                           <a href="reproductor.php?titulo='.$fila["titulo"].'"><button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button></a>
+                                        </div>
+                                     </div>';
                               }
                            }
                            ?>
@@ -199,11 +199,11 @@
                            ?>
                            <button value="<?php echo $_GET["usuario"]?>"type="submit" class="btn btn-primary btn-block" id="Seguir">
                               <?php
-   if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($_GET['usuario']))) {
-      echo 'Siguiendo';
-   } else {
-      echo 'Seguir';
-   }
+                              if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($_GET['usuario']))) {
+                                 echo 'Siguiendo';
+                              } else {
+                                 echo 'Seguir';
+                              }
                               ?>
                            </button>
                         </div>
