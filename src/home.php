@@ -32,10 +32,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
                 </div>
                 <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="listas-reproduccion.html"><span class="glyphicon glyphicon-music"></span> Lista reproducción</a></li>
                         <li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
                         <li><a href="miperfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
                         <li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
