@@ -155,6 +155,7 @@ function validarRegistro(event) {
     }
 }
 
+<<<<<<< HEAD
 $( document ).ready(function() {
    $("#ID_Usuario").bind("change", function () {
         validarUsuario();
@@ -172,3 +173,22 @@ $( document ).ready(function() {
      validarRegistro(event);
    });
 });
+=======
+#(document).ready( function(){
+    $("#ID_Usuario").bind("change", function () {
+        validarUsuario();
+    });
+    $("#ID_Correo").bind("change", function () {
+        validarCorreo();
+    });
+    $("#ID_Pass").bind("change", function () {
+        validarContrasenya();
+    });
+    $("#ID_Pass1").bind("change", function () {
+        validarReContrasenya();
+    });
+    $("#ID_Formulario").bind("submit", function () {
+        validarRegistro(event);
+    });
+});
+>>>>>>> 753196fd47ccaa73c96e8f1b223cfe9246bc00d3
