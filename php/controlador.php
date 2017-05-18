@@ -42,4 +42,32 @@ function aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $ti
 function autenticar($usuario, $pass) {
    return autenticarUsuario($usuario, $pass);
 }
+
+function obtener_gustos_musicales($usuario) {
+   return obtenerGustosMusicales($usuario);
+}
+
+function obtener_informacion_usuario($usuario) {
+   return obtenerInformacionUsuario($usuario);
+}
+
+function obtener_descripcion_usuario($usuario) {
+   return obtenerDescripcionUsuario($usuario);
+}
+
+function obtener_seguidores($usuario) {
+   return obtenerSeguidores($usuario);
+}
+
+function obtener_seguidos($usuario) {
+   return obtenerSeguidos($usuario);
+}
+
+function obtener_canciones_usuario($usuario) {
+   return obtenerCancionesUsuario($usuario);
+}
+
+function sigue_a($seguidor, $seguido) {
+   return sigueA($seguidor, $seguido);
+}
 ?>

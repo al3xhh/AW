@@ -95,12 +95,14 @@ function existeCorreo($correo) {
 function registraUsuario($usuario, $correo, $contrasenya) {
    $mysqli = conectar();
    $ret = True;
+   $foto = "FotoUsuarioPorDefecto.png";
+   $encabezado = "EncabezadoPorDefecto.png";
 
    errorMysql($mysqli);
 
-   $sql = "INSERT INTO usuarios(email, nombreusuario, contrasenya) VALUES (?, ?, ?)";
+   $sql = "INSERT INTO usuarios(email, nombreusuario, contrasenya, foto, encabezado) VALUES (?, ?, ?, ?, ?)";
    $stmt = $mysqli->prepare($sql);
-   $stmt->bind_param("sss", $correo, $usuario, $contrasenya);
+   $stmt->bind_param("sssss", $correo, $usuario, $contrasenya, $foto, $encabezado);
 
    if (!$stmt->execute()) {
       printf("Errormessage: %s\n", $mysqli->error);
@@ -244,6 +246,218 @@ function tusTopSocial($usuario) {
 
    return $array;
 }
+
+//Función que obtiene los gustos musicales del usuario.
+function obtenerGustosMusicales($usuario) {
+   $mysqli = conectar();
+   $array = array();
+
+   errorMysql($mysqli);
+
+   $sql = "SELECT genero
+            FROM gustos
+            WHERE usuario = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   $stmt->bind_result($col1);
+
+   while ($stmt->fetch()){
+      $row = array("genero" => $col1);
+      array_push($array, $row);
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+}
+
+//Función que obtiene la foto, el encabezado y la descripción del usuario
+function obtenerInformacionUsuario($usuario) {
+   $mysqli = conectar();
+   $array = array();
+
+   errorMysql($mysqli);
+
+   $sql = "SELECT nombreusuario, foto, encabezado
+            FROM usuarios
+            WHERE nombreusuario = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   obtenerArray($stmt, $array, "nombreusuario", "foto", "encabezado");
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+}
+
+//Función que obtiene la descripción del usuario
+function obtenerDescripcionUsuario($usuario) {
+   $mysqli = conectar();
+
+   errorMysql($mysqli);
+
+   $sql = "SELECT descripcion
+            FROM usuarios
+            WHERE nombreusuario = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   $stmt->bind_result($col1);
+   $stmt->fetch();
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $col1;
+}
+
+//Función que obtiene los seguidores del usuario
+function obtenerSeguidores($usuario) {
+   $mysqli = conectar();
+   $array = array();
+
+   errorMysql($mysqli);
+
+   $sql = "SELECT seguidor, foto
+            FROM sigue
+            JOIN usuarios ON nombreusuario = seguidor
+            WHERE seguido = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   $stmt->bind_result($col1, $col2);
+
+   while ($stmt->fetch()){
+      $row = array("seguidor" => $col1,
+                   "foto" => $col2);
+      array_push($array, $row);
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+}
+
+//Función que obtiene los seguidos del usuario
+function obtenerSeguidos($usuario) {
+   $mysqli = conectar();
+   $array = array();
+
+   errorMysql($mysqli);
+
+   $sql = "SELECT seguido, foto
+            FROM sigue
+            JOIN usuarios ON nombreusuario = seguido
+            WHERE seguidor = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   $stmt->bind_result($col1, $col2);
+
+   while ($stmt->fetch()){
+      $row = array("seguido" => $col1,
+                   "foto" => $col2);
+      array_push($array, $row);
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+}
+
+//Función para obtener las canciones subidas por el usuario
+function obtenerCancionesUsuario($usuario) {
+   $mysqli = conectar();
+   $array = array();
+
+   errorMysql($mysqli);
+
+   $sql = "SELECT titulo, caratula
+            FROM cancion
+            WHERE autor = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   $stmt->bind_result($col1, $col2);
+
+   while ($stmt->fetch()){
+      $row = array("titulo" => $col1,
+                   "caratula" => $col2);
+      array_push($array, $row);
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+}
+
+//Función que indica si un usuario sigue a otro
+function sigueA($seguidor, $seguido) {
+   $mysqli = conectar();
+   $ret = False;
+
+   errorMysql($mysqli);
+
+   $sql = "SELECT seguido
+            FROM sigue
+            WHERE seguidor = ? AND seguido = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $seguidor, $seguido);
+
+   if (!$stmt->execute()) {
+      printf("Errormessage: %s\n", $mysqli->error);
+   }
+
+   $resultado = $stmt->get_result();
+
+   if ($resultado->num_rows > 0) {
+      $ret = True;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
+}
+
 function getInfoCancion($titulo){
    $mysqli = new mysqli('127.0.0.1', 'root', '', 'WebMusic');
    $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo FROM cancion WHERE titulo = ?");
