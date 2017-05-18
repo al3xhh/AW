@@ -6,8 +6,8 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
    while ($stmt->fetch()){
       $row = array($col1_n => $col1,
-                    $col2_n => $col2,
-                    $col3_n => $col3);
+                   $col2_n => $col2,
+                   $col3_n => $col3);
       array_push($array, $row);
    }
 }
@@ -125,12 +125,12 @@ function tusNovedades($usuario) {
    errorMysql($mysqli);
 
    $sql = "SELECT titulo, autor, date(fecha)
-            FROM cancion
-            JOIN premium ON usuario = autor
-            JOIN sigue ON seguido = autor
-            WHERE seguidor = ? AND fechacaducidad > ?
-            ORDER BY fecha DESC
-            LIMIT 6";
+   FROM cancion
+   JOIN premium ON usuario = autor
+   JOIN sigue ON seguido = autor
+   WHERE seguidor = ? AND fechacaducidad > ?
+   ORDER BY fecha DESC
+   LIMIT 6";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $usuario, $hoy);
@@ -142,13 +142,13 @@ function tusNovedades($usuario) {
    obtenerArray($stmt, $array, "titulo", "autor", "fecha");
 
    $sql = "SELECT titulo, autor, date(fecha)
-            FROM cancion
-            JOIN sigue ON seguido = autor
-            WHERE seguidor = ? AND autor NOT IN (SELECT usuario
-                                                FROM premium
-                                                WHERE usuario = autor)
-            ORDER BY fecha DESC
-            LIMIT 4";
+   FROM cancion
+   JOIN sigue ON seguido = autor
+   WHERE seguidor = ? AND autor NOT IN (SELECT usuario
+      FROM premium
+      WHERE usuario = autor)
+      ORDER BY fecha DESC
+      LIMIT 4";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -174,12 +174,12 @@ function tusTop($usuario) {
    errorMysql($mysqli);
 
    $sql = "SELECT titulo, autor, numeroreproducciones
-            FROM cancion
-            JOIN premium ON usuario = autor
-            JOIN gustos ON cancion.genero = gustos.genero
-            WHERE gustos.usuario = ? AND fechacaducidad > ?
-            ORDER BY numeroreproducciones DESC
-            LIMIT 6";
+      FROM cancion
+      JOIN premium ON usuario = autor
+      JOIN gustos ON cancion.genero = gustos.genero
+      WHERE gustos.usuario = ? AND fechacaducidad > ?
+      ORDER BY numeroreproducciones DESC
+      LIMIT 6";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $usuario, $hoy);
@@ -191,13 +191,13 @@ function tusTop($usuario) {
    obtenerArray($stmt, $array, "titulo", "autor", "numeroreproducciones");
 
    $sql = "SELECT titulo, autor, numeroreproducciones
-            FROM cancion
-            JOIN gustos ON cancion.genero = gustos.genero
-            WHERE gustos.usuario = ? AND autor NOT IN (SELECT usuario
-                                                FROM premium
-                                                WHERE usuario = autor)
-            ORDER BY numeroreproducciones DESC
-            LIMIT 4";
+      FROM cancion
+      JOIN gustos ON cancion.genero = gustos.genero
+      WHERE gustos.usuario = ? AND autor NOT IN (SELECT usuario
+         FROM premium
+         WHERE usuario = autor)
+         ORDER BY numeroreproducciones DESC
+         LIMIT 4";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -222,11 +222,11 @@ function tusTopSocial($usuario) {
    errorMysql($mysqli);
 
    $sql = "SELECT cancion.titulo, reproducciones.usuario, reproducciones.fecha
-            FROM cancion
-            JOIN reproducciones ON cancion.id = reproducciones.cancion
-            WHERE reproducciones.usuario IN (SELECT seguido
-                                             FROM sigue
-                                             WHERE seguidor = ?)
+         FROM cancion
+         JOIN reproducciones ON cancion.id = reproducciones.cancion
+         WHERE reproducciones.usuario IN (SELECT seguido
+            FROM sigue
+            WHERE seguidor = ?)
             ORDER BY reproducciones.fecha ASC
             LIMIT 10";
 
@@ -243,5 +243,26 @@ function tusTopSocial($usuario) {
    $mysqli->close();
 
    return $array;
+}
+
+function getInfoCancion($titulo){
+   $mysqli = new mysqli('127.0.0.1', 'root', '', 'WebMusic');
+   $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo FROM cancion WHERE titulo = ?");
+   $stmt->bind_param("s", $titulo);
+   $stmt->execute();
+   $stmt->bind_result($col1, $col2, $col3, $col4);
+   $stmt->fetch();
+   $ret = array("autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4);
+
+   $mysqli->close();
+
+   return $ret;
+}
+
+function aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium){
+   $stmt = $mysqli->prepare("INSERT INTO premium VALUES (?, ?, ?, ?, ?, ?, ?)");
+   $stmt->bind_param("sssssss", $usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium);
+   $stmt->execute();
+   $stmt->close();
 }
 ?>
