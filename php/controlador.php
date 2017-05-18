@@ -1,27 +1,21 @@
 <?php
-  require_once("modelo.php");
 
-  function existe_usuario() {
-    return existeUsuario();
-  }
+require('modelo.php');
 
-  function existe_correo() {
-    return existeCorreo();
-  }
+//TESTEAR DATOS
+function testear($dato){
+    return testearDato($dato);
+}
+//FIN TESTEAR DATOS
 
-  function registra_usuario() {
-    return registraUsuario();
-  }
+//SELECT
+//para registro
+function buscar($usuario){
+    return buscarUsuario($usuario);
+}
 
-  function tus_novedades() {
-    return tusNovedades();
-  }
-
-  function tus_top() {
-    return tusTop();
-  }
-
-  function tus_top_social() {
-    return tusTopSocial();
-  }
- ?>
+//para inicio de sesion
+function autenticar($usuario, $pass){
+    return autenticarUsuario($usuario, $pass);
+}
+?>

@@ -123,3 +123,21 @@ function validarRegistro() {
         return true;
     }
 }
+
+#(document).ready( function(){
+    $("#ID_Usuario").bind("change", function () {
+        validarUsuario();
+    });
+    $("#ID_Correo").bind("change", function () {
+        validarCorreo();
+    });
+    $("#ID_Pass").bind("change", function () {
+        validarContrasenya();
+    });
+    $("#ID_Pass1").bind("change", function () {
+        validarReContrasenya();
+    });
+    $("#ID_Formulario").bind("submit", function () {
+        validarRegistro(event);
+    });
+});

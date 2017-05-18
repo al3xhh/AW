@@ -24,6 +24,18 @@ function validarUsuario() {
         return false;
 	}
 	else {
+        //document.getElementById("ID_Error_Usuario").style.display = "none";
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200) {
+                if(this.responseText != ""){
+                    document.getElementById("ID_Error_Usuario").style.display = "block";
+                    document.getElementById("ID_Error_Usuario").innerHTML = this.responseText;
+                }
+            }
+        };
+        xmlhttp.open("GET", "../php/login_usuario.php?usuario="+usuario_val, true);
+        xmlhttp.send();
         document.getElementById("ID_Error_Usuario").style.display = "none";
         return true;
     }
@@ -77,14 +89,31 @@ function validarSuma() {
 }
 
 //Función que comprueba todos los datos
-function validarLogin() {
+function validarLogin(event) {
     "use strict";
     
     var ret = (validarUsuario() & validarContrasenya() & validarSuma());
     
     if (ret === 0) {
+        //esto hace que no haga submit el formulario
+        event.preventDefault();
         return false;
     } else {
         return true;
     }
 }
+
+$( document ).ready(function() {
+    $("#ID_Usuario").bind("change", function () {
+        validarUsuario();
+    });
+    $("#ID_Pass").bind("change", function () {
+        validarContrasenya();
+    });
+    $("#ID_Suma").bind("change", function () {
+        validarSuma();
+    });
+    $("form").bind("submit", function () {
+        validarLogin(event);
+    });
+});

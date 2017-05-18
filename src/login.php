@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
+    <?php
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            require_once('../php/controlador.php');
+            $usuario = testear($_POST["usuario"]);
+            $pass = testear($_POST["password"]);
+            if(autenticar($usuario, $pass)){
+               //session_start();
+               //$_SESSION['usuario']=$usuario;
+               header('Location: registro.php');
+            }
+        }                                           
+    ?>
         <noscript>
             <meta http-equiv="refresh" content="0; url=errorJS.html" />
         </noscript>
@@ -18,9 +29,6 @@
         <script src="../js/bootstrap.min.js"></script>
         <!-- Archivo con las funciones javascript que se encargan de validar el login-->
         <script src="../js/login.js"></script>
-        <!-- Java script necesario para que funcione el recaptcha de google-->
-        <script src='https://www.google.com/recaptcha/api.js'></script>
-        <script src="../js/general.js"></script>
     </head>
 
     <body>
@@ -49,7 +57,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Inicio de Sesion</div>
                             <div class="panel-body">
-                                <form action="home.html" method="post" onsubmit="return validarLogin()">
+                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                                     <div class="row">
                                         <div class="center-block">
                                             <img class="profile-img" src="../img/ImagenRegistroInterior.png" alt="Imagen Registro">
@@ -60,21 +68,24 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                    <input class="form-control" placeholder="Correo electrónico/Usuario *" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                                                    <input class="form-control" placeholder="Correo electrónico/Usuario *" id="ID_Usuario" type="text" name="usuario">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                    <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" onchange="validarContrasenya()">
+                                                    <input class="form-control" placeholder="Contraseña *" id="ID_Pass" type="password" name="password">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
+                                                <?php
+                                                   
+                                                ?>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
-                                                    <input class="form-control" placeholder="" id="ID_Suma" type="text" onchange="validarSuma()">
+                                                    <input class="form-control" placeholder="" id="ID_Suma" type="text">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Suma"></div>
                                             </div>
@@ -95,7 +106,7 @@
         </div>
 
         <!-- Container que contiene el footer de la página -->
-        <div class="footer-container">
+        <!--<div class="footer-container">
             <footer class="footer-bs" id="footer">
                 <div class="row">
                     <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
@@ -127,6 +138,6 @@
                     </div>
                 </div>
             </footer>
-        </div><!-- Fin container footer -->
+        </div>Fin container footer -->
     </body>
 </html>
