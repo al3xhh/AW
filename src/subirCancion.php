@@ -18,10 +18,16 @@
         <script src="../js/bootstrap.min.js"></script>
         <!-- Script para comprobar los datos de la subida de la cancion -->
         <script src="../js/subirCancion.js"></script>
-        <script src="../js/general.js"></script>
     </head>
 
     <body>
+    <?php
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $target_dir = "../songs/";
+            $target_file = $target_dir . basename($_FILES['cancion']);
+            move_uploaded_file($_FILES['cancion'], $target_file);
+        }
+    ?>
         <div id="container-principal">
             <!-- Barra superior de la página -->
             <nav  class="navbar navbar-inverse">
@@ -47,7 +53,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Subir Cancion</div>
                             <div class="panel-body">
-                                <form action="#" method="post" onsubmit="return validarFormCancion()">
+                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" onsubmit="return validarFormCancion()">
                                     <div class="row">
                                         <div class="center-block">
                                             <img class="profile-img" src="../img/ImagenNota.png" alt="Imagen Registro">
@@ -58,28 +64,28 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
-                                                    <input class="form-control" placeholder="Cancion *" id="ID_Cancion" type="text" onchange="validarCancion()">
+                                                    <input class="form-control" placeholder="Cancion *" id="ID_Cancion" type="text" name="nombreCancion" onchange="validarCancion()">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Cancion"></div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                    <input class="form-control" placeholder="Artista *" id="ID_Artista" type="text" onchange="validarArtista()">
+                                                    <input class="form-control" placeholder="Artista *" id="ID_Artista" type="text" name="artista" onchange="validarArtista()">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Artista"></div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                                                    <input class="form-control" id="ID_Imagen" type="file" onchange="validarImagen(this)">
+                                                    <input class="form-control" id="ID_Imagen" type="file" name="imagenCancion" onchange="validarImagen(this)">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Imagen"></div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-music"></i></span>
-                                                    <input class="form-control" id="ID_Archivo_Cancion" type="file" onchange="validarArchivoCancion(this)">
+                                                    <input class="form-control" id="ID_Archivo_Cancion" type="file" name="cancion" enctype="multipart/form-data" onchange="validarArchivoCancion()">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Archivo_Cancion"></div>
                                             </div>
@@ -100,7 +106,7 @@
         </div>
 
         <!-- Container que contiene el footer de la página -->
-        <div class="footer-container">
+        <!--<div class="footer-container">
             <footer class="footer-bs" id="footer">
                 <div class="row">
                     <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
@@ -132,6 +138,6 @@
                     </div>
                 </div>
             </footer>
-        </div><!-- Fin container footer -->
+        </div>-->
     </body>
 </html>
