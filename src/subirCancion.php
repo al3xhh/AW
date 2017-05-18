@@ -18,28 +18,16 @@
         <script src="../js/bootstrap.min.js"></script>
         <!-- Script para comprobar los datos de la subida de la cancion -->
         <script src="../js/subirCancion.js"></script>
-        <script src="../js/general.js"></script>
     </head>
 
     <body>
         <div id="container-principal">
-            <!-- Barra superior de la página -->
-            <nav  class="navbar navbar-inverse">
-                <a class="navbar-brand" href="../index.html">Webmusic</a>
-                <div class="navbar-header">
-                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbarCollapse" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> La pagina de la que vengas</a></li>
-                    </ul>
-                </div>
-            </nav><!-- Fin barra superior -->
+           <!-- Barra superior de la página -->
+           <?php
+             require_once("../php/navbar.php");
+             navbar();
+           ?>
+           <!-- Fin barra superior -->
 
             <div><!-- Container principal que contiene todos los campos de inicio de sesion -->
                 <div class="row">

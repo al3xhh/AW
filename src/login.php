@@ -10,7 +10,7 @@
                //$_SESSION['usuario']=$usuario;
                header('Location: registro.php');
             }
-        }                                           
+        }
     ?>
         <noscript>
             <meta http-equiv="refresh" content="0; url=errorJS.html" />
@@ -33,23 +33,12 @@
 
     <body>
         <div id="container-principal">
-            <!-- Barra superior de la página -->
-            <nav  class="navbar navbar-inverse">
-                <a class="navbar-brand" href="../index.html">Webmusic</a>
-                <div class="navbar-header">
-                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbarCollapse" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="registro.html"><span class="glyphicon glyphicon-log-in"></span>Registrase</a></li>
-                    </ul>
-                </div>
-            </nav><!-- Fin barra superior -->
+           <!-- Barra superior de la página -->
+           <?php
+             require_once("../php/navbar.php");
+             navbar();
+           ?>
+           <!-- Fin barra superior -->
 
             <div><!-- Container principal que contiene todos los campos de inicio de sesion -->
                 <div class="row">
@@ -79,7 +68,7 @@
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
                                                 <?php
-                                                   
+
                                                 ?>
                                             </div>
                                             <div class="form-group">

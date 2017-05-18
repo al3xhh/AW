@@ -16,35 +16,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/general.js"></script>
     </head>
     <body>
         <div id="container-principal">
-            <!-- Barra superior de la página -->
-            <nav class="navbar navbar-inverse">
-                <a class="navbar-brand" href="home.html">Webmusic</a>
-                <div class="navbar-header">
-                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbarCollapse" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
-                        <li><a href="miperfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-                        <li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            </nav>
+           <!-- Barra superior de la página -->
+           <?php
+             require_once("../php/navbar.php");
+             navbar();
+           ?>
+           <!-- Fin barra superior -->
 
             <!-- Barra de búsqueda -->
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
-                        <div id="imaginary_container"> 
+                        <div id="imaginary_container">
                             <div class="input-group stylish-input-group">
                                 <input type="text" class="form-control"  placeholder="Buscar" >
                                 <span class="input-group-addon">
@@ -66,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- /container fluid-->  
+            </div> <!-- /container fluid-->
 
             <div class="container">
                 <div class="col-sm-8">
@@ -93,17 +79,17 @@
                                 <div class="tab-pane active" id="tab_default_1">
 
                                     <p>
-                                        My daughter  is good looking, with pleasant personality, smart, well educated, from well cultural and  a religious family background. having respect in heart for others.  
-                                        would like to thanks you for visiting through my daughter;s profile. 
-                                        She has done PG in Human Resources after her graduation. 
+                                        My daughter  is good looking, with pleasant personality, smart, well educated, from well cultural and  a religious family background. having respect in heart for others.
+                                        would like to thanks you for visiting through my daughter;s profile.
+                                        She has done PG in Human Resources after her graduation.
                                         At present working IN INSURANCE sector as Manager Training .
                                     </p>
                                     <h4>About her Family</h4>
                                     <p>
-                                        About her family she belongs to a religious and a well cultural family background. 
-                                        Father - Retired from a Co-operate Bank as a Manager. 
-                                        Mother - she is a home maker. 
-                                        1 younger brother - works for Life Insurance n manages cluster. 
+                                        About her family she belongs to a religious and a well cultural family background.
+                                        Father - Retired from a Co-operate Bank as a Manager.
+                                        Mother - she is a home maker.
+                                        1 younger brother - works for Life Insurance n manages cluster.
                                     </p>
                                     <h4>Education </h4>
                                     <p>I have done PG in Human Resourses</p>

@@ -16,7 +16,6 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="../js/bootstrap.min.js"></script>
-      <script src="../js/general.js"></script>
       <script src="../js/reproductor.js"></script>
    </head>
    <body>
@@ -28,32 +27,19 @@
                <h4>Esta página requiere JavaScript para su correcto funcionamiento. Compruebe si JavaScript está deshabilitado en el navegador.</h4>
             </div>
          </noscript>
-         <!-- Barra de navegacion -->
-         <nav class="navbar navbar-inverse">
-            <a class="navbar-brand" href="../index.html">Webmusic</a>
-            <div class="navbar-header">
-               <img src="../img/Logo.png" width="50" height="50" alt="logo">
-               <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-               </button>
-            </div>
-            <div id="navbarCollapse" class="collapse navbar-collapse">
-               <ul class="nav navbar-nav navbar-right">
-                  <li><a href="registro.html"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
-                  <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
-               </ul>
-            </div>
-         </nav>
-         <!-- Fin barra de navegacion -->
+         <!-- Barra superior de la página -->
+         <?php
+           require_once("../php/navbar.php");
+           navbar();
+         ?>
+         <!-- Fin barra superior -->
 
          <div class="container-fluid">
             <!-- Barra de búsqueda -->
             <div class="container">
                <div class="row">
                   <div class="col-sm-6 col-sm-offset-3">
-                     <div id="imaginary_container"> 
+                     <div id="imaginary_container">
                         <div class="input-group stylish-input-group">
                            <input type="text" class="form-control"  placeholder="Buscar" >
                            <span class="input-group-addon">
@@ -71,7 +57,7 @@
                   <img src="../img/DiscoPortada.jpg" width="150" height="150" alt="Imagen usuario">
                </div>
                <div id="player-header-info">
-                  <?php 
+                  <?php
                   require_once("../php/controlador.php");
                   $info = info_cancion($_GET["titulo"]);
                   echo "<audio src=".$info["archivo"]." id='song'></audio>";

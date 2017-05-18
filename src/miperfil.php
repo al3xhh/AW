@@ -19,25 +19,16 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/miPerfil.js"></script>
-        <script src="../js/general.js"></script>
     </head>
     <body>
         <div id="container-principal">
 
-            <!-- BARRA DE NAVEGACION -->
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <img src="../img/Logo.png" width="50" height="50" alt="Logo">
-                    </div>
-                    <a class="navbar-brand" href="../index.html">Webmusic</a>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-upload"></span> Subir Cancion</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- FIN BARRA DE NAVEGACION -->
+           <!-- Barra superior de la página -->
+           <?php
+             require_once("../php/navbar.php");
+             navbar();
+           ?>
+           <!-- Fin barra superior -->
 
             <!-- Barra de búsqueda -->
             <div class="container">

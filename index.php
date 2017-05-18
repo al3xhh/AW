@@ -16,33 +16,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/general.js"></script>
     </head>
     <body>
         <div id="container-principal">
-            <nav class="navbar navbar-inverse">
-                <a class="navbar-brand" href="index.html">Webmusic</a>
-                <div class="navbar-header">
-                    <a href="index.html" ><img src="img/Logo.png" width="50" height="50" alt="logo"></a>
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbarCollapse" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="src/registro.php"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
-                        <li><a href="src/login.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
-                    </ul>
-                </div>
-            </nav>
+           <!-- Barra superior de la página -->
+           <?php
+             require_once("php/navbar.php");
+             navbar();
+           ?>
+           <!-- Fin barra superior -->
 
             <!-- Barra de búsqueda -->
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
-                        <div id="imaginary_container"> 
+                        <div id="imaginary_container">
                             <div class="input-group stylish-input-group">
                                 <input type="text" class="form-control"  placeholder="Buscar" >
                                 <span class="input-group-addon">
@@ -68,7 +56,7 @@
                     <div class="item slides active">
                         <div class="slide-1"></div>
                         <div class="hero">
-                            <h1>Bienvenido</h1>        
+                            <h1>Bienvenido</h1>
                             <h3>Descrube y comparte toda tu música</h3>
                         </div>
                     </div>
@@ -76,21 +64,21 @@
                         <div class="slide-2"></div>
                         <div class="hero">
                             <a href="src/premium.html" class="link-index-carousel">
-                                <h1>Hazte premium</h1>        
-                                <h3>Descubre todas sus ventajas pinchando aquí</h3>      
+                                <h1>Hazte premium</h1>
+                                <h3>Descubre todas sus ventajas pinchando aquí</h3>
                             </a>
                         </div>
                     </div>
                     <div class="item slides">
                         <div class="slide-3"></div>
-                        <div class="hero">  
+                        <div class="hero">
                             <a href="src/registro.html" class="link-index-carousel">
-                                <h1>Únete</h1>        
+                                <h1>Únete</h1>
                                 <h3>Registrate gratis y empieza a disfrutar</h3>
                             </a>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
 
             <div class="container">

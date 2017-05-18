@@ -17,29 +17,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/general.js"></script>
     </head>
     <body>
         <div id="container-principal">
-            <!-- Barra superior de la página -->
-            <nav class="navbar navbar-inverse">
-                <a class="navbar-brand" href="home.html">Webmusic</a>
-                <div class="navbar-header">
-                    <img src="../img/Logo.png" width="50" height="50" alt="logo">
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbarCollapse" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
-                        <li><a href="miperfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-                        <li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            </nav><!-- Fin barra superior -->
+           <!-- Barra superior de la página -->
+           <?php
+             require_once("../php/navbar.php");
+             navbar();
+           ?>
+           <!-- Fin barra superior -->
 
             <!--Este contenedor se usa para ver las siguientes categorias en las que separamos las listas de reproduccion-->
             <div class="container-fluid">
@@ -48,7 +34,7 @@
                     <div class="col-md-2 col-md-push-2">Nombre</div>
                     <div class="col-md-2 col-md-push-2">Fecha de creacion</div>
                     <div class="col-md-2 col-md-push-2">Numero de canciones</div>
-                </div>	
+                </div>
             </div>
 
             <!--Contenedo que tiene una lista de reproduccion con sus caracteristicas-->
@@ -111,17 +97,17 @@
                 <div class="separar-filas">
                     <div class="col-md-3 col-md-push-2">
                         <div class="input-group stylish-input-group">
-                            ¿Quieres crear una lista nueva? 
+                            ¿Quieres crear una lista nueva?
                         </div>
                     </div>
                     <div class="col-md-2 col-md-push-1">
                         <div class="input-group stylish-input-group">
                             <input type="text" class="forma-buscar"  placeholder="Nombre de la lista" >
-                        </div> 
+                        </div>
                     </div>
                     <div class="col-md-1 col-md-push-1">
                         <button type="submit">Crear
-                        </button>  
+                        </button>
                     </div>
                 </div>
             </div>

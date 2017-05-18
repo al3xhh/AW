@@ -15,7 +15,7 @@
         <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <?PHP
+        <?php
           session_start();
           //TODO eliminar esto, está forzado para hacer pruebas.
           $_SESSION['usuario'] = 'alex';
@@ -24,26 +24,11 @@
 
         <div id="container-principal">
             <!-- Barra superior de la página -->
-            <nav class="navbar navbar-inverse">
-                <a class="navbar-brand" href="home.php">Webmusic</a>
-                <div class="navbar-header">
-                    <a href="home.php"><img src="../img/Logo.png" width="50" height="50" alt="logo"></a>
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbarCollapse" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="listas-reproduccion.html"><span class="glyphicon glyphicon-music"></span> Lista reproducción</a></li>
-                        <li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>
-                        <li><a href="miperfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
-                        <li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            </nav><!-- Fin barra superior -->
+            <?php
+               require_once("../php/navbar.php");
+               navbar();
+            ?>
+            <!-- Fin barra superior -->
 
             <!-- Barra de búsqueda -->
             <div class="container">
@@ -96,8 +81,8 @@
                                               <blockquote>
                                                   <div class="row">
                                                       <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.html?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
-                                                      <a href="usuario.html?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
+                                                      <a href="reproductor.php?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                      <a href="usuario.php?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
                                                       <h5 class="col-md-3">'.$fila["fecha"].'</h5>
                                                   </div>
                                               </blockquote>
@@ -137,8 +122,8 @@
                                               <blockquote>
                                                   <div class="row">
                                                       <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.html?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
-                                                      <a href="usuario.html?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
+                                                      <a href="reproductor.php?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                      <a href="usuario.php?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
                                                       <h5 class="col-md-3">'.$fila["numeroreproducciones"].'</h5>
                                                   </div>
                                               </blockquote>
@@ -181,8 +166,8 @@
                                               <blockquote>
                                                   <div class="row">
                                                         <h5 class="col-md-3">'.$i.'</h5>
-                                                        <a href="reproductor.html?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
-                                                        <a href="usuario.html?usuario='.$fila["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["usuario"].'</h5></a>
+                                                        <a href="reproductor.php?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                        <a href="usuario.php?usuario='.$fila["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["usuario"].'</h5></a>
                                                         <h5 class="col-md-3">'.$tiempo.'</h5>
                                                   </div>
                                               </blockquote>

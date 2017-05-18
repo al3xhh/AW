@@ -40,7 +40,7 @@
                                   validar_entrada($_POST["correo"]),
                                   hash('sha256', validar_entrada($_POST["contrasenya"])))) {
                 if(isset($_POST['premium'])) {
-                   header("Location: ../src/premium.html");
+                   header("Location: ../src/premium.php");
                 } else {
                    header("Location: ../src/home.php");
                 }
@@ -49,22 +49,11 @@
           }
         ?>
         <!-- Barra superior de la página -->
-        <nav  class="navbar navbar-inverse">
-            <a class="navbar-brand" href="../index.html">Webmusic</a>
-            <div class="navbar-header">
-                <img src="../img/Logo.png" width="50" height="50" alt="logo">
-                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div id="navbarCollapse" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
-                </ul>
-            </div>
-        </nav><!-- Fin barra superior -->
+        <?php
+          require_once("../php/navbar.php");
+          navbar();
+        ?>
+        <!-- Fin barra superior -->
 
         <div id="container-principal"><!-- Container principal que contiene todo el registro -->
             <div class="row">
