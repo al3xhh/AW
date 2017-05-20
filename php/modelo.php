@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   return new mysqli('127.0.0.1', 'root', '', 'WebMusic');
 }
 
 //Función para limpiar la entrada de cualquier caracter raro.
@@ -459,7 +459,7 @@ function sigueA($seguidor, $seguido) {
 }
 
 function getInfoCancion($titulo){
-   $mysqli = new mysqli('127.0.0.1', 'root', '', 'WebMusic');
+   $mysqli = conectar();
    $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo FROM cancion WHERE titulo = ?");
    $stmt->bind_param("s", $titulo);
    $stmt->execute();
@@ -479,31 +479,20 @@ function aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $tit
    $stmt->close();
 }
 
-function conectarBBDD(){
-   $db = new mysqli("localhost", "root", "joseubuntu", "webmusic");
-
-   if(!$db->connect_error){
-      return $db;
-   }
-   return NULL;
-}
-
-function desconectarBBDD($conexion){
-   $conexion->close();
-}
-
 function autenticarUsuario($usuario, $pass){
 
-   $con = conectarBBDD();
+   $con = conectar();
    if($con != NULL){
 
       $sql = "SELECT nombreusuario, contrasenya FROM usuarios where nombreusuario = '$usuario'AND contrasenya = '$pass'";
 
       $result = $con->query($sql);
       if($result->num_rows > 0){
-         return true;
+         $con->close();
+		 return true;
       }
       else{
+		  $con->close();
          return false;
       }
    }
