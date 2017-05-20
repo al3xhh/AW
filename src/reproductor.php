@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start() ?>
 <html lang="es">
    <head>
       <meta charset="utf-8">
@@ -19,7 +20,7 @@
       <script src="../js/reproductor.js"></script>
    </head>
    <body>
-      <?php if(isset($_GET["titulo"])) : ?>
+      <?php if(isset($_GET["titulo"]) && isset($_GET["usuario"])) : ?>
       <div id="container-principal">
          <!-- En caso de que no haya JavaScript avisamos al usuario de que la pagina podria ir mal pero no redirigimos a error ya que no podrian introducir datos maliciosos por falta de validaciones -->
          <noscript>
@@ -29,8 +30,8 @@
          </noscript>
          <!-- Barra superior de la página -->
          <?php
-           require_once("../php/navbar.php");
-           navbar();
+         require_once("../php/navbar.php");
+         navbar();
          ?>
          <!-- Fin barra superior -->
 
@@ -59,20 +60,32 @@
                <div id="player-header-info">
                   <?php
                   require_once("../php/controlador.php");
-                  $info = info_cancion($_GET["titulo"]);
-                  echo "<audio src=".$info["archivo"]." id='song'></audio>";
+                  $info = info_cancion_reproductor($_GET["titulo"], $_GET["usuario"]);
+                  echo "<audio src=../songs/".$info["archivo"]." id='song'></audio>";
                   echo "<p>".$_GET["titulo"]."</p>\n";
                   echo "<p>".$info["autor"]."</p>";
-                  echo "<p>Nº reproducciones: ".$info["nreproducciones"]."</p>"
+                  echo "<p>Nº reproducciones: ".$info["nreproducciones"]."</p>";
                   ?>
-                  <div class="dropdown">
-                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista <span class="caret"></span></button>
-                     <ul class="dropdown-menu">
-                        <li><a href="#">Lista 1</a></li>
-                        <li><a href="#">Lista 2</a></li>
-                        <li><a href="#">Lista 3</a></li>
-                     </ul>
+
+                  <?php if(isset($_SESSION["usuario"])) : ?>
+
+                  <div class="form-group">
+                     <label for="selList">Añadir a lista:</label>
+                     <form action="addGusto.php" method="POST" id="addList-form">
+                        <div class="col-md-12">
+                           <select id="selList" class="form-control" form="addList-form" name="genero" type="submit">
+                              <?php
+                              $listas = obtener_listas_reproduccion_usuario($_SESSION["usuario"]);
+
+                              foreach($listas as $lista)
+                                 echo "<option>".$lista."</option>";
+
+                              ?>
+                           </select>
+                        </div>
+                     </form>
                   </div>
+                  <?php endif; ?>
                </div>
             </div>
 
@@ -109,7 +122,7 @@
             </div>
 
             <h3 id="comment-title" class="col-md-10 col-md-push-2">Comentarios</h3>
-
+            <?php if(isset($_SESSION["usuario"])) : ?>
             <div class="comment-content col-xs-12 col-md-8 col-md-push-2">
                <div class="row">
                   <div class="panel panel-primary">
@@ -128,23 +141,35 @@
                   </div>
                </div>
             </div>
+            <?php endif; ?>
+            <?php
+            $comentarios = obtener_info_comentarios_cancion($_GET["titulo"], $_GET["usuario"]); 
 
-            <div class="comment-content col-md-8 col-md-push-2 col-xs-12">
-               <div class="row">
-                  <div class="panel panel-primary">
-                     <div class="panel-heading comment-heading">
-                        <img src="../img/FotoPerfil.jpg" class="img-circle img-responsive comment-img" alt="user profile image">
-                        <div>
-                           <h4>Nombre usuario</h4>
-                           <h6>hace 1 minuto</h6>
+            foreach($comentarios as $comentario){
+               echo "<div class='comment-content col-md-8 col-md-push-2 col-xs-12'>
+                        <div class='row'>
+                           <div class='panel panel-primary'>
+                              <div class='panel-heading comment-heading'>";
+               if ($comentario["foto"])
+                  echo "         <img src='../img/".$comentario["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
+               else
+                  echo "         <img src='../img/FotoPerfil.jpg' class='img-circle img-responsive comment-img' alt='user profile image'>";
+               
+               echo "            <div>
+                                    <h4>".$comentario["usuario"]."</h4>
+                                    <h6>".$comentario["fecha"]."</h6>
+                                 </div>
+                              </div>
+                              <div class='panel-body'>
+                                 <p>".$comentario["texto"]."</p>
+                              </div>
+                           </div>
                         </div>
-                     </div>
-                     <div class="panel-body">
-                        <p>Esta página es la mejor!</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
+                     </div>";
+            }
+
+            ?>
+
          </div>
       </div>
 

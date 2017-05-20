@@ -458,29 +458,31 @@ function sigueA($seguidor, $seguido) {
    return $ret;
 }
 
-function getInfoCancion($titulo){
-   $mysqli = new mysqli('127.0.0.1', 'root', '', 'WebMusic');
-   $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo FROM cancion WHERE titulo = ?");
-   $stmt->bind_param("s", $titulo);
+function getInfoCancion($titulo, $autor){
+   $mysqli = conectarBBDD();
+   $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo FROM cancion WHERE titulo = ? AND autor = ?");
+   $stmt->bind_param("ss", $titulo, $autor);
    $stmt->execute();
    $stmt->bind_result($col1, $col2, $col3, $col4);
    $stmt->fetch();
    $ret = array("autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4);
 
-   $mysqli->close();
+   desconectarBBDD($mysqli);
 
    return $ret;
 }
 
 function aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium){
+   $mysqli = conectarBBDD();
    $stmt = $mysqli->prepare("INSERT INTO premium VALUES (?, ?, ?, ?, ?, ?, ?)");
    $stmt->bind_param("sssssss", $usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium);
    $stmt->execute();
    $stmt->close();
+   desconectarBBDD($mysqli);
 }
 
 function conectarBBDD(){
-   $db = new mysqli("localhost", "root", "joseubuntu", "webmusic");
+   $db = new mysqli('127.0.0.1', 'root', '', 'WebMusic');
 
    if(!$db->connect_error){
       return $db;
@@ -508,4 +510,80 @@ function autenticarUsuario($usuario, $pass){
       }
    }
 }
+
+function aumentarReproducciones($titulo, $autor){
+   $mysqli = conectarBBDD();
+   //cogemos el numero de reproducciones
+   $stmt = $mysqli->prepare("SELECT numeroreproducciones FROM cancion WHERE titulo = ? AND autor = ?");
+   $stmt->bind_param("ss", $titulo, $autor);
+   $stmt->execute();
+   $stmt->bind_result($n_reproducciones);
+   $stmt->fetch();
+   $n_reproducciones += 1;
+   $stmt->close();
+   //actualizamos el numero de reproducciones
+   $stmt2 = $mysqli->prepare("UPDATE cancion SET numeroreproducciones = ? WHERE titulo = ? AND autor = ?");
+   $stmt2->bind_param("iss", $n_reproducciones, $titulo, $autor);
+   $stmt2->execute();
+   $stmt2->close();
+
+   desconectarBBDD($mysqli);
+
+}
+
+function obtenerListasReproduccionUsuario($usuario){
+   $mysqli = conectarBBDD();
+   //cogemos el numero de reproducciones
+   $stmt = $mysqli->prepare("SELECT nombre FROM listareproduccion WHERE usuario = ?");
+   $stmt->bind_param("", $usuario);
+   $stmt->execute();
+   $stmt->bind_result($listas);
+   $array = array();
+
+   while($stmt->fetch())
+      array_push($array, $listas);
+
+
+   $stmt->close();
+
+   desconectarBBDD($mysqli);
+
+   return $array;
+}
+
+function obtenerComentariosCancion($cancion, $usuario){
+   $mysqli = conectarBBDD();
+   //cogemos el numero de reproducciones
+   $stmt = $mysqli->prepare("SELECT texto, fecha, usuario FROM comentario WHERE cancion = (SELECT id FROM cancion WHERE titulo = ? AND autor = ?)");
+   $stmt->bind_param("ss",$cancion, $usuario);
+   $stmt->execute();
+   $stmt->bind_result($col1, $col2, $col3);
+   $array = array();
+
+   while($stmt->fetch()){
+      $row = array("texto" => $col1, "fecha" => $col2, "usuario" => $col3);
+      array_push($array, $row);
+   }
+
+   $stmt->close();
+
+   desconectarBBDD($mysqli);
+
+   return $array;
+}
+
+function obtenerImagenUsuario($usuario){
+   $mysqli = conectarBBDD();
+   //cogemos el numero de reproducciones
+   $stmt = $mysqli->prepare("SELECT foto FROM usuario WHERE nombreusuario = ?");
+   $stmt->bind_param("s", $usuario);
+   $stmt->execute();
+   $stmt->bind_result($fotousuario);
+   $stmt->close();
+
+   desconectarBBDD($mysqli);
+
+   return $fotousuario;
+}
+
 ?>
