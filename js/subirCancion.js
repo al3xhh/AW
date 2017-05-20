@@ -66,13 +66,12 @@ ID_Error_Imagen
     }
 }
 
-function validarArchivoCancion(cancion){
+function validarArchivoCancion(){
     "use strict";
-
+    var cancion = document.getElementById("ID_Archivo_Cancion");
     if(cancion != null){
-
-        var uploadCancion = cancion.files[0];
-        if(!(/\.(mp3|mp4|wav)$/i).test(uploadCancion.name)){
+        var uploadCancion = cancion.value;
+        if(!(/\.(mp3|mp4|wav)$/i).test(uploadCancion)){
             document.getElementById("ID_Error_Archivo_Cancion").style.display = "block";
             document.getElementById("ID_Error_Archivo_Cancion").innerHTML = "La extension de la cancion no se soporta. Solo mp3, mp4 y wav";
             return false;
