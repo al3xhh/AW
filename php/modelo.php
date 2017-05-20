@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'root', '', 'WebMusic');
+   return new mysqli('127.0.0.1', 'root', 'joseubuntu', 'WebMusic');
 }
 
 //Función para limpiar la entrada de cualquier caracter raro.
