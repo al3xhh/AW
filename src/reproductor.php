@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<?php session_start() ?>
 <html lang="es">
    <head>
       <meta charset="utf-8">
@@ -55,15 +54,22 @@
             <!-- Cabecera del reproductor-->
             <div id="player-header" class="col-md-10 col-md-push-2">
                <div>
-                  <img src="../img/DiscoPortada.jpg" width="150" height="150" alt="Imagen usuario">
-               </div>
-               <div id="player-header-info">
                   <?php
                   require_once("../php/controlador.php");
                   $info = info_cancion_reproductor($_GET["titulo"], $_GET["usuario"]);
+
+                  if ($info["caratula"])
+                     echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
+                  else
+                     echo "<img src='../img/CaratulaPorDefecto.jpg' width='150' height='150' alt='Imagen usuario'>";
+                  ?>
+
+               </div>
+               <div id="player-header-info">
+                  <?php
                   echo "<audio src=../songs/".$info["archivo"]." id='song'></audio>";
-                  echo "<p>".$_GET["titulo"]."</p>\n";
-                  echo "<p>".$info["autor"]."</p>";
+                  echo "<p id='nombre_cancion'>".$_GET["titulo"]."</p>\n";
+                  echo "<p id='autor'>".$info["autor"]."</p>";
                   echo "<p>Nº reproducciones: ".$info["nreproducciones"]."</p>";
                   ?>
 
@@ -127,49 +133,47 @@
                <div class="row">
                   <div class="panel panel-primary">
                      <div class="panel-heading comment-heading">
-                        <img src="../img/FotoPerfil.jpg" class="img-circle img-responsive comment-img" alt="user profile image">
+                        <img src="../img/FotoUsuarioPorDefecto.png" class="img-circle img-responsive comment-img" alt="user profile image">
                         <div>
-                           <h4>Nombre usuario</h4>
+                           <h4 id="nombre_usuario"><?php echo $_SESSION["usuario"] ?></h4>
                         </div>
                      </div>
                      <div class="panel-body">
-                        <form action="#" id="comment-form">
-                           <textarea class="col-md-12 form-control" form="comment-form"></textarea>
-                           <input type="submit" id="comment-btn" value="Comentar" class="btn btn-primary pull-right">
-                        </form>
+                        <textarea id="texto" class="col-md-12 form-control" form="comment-form"></textarea>
+                        <button type="submit" id="comment-btn" class="btn btn-primary pull-right">Comentar</button>
                      </div>
                   </div>
                </div>
             </div>
             <?php endif; ?>
-            <?php
-            $comentarios = obtener_info_comentarios_cancion($_GET["titulo"], $_GET["usuario"]); 
+            <div id="comentarios">
+               <?php
+               $comentarios = obtener_info_comentarios_cancion($_GET["titulo"], $_GET["usuario"]);
+               foreach($comentarios as $comentario){
+                  echo "<div class='comment-content col-md-8 col-md-push-2 col-xs-12'>
+                           <div class='row'>
+                              <div class='panel panel-primary'>
+                                 <div class='panel-heading comment-heading'>";
+                  if ($comentario["foto"])
+                     echo "         <img src='../img/".$comentario["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
+                  else
+                     echo "         <img src='../img/FotoUsuarioPorDefecto.png' class='img-circle img-responsive comment-img' alt='user profile image'>";
 
-            foreach($comentarios as $comentario){
-               echo "<div class='comment-content col-md-8 col-md-push-2 col-xs-12'>
-                        <div class='row'>
-                           <div class='panel panel-primary'>
-                              <div class='panel-heading comment-heading'>";
-               if ($comentario["foto"])
-                  echo "         <img src='../img/".$comentario["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
-               else
-                  echo "         <img src='../img/FotoPerfil.jpg' class='img-circle img-responsive comment-img' alt='user profile image'>";
-               
-               echo "            <div>
-                                    <h4>".$comentario["usuario"]."</h4>
-                                    <h6>".$comentario["fecha"]."</h6>
+                  echo "            <div>
+                                       <h4>".$comentario["usuario"]."</h4>
+                                       <h6>".$comentario["fecha"]."</h6>
+                                    </div>
                                  </div>
-                              </div>
                               <div class='panel-body'>
                                  <p>".$comentario["texto"]."</p>
                               </div>
                            </div>
                         </div>
                      </div>";
-            }
+               }
 
-            ?>
-
+               ?>
+            </div>
          </div>
       </div>
 

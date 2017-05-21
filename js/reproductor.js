@@ -18,6 +18,15 @@ $(document).ready(function() {
       }
    });
 
+   $("#comment-btn").click(function() {
+      $.post("../php/enviar_comentario.php", {'texto' : $("#texto").val(), 'usuario' : $("#nombre_usuario").text(), 'cancion' : $("#nombre_cancion").text(), 'autor' : $("#autor").text()}, function(data){
+         $("#comentarios").html(data);
+         $("#texto").val("");
+      });
+      
+      return false;
+   });
+
 });
 
 
@@ -40,7 +49,7 @@ function activateBar(){
          $("#myBar").css("width", width + "%");
          if (width % 1 == 0)
             var time = aumentarTiempo($("#reproducido").text());
-            $("#reproducido").text(time);
+         $("#reproducido").text(time);
       }
    } 
 
@@ -50,14 +59,14 @@ function aumentarTiempo(tiempo){
    var tokens = tiempo.split(":"),
        minutos = parseInt(tokens[0]),
        segundos = parseInt(tokens[1]);
-   
+
    if (segundos + 1 == 60){
       minutos++;
       segundos = 0;
    }
    else 
       segundos++;
-   
+
    return minutos + ":" + segundos;
 }
 
@@ -75,3 +84,7 @@ function pauseSong() {
    "use strict";
    document.getElementById("song").pause();
 }
+
+
+
+

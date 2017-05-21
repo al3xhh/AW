@@ -68,8 +68,14 @@
       return obtenerCancionesUsuario($usuario);
    }
 
+
    function sigue_a($seguidor, $seguido) {
       return sigueA($seguidor, $seguido);
+   }
+
+   function obtener_info_comentarios_cancion($cancion, $usuario){
+
+      return obtenerInfoComentariosCancion($cancion, $usuario);
    }
 
 ?>
