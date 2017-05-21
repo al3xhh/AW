@@ -654,4 +654,23 @@ function obtenerIdCancion($titulo, $autor){
    return $id;
 }
 
+function aniadirCancionALista($cancion, $lista, $usuario){
+   //sacamos el id de la lista
+   $mysqli = conectarBBDD();
+   $stmt = $mysqli->prepare("SELECT id FROM listareproduccion WHERE usuario = ? AND nombre = ?");
+   $stmt->bind_param("ss", $usuario, $lista);
+   $stmt->execute();
+   $stmt->bind_result($lista);
+   $stmt->fetch();
+   $stmt->close();
+   
+   //insetamos la cancion en la lista
+   $stmt = $mysqli->prepare("INSERT INTO listareproduccioncancion VALUES (?, ?)");
+   $stmt->bind_param("ss", $lista, $cancion);
+   $stmt->execute();
+   $stmt->close();
+
+   desconectarBBDD($mysqli);
+}
+
 ?>
