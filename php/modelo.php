@@ -460,12 +460,12 @@ function sigueA($seguidor, $seguido) {
 
 function getInfoCancion($titulo, $autor){
    $mysqli = conectarBBDD();
-   $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo FROM cancion WHERE titulo = ? AND autor = ?");
+   $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo, caratula FROM cancion WHERE titulo = ? AND autor = ?");
    $stmt->bind_param("ss", $titulo, $autor);
    $stmt->execute();
-   $stmt->bind_result($col1, $col2, $col3, $col4);
+   $stmt->bind_result($col1, $col2, $col3, $col4, $col5);
    $stmt->fetch();
-   $ret = array("autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4);
+   $ret = array("autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4, "caratula" => $col5);
 
    desconectarBBDD($mysqli);
 
@@ -535,7 +535,7 @@ function obtenerListasReproduccionUsuario($usuario){
    $mysqli = conectarBBDD();
    //cogemos el numero de reproducciones
    $stmt = $mysqli->prepare("SELECT nombre FROM listareproduccion WHERE usuario = ?");
-   $stmt->bind_param("", $usuario);
+   $stmt->bind_param("s", $usuario);
    $stmt->execute();
    $stmt->bind_result($listas);
    $array = array();
@@ -551,17 +551,16 @@ function obtenerListasReproduccionUsuario($usuario){
    return $array;
 }
 
-function obtenerComentariosCancion($cancion, $usuario){
+function obtenerInfoComentariosCancion($cancion, $usuario){
    $mysqli = conectarBBDD();
-   //cogemos el numero de reproducciones
-   $stmt = $mysqli->prepare("SELECT texto, fecha, usuario FROM comentario WHERE cancion = (SELECT id FROM cancion WHERE titulo = ? AND autor = ?)");
+   $stmt = $mysqli->prepare("SELECT texto, fecha, usuario FROM comentario WHERE cancion = (SELECT id FROM cancion WHERE titulo = ? AND autor = ?) ORDER BY 2 DESC");
    $stmt->bind_param("ss",$cancion, $usuario);
    $stmt->execute();
    $stmt->bind_result($col1, $col2, $col3);
    $array = array();
 
    while($stmt->fetch()){
-      $row = array("texto" => $col1, "fecha" => $col2, "usuario" => $col3);
+      $row = array("texto" => $col1, "fecha" => $col2, "usuario" => $col3, "foto" => obtenerImagenUsuario($col3));
       array_push($array, $row);
    }
 
@@ -574,16 +573,39 @@ function obtenerComentariosCancion($cancion, $usuario){
 
 function obtenerImagenUsuario($usuario){
    $mysqli = conectarBBDD();
-   //cogemos el numero de reproducciones
-   $stmt = $mysqli->prepare("SELECT foto FROM usuario WHERE nombreusuario = ?");
+   $stmt = $mysqli->prepare("SELECT foto FROM usuarios WHERE nombreusuario = ?");
    $stmt->bind_param("s", $usuario);
    $stmt->execute();
    $stmt->bind_result($fotousuario);
+   $stmt->fetch();
    $stmt->close();
 
    desconectarBBDD($mysqli);
 
    return $fotousuario;
+}
+
+function aniadirComentario($cancion, $texto, $usuario){
+   $mysqli = conectarBBDD();
+   $stmt = $mysqli->prepare("INSERT INTO comentario (cancion, texto, usuario) VALUES (?, ?, ?)");
+   $stmt->bind_param("sss", $cancion, $texto, $usuario);
+   $stmt->execute();
+   $stmt->close();
+
+   desconectarBBDD($mysqli);
+}
+
+function obtenerIdCancion($titulo, $autor){
+   $mysqli = conectarBBDD();
+   $stmt = $mysqli->prepare("SELECT id FROM cancion WHERE titulo = ? AND autor = ?");
+   $stmt->bind_param("ss", $titulo, $autor);
+   $stmt->execute();
+   $stmt->bind_result($id);
+   $stmt->fetch();
+   $stmt->close();
+   desconectarBBDD($mysqli);
+
+   return $id;
 }
 
 ?>

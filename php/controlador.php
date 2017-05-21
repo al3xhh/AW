@@ -77,14 +77,8 @@ function obtener_listas_reproduccion_usuario($usuario){
 }
 
 function obtener_info_comentarios_cancion($cancion, $usuario){
-   $comentarios = obtenerComentariosCancion($cancion, $usuario);
-   
-   foreach ($comentarios as $comentario){
-      $foto = obtenerImagenUsuario($comentario["usuario"]);
-      $comentario["foto"] = $foto;
-   }
-   
-   return $comentarios;
+
+   return obtenerInfoComentariosCancion($cancion, $usuario);
 }
 
 ?>
