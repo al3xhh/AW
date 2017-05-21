@@ -63,7 +63,7 @@
                            <img class="fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" height=400>
                            <img class="fb-image-profile thumbnail" src="../img/'.$resultado[0]["foto"].'" alt="Profile image example">
                            <div class="fb-profile-text">
-                               <h1>'.$resultado[0]["nombreusuario"].'</h1>
+                               <h1 id="nombreusuario">'.$resultado[0]["nombreusuario"].'</h1>
                            </div>
                         <div class="fb-profile-text">';
                         if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($resultado[0]["nombreusuario"]))) {
@@ -100,9 +100,9 @@
                               echo '<p>'.$resultado.'</p>';
                            ?>
                         </div>
-                        <div class="tab-pane" id="tab_default_2" value="<?php echo validar_entrada($_GET['usuario']) ?>">
+                        <div class="tab-pane" id="tab_default_2">
                         </div>
-                        <div class="tab-pane" id="tab_default_3" value="<?php echo validar_entrada($_GET['usuario']) ?>">
+                        <div class="tab-pane" id="tab_default_3">
                         </div>
                         <div class="tab-pane" id="tab_default_4">
                            <?PHP
@@ -120,7 +120,7 @@
                                             <h3>'.$fila["titulo"].'</h3>
                                         </div>
                                         <div class="user-resume-button">
-                                           <a href="reproductor.php?titulo='.$fila["titulo"].'?usuario=';echo validar_entrada($_GET['usuario']); echo '"><button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button></a>
+                                           <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario=';echo validar_entrada($_GET['usuario']); echo '"><button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button></a>
                                         </div>
                                      </div>';
                               }

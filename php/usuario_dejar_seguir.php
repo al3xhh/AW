@@ -4,9 +4,11 @@
    require_once("modelo.php");
    session_start();
 
-   $seguidor = validarEntrada($_SESSION['usuario']);
-   $seguido =  validarEntrada($_GET['usuario']);
+   if(isset($_POST['usuario'])) {
+      $seguidor = validarEntrada($_SESSION['usuario']);
+      $seguido =  validarEntrada($_POST['usuario']);
 
-   dejarDeSeguir($seguidor, $seguido);
+      dejarDeSeguir($seguidor, $seguido);
+   }
 
 ?>
