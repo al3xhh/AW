@@ -466,6 +466,44 @@ function sigueA($seguidor, $seguido) {
    return $ret;
 }
 
+//Función que permite a un usuario seguir a otro.
+function seguir($seguidor, $seguido) {
+   $mysqli = conectar();
+
+   errorMysql($mysqli);
+
+   $sql = "INSERT INTO sigue VALUES (?, ?)";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $seguidor, $seguido);
+
+   if (!$stmt->execute()) {
+      echo $mysqli->error;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+}
+
+//Función que permite a un usuario dejar de seguir a obtenerGustosMusicales
+function dejarDeSeguir($seguidor, $seguido) {
+   $mysqli = conectar();
+
+   errorMysql($mysqli);
+
+   $sql = "DELETE FROM sigue
+            WHERE seguidor = ? AND seguido = ?";
+            
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $seguidor, $seguido);
+
+   if (!$stmt->execute()) {
+      echo $mysqli->error;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+}
+
 function getInfoCancion($titulo){
    $mysqli = new mysqli('127.0.0.1', 'root', '', 'WebMusic');
    $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo FROM cancion WHERE titulo = ?");

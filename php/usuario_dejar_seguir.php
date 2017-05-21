@@ -1,22 +1,12 @@
 <?php
-require_once("modelo.php");
-session_start();
 
-$mysqli = conectar();
-$seguidor = validarEntrada($_SESSION['usuario']);
-$seguido =  validarEntrada($_GET['usuario']);
+   //Script php utilizado por ajax para dejar de seguir a un usuario.
+   require_once("modelo.php");
+   session_start();
 
-errorMysql($mysqli);
+   $seguidor = validarEntrada($_SESSION['usuario']);
+   $seguido =  validarEntrada($_GET['usuario']);
 
-$sql = "DELETE FROM sigue WHERE seguidor = ? AND seguido = ?";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("ss", $seguidor, $seguido);
-
-if (!$stmt->execute()) {
-   echo $mysqli->error;
-}
-
-$stmt->close();
-$mysqli->close();
+   dejarDeSeguir($seguidor, $seguido);
 
 ?>

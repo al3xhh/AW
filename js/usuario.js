@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+
+   //Listener para el botón de seguir a un usuario.
    $("#Seguir").click(function() {
       var usuario_val = $("#Seguir").val();
       var xmlhttp = new XMLHttpRequest();
@@ -23,6 +25,7 @@ $( document ).ready(function() {
       }
    });
 
+   //Listener para el botón de seguir en la lista de seguidores de un usuario.
    $("#SeguidoresSeguir").click(function() {
       var usuario_val = $("#SeguidoresSeguir").val();
       var xmlhttp = new XMLHttpRequest();
@@ -47,6 +50,7 @@ $( document ).ready(function() {
       }
    });
 
+   //Listener para el botón de seguir en la lista de seguidos de un usuario.
    $("#SeguidosSeguir").click(function() {
       var usuario_val = $("#SeguidosSeguir").val();
       var xmlhttp = new XMLHttpRequest();
@@ -71,6 +75,7 @@ $( document ).ready(function() {
       }
    });
 
+   //Listener para las pestañas del perfil de un usuario, para actualizarlas con ajax.
    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var target = $(e.target).attr("href");
       var xmlhttp = new XMLHttpRequest();
