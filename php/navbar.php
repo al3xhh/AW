@@ -1,4 +1,6 @@
 <?php
+
+//Fnción que crea la barra superior de la página dependiendo del usuario y del sitio.
 function navbar() {
    $URIDirectorio = htmlspecialchars($_SERVER["PHP_SELF"]);
    $path = parse_url($URIDirectorio, PHP_URL_PATH);
@@ -50,4 +52,5 @@ function navbar() {
    echo "</div>\n";
    echo "</nav>\n";
 }
+
 ?>

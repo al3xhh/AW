@@ -710,6 +710,26 @@ body {
     text-decoration: none;
 }
 
+.link-usuario:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+.link-usuario:visited {
+    color: #000000;
+    text-decoration: none;
+}
+
+.link-usuario:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+.link-usuario:active {
+    color: #000000;
+    text-decoration: none;
+}
+
 .negrita{
 	font-weight: bold;
 }

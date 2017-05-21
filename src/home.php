@@ -81,7 +81,7 @@
                                               <blockquote>
                                                   <div class="row">
                                                       <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.php?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                      <a href="reproductor.php?titulo='.$fila["titulo"].'?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
                                                       <a href="usuario.php?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
                                                       <h5 class="col-md-3">'.$fila["fecha"].'</h5>
                                                   </div>
@@ -122,7 +122,7 @@
                                               <blockquote>
                                                   <div class="row">
                                                       <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.php?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                      <a href="reproductor.php?titulo='.$fila["titulo"].'?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
                                                       <a href="usuario.php?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
                                                       <h5 class="col-md-3">'.$fila["numeroreproducciones"].'</h5>
                                                   </div>
@@ -166,7 +166,7 @@
                                               <blockquote>
                                                   <div class="row">
                                                         <h5 class="col-md-3">'.$i.'</h5>
-                                                        <a href="reproductor.php?titulo='.$fila["titulo"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                        <a href="reproductor.php?titulo='.$fila["titulo"].'?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
                                                         <a href="usuario.php?usuario='.$fila["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["usuario"].'</h5></a>
                                                         <h5 class="col-md-3">'.$tiempo.'</h5>
                                                   </div>
