@@ -223,7 +223,7 @@ function tusTopSocial($usuario) {
 
    errorMysql($mysqli);
 
-   $sql = "SELECT cancion.titulo, reproducciones.usuario, reproducciones.fecha
+   $sql = "SELECT cancion.titulo, reproducciones.usuario, reproducciones.fecha, autor
             FROM cancion
             JOIN reproducciones ON cancion.id = reproducciones.cancion
             WHERE reproducciones.usuario IN (SELECT seguido
@@ -239,7 +239,15 @@ function tusTopSocial($usuario) {
       printf("Errormessage: %s\n", $mysqli->error);
    }
 
-   obtenerArray($stmt, $array, "titulo", "usuario", "fecha");
+   $stmt->bind_result($col1, $col2, $col3, $col4);
+
+   while ($stmt->fetch()){
+      $row = array("titulo" => $col1,
+                   "usuario" => $col2,
+                   "fecha" => $col3,
+                   "autor" => $col4);
+      array_push($array, $row);
+   }
 
    $stmt->close();
    $mysqli->close();
