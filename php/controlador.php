@@ -30,9 +30,9 @@
       return tusTopSocial($usuario);
    }
 
-   function info_cancion($titulo) {
+   function info_cancion($titulo, $autor) {
 
-      return getInfoCancion($titulo);
+      return getInfoCancion($titulo, $autor);
    }
 
    function aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium) {
@@ -71,6 +71,10 @@
 
    function sigue_a($seguidor, $seguido) {
       return sigueA($seguidor, $seguido);
+   }
+
+   function obtener_listas_reproduccion_usuario($usuario){
+      return obtenerListasReproduccionUsuario($usuario);
    }
 
    function obtener_info_comentarios_cancion($cancion, $usuario){

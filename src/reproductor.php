@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+   session_start();
+   $_SESSION["usuario"] = "christian";
+?>
 <html lang="es">
    <head>
       <meta charset="utf-8">
@@ -56,7 +60,7 @@
                <div>
                   <?php
                   require_once("../php/controlador.php");
-                  $info = info_cancion_reproductor($_GET["titulo"], $_GET["usuario"]);
+                  $info = info_cancion($_GET["titulo"], $_GET["usuario"]);
 
                   if ($info["caratula"])
                      echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
@@ -80,6 +84,7 @@
                      <form action="addGusto.php" method="POST" id="addList-form">
                         <div class="col-md-12">
                            <select id="selList" class="form-control" form="addList-form" name="genero" type="submit">
+                              <option value="title">Añadir a lista</option>
                               <?php
                               $listas = obtener_listas_reproduccion_usuario($_SESSION["usuario"]);
 
