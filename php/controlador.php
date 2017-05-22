@@ -68,9 +68,16 @@
       return obtenerCancionesUsuario($usuario);
    }
 
-
    function sigue_a($seguidor, $seguido) {
       return sigueA($seguidor, $seguido);
+   }
+
+   function obtener_top() {
+      return obtenerTop();
+   }
+
+   function obtener_novedades() {
+      return obtenerNovedades();
    }
 
    function obtener_listas_reproduccion_usuario($usuario){

@@ -86,38 +86,22 @@
                     <h3 class="panel-title">Novedades</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
+                   <?php
+                      require_once('php/controlador.php');
+                      $resultado = obtener_novedades();
+                      $i = 1;
+
+                      foreach ($resultado as $fila) {
+                        echo '<div class="col-md-3 col-lg-3">
+                                 <figure>
+                                     <figcaption>
+                                         <h4>'.$fila["titulo"].' - '.$fila["autor"].'</h4>
+                                     </figcaption>
+                                     <a href="src/reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'"><img class="img-responsive" src="img/'.$fila["caratula"].'" alt="img" title="image" height="200" width="200"/></a>
+                                 </figure>
+                             </div>';
+                     }
+                    ?>
                 </div>
             </div>
 
@@ -126,38 +110,22 @@
                     <h3 class="panel-title">Top</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
+                   <?php
+                      require_once('php/controlador.php');
+                      $resultado = obtener_top();
+                      $i = 1;
+
+                      foreach ($resultado as $fila) {
+                        echo '<div class="col-md-3 col-lg-3">
+                                 <figure>
+                                     <figcaption>
+                                         <h4>'.$fila["titulo"].' - '.$fila["autor"].'</h4>
+                                     </figcaption>
+                                     <a href="src/reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'"><img class="img-responsive" src="img/'.$fila["caratula"].'" alt="img" title="image" height="200" width="200"/></a>
+                                 </figure>
+                             </div>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>

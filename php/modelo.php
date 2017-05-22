@@ -22,34 +22,16 @@ function validarEntrada($dato) {
    return htmlspecialchars(trim(strip_tags($dato)));
 }
 
-//Función que se encarga de mostrar un error en caso de que la
-//conexión con la base de datos falle.
-function errorMysql($mysqli) {
-   if ($mysqli->connect_errno) {
-
-      echo "Lo sentimos, este sitio web está experimentando problemas.";
-
-      echo "Error: Fallo al conectarse a MySQL debido a: \n";
-      echo "Errno: " . $mysqli->connect_errno . "\n";
-      echo "Error: " . $mysqli->connect_error . "\n";
-
-      exit;
-   }
-}
-
 //Función que comprueba si existe el nombre de usuario en la aplicación.
 function existeUsuario($usuario) {
    $mysqli = conectar();
    $ret = False;
-
-   errorMysql($mysqli);
-
    $sql = "SELECT nombreusuario FROM usuarios WHERE nombreusuario = ?";
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
 
    if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
+      $ret = False;
    }
 
    $resultado = $stmt->get_result();
@@ -68,15 +50,12 @@ function existeUsuario($usuario) {
 function existeCorreo($correo) {
    $mysqli = conectar();
    $ret = False;
-
-   errorMysql($mysqli);
-
    $sql = "SELECT email FROM usuarios WHERE email = ?";
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $correo);
 
    if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
+      $ret = False;
    }
 
    $resultado = $stmt->get_result();
@@ -97,15 +76,11 @@ function registraUsuario($usuario, $correo, $contrasenya) {
    $ret = True;
    $foto = "FotoUsuarioPorDefecto.png";
    $encabezado = "EncabezadoPorDefecto.png";
-
-   errorMysql($mysqli);
-
    $sql = "INSERT INTO usuarios(email, nombreusuario, contrasenya, foto, encabezado) VALUES (?, ?, ?, ?, ?)";
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("sssss", $correo, $usuario, $contrasenya, $foto, $encabezado);
 
    if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
       $ret = False;
    } else {
       session_start();
@@ -123,9 +98,6 @@ function tusNovedades($usuario) {
    $mysqli = conectar();
    $hoy = date("Y-m-d");
    $array = array();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT titulo, autor, date(fecha)
             FROM cancion
             JOIN premium ON usuario = autor
@@ -133,13 +105,9 @@ function tusNovedades($usuario) {
             WHERE seguidor = ? AND fechacaducidad > ?
             ORDER BY fecha DESC
             LIMIT 6";
-
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $usuario, $hoy);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    obtenerArray($stmt, $array, "titulo", "autor", "fecha");
 
@@ -154,10 +122,7 @@ function tusNovedades($usuario) {
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    obtenerArray($stmt, $array, "titulo", "autor", "fecha");
 
@@ -172,9 +137,6 @@ function tusTop($usuario) {
    $mysqli = conectar();
    $hoy = date("Y-m-d");
    $array = array();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT titulo, autor, numeroreproducciones
             FROM cancion
             JOIN premium ON usuario = autor
@@ -185,10 +147,7 @@ function tusTop($usuario) {
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $usuario, $hoy);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    obtenerArray($stmt, $array, "titulo", "autor", "numeroreproducciones");
 
@@ -203,10 +162,7 @@ function tusTop($usuario) {
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    obtenerArray($stmt, $array, "titulo", "autor", "numeroreproducciones");
 
@@ -220,9 +176,6 @@ function tusTop($usuario) {
 function tusTopSocial($usuario) {
    $mysqli = conectar();
    $array = array();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT cancion.titulo, reproducciones.usuario, reproducciones.fecha, autor
             FROM cancion
             JOIN reproducciones ON cancion.id = reproducciones.cancion
@@ -234,10 +187,7 @@ function tusTopSocial($usuario) {
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    $stmt->bind_result($col1, $col2, $col3, $col4);
 
@@ -259,19 +209,13 @@ function tusTopSocial($usuario) {
 function obtenerGustosMusicales($usuario) {
    $mysqli = conectar();
    $array = array();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT genero
             FROM gustos
             WHERE usuario = ?";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    $stmt->bind_result($col1);
 
@@ -290,19 +234,13 @@ function obtenerGustosMusicales($usuario) {
 function obtenerInformacionUsuario($usuario) {
    $mysqli = conectar();
    $array = array();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT nombreusuario, foto, encabezado
             FROM usuarios
             WHERE nombreusuario = ?";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    obtenerArray($stmt, $array, "nombreusuario", "foto", "encabezado");
 
@@ -315,19 +253,13 @@ function obtenerInformacionUsuario($usuario) {
 //Función que obtiene la descripción del usuario
 function obtenerDescripcionUsuario($usuario) {
    $mysqli = conectar();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT descripcion
             FROM usuarios
             WHERE nombreusuario = ?";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    $stmt->bind_result($col1);
    $stmt->fetch();
@@ -342,9 +274,6 @@ function obtenerDescripcionUsuario($usuario) {
 function obtenerSeguidores($usuario, $limite) {
    $mysqli = conectar();
    $array = array();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT seguidor, foto
             FROM sigue
             JOIN usuarios ON nombreusuario = seguidor
@@ -352,10 +281,7 @@ function obtenerSeguidores($usuario, $limite) {
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    $stmt->bind_result($col1, $col2);
 
@@ -375,9 +301,6 @@ function obtenerSeguidores($usuario, $limite) {
 function obtenerSeguidos($usuario, $limite) {
    $mysqli = conectar();
    $array = array();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT seguido, foto
             FROM sigue
             JOIN usuarios ON nombreusuario = seguido
@@ -385,10 +308,7 @@ function obtenerSeguidos($usuario, $limite) {
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    $stmt->bind_result($col1, $col2);
 
@@ -408,19 +328,13 @@ function obtenerSeguidos($usuario, $limite) {
 function obtenerCancionesUsuario($usuario, $limite) {
    $mysqli = conectar();
    $array = array();
-
-   errorMysql($mysqli);
-
    $sql = "SELECT titulo, caratula
             FROM cancion
             WHERE autor = ? " .$limite;
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    $stmt->bind_result($col1, $col2);
 
@@ -440,19 +354,13 @@ function obtenerCancionesUsuario($usuario, $limite) {
 function sigueA($seguidor, $seguido) {
    $mysqli = conectar();
    $ret = False;
-
-   errorMysql($mysqli);
-
    $sql = "SELECT seguido
             FROM sigue
             WHERE seguidor = ? AND seguido = ?";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $seguidor, $seguido);
-
-   if (!$stmt->execute()) {
-      printf("Errormessage: %s\n", $mysqli->error);
-   }
+   $stmt->execute();
 
    $resultado = $stmt->get_result();
 
@@ -466,19 +374,13 @@ function sigueA($seguidor, $seguido) {
    return $ret;
 }
 
-//Función que permite a un usuario seguir a otro.
+//Función que permite a un usuario seguir a otro
 function seguir($seguidor, $seguido) {
    $mysqli = conectar();
-
-   errorMysql($mysqli);
-
    $sql = "INSERT INTO sigue VALUES (?, ?)";
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $seguidor, $seguido);
-
-   if (!$stmt->execute()) {
-      echo $mysqli->error;
-   }
+   $stmt->execute();
 
    $stmt->close();
    $mysqli->close();
@@ -487,21 +389,87 @@ function seguir($seguidor, $seguido) {
 //Función que permite a un usuario dejar de seguir a obtenerGustosMusicales
 function dejarDeSeguir($seguidor, $seguido) {
    $mysqli = conectar();
-
-   errorMysql($mysqli);
-
    $sql = "DELETE FROM sigue
             WHERE seguidor = ? AND seguido = ?";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $seguidor, $seguido);
-
-   if (!$stmt->execute()) {
-      echo $mysqli->error;
-   }
+   $stmt->execute();
 
    $stmt->close();
    $mysqli->close();
+}
+
+//Función que obtiene los top del index
+function obtenerTop() {
+   $mysqli = conectar();
+   $hoy = date("Y-m-d");
+   $array = array();
+
+   $sql = "SELECT titulo, autor, caratula
+            FROM cancion
+            JOIN premium ON usuario = autor
+            ORDER BY numeroreproducciones DESC
+            LIMIT 2";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->execute();
+
+   obtenerArray($stmt, $array, "titulo", "autor", "caratula");
+
+   $sql = "SELECT titulo, autor, caratula
+            FROM cancion
+            WHERE autor NOT IN (SELECT usuario
+                                 FROM premium
+                                 WHERE usuario = autor)
+            ORDER BY numeroreproducciones DESC
+            LIMIT 2";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->execute();
+
+   obtenerArray($stmt, $array, "titulo", "autor", "caratula");
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+}
+
+//Función que obtiene las novedades del index
+function obtenerNovedades() {
+   $mysqli = conectar();
+   $hoy = date("Y-m-d");
+   $array = array();
+
+   $sql = "SELECT titulo, autor, caratula
+            FROM cancion
+            JOIN premium ON usuario = autor
+            ORDER BY fecha DESC
+            LIMIT 2";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->execute();
+
+   obtenerArray($stmt, $array, "titulo", "autor", "caratula");
+
+   $sql = "SELECT titulo, autor, caratula
+            FROM cancion
+            WHERE autor NOT IN (SELECT usuario
+                                 FROM premium
+                                 WHERE usuario = autor)
+            ORDER BY fecha DESC
+            LIMIT 2";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->execute();
+
+   obtenerArray($stmt, $array, "titulo", "autor", "caratula");
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
 }
 
 function getInfoCancion($titulo, $autor){
