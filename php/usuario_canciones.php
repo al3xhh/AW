@@ -5,7 +5,7 @@
       $resultado = obtenerCancionesUsuario(validarEntrada($_POST['usuario']), $_POST['limite']);
 
       if (empty($resultado)) {
-         echo '<h4 class="text-center">El usuario no ha subido aún ninguna canción.</h4>';
+         echo '<h4 class="text-center">El usuario no ha subido ninguna canción</h4>';
       } else {
          foreach ($resultado as $fila) {
             echo '<div class="user-resume">
@@ -20,9 +20,9 @@
                    </div>
                 </div>';
          }
+         
+         if($_POST['limite'] != "")
+            echo '<p class="alert alert-info text-center" id="todasCanciones">Mostrar todas las canciones</p>';
       }
-
-      if($_POST['limite'] != "")
-         echo '<p class="alert alert-info text-center" id="todasCanciones">Mostrar todas las canciones</p>';
    }
 ?>

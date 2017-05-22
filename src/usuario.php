@@ -63,8 +63,8 @@
                   $resultado = obtener_informacion_usuario(validar_entrada($_GET['usuario']));
 
                   echo '<div class="fb-profile">
-                           <img class="fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" width= 400 height=400>
-                           <img class="fb-image-profile thumbnail" src="../img/'.$resultado[0]["foto"].'" alt="Profile image example">
+                           <img class="img img-responsive fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" width= 400 height=400>
+                           <img class="img img-responsive fb-image-profile thumbnail" src="../img/'.$resultado[0]["foto"].'" alt="Profile image example">
                            <div class="fb-profile-text">
                                <h1 id="nombreusuario">'.$resultado[0]["nombreusuario"].'</h1>
                            </div>
@@ -100,7 +100,12 @@
                         <div class="tab-pane active" id="tab_default_1">
                            <?php
                               $resultado = obtener_descripcion_usuario(validar_entrada($_GET['usuario']));
-                              echo '<p>'.$resultado.'</p>';
+
+                              if($resultado == "") {
+                                 echo '<div class="text-center"><h4>El usuario no ha puesto una descripción</h4></div>';
+                              } else {
+                                 echo '<p>'.$resultado.'</p>';
+                              }
                            ?>
                         </div>
                         <div class="tab-pane" id="tab_default_2"></div>
@@ -121,10 +126,14 @@
                            <?php
                            $resultado = obtener_gustos_musicales(validar_entrada($_GET['usuario']));
 
-                           foreach ($resultado as $fila) {
-                              echo '<div class="form-group">
-                                                <label>'.$fila["genero"].'</label>
-                                               </div>';
+                           if(empty($resultado)) {
+                              echo '<div class="text-center"><h4>El usuario no ha indicado sus gustos musicales</h4></div>';
+                           } else {
+                              foreach ($resultado as $fila) {
+                                 echo '<div class="form-group">
+                                                   <label>'.$fila["genero"].'</label>
+                                                  </div>';
+                              }
                            }
                            ?>
                            <button value="<?php echo $_GET["usuario"]?>"type="submit" class="btn btn-primary btn-block" id="Seguir">
@@ -149,7 +158,7 @@
          <footer class="footer-bs" id="footer">
             <div class="row">
                <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                  <a href="index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
+                  <img class="img img-responsive" alt="WebMusic" src="../img/Logo.png" width="180" height="180">
                </div>
                <div class="col-md-10 footer-nav animated fadeInUp">
                   <div class="col-md-3">

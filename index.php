@@ -134,7 +134,7 @@
             <footer class="footer-bs" id="footer">
                 <div class="row">
                     <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                        <a href="index.html"><img alt="WebMusic" src="img/Logo.png" width="180" height="180"></a>
+                        <img class="img img-responsive" alt="WebMusic" src="img/Logo.png" width="180" height="180">
                     </div>
                     <div class="col-md-10 footer-nav animated fadeInUp">
                         <div class="col-md-3">

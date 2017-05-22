@@ -18,7 +18,7 @@
         <?php
           session_start();
           //TODO eliminar esto, está forzado para hacer pruebas.
-          $_SESSION['usuario'] = 'alex';
+          $_SESSION['usuario'] = 'juan';
           require_once('../php/controlador.php');
         ?>
 
@@ -27,8 +27,7 @@
             <?php
                require_once("../php/navbar.php");
                navbar();
-            ?>
-            <!-- Fin barra superior -->
+            ?><!-- Fin barra superior -->
 
             <!-- Barra de búsqueda -->
             <div class="container">
@@ -67,28 +66,34 @@
                             <div class="col-md-12" data-wow-delay="0.2s">
                                 <div class="carousel slide quote-carousel" data-ride="carousel" id="qc1">
                                     <div class="text-center">
-                                      <h4 class="col-md-3">#</h4>
-                                      <h4 class="col-md-3">Título</h4>
-                                      <h4 class="col-md-3">Autor</h4>
-                                      <h4 class="col-md-3">Fecha publicación</h4>
-                                      <hr class="separator">
                                       <?PHP
                                         $resultado = tus_novedades(validar_entrada($_SESSION['usuario']));
                                         $i = 1;
 
-                                        foreach ($resultado as $fila) {
-                                          echo '<div class="item active">
-                                              <blockquote>
-                                                  <div class="row">
-                                                      <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
-                                                      <a href="usuario.php?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
-                                                      <h5 class="col-md-3">'.$fila["fecha"].'</h5>
-                                                  </div>
-                                              </blockquote>
-                                          </div>';
+                                        if(empty($resultado)) {
+                                           echo '<div class="text-center"><h3>No sigues a nadie, comienza a explorar la aplicación y descubre nuevos artistas</h3></div>';
 
-                                          $i ++;
+                                        } else {
+                                           echo '<h4 class="col-md-3">#</h4>
+                                           <h4 class="col-md-3">Título</h4>
+                                           <h4 class="col-md-3">Autor</h4>
+                                           <h4 class="col-md-3">Fecha publicación</h4>
+                                           <hr class="separator">';
+
+                                           foreach ($resultado as $fila) {
+                                             echo '<div class="item active">
+                                                 <blockquote>
+                                                     <div class="row">
+                                                         <h5 class="col-md-3">'.$i.'</h5>
+                                                         <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                         <a href="usuario.php?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
+                                                         <h5 class="col-md-3">'.$fila["fecha"].'</h5>
+                                                     </div>
+                                                 </blockquote>
+                                             </div>';
+
+                                             $i ++;
+                                           }
                                         }
                                       ?>
                                         </div>
@@ -107,29 +112,35 @@
                             <div class="col-md-12" data-wow-delay="0.2s">
                                 <div class="carousel slide quote-carousel" data-ride="carousel" id="qc2">
                                     <div class="text-center">
-                                      <h4 class="col-md-3">#</h4>
-                                      <h4 class="col-md-3">Título</h4>
-                                      <h4 class="col-md-3">Autor</h4>
-                                      <h4 class="col-md-3">Número reproducciones</h4>
-                                      <hr class="separator">
                                       <?PHP
                                         $resultado = tus_top(validar_entrada($_SESSION['usuario']));
                                         $i = 1;
 
-                                        foreach ($resultado as $fila) {
+                                        if(empty($resultado)) {
+                                           echo '<div class="text-center"><h3>Añade tus gustos musicales para poder descubrir nueva música</h3></div>';
 
-                                          echo '<div class="item active">
-                                              <blockquote>
-                                                  <div class="row">
-                                                      <h5 class="col-md-3">'.$i.'</h5>
-                                                      <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
-                                                      <a href="usuario.php?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
-                                                      <h5 class="col-md-3">'.$fila["numeroreproducciones"].'</h5>
-                                                  </div>
-                                              </blockquote>
-                                          </div>';
+                                        } else {
+                                           echo '<h4 class="col-md-3">#</h4>
+                                           <h4 class="col-md-3">Título</h4>
+                                           <h4 class="col-md-3">Autor</h4>
+                                           <h4 class="col-md-3">Fecha publicación</h4>
+                                           <hr class="separator">';
 
-                                          $i ++;
+                                           foreach ($resultado as $fila) {
+
+                                             echo '<div class="item active">
+                                                 <blockquote>
+                                                     <div class="row">
+                                                         <h5 class="col-md-3">'.$i.'</h5>
+                                                         <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                         <a href="usuario.php?usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["autor"].'</h5></a>
+                                                         <h5 class="col-md-3">'.$fila["numeroreproducciones"].'</h5>
+                                                     </div>
+                                                 </blockquote>
+                                             </div>';
+
+                                             $i ++;
+                                           }
                                         }
                                       ?>
                                       </div>
@@ -148,32 +159,38 @@
                             <div class="col-md-12" data-wow-delay="0.2s">
                                 <div class="carousel slide quote-carousel" data-ride="carousel" id="qc3">
                                     <div class="text-center">
-                                      <h4 class="col-md-3">#</h4>
-                                      <h4 class="col-md-3">Título</h4>
-                                      <h4 class="col-md-3">Escuchada por</h4>
-                                      <h4 class="col-md-3">Reproducido hace</h4>
-                                      <hr class="separator">
                                       <?PHP
                                         $resultado = tus_top_social(validar_entrada($_SESSION['usuario']));
                                         $i = 1;
 
-                                        foreach ($resultado as $fila) {
-                                          $fecha = new DateTime($fila["fecha"]);
-                                          $ahora = new DateTime();
-                                          $tiempo = $fecha->diff($ahora)->format("%m meses, %d días, %h horas and %i minutos");
+                                        if(empty($resultado)) {
+                                           echo '<div class="text-center"><h3>No sigues a nadie, comienza a explorar la aplicación y descubre lo que escuchan</h3></div>';
 
-                                          echo '<div class="item active">
-                                              <blockquote>
-                                                  <div class="row">
-                                                        <h5 class="col-md-3">'.$i.'</h5>
-                                                        <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
-                                                        <a href="usuario.php?usuario='.$fila["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["usuario"].'</h5></a>
-                                                        <h5 class="col-md-3">'.$tiempo.'</h5>
-                                                  </div>
-                                              </blockquote>
-                                          </div>';
+                                        } else {
+                                           echo '<h4 class="col-md-3">#</h4>
+                                           <h4 class="col-md-3">Título</h4>
+                                           <h4 class="col-md-3">Autor</h4>
+                                           <h4 class="col-md-3">Fecha publicación</h4>
+                                           <hr class="separator">';
 
-                                          $i ++;
+                                           foreach ($resultado as $fila) {
+                                             $fecha = new DateTime($fila["fecha"]);
+                                             $ahora = new DateTime();
+                                             $tiempo = $fecha->diff($ahora)->format("%m meses, %d días, %h horas and %i minutos");
+
+                                             echo '<div class="item active">
+                                                 <blockquote>
+                                                     <div class="row">
+                                                           <h5 class="col-md-3">'.$i.'</h5>
+                                                           <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
+                                                           <a href="usuario.php?usuario='.$fila["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["usuario"].'</h5></a>
+                                                           <h5 class="col-md-3">'.$tiempo.'</h5>
+                                                     </div>
+                                                 </blockquote>
+                                             </div>';
+
+                                             $i ++;
+                                           }
                                         }
                                       ?>
                                     </div>
@@ -191,7 +208,7 @@
             <footer class="footer-bs" id="footer">
                 <div class="row">
                     <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                        <a href="../index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
+                        <img class="img img-responsive" alt="WebMusic" src="../img/Logo.png" width="180" height="180">
                     </div>
                     <div class="col-md-10 footer-nav animated fadeInUp">
                         <div class="col-md-3">

@@ -17,6 +17,7 @@ function conectar() {
    return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
 }
 
+//TODO quitarla de aquí y corregir todas las llamadas que se hagan
 //Función para limpiar la entrada de cualquier caracter raro.
 function validarEntrada($dato) {
    return htmlspecialchars(trim(strip_tags($dato)));
@@ -98,13 +99,25 @@ function tusNovedades($usuario) {
    $mysqli = conectar();
    $hoy = date("Y-m-d");
    $array = array();
-   $sql = "SELECT titulo, autor, date(fecha)
-            FROM cancion
-            JOIN premium ON usuario = autor
-            JOIN sigue ON seguido = autor
-            WHERE seguidor = ? AND fechacaducidad > ?
-            ORDER BY fecha DESC
-            LIMIT 6";
+   $premium = esPremium($usuario);
+
+   if(!$premium) {
+      $sql = "SELECT titulo, autor, date(fecha)
+               FROM cancion
+               JOIN premium ON usuario = autor
+               JOIN sigue ON seguido = autor
+               WHERE seguidor = ? AND fechacaducidad > ? AND premium = 0
+               ORDER BY fecha DESC
+               LIMIT 6";
+   } else {
+      $sql = "SELECT titulo, autor, date(fecha)
+               FROM cancion
+               JOIN premium ON usuario = autor
+               JOIN sigue ON seguido = autor
+               WHERE seguidor = ? AND fechacaducidad > ? AND premium = 1
+               ORDER BY fecha DESC
+               LIMIT 6";
+   }
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $usuario, $hoy);
    $stmt->execute();
@@ -137,13 +150,25 @@ function tusTop($usuario) {
    $mysqli = conectar();
    $hoy = date("Y-m-d");
    $array = array();
-   $sql = "SELECT titulo, autor, numeroreproducciones
-            FROM cancion
-            JOIN premium ON usuario = autor
-            JOIN gustos ON cancion.genero = gustos.genero
-            WHERE gustos.usuario = ? AND fechacaducidad > ?
-            ORDER BY numeroreproducciones DESC
-            LIMIT 6";
+   $premium = esPremium($usuario);
+
+   if(!$premium) {
+      $sql = "SELECT titulo, autor, numeroreproducciones
+               FROM cancion
+               JOIN premium ON usuario = autor
+               JOIN gustos ON cancion.genero = gustos.genero
+               WHERE gustos.usuario = ? AND fechacaducidad > ? AND premium = 0
+               ORDER BY numeroreproducciones DESC
+               LIMIT 6";
+   } else {
+      $sql = "SELECT titulo, autor, numeroreproducciones
+               FROM cancion
+               JOIN premium ON usuario = autor
+               JOIN gustos ON cancion.genero = gustos.genero
+               WHERE gustos.usuario = ? AND fechacaducidad > ? AND premium = 1
+               ORDER BY numeroreproducciones DESC
+               LIMIT 6";
+   }
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("ss", $usuario, $hoy);
@@ -470,6 +495,33 @@ function obtenerNovedades() {
    $mysqli->close();
 
    return $array;
+}
+
+//Función que indica si un usuario es premium
+function esPremium($usuario) {
+   $mysqli = conectar();
+   $ret = False;
+   $sql = "SELECT nombreusuario
+            FROM usuarios
+            JOIN premium ON usuario = nombreusuario
+            WHERE nombreusuario = ?";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+
+   if (!$stmt->execute()) {
+      $ret = False;
+   }
+
+   $resultado = $stmt->get_result();
+
+   if ($resultado->num_rows > 0) {
+      $ret = True;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
 }
 
 function getInfoCancion($titulo, $autor){
