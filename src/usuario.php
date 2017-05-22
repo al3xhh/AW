@@ -65,8 +65,8 @@
                            <div class="fb-profile-text">
                                <h1 id="nombreusuario">'.$resultado[0]["nombreusuario"].'</h1>
                            </div>
-                        <div class="fb-profile-text">';
-                        if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($resultado[0]["nombreusuario"]))) {
+                        <div class="fb-profile-text" id="tesigue">';
+                        if(sigueA(validar_entrada($resultado[0]["nombreusuario"]), validar_entrada($_SESSION['usuario']))) {
                            echo 'Te sigue!';
                         }
                         echo '</div>
