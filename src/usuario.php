@@ -1,3 +1,12 @@
+<?php
+   session_start();
+   //TODO eliminar esto, está forzado para hacer pruebas.
+   $_SESSION['usuario'] = 'alex';
+
+   if(!isset($_SESSION["usuario"]))
+      header("Location: ../src/accesodenegado.html");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
    <head>
@@ -24,12 +33,6 @@
       <script src="../js/usuario.js"></script>
    </head>
    <body>
-      <?php
-      session_start();
-      //TODO eliminar esto, está forzado para hacer pruebas.
-      $_SESSION['usuario'] = 'alex';
-
-      ?>
       <div id="container-principal">
          <!-- Barra superior de la página -->
          <?php
@@ -60,7 +63,7 @@
                   $resultado = obtener_informacion_usuario(validar_entrada($_GET['usuario']));
 
                   echo '<div class="fb-profile">
-                           <img class="fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" height=400>
+                           <img class="fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" width= 400 height=400>
                            <img class="fb-image-profile thumbnail" src="../img/'.$resultado[0]["foto"].'" alt="Profile image example">
                            <div class="fb-profile-text">
                                <h1 id="nombreusuario">'.$resultado[0]["nombreusuario"].'</h1>
@@ -100,33 +103,9 @@
                               echo '<p>'.$resultado.'</p>';
                            ?>
                         </div>
-                        <div class="tab-pane" id="tab_default_2">
-                        </div>
-                        <div class="tab-pane" id="tab_default_3">
-                        </div>
-                        <div class="tab-pane" id="tab_default_4">
-                           <?PHP
-                           $resultado = obtener_canciones_usuario(validar_entrada($_GET['usuario']));
-
-                           if (empty($resultado)) {
-                              echo '<h4 class="text-center">El usuario no ha subido aún ninguna canción.</h4>';
-                           } else {
-                              foreach ($resultado as $fila) {
-                                 echo '<div class="user-resume">
-                                        <div>
-                                            <img class="user-resume-img" src="../img/'.$fila["caratula"].'" width="64" height="64" alt="Imagen usuario">
-                                        </div>
-                                        <div class="user-resume-info">
-                                            <h3>'.$fila["titulo"].'</h3>
-                                        </div>
-                                        <div class="user-resume-button">
-                                           <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario=';echo validar_entrada($_GET['usuario']); echo '"><button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button></a>
-                                        </div>
-                                     </div>';
-                              }
-                           }
-                           ?>
-                        </div>
+                        <div class="tab-pane" id="tab_default_2"></div>
+                        <div class="tab-pane" id="tab_default_3"></div>
+                        <div class="tab-pane" id="tab_default_4"></div>
                      </div>
                   </div>
                </div>

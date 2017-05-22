@@ -339,7 +339,7 @@ function obtenerDescripcionUsuario($usuario) {
 }
 
 //Función que obtiene los seguidores del usuario
-function obtenerSeguidores($usuario) {
+function obtenerSeguidores($usuario, $limite) {
    $mysqli = conectar();
    $array = array();
 
@@ -348,7 +348,7 @@ function obtenerSeguidores($usuario) {
    $sql = "SELECT seguidor, foto
             FROM sigue
             JOIN usuarios ON nombreusuario = seguidor
-            WHERE seguido = ?";
+            WHERE seguido = ? " . $limite;
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -372,7 +372,7 @@ function obtenerSeguidores($usuario) {
 }
 
 //Función que obtiene los seguidos del usuario
-function obtenerSeguidos($usuario) {
+function obtenerSeguidos($usuario, $limite) {
    $mysqli = conectar();
    $array = array();
 
@@ -381,7 +381,7 @@ function obtenerSeguidos($usuario) {
    $sql = "SELECT seguido, foto
             FROM sigue
             JOIN usuarios ON nombreusuario = seguido
-            WHERE seguidor = ?";
+            WHERE seguidor = ? " . $limite;
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -405,7 +405,7 @@ function obtenerSeguidos($usuario) {
 }
 
 //Función para obtener las canciones subidas por el usuario
-function obtenerCancionesUsuario($usuario) {
+function obtenerCancionesUsuario($usuario, $limite) {
    $mysqli = conectar();
    $array = array();
 
@@ -413,7 +413,7 @@ function obtenerCancionesUsuario($usuario) {
 
    $sql = "SELECT titulo, caratula
             FROM cancion
-            WHERE autor = ?";
+            WHERE autor = ? " .$limite;
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);

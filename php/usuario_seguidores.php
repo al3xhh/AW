@@ -6,8 +6,8 @@
    $estado = "";
    $id = 0;
 
-   if(isset($_POST['usuario'])) {
-      $resultado = obtenerSeguidores(validarEntrada($_POST['usuario']));
+   if(isset($_POST['usuario']) && isset($_POST['limite'])) {
+      $resultado = obtenerSeguidores(validarEntrada($_POST['usuario']), $_POST['limite']);
 
       foreach ($resultado as $fila) {
          if($_SESSION['usuario'] == $fila["seguidor"]) {
@@ -37,6 +37,9 @@
 
          $id ++;
       }
+
+      if($_POST['limite'] != "")
+         echo '<p class="alert alert-info text-center" id="todosSeguidores">Mostrar todos los seguidores</p>';
    }
 
 ?>

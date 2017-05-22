@@ -44,19 +44,44 @@ $( document ).ready(function() {
       var target = $(e.target).attr("href");
 
       if(target == "#tab_default_2") {
-         $.post("../php/usuario_seguidores.php", {'usuario' : $("#nombreusuario").html()}, function(data) {
+         $.post("../php/usuario_seguidores.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
             $("#tab_default_2").html(data);
             $(".SeguidoresSeguir").bind("click", function () {
                seguidoresSeguir(this.id);
             });
+            $("#todosSeguidores").click(function () {
+               $.post("../php/usuario_seguidores.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
+                  $("#tab_default_2").html(data);
+                  $(".SeguidoresSeguir").bind("click", function () {
+                     seguidoresSeguir(this.id);
+                  });
+               });
+            });
          });
       } else if (target == "#tab_default_3") {
-         $.post("../php/usuario_seguidos.php", {'usuario' : $("#nombreusuario").html()}, function(data) {
+         $.post("../php/usuario_seguidos.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
             $("#tab_default_3").html(data);
             $(".SeguidosSeguir").bind("click", function () {
                seguidosSeguir(this.id);
             });
+            $("#todosSeguidos").click(function () {
+               $.post("../php/usuario_seguidos.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
+                  $("#tab_default_3").html(data);
+                  $(".SeguidosSeguir").bind("click", function () {
+                     seguidosSeguir(this.id);
+                  });
+               });
+            });
          });
+      } else if (target == "#tab_default_4") {
+         $.post("../php/usuario_canciones.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
+            $("#tab_default_4").html(data);
+            $("#todasCanciones").click(function () {
+               $.post("../php/usuario_canciones.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
+                  $("#tab_default_4").html(data);
+                  });
+               });
+            });
       }
    });
 });

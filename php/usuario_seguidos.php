@@ -6,8 +6,8 @@
    $estado = "";
    $id = 0;
 
-   if(isset($_POST['usuario'])) {
-      $resultado = obtenerSeguidos(validarEntrada($_POST['usuario']));
+   if(isset($_POST['usuario']) && isset($_POST['limite'])) {
+      $resultado = obtenerSeguidos(validarEntrada($_POST['usuario']), $_POST['limite']);
 
       foreach ($resultado as $fila) {
          if($_SESSION['usuario'] == $fila["seguido"]) {
@@ -34,9 +34,11 @@
          echo '</button>
                </div>
                </div>';
-
          $id ++;
       }
+
+      if($_POST['limite'] != "")
+         echo '<p class="alert alert-info text-center" id="todosSeguidos">Mostrar todos los seguidos</p>';
    }
 
 ?>
