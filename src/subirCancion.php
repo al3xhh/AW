@@ -113,26 +113,21 @@
 													}
 												?>
                                             </div>
-											<div class="dropdown">
-												<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-													Genero
-													<span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-													<!--<li><a href="#">Action</a></li>-->
-													<?php
-														require_once("../php/controlador.php");
-														$result = obtener_generos();
-														print_r($result);
-														/*foreach($result as $fila){
-															print_r($result);
-															print_r($fila);
-															echo "<li><a>".$fila."</a></li>";
-														}*/
-													?>
-												</ul>
-											</div>
                                             <div class="form-group">
+                                                <label for="sel1">Generos:</label>
+                                                <select class="form-control" id="sel1">
+                                                    <?php
+    													require_once("../php/controlador.php");
+    													$result = obtener_generos();
+    													foreach($result as $fila){
+    														echo "<option>".$fila."</option>";
+    													}
+    												?>
+                                                </select>
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
+                                                </br>
                                                 <p>Los campos con * son obligatorios</p>
                                             </div>
                                             <div class="form-group">

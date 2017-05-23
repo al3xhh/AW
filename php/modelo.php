@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'root', '', 'WebMusic');
+   return new mysqli('127.0.0.1', 'root', 'joseubuntu', 'webmusic');
 }
 
 //Función para limpiar la entrada de cualquier caracter raro.
@@ -503,17 +503,36 @@ function getGeneros(){
 	$mysqli = conectar();
 	$stmt = $mysqli->prepare("SELECT nombre FROM generos");
 	$stmt->execute();
-	
 	$stmt->bind_result($col1);
-	$stmt->fetch();
-	//while($stmt->fetch()){
-	$ret = array("nombre"=>$col1);
-	//}
-	//$stmt->free_result();
+	$ret = array();
+   while($stmt->fetch())
+      array_push($ret, $col1);
 	$stmt->close();
 	$mysqli->close();
 
 	return $ret;	
+}
+
+function obtener_contrasenia_usuario($usuario){
+   $mysqli = conectar();
+   $ret = False;
+
+   errorMysql($mysqli);
+
+   $sql = "SELECT  FROM usuarios WHERE nombreusuario = ? OR email = ?";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $usuario, $usuario);
+
+   $resultado = $stmt->get_result();
+
+   if ($resultado->num_rows > 0) {
+      $ret = ;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
 }
 
 function subirArchivo($archivo, $directorioTemporal, $directorioSubida){
