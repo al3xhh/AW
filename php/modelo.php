@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   return new mysqli('127.0.0.1', 'root', 'joseubuntu', 'WebMusic');
 }
 
 //TODO quitarla de aquí y corregir todas las llamadas que se hagan
@@ -547,9 +547,11 @@ function aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $tit
    desconectar($mysqli);
 }
 
+
 function desconectar($conexion){
    $conexion->close();
 }
+
 
 function autenticarUsuario($usuario, $pass){
 
@@ -560,9 +562,11 @@ function autenticarUsuario($usuario, $pass){
 
       $result = $con->query($sql);
       if($result->num_rows > 0){
-         return true;
+         $con->close();
+		 return true;
       }
       else{
+		  $con->close();
          return false;
       }
    }
