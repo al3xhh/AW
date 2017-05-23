@@ -75,6 +75,25 @@ function obtener_generos(){
 	return getGeneros();
 }
 
+function autenticar_con_correo($usuario, $correo, $pass){
+	return autenticarUsuarioConCorreo($usuario, $correo, $pass);
+}
+
+function conseguir_usuario_correo($correo){
+	
+}
+
+function cargar_Ruta_Foto_Encabezado($ruta){
+	return cargarRutaFotoEncabezado($ruta);
+}
+
+function cargar_Ruta_Foto_Perfil($ruta){
+	return cargarRutaFotoPerfil($ruta);
+}
+
+function cargar_caratula_por_defecto($ruta){
+	return cargarCaratulaPorDefecto($ruta);
+}
 function subir_archivo($archivo, $directorioTemporal, $directorioSubida){
 	return subirArchivo($archivo, $directorioTemporal, $directorioSubida);
 }

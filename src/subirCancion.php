@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <noscript>
-            <meta http-equiv="refresh" content="0; url=errorJS.html" />
+            <meta http-equiv="refresh" content="0" url="errorJS.html">
         </noscript>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

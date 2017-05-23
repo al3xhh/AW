@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
-    <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            require_once('../php/controlador.php');
-            $usuario = testear($_POST["usuario"]);
-            $pass = testear($_POST["password"]);
-            if(autenticar($usuario, $pass)){
-               //session_start();
-               //$_SESSION['usuario']=$usuario;
-               header('Location: registro.php');
-            }
-        }
-    ?>
         <noscript>
-            <meta http-equiv="refresh" content="0; url=errorJS.html" />
+            <meta http-equiv="refresh" content="0" url="errorJS.html">
         </noscript>
+		<?php
+			$errorUsuario = false;
+			$errorAutenticacion = false;
+			if($_SERVER["REQUEST_METHOD"] == "POST"){
+				require_once('../php/controlador.php');
+				$usuario = validar_entrada($_POST['usuario']);
+				$pass = validar_entrada($_POST['password']);
+				
+				$existeUsuario = existe_usuario($usuario);
+				if(!existeUsuario){
+					$existeCorreo = existe_correo($usuario);
+					if(!existeCorreo){
+						//error
+						$errorUsuario = true;
+					}
+					else{
+						//autentico
+						if(autenticar_con_correo($usuario, $pass)){
+							session_start();
+							$_SESSION['usuario']=conseguir_usuario_correo($usuario);
+							header('Location: miPerfil.php');
+						}
+						else{
+							$errorAutenticacion = true;
+						}
+					}
+				}
+				else{
+					//autentico
+					if(autenticar_con_correo($usuario, $pass)){
+						session_start();
+						$_SESSION['usuario']=$usuario;
+						header('Location: miPerfil.php');
+					}
+					else{
+						$errorAutenticacion = true;
+					}
+				}
+			}
+		?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,6 +88,11 @@
                                                     <input class="form-control" placeholder="Correo electrónico/Usuario *" id="ID_Usuario" type="text" name="usuario">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
+												<?php
+													if($errorUsuario){
+														echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Usuario'>Correo/Usuario no registrado</div>";
+													}	
+                                                ?>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
@@ -68,7 +101,9 @@
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
                                                 <?php
-
+													if($errorAutenticacion){
+														echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Pass'>Contraseña erronea</div>";
+													}	
                                                 ?>
                                             </div>
                                             <div class="form-group">

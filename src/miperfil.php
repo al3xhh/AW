@@ -2,12 +2,19 @@
 <html lang="es">
     <head>
         <noscript>
-            <meta http-equiv="refresh" content="0; url=errorJS.html" />
+            <meta http-equiv="refresh" content="0" url="errorJS.html">
         </noscript>
+		<?php
+			session_start();
+			/*if(!isset($_SESSION['usuario']))
+				header('Location: login.php');*/
+			
+			$_SESSION['usuario'] = "alex";
+		?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Nombre usuario</title>
+        <title><?php echo $_SESSION['usuario']?></title>
 
         <link rel="icon" type="image/png" href="../img/Logo.png"/>
 
@@ -48,13 +55,17 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="fb-profile">
-                        <img class="fb-image-lg" src="../img/EncabezadoPorDefecto.png" alt="Profile image example" height=400>
-                        <img class="fb-image-profile thumbnail" src="../img/FotoUsuarioPorDefecto.png" alt="Profile image example">
-                        <div class="fb-profile-text">
-                            <h1>Nombre Usuario</h1>
-                        </div>
-                    </div>
+                <?php
+					require_once("../php/controlador.php");
+					$resultado = obtener_informacion_usuario(validar_entrada($_SESSION['usuario']));
+					echo '<div class="fb-profile">
+                           <img class="fb-image-lg" src="../img/'.cargar_Ruta_Foto_Encabezado($resultado[0]["encabezado"]).'" alt="Profile image example" height=400>
+                           <img class="fb-image-profile thumbnail" src="../img/'.cargar_Ruta_Foto_Perfil($resultado[0]["foto"]).'" alt="Profile image example">
+                           <div class="fb-profile-text">
+								<h1>'.$resultado[0]["nombreusuario"].'</h1>
+                           </div>
+                        <div class="fb-profile-text">';
+               ?>
                 </div>
             </div> <!-- /container fluid-->
 
@@ -64,114 +75,109 @@
                         <div class="tabbable-line">
                             <ul class="nav nav-tabs ">
                                 <li class="active">
-                                    <a href="#tab_default_1" data-toggle="tab">Descripción</a>
+                                    <a href="#Descripcion" data-toggle="tab">Descripción</a>
                                 </li>
                                 <li>
-                                    <a href="#tab_default_2" data-toggle="tab">Seguidores</a>
+                                    <a href="#Seguidores" data-toggle="tab">Seguidores</a>
                                 </li>
                                 <li>
-                                    <a href="#tab_default_3" data-toggle="tab">Seguidos</a>
+                                    <a href="#Seguidos" data-toggle="tab">Seguidos</a>
                                 </li>
                                 <li>
-                                    <a href="#tab_default_4" data-toggle="tab">Canciones</a>
+                                    <a href="#Canciones" data-toggle="tab">Canciones</a>
                                 </li>
                                 <li>
-                                    <a href="#tab_default_5" data-toggle="tab">Editar Perfil</a>
+                                    <a href="#Editar_Perfil" data-toggle="tab">Editar Perfil</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="tab_default_1">
+                                <div class="tab-pane active" id="Descripcion">
+									<?php
+										$resultado = obtener_descripcion_usuario(validar_entrada($_SESSION['usuario']));
+										echo '<p>'.$resultado.'</p>';
+									?>
+                                </div>
+                                <div class="tab-pane" id="Seguidores">
+                                    <?php
+										$resultado = obtener_seguidores(validar_entrada($_SESSION['usuario']));
+										
+										foreach ($resultado as $fila){
+											if($_SESSION['usuario'] != $fila["seguidor"]) {
+												echo '<div class="user-resume">
+														<div>
+															<img class="user-resume-img" src="../img/'.cargar_Ruta_Foto_Perfil($fila["foto"]).'" width="64" height="64" alt="Imagen usuario">
+														</div>
+														<div class="user-resume-info">
+															<h3>'.$fila["seguidor"].'</h3>
+														</div>
+														<div class="user-resume-button">
+														<button value="';
+                                                echo $fila["seguidor"];
+                                                echo '"type="submit" class="btn btn-primary pull-right" id="SeguidoresSeguir">';
+                                                if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguidor"]))) {
+                                                   echo 'Siguiendo';
+                                                } 
+												else {
+                                                   echo 'Seguir';
+                                                }
+                                                echo '</button>
+                                                       </div>
+                                                       </div>';
+                                            }
+										}
+									?>
+                                </div>
+                                <div class="tab-pane" id="Seguidos">
+                                    <?php
+										$resultado = obtener_seguidos(validar_entrada($_SESSION['usuario']));
 
-                                    <p>
-                                        My daughter  is good looking, with pleasant personality, smart, well educated, from well cultural and  a religious family background. having respect in heart for others.
-                                        would like to thanks you for visiting through my daughter;s profile.
-                                        She has done PG in Human Resources after her graduation.
-                                        At present working IN INSURANCE sector as Manager Training .
-                                    </p>
-                                    <h4>About her Family</h4>
-                                    <p>
-                                        About her family she belongs to a religious and a well cultural family background.
-                                        Father - Retired from a Co-operate Bank as a Manager.
-                                        Mother - she is a home maker.
-                                        1 younger brother - works for Life Insurance n manages cluster.
-                                    </p>
-                                    <h4>Education </h4>
-                                    <p>I have done PG in Human Resourses</p>
-                                    <h4>Occupation</h4>
-                                    <p>At present Working in Insurance sector</p>
+										foreach ($resultado as $fila) {
+											if($_SESSION['usuario'] != $fila["seguido"]) {
+												echo '<div class="user-resume">
+														<div>
+															<img class="user-resume-img" src="../img/'.cargar_Ruta_Foto_Perfil($fila["foto"]).'" width="64" height="64" alt="Imagen usuario">
+														</div>
+														<div class="user-resume-info">
+															<h3>'.$fila["seguido"].'</h3>
+														</div>
+														<div class="user-resume-button">
+															<button <button value="';
+                                                echo $fila["seguido"];
+                                                echo '"type="submit" class="btn btn-primary pull-right" id="SeguidosSeguir">';
+												if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguido"]))){
+                                                   echo 'Siguiendo';
+                                                } else {
+                                                   echo 'Seguir';
+                                                }
+                                                echo '</button>
+                                                      </div>
+                                                      </div>';
+											}
+										}
+									?>
+                                </div>
+                                <div class="tab-pane" id="Canciones">
+                                    <?PHP
+										$resultado = obtener_canciones_usuario(validar_entrada($_SESSION['usuario']));
 
-                                </div>
-                                <div class="tab-pane" id="tab_default_2">
-                                    <div class="user-resume">
-                                        <div>
-                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
-                                        </div>
-                                        <div class="user-resume-info">
-                                            <h3>Nombre usuario</h3>
-                                        </div>
-                                        <div class="user-resume-button">
-                                            <button type="button" class="btn btn-primary pull-right" disabled>Seguir</button>
-                                        </div>
-                                    </div>
-                                    <div class="user-resume">
-                                        <div>
-                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
-                                        </div>
-                                        <div class="user-resume-info">
-                                            <h3>Nombre usuario</h3>
-                                        </div>
-                                        <div class="user-resume-button">
-                                            <button type="button" class="btn btn-primary pull-right">Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="tab_default_3">
-                                    <div class="user-resume">
-                                        <div>
-                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
-                                        </div>
-                                        <div class="user-resume-info">
-                                            <h3>Nombre usuario</h3>
-                                        </div>
-                                        <div class="user-resume-button">
-                                            <button type="button" class="btn btn-primary pull-right">Seguir</button>
-                                        </div>
-                                    </div>
-                                    <div class="user-resume">
-                                        <div>
-                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
-                                        </div>
-                                        <div class="user-resume-info">
-                                            <h3>Nombre usuario</h3>
-                                        </div>
-                                        <div class="user-resume-button">
-                                            <button type="button" class="btn btn-primary pull-right" disabled>Seguir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="tab_default_4">
-                                    <div class="user-resume">
-                                        <div>
-                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
-                                        </div>
-                                        <div class="user-resume-info">
-                                            <h3>Nombre canción</h3>
-                                        </div>
-                                        <div class="user-resume-button">
-                                            <button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button>
-                                        </div>
-                                    </div>
-                                    <div class="user-resume">
-                                        <div>
-                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
-                                        </div>
-                                        <div class="user-resume-info">
-                                            <h3>Nombre canción</h3>
-                                        </div>
-                                        <div class="user-resume-button">
-                                            <button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button>
-                                        </div>
-                                    </div>
+										if (empty($resultado)) {
+											echo '<h4 class="text-center">El usuario no ha subido aún ninguna canción.</h4>';
+										} else {
+											foreach ($resultado as $fila) {
+												echo '<div class="user-resume">
+														<div>
+															<img class="user-resume-img" src="../img/'.cargar_caratula_por_defecto($fila["caratula"]).'" width="64" height="64" alt="Imagen usuario">
+														</div>
+														<div class="user-resume-info">
+															<h3>'.$fila["titulo"].'</h3>
+														</div>
+														<div class="user-resume-button">
+															<a href="reproductor.php?titulo='.$fila["titulo"].'"><button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button></a>
+														</div>
+													</div>';
+											}
+										}
+									?>
                                 </div>
                                 <div class="tab-pane" id="tab_default_5">
 
@@ -228,8 +234,8 @@
                             <div class="row">
                                 <div class="col-lg-12" id="panelGustos">
                                     <div class="form-group">
-                                        <label>Pop</label>
-										<p></p>
+                                        <label>Pop:</label>
+										<p>Caca</p>
                                     </div>
                                     <div class="form-group">
                                         <label>Rock</label>
@@ -251,7 +257,7 @@
                                         <label>Música clásica</label>
 										<p></p>
                                     </div>
-                                    <button onclick="ocultarGustos()" class="btn btn-danger btn-block">Editar gustos musicales</button>
+                                    <button id="habilitar_edicion" class="btn btn-danger btn-block">Editar gustos musicales</button>
                                 </div>
                                 <div class="col-lg-12" id="editarGustos">
                                     <div class="form-group">
@@ -279,8 +285,8 @@
                                         <input class="form-control">
                                     </div>
 
-                                    <button onclick="ocultarEdicionGustos()" class="btn btn-danger btn-block">Guardar</button>
-                                    <button onclick="ocultarEdicionGustos()" class="btn btn-danger btn-block">Cancelar</button>
+                                    <button id="guardar_cambios" class="btn btn-danger btn-block">Guardar</button>
+                                    <button id="cancelar" class="btn btn-danger btn-block">Cancelar</button>
                                 </div>
                             </div>
                         </div>

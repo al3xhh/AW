@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'root', 'joseubuntu', 'webmusic');
+   return new mysqli('127.0.0.1', 'root', '', 'webmusic');
 }
 
 //Función para limpiar la entrada de cualquier caracter raro.
@@ -513,26 +513,38 @@ function getGeneros(){
 	return $ret;	
 }
 
-function obtener_contrasenia_usuario($usuario){
-   $mysqli = conectar();
-   $ret = False;
+function autenticarUsuarioConCorreo($usuario, $correo, $pass){
+   
+}
 
-   errorMysql($mysqli);
+function cargarRutaFotoEncabezado($ruta){
+	
+	if($ruta == ""){
+		return "EncabezadoPorDefecto.png";
+	}
+	else{
+		return $ruta;
+	}
+}
 
-   $sql = "SELECT  FROM usuarios WHERE nombreusuario = ? OR email = ?";
-   $stmt = $mysqli->prepare($sql);
-   $stmt->bind_param("ss", $usuario, $usuario);
+function cargarRutaFotoPerfil($ruta){
+	
+	if($ruta == ""){
+		return "FotoUsuarioPorDefecto.png";
+	}
+	else{
+		return $ruta;
+	}
+}
 
-   $resultado = $stmt->get_result();
+function cargarCaratulaPorDefecto($ruta){
 
-   if ($resultado->num_rows > 0) {
-      $ret = ;
-   }
-
-   $stmt->close();
-   $mysqli->close();
-
-   return $ret;
+	if($ruta == ""){
+		return "CaratulaPorDefecto.jpg";
+	}
+	else{
+		return $ruta;
+	}
 }
 
 function subirArchivo($archivo, $directorioTemporal, $directorioSubida){
