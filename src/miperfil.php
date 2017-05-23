@@ -49,8 +49,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="fb-profile">
-                        <img class="fb-image-lg" src="../img/Header.jpg" alt="Profile image example" height=400>
-                        <img class="fb-image-profile thumbnail" src="../img/FotoPerfil.jpg" alt="Profile image example">
+                        <img class="fb-image-lg" src="../img/EncabezadoPorDefecto.png" alt="Profile image example" height=400>
+                        <img class="fb-image-profile thumbnail" src="../img/FotoUsuarioPorDefecto.png" alt="Profile image example">
                         <div class="fb-profile-text">
                             <h1>Nombre Usuario</h1>
                         </div>
@@ -104,7 +104,7 @@
                                 <div class="tab-pane" id="tab_default_2">
                                     <div class="user-resume">
                                         <div>
-                                            <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
                                         </div>
                                         <div class="user-resume-info">
                                             <h3>Nombre usuario</h3>
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="user-resume">
                                         <div>
-                                            <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
                                         </div>
                                         <div class="user-resume-info">
                                             <h3>Nombre usuario</h3>
@@ -128,7 +128,7 @@
                                 <div class="tab-pane" id="tab_default_3">
                                     <div class="user-resume">
                                         <div>
-                                            <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
                                         </div>
                                         <div class="user-resume-info">
                                             <h3>Nombre usuario</h3>
@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="user-resume">
                                         <div>
-                                            <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
                                         </div>
                                         <div class="user-resume-info">
                                             <h3>Nombre usuario</h3>
@@ -152,7 +152,7 @@
                                 <div class="tab-pane" id="tab_default_4">
                                     <div class="user-resume">
                                         <div>
-                                            <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
                                         </div>
                                         <div class="user-resume-info">
                                             <h3>Nombre canción</h3>
@@ -163,7 +163,7 @@
                                     </div>
                                     <div class="user-resume">
                                         <div>
-                                            <img class="user-resume-img" src="../img/FotoPerfil.jpg" width="64" height="64" alt="Imagen usuario">
+                                            <img class="user-resume-img" src="../img/FotoUsuarioPorDefecto.png" width="64" height="64" alt="Imagen usuario">
                                         </div>
                                         <div class="user-resume-info">
                                             <h3>Nombre canción</h3>
@@ -229,21 +229,27 @@
                                 <div class="col-lg-12" id="panelGustos">
                                     <div class="form-group">
                                         <label>Pop</label>
+										<p></p>
                                     </div>
                                     <div class="form-group">
                                         <label>Rock</label>
+										<p></p>
                                     </div>
                                     <div class="form-group">
                                         <label>Hip-Hop</label>
+										<p></p>
                                     </div>
                                     <div class="form-group">
                                         <label>Reagge</label>
+										<p></p>
                                     </div>
                                     <div class="form-group">
                                         <label>House</label>
+										<p></p>
                                     </div>
                                     <div class="form-group">
                                         <label>Música clásica</label>
+										<p></p>
                                     </div>
                                     <button onclick="ocultarGustos()" class="btn btn-danger btn-block">Editar gustos musicales</button>
                                 </div>

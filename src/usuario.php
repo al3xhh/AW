@@ -1,12 +1,3 @@
-<?php
-   session_start();
-   //TODO eliminar esto, está forzado para hacer pruebas.
-   $_SESSION['usuario'] = 'alex';
-
-   if(!isset($_SESSION["usuario"]))
-      header("Location: ../src/accesodenegado.html");
-?>
-
 <!DOCTYPE html>
 <html lang="es">
    <head>
@@ -14,12 +5,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <?php
-         require_once('../php/controlador.php');
-         echo '<title>';
-         echo validar_entrada($_GET['usuario']);
-         echo '</title>';
-      ?>
+      <title>Nombre usuario</title>
 
       <link rel="icon" type="image/png" href="../img/Logo.png"/>
 
@@ -33,6 +19,12 @@
       <script src="../js/usuario.js"></script>
    </head>
    <body>
+      <?php
+      session_start();
+      //TODO eliminar esto, está forzado para hacer pruebas.
+      $_SESSION['usuario'] = 'alex';
+      require_once('../php/controlador.php');
+      ?>
       <div id="container-principal">
          <!-- Barra superior de la página -->
          <?php
@@ -63,13 +55,13 @@
                   $resultado = obtener_informacion_usuario(validar_entrada($_GET['usuario']));
 
                   echo '<div class="fb-profile">
-                           <img class="img img-responsive fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" width= 400 height=400>
-                           <img class="img img-responsive fb-image-profile thumbnail" src="../img/'.$resultado[0]["foto"].'" alt="Profile image example">
+                           <img class="fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" height=400>
+                           <img class="fb-image-profile thumbnail" src="../img/'.$resultado[0]["foto"].'" alt="Profile image example">
                            <div class="fb-profile-text">
-                               <h1 id="nombreusuario">'.$resultado[0]["nombreusuario"].'</h1>
+                               <h1>'.$resultado[0]["nombreusuario"].'</h1>
                            </div>
-                        <div class="fb-profile-text" id="tesigue">';
-                        if(sigueA(validar_entrada($resultado[0]["nombreusuario"]), validar_entrada($_SESSION['usuario']))) {
+                        <div class="fb-profile-text">';
+                        if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($resultado[0]["nombreusuario"]))) {
                            echo 'Te sigue!';
                         }
                         echo '</div>
@@ -100,17 +92,90 @@
                         <div class="tab-pane active" id="tab_default_1">
                            <?php
                               $resultado = obtener_descripcion_usuario(validar_entrada($_GET['usuario']));
+                              echo '<p>'.$resultado.'</p>';
+                           ?>
+                        </div>
+                        <div class="tab-pane" id="tab_default_2">
+                           <?PHP
+                              $resultado = obtener_seguidores(validar_entrada($_GET['usuario']));
 
-                              if($resultado == "") {
-                                 echo '<div class="text-center"><h4>El usuario no ha puesto una descripción</h4></div>';
-                              } else {
-                                 echo '<p>'.$resultado.'</p>';
+                              foreach ($resultado as $fila) {
+                                 if($_SESSION['usuario'] != $fila["seguidor"]) {
+                                    echo '<div class="user-resume">
+                                              <div>
+                                                  <img class="user-resume-img" src="../img/'.$fila["foto"].'" width="64" height="64" alt="Imagen usuario">
+                                              </div>
+                                              <div class="user-resume-info">
+                                                  <h3>'.$fila["seguidor"].'</h3>
+                                              </div>
+                                              <div class="user-resume-button">
+                                               <button value="';
+                                                echo $fila["seguidor"];
+                                                echo '"type="submit" class="btn btn-primary pull-right" id="SeguidoresSeguir">';
+                                                if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguidor"]))) {
+                                                   echo 'Siguiendo';
+                                                } else {
+                                                   echo 'Seguir';
+                                                }
+                                                echo '</button>
+                                                       </div>
+                                                       </div>';
+                                             }
                               }
                            ?>
                         </div>
-                        <div class="tab-pane" id="tab_default_2"></div>
-                        <div class="tab-pane" id="tab_default_3"></div>
-                        <div class="tab-pane" id="tab_default_4"></div>
+                        <div class="tab-pane" id="tab_default_3">
+                           <?PHP
+                              $resultado = obtener_seguidos(validar_entrada($_GET['usuario']));
+
+                              foreach ($resultado as $fila) {
+                                 if($_SESSION['usuario'] != $fila["seguido"]) {
+                                    echo '<div class="user-resume">
+                                          <div>
+                                               <img class="user-resume-img" src="../img/'.$fila["foto"].'" width="64" height="64" alt="Imagen usuario">
+                                          </div>
+                                          <div class="user-resume-info">
+                                               <h3>'.$fila["seguido"].'</h3>
+                                          </div>
+                                          <div class="user-resume-button">
+                                               <button <button value="';
+                                                echo $fila["seguido"];
+                                                echo '"type="submit" class="btn btn-primary pull-right" id="SeguidosSeguir">';
+                                                if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguido"]))) {
+                                                   echo 'Siguiendo';
+                                                } else {
+                                                   echo 'Seguir';
+                                                }
+                                                echo '</button>
+                                                      </div>
+                                                      </div>';
+                                 }
+                              }
+                           ?>
+                        </div>
+                        <div class="tab-pane" id="tab_default_4">
+                           <?PHP
+                           $resultado = obtener_canciones_usuario(validar_entrada($_GET['usuario']));
+
+                           if (empty($resultado)) {
+                              echo '<h4 class="text-center">El usuario no ha subido aún ninguna canción.</h4>';
+                           } else {
+                              foreach ($resultado as $fila) {
+                                 echo '<div class="user-resume">
+                                        <div>
+                                            <img class="user-resume-img" src="../img/'.$fila["caratula"].'" width="64" height="64" alt="Imagen usuario">
+                                        </div>
+                                        <div class="user-resume-info">
+                                            <h3>'.$fila["titulo"].'</h3>
+                                        </div>
+                                        <div class="user-resume-button">
+                                           <a href="reproductor.php?titulo='.$fila["titulo"].'"><button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button></a>
+                                        </div>
+                                     </div>';
+                              }
+                           }
+                           ?>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -126,14 +191,10 @@
                            <?php
                            $resultado = obtener_gustos_musicales(validar_entrada($_GET['usuario']));
 
-                           if(empty($resultado)) {
-                              echo '<div class="text-center"><h4>El usuario no ha indicado sus gustos musicales</h4></div>';
-                           } else {
-                              foreach ($resultado as $fila) {
-                                 echo '<div class="form-group">
-                                                   <label>'.$fila["genero"].'</label>
-                                                  </div>';
-                              }
+                           foreach ($resultado as $fila) {
+                              echo '<div class="form-group">
+                                                <label>'.$fila["genero"].'</label>
+                                               </div>';
                            }
                            ?>
                            <button value="<?php echo $_GET["usuario"]?>"type="submit" class="btn btn-primary btn-block" id="Seguir">
@@ -158,7 +219,7 @@
          <footer class="footer-bs" id="footer">
             <div class="row">
                <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                  <img class="img img-responsive" alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                  <a href="index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
                </div>
                <div class="col-md-10 footer-nav animated fadeInUp">
                   <div class="col-md-3">

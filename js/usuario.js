@@ -1,87 +1,73 @@
 $( document ).ready(function() {
-
-   //Función para el botón de seguir en la lista de seguidores de un usuario.
-   function seguidoresSeguir(id) {
-      if($("#" + id).html() == "Seguir") {
-         $.post("../php/usuario_seguir.php", {'usuario' : $("#" + id).val()}, function(data) {
-            $("#" + id).html("Siguiendo");
-         });
-      } else {
-         $.post("../php/usuario_dejar_seguir.php", {'usuario' : $("#" + id).val()}, function(data) {
-            $("#" + id).html("Seguir");
-         });
-      }
-   }
-
-   //Función para el botón de seguir en la lista de seguidos de un usuario.
-   function seguidosSeguir(id) {
-      if($("#" + id).html() == "Seguir") {
-         $.post("../php/usuario_seguir.php", {'usuario' : $("#" + id).val()}, function(data) {
-            $("#" + id).html("Siguiendo");
-         });
-      } else {
-         $.post("../php/usuario_dejar_seguir.php", {'usuario' : $("#" + id).val()}, function(data) {
-            $("#" + id).html("Seguir");
-         });
-      }
-   }
-
-   //Listener para el botón de seguir a un usuario.
    $("#Seguir").click(function() {
-      if($("#Seguir").html() == "Seguir") {
-         $.post("../php/usuario_seguir.php", {'usuario' : $("#Seguir").val()}, function(data) {
-            $("#Seguir").html("Siguiendo");
-         });
+      var usuario_val = $("#Seguir").val();
+      var xmlhttp = new XMLHttpRequest();
+      var accion = $("#Seguir").html();
+
+      if(accion == "Seguir") {
+         xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               $("#Seguir").html("Siguiendo");
+            }
+         };
+         xmlhttp.open("GET", "../php/usuario_seguir.php?usuario=" + usuario_val, true);
+         xmlhttp.send();
       } else {
-         $.post("../php/usuario_dejar_seguir.php", {'usuario' : $("#Seguir").val()}, function(data) {
-            $("#Seguir").html("Seguir");
-         });
+         xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               $("#Seguir").html("Seguir");
+            }
+         };
+         xmlhttp.open("GET", "../php/usuario_dejar_seguir.php?usuario=" + usuario_val, true);
+         xmlhttp.send();
       }
    });
 
-   //Listener para las pestañas del perfil de un usuario, para actualizarlas con ajax.
-   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      var target = $(e.target).attr("href");
+   $("#SeguidoresSeguir").click(function() {
+      var usuario_val = $("#SeguidoresSeguir").val();
+      var xmlhttp = new XMLHttpRequest();
+      var accion = $("#SeguidoresSeguir").html();
 
-      if(target == "#tab_default_2") {
-         $.post("../php/usuario_seguidores.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
-            $("#tab_default_2").html(data);
-            $(".SeguidoresSeguir").bind("click", function () {
-               seguidoresSeguir(this.id);
-            });
-            $("#todosSeguidores").click(function () {
-               $.post("../php/usuario_seguidores.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
-                  $("#tab_default_2").html(data);
-                  $(".SeguidoresSeguir").bind("click", function () {
-                     seguidoresSeguir(this.id);
-                  });
-               });
-            });
-         });
-      } else if (target == "#tab_default_3") {
-         $.post("../php/usuario_seguidos.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
-            $("#tab_default_3").html(data);
-            $(".SeguidosSeguir").bind("click", function () {
-               seguidosSeguir(this.id);
-            });
-            $("#todosSeguidos").click(function () {
-               $.post("../php/usuario_seguidos.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
-                  $("#tab_default_3").html(data);
-                  $(".SeguidosSeguir").bind("click", function () {
-                     seguidosSeguir(this.id);
-                  });
-               });
-            });
-         });
-      } else if (target == "#tab_default_4") {
-         $.post("../php/usuario_canciones.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
-            $("#tab_default_4").html(data);
-            $("#todasCanciones").click(function () {
-               $.post("../php/usuario_canciones.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
-                  $("#tab_default_4").html(data);
-                  });
-               });
-            });
+      if(accion == "Seguir") {
+         xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               $("#SeguidoresSeguir").html("Siguiendo");
+            }
+         };
+         xmlhttp.open("GET", "../php/usuario_seguir.php?usuario=" + usuario_val, true);
+         xmlhttp.send();
+      } else {
+         xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               $("#SeguidoresSeguir").html("Seguir");
+            }
+         };
+         xmlhttp.open("GET", "../php/usuario_dejar_seguir.php?usuario=" + usuario_val, true);
+         xmlhttp.send();
+      }
+   });
+
+   $("#SeguidosSeguir").click(function() {
+      var usuario_val = $("#SeguidosSeguir").val();
+      var xmlhttp = new XMLHttpRequest();
+      var accion = $("#SeguidosSeguir").html();
+
+      if(accion == "Seguir") {
+         xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               $("#SeguidosSeguir").html("Siguiendo");
+            }
+         };
+         xmlhttp.open("GET", "../php/usuario_seguir.php?usuario=" + usuario_val, true);
+         xmlhttp.send();
+      } else {
+         xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               $("#SeguidosSeguir").html("Seguir");
+            }
+         };
+         xmlhttp.open("GET", "../php/usuario_dejar_seguir.php?usuario=" + usuario_val, true);
+         xmlhttp.send();
       }
    });
 });

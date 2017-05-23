@@ -24,41 +24,18 @@
 
     <body>
         <?PHP
-          $existe_usuario = False;
-          $existe_correo = False;
-          $usuario_valido = False;
-          $correo_valido = False;
-          $contrasenya_valida = False;
-          $recontrasenya_valida = False;
+          $usuario = False;
+          $correo = False;
 
           if($_SERVER["REQUEST_METHOD"] == "POST") {
             require_once('../php/controlador.php');
-            require_once('../php/utils.php');
-
             if(existe_usuario(validar_entrada($_POST["usuario"]))) {
-              $existe_usuario = True;
+              $usuario = True;
             }
             if(existe_correo(validar_entrada($_POST["correo"]))) {
-              $existe_correo = True;
+              $correo = True;
             }
-
-            if(validarUsuario(validar_entrada($_POST["usuario"]))) {
-               $usuario_valido = True;
-            }
-
-            if(validarCorreo(validar_entrada($_POST["correo"]))) {
-               $correo_valido = True;
-            }
-
-            if(validarContrasenya(validar_entrada($_POST["contrasenya"]))) {
-               $contrasenya_valida = True;
-            }
-
-            if(validarReContrasenya(validar_entrada($_POST["contrasenya"]), validar_entrada($_POST["recontrasenya"]))) {
-               $recontrasenya_valida = True;
-            }
-
-            if(!$correo && !$usuario && $usuario_valido && $correo_valido && $contrasenya_valida && $recontrasenya_valida) {
+            if(!$correo && !$usuario) {
               if(registra_usuario(validar_entrada($_POST["usuario"]),
                                   validar_entrada($_POST["correo"]),
                                   hash('sha256', validar_entrada($_POST["contrasenya"])))) {
@@ -71,12 +48,12 @@
             }
           }
         ?>
-
         <!-- Barra superior de la página -->
         <?php
           require_once("../php/navbar.php");
           navbar();
-        ?><!-- Fin barra superior -->
+        ?>
+        <!-- Fin barra superior -->
 
         <div id="container-principal"><!-- Container principal que contiene todo el registro -->
             <div class="row">
@@ -99,13 +76,9 @@
                                                 value=<?php if($_SERVER["REQUEST_METHOD"] == "POST"){echo $_POST["usuario"];} ?>>
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
-                                            <?php
-                                                if($existe_usuario) {
-                                                   echo '<div class="alert alert-danger" id="ID_Error_Usuario_1">Usuario ya registrado.</div>';
-                                                } else if($usuario_valido) {
-                                                   echo '<div class="alert alert-danger" id="ID_Error_Usuario_2">Usuario no válido.</div>';
-                                                }
-                                            ?>
+                                            <?php if($usuario) {
+                                              echo '<div class="alert alert-danger" id="ID_Error_Usuario_2">Usuario ya registrado.</div>';
+                                            } ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
@@ -114,13 +87,9 @@
                                                 value=<?php if($_SERVER["REQUEST_METHOD"] == "POST"){echo $_POST["correo"];} ?>>
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Correo"></div>
-                                            <?php
-                                                if($existe_correo) {
-                                                   echo '<div class="alert alert-danger" id="ID_Error_Correo_1">Correo ya registrado.</div>';
-                                                } else if($correo_valido) {
-                                                   echo '<div class="alert alert-danger" id="ID_Error_Correo_2">Correo no válido.</div>';
-                                                }
-                                            ?>
+                                            <?php if($correo) {
+                                              echo '<div class="alert alert-danger" id="ID_Error_Correo_2">Correo ya registrado.</div>';
+                                            } ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
@@ -128,23 +97,13 @@
                                                 <input class="form-control" placeholder="Contraseña *" id="ID_Pass" name="contrasenya" type="password">
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
-                                            <?php
-                                                if($contrasenya_valida) {
-                                                   echo '<div class="alert alert-danger" id="ID_Error_Pass_1">Contraseña no válida.</div>';
-                                                }
-                                            ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input class="form-control" placeholder="Repite la contraseña *" id="ID_Pass1" name="recontrasenya" type="password">
+                                                <input class="form-control" placeholder="Repite la contraseña *" id="ID_Pass1" type="password">
                                             </div>
                                             <div class="alert alert-danger alertas-registro" id="ID_Error_Pass1"></div>
-                                            <?php
-                                                if($recontrasenya_valida) {
-                                                   echo '<div class="alert alert-danger" id="ID_Error_Pass1_1">Las contraseñas no coinciden.</div>';
-                                                }
-                                            ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
@@ -181,7 +140,7 @@
             <footer class="footer-bs" id="footer">
                 <div class="row">
                     <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                        <img class="img img-responsive" alt="WebMusic" src="../img/Logo.png" width="180" height="180">
+                        <a href="index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
                     </div>
                     <div class="col-md-10 footer-nav animated fadeInUp">
                         <div class="col-md-3">

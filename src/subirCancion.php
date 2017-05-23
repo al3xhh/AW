@@ -22,17 +22,29 @@
 
     <body>
     <?php
+		$okcancion = $okimagen = "";
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $target_dir = "../songs/";
-            $target_file = $target_dir . basename($_FILES['cancion']);
-            move_uploaded_file($_FILES['cancion'], $target_file);
-        }
+
+			require_once("../php/controlador.php");
+			$caratula = $_FILES['imagenCancion']['name'];
+			$dirTemporalImagen = $_FILES['imagenCancion']['tmp_name'];
+			$dirSubidaImagen = "../img/";
+			$okimagen = subir_archivo(validar_entrada($caratula), validar_entrada($dirTemporalImagen), validar_entrada($dirSubidaImagen));
+			
+			if($okimagen){
+				$cancion = $_FILES['cancion']['name'];
+				$dirTemporalCancion = $_FILES['cancion']['tmp_name'];
+				$dirSubidaCancion = "../songs/";
+				
+				$okcancion = subir_archivo(validar_entrada($cancion), validar_entrada($dirTemporalCancion), validar_entrada($dirSubidaCancion));
+			}
+		}
     ?>
         <div id="container-principal">
            <!-- Barra superior de la página -->
            <?php
-             require_once("../php/navbar.php");
-             navbar();
+            require_once("../php/navbar.php");
+            navbar();
            ?>
            <!-- Fin barra superior -->
 
@@ -42,7 +54,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Subir Cancion</div>
                             <div class="panel-body">
-                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" onsubmit="return validarFormCancion()">
+                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" enctype="multipart/form-data" onsubmit="return validarFormCancion()">
                                     <div class="row">
                                         <div class="center-block">
                                             <img class="profile-img" src="../img/ImagenNota.png" alt="Imagen Registro">
@@ -67,9 +79,16 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                                                    <input class="form-control" id="ID_Imagen" type="file" name="imagenCancion" onchange="validarImagen(this)">
+                                                    <input class="form-control" id="ID_Imagen" type="file" name="imagenCancion" enctype="multipart/form-data" onchange="validarImagen()">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Imagen"></div>
+												<?php
+													if($okimagen != ""){
+														if(!$okimagen){
+															echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Imagen'>No se pudo subir la imagen</div>";
+														}
+													}
+												?>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
@@ -77,7 +96,42 @@
                                                     <input class="form-control" id="ID_Archivo_Cancion" type="file" name="cancion" enctype="multipart/form-data" onchange="validarArchivoCancion()">
                                                 </div>
                                                 <div class="alert alert-danger alertas-registro" id="ID_Error_Archivo_Cancion"></div>
+												<?php
+													if($okcancion != "" && $okcancion != ""){
+														if(!$okimagen){
+															echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Archivo_Cancion'>No se subio la cancion porque no se pudo subir la imagen</div>";
+														}
+														else{
+															if(!$okcancion){
+																echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Archivo_Cancion'>No se pudo subir la cancion</div>";
+															}
+															else{
+																//aqui se sube la cancion
+																
+															}
+														}
+													}
+												?>
                                             </div>
+											<div class="dropdown">
+												<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+													Genero
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+													<!--<li><a href="#">Action</a></li>-->
+													<?php
+														require_once("../php/controlador.php");
+														$result = obtener_generos();
+														print_r($result);
+														/*foreach($result as $fila){
+															print_r($result);
+															print_r($fila);
+															echo "<li><a>".$fila."</a></li>";
+														}*/
+													?>
+												</ul>
+											</div>
                                             <div class="form-group">
                                                 <p>Los campos con * son obligatorios</p>
                                             </div>
