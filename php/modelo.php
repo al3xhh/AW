@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
+   return new mysqli('127.0.0.1', 'root', '', 'WebMusic');
 }
 
 //TODO quitarla de aquí y corregir todas las llamadas que se hagan
@@ -545,6 +545,7 @@ function aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $tit
    $stmt->execute();
    $stmt->close();
    desconectar($mysqli);
+   return true;
 }
 
 function desconectar($conexion){
