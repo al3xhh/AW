@@ -514,7 +514,22 @@ function getGeneros(){
 }
 
 function autenticarUsuarioConCorreo($usuario, $correo, $pass){
-   
+   $pass = hash('sha256', validar_entrada($pass));
+   $con = conectar();
+   if($con != NULL){
+
+      $sql = "SELECT nombreusuario, email, contrasenya FROM usuarios where nombreusuario = '$usuario' OR email = '$correo' AND contrasenya = '$pass'";
+
+      $result = $con->query($sql);
+      if($result->num_rows > 0){
+         $con->close();
+		 return true;
+      }
+      else{
+		  $con->close();
+         return false;
+      }
+   }
 }
 
 function cargarRutaFotoEncabezado($ruta){

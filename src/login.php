@@ -11,10 +11,8 @@
 				$usuario = validar_entrada($_POST['usuario']);
 				$pass = validar_entrada($_POST['password']);
 				
-				$existeUsuario = existe_usuario($usuario);
-				if(!existeUsuario){
-					$existeCorreo = existe_correo($usuario);
-					if(!existeCorreo){
+				if(!existe_usuario($usuario)){
+					if(!existe_correo($usuario)){
 						//error
 						$errorUsuario = true;
 					}

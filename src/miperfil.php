@@ -179,44 +179,42 @@
 										}
 									?>
                                 </div>
-                                <div class="tab-pane" id="tab_default_5">
-
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label">Nombre:</label>
-                                            <div class="col-lg-8">
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label">Apellido:</label>
-                                            <div class="col-lg-8">
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
+                                <div class="tab-pane" id="form_editar_Perfil">
+                                    <form class="form-horizontal" id="perfil">
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Nombre de usuario:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" type="text">
+                                                <input id="id_nuevo_usuario" class="form-control" type="text" name="nuevo_nombre_usuario">
                                             </div>
+											<div class="alert alert-danger alertas-registro" id="ID_error_nuevo_usuario"></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Email:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" type="text">
+                                                <input id="id_nuevo_email" class="form-control" type="text" name="nuevo_email">
                                             </div>
+											<div class="alert alert-danger alertas-registro" id="ID_error_email"></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Imagen de perfil:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" type="file">
+                                                <input class="form-control" type="file" name="nueva_imagen_perfil">
                                             </div>
+											<div class="alert alert-danger alertas-registro" id="ID_error_perfil"></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Imagen de encabezado:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" type="file">
+                                                <input class="form-control" type="file" name="nueva_imagen_encabezado">
                                             </div>
+											<div class="alert alert-danger alertas-registro" id="ID_error_encabezado"></div>
+                                        </div>
+										<div class="form-group">
+                                            <label class="col-lg-2 control-label">Descripcion:</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" type="text" name="nueva_descripcion">
+                                            </div>
+											<div class="alert alert-danger alertas-registro" id="ID_error_descripcion"></div>
                                         </div>
                                         <button type="submit" class="btn btn-danger btn-block">Guardar cambios</button>
                                     </form>
@@ -259,35 +257,37 @@
                                     </div>
                                     <button id="habilitar_edicion" class="btn btn-danger btn-block">Editar gustos musicales</button>
                                 </div>
-                                <div class="col-lg-12" id="editarGustos">
-                                    <div class="form-group">
-                                        <label>Pop:</label>
-                                        <input class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Rock:</label>
-                                        <input class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hip-Hop:</label>
-                                        <input class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Reagge:</label>
-                                        <input class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>House:</label>
-                                        <input class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Musica clasica:</label>
-                                        <input class="form-control">
-                                    </div>
+                                <form class="form-horizontal" id="form_gustos">
+									<div class="col-lg-12" id="editarGustos">
+										<div class="form-group">
+											<label>Pop:</label>
+											<input class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Rock:</label>
+											<input class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Hip-Hop:</label>
+											<input class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Reagge:</label>
+											<input class="form-control">
+										</div>
+										<div class="form-group">
+											<label>House:</label>
+											<input class="form-control">
+										</div>
+										<div class="form-group">
+											<label>Musica clasica:</label>
+											<input class="form-control">
+										</div>
 
-                                    <button id="guardar_cambios" class="btn btn-danger btn-block">Guardar</button>
-                                    <button id="cancelar" class="btn btn-danger btn-block">Cancelar</button>
-                                </div>
+										<button id="guardar_cambios" type="submit" class="btn btn-danger btn-block">Guardar</button>
+										<button id="cancelar" class="btn btn-danger btn-block">Cancelar</button>
+									</div>
+								</footer>
                             </div>
                         </div>
                     </div>
