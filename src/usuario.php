@@ -135,16 +135,17 @@
                                                   </div>';
                               }
                            }
+                           if(validar_entrada($_GET['usuario']) != validar_entrada($_SESSION['usuario'])) {
+                              echo '<button value="';echo $_GET["usuario"];echo'"type="submit" class="btn btn-primary btn-block" id="Seguir">';
+
+                                 if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($_GET['usuario']))) {
+                                    echo 'Siguiendo';
+                                 } else {
+                                    echo 'Seguir';
+                                 }
+                              echo '</button>';
+                           }
                            ?>
-                           <button value="<?php echo $_GET["usuario"]?>"type="submit" class="btn btn-primary btn-block" id="Seguir">
-                              <?php
-                              if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($_GET['usuario']))) {
-                                 echo 'Siguiendo';
-                              } else {
-                                 echo 'Seguir';
-                              }
-                              ?>
-                           </button>
                         </div>
                      </div>
                   </div>
