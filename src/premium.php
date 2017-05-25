@@ -1,4 +1,30 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+   if (isset($_POST["ID_Cuenta"])){
+      require_once("../php/controlador.php");
+      $usuario = validarEntrada($_POST["ID_Usuario"]);
+      $n_cuenta = validarEntrada($_POST["ID_Cuenta"]);
+      $cvv =  validarEntrada($_POST["ID_CVV"]);
+      $fecha_caducidad_cuenta = validarEntrada($_POST["ID_Fecha_Cad"]);
+      $titular = validarEntrada($_POST["ID_Titular"]);
+      $contraseña = validarEntrada($_POST["ID_Pass"]);
+      $n_meses = validarEntrada($_POST["ID_Num_meses"]);
+      $fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + $n_meses, date("d"), date("Y")));
+   } else if (isset($_SESSION["usuario"])){
+      $usuario = validarEntrada($_POST["ID_Usuario"]);
+      $fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + 1, date("d"), date("Y")));
+   }
+
+   if (!aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium, $contraseña))
+      echo "<div class='alert alert-danger text-center'>
+                <h4>Se producido un erro. Revisa los datos introducidos</h4>
+            </div>";
+   else 
+      header("Location: ".htmlspecialchars($_SERVER["PHP_SELF"]));
+}
+?>
 
 <html lang="es">
    <head>
@@ -28,32 +54,6 @@
       <script src="../js/premium.js"></script>
    </head>
    <body>
-      <?php
-      session_start();
-      if ($_SERVER["REQUEST_METHOD"] == "POST"){
-         if (isset($_POST["ID_Cuenta"])){
-            require_once("../php/controlador.php");
-            $usuario = validarEntrada($_POST["ID_Usuario"]);
-            $n_cuenta = validarEntrada($_POST["ID_Cuenta"]);
-            $cvv =  validarEntrada($_POST["ID_CVV"]);
-            $fecha_caducidad_cuenta = validarEntrada($_POST["ID_Fecha_Cad"]);
-            $titular = validarEntrada($_POST["ID_Titular"]);
-            $contraseña = validarEntrada($_POST["ID_Pass"]);
-            $n_meses = validarEntrada($_POST["ID_Num_meses"]);
-            $fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + $n_meses, date("d"), date("Y")));
-         } else if (isset($_SESSION["usuario"])){
-            $usuario = validarEntrada($_POST["ID_Usuario"]);
-            $fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + 1, date("d"), date("Y")));
-         }
-
-         if (aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium, $contraseña) != true)
-            echo "<div class='alert alert-danger text-center'>
-                <h4>Se produ</h4>
-            </div>";
-
-         header("Location: ".htmlspecialchars($_SERVER["PHP_SELF"]));
-      }
-      ?>
       <div id="container-principal">
 
          <!-- Barra superior de la página -->
