@@ -1,8 +1,14 @@
 <?php
 require_once('modelo.php');
 
-	$mysqli = conectar();
-	if($mysql->query("UPDATE usuarios SET email = '$correo' WHERE usuario = '$usuario' ") !== TRUE){
-		echo "No se pudo actualizar el correo";
-	}
+	$con = conectar();
+	if($con != NULL){
+		session_start();
+		$usuario = $_SESSION['usuario'];
+		$correo = validarEntrada($_POST['correo_nuevo']);
+      	$sql = "UPDATE usuarios SET email = ? WHERE nombreusuario = ?";
+      	$result = $con->prepare($sql);
+      	$result->bind_param("ss", $correo, $usuario);
+      	$result->execute();
+   }
 ?>

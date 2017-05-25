@@ -27,69 +27,96 @@ function actualizarGustos(){
 
 //funciones para validar el formulario de editar perfil
 function borrarCampos(){
-	$("form_editar_Perfil").find("input").text("");
+	$("#form_editar_Perfil").find("input").text("");
 }
 //funcion que valida todo el formulario de editar perfil
-
-function validarNombreUsuario(){
-	"use strict";
-
-    var reg_usuario = /^[a-z0-9].{1,15}$/i;
-    
-	var usuario = document.getElementById("id_nuevo_usuario");
-    var usuario_val = usuario.value;
-
-	if(!reg_usuario.test(usuario_val) && !reg_correo.test(usuario_val)){
-		document.getElementById("ID_error_nuevo_usuario").style.display = "block";
-        document.getElementById("ID_error_nuevo_usuario").innerHTML = "Usuario/Correo incorrecto";
-        return false;
-	}
-	else {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function(){
-            if (this.readyState == 4 && this.status == 200) {
-                if(this.responseText != ""){
-                    document.getElementById("ID_error_nuevo_usuario").style.display = "block";
-                    document.getElementById("ID_error_nuevo_usuario").innerHTML = this.responseText;
-                }
-            }
-        };
-        xmlhttp.open("GET", "../php/cambiar_usuario.php?usuario="+usuario_val, true);
-        xmlhttp.send();
-        document.getElementById("ID_error_nuevo_usuario").style.display = "none";
-        return true;
-    }
-}
 
 function validarCorreo(){
 
    var reg_correo = /^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}$/,
        correo = document.getElementById("id_nuevo_email"),
        correo_val = correo.value;
-
-   if (correo_val === "") {
-      document.getElementById("ID_error_email").style.display = "block";
-      document.getElementById("ID_error_email").innerHTML = "Debes introducir un correo";
-      return false;
-   } else if (!reg_correo.test(correo_val)) {
+    if(correo_val.trim() === ""){
+        return true;
+    }
+    else if (!reg_correo.test(correo_val)) {
       document.getElementById("ID_error_email").style.display = "block";
       document.getElementById("ID_error_email").innerHTML = "El formato del correo es erróneo";
       return false;
    } else {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-         if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText != "") {
-               document.getElementById("ID_error_email").style.display = "block";
-               document.getElementById("ID_error_email").innerHTML = this.responseText;
-            }
-         }
-      };//COMO COÑO COJO EL USUARIO PARA PASARSELO AL SCRIPT
-      xmlhttp.open("GET", "../php/cambiar_correo.php?correo=" + correo_val + ":usuario=" + , true);
-      xmlhttp.send();
+      $.post("../php/cambiar_correo.php",
+        {
+          correo_nuevo: correo_val
+        },
+        function(data){
+          document.getElementById("ID_error_email").style.display = "block";
+          document.getElementById("ID_error_email").innerHTML = data;
+          return false;
+        }
+        );
       document.getElementById("ID_error_email").style.display = "none";
       return true;
    }
+}
+
+function validarDescripcion(){
+
+  var descripcion = document.getElementById("id_descripcion").value;
+  if(descripcion.trim() === ""){
+      document.getElementById("ID_error_descripcion").style.display = "none";
+      return true;
+  }
+  else if(descripcion.lenght > 140){
+      document.getElementById("ID_error_descripcion").style.display = "block";
+      document.getElementById("ID_error_descripcion").innerHTML = "La descripcion no puede superar los 140 caracteres";
+  }
+  else{
+      $.post("../php/cambiar_descripcion.php",
+        {
+          nueva_descripcion: descripcion
+       },
+        function(data){
+          document.getElementById("ID_error_email").style.display = "block";
+          document.getElementById("ID_error_email").innerHTML = data;
+          return false;
+        }
+        );
+      return true;
+  }
+}
+
+function validarNuevaFotoPerfil(){
+    "use strict";
+    
+    var imagen = document.getElementById("nueva_imagen_perfil");
+     var uploadImg = imagen.value;
+        if(uploadImg.trim() === ""){
+            return true;
+        }
+        else if(!(/\.(jpg|png)$/i).test(uploadImg)){
+            document.getElementById("ID_error_perfil").style.display = "block";
+            document.getElementById("ID_error_perfil").innerHTML = "La extension del archivo no se soporta. Solo jpg y png";
+            return false;
+        }
+        else if(imagen.size > 31457280){
+            document.getElementById("ID_error_perfil").style.display = "block";
+            document.getElementById("ID_error_perfil").innerHTML = "El archivo no puede superar los 30MB";
+            return false;
+        }
+        else{
+            $.post("../php/cambiar_imagenPerfil.php",
+                {   //indice de post
+                    nueva_imagen: uploadImg
+                },
+                function(data){
+                    document.getElementById("ID_error_perfil").style.display = "block";
+                    document.getElementById("ID_error_perfil").innerHTML = data;
+                    return false;
+                }
+            );
+            document.getElementById("ID_error_perfil").style.display = "none";
+            return true;
+        }
 }
 
 function validarDatosEditarPerfil(event){
@@ -99,10 +126,9 @@ function validarDatosEditarPerfil(event){
 	ImagenEncabezado
 	Descripcion
 	*/
-	var ret = (validarNombreUsuario() & validarCorreo());
+	var ret = (validarCorreo() & validarDescripcion() & validarNuevaFotoPerfil());
     
     if (ret === 0) {
-        //esto hace que no haga submit el formulario
         event.preventDefault();
         return false;
     } else {
@@ -116,9 +142,9 @@ $( document ).ready(function() {
 	var edicion = false;
     $("#habilitar_edicion").on("click", function () {
         if(!edicion){
-			ocultarGustos();
-			edicion = true;
-		}
+			     ocultarGustos();
+			     edicion = true;
+		    }
     });
 	$("#guardar_cambios").on("click", function () {
 		edicion = false;
@@ -132,7 +158,7 @@ $( document ).ready(function() {
     });
 	
 	//eventos del formulario de editarPerfil
-	$("#form_editar_Perfil").bind("submit", function () {
+	$("#cambiar_perfil").click( function () {
         validarDatosEditarPerfil(event);
     });
 });

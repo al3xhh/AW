@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'root', '', 'webmusic');
+   return new mysqli('127.0.0.1', 'root', 'joseubuntu', 'webmusic');
 }
 
 //Función para limpiar la entrada de cualquier caracter raro.
@@ -480,14 +480,16 @@ function aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $tit
 }
 
 function autenticarUsuario($usuario, $pass){
-
+   $pass = hash('sha256', validar_entrada($pass));
    $con = conectar();
    if($con != NULL){
 
-      $sql = "SELECT nombreusuario, contrasenya FROM usuarios where nombreusuario = '$usuario' AND contrasenya = '$pass'";
-
-      $result = $con->query($sql);
-      if($result->num_rows > 0){
+      $sql = "SELECT nombreusuario, contrasenya FROM usuarios where nombreusuario = ? AND contrasenya = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("ss", $usuario, $pass);
+      $result->execute();
+      $rows = $result->get_result();
+      if($rows->num_rows > 0){
          $con->close();
 		 return true;
       }
@@ -518,10 +520,12 @@ function autenticarUsuarioConCorreo($usuario, $correo, $pass){
    $con = conectar();
    if($con != NULL){
 
-      $sql = "SELECT nombreusuario, email, contrasenya FROM usuarios where nombreusuario = '$usuario' OR email = '$correo' AND contrasenya = '$pass'";
-
-      $result = $con->query($sql);
-      if($result->num_rows > 0){
+      $sql = "SELECT nombreusuario, email, contrasenya FROM usuarios where nombreusuario = ? OR email = ? AND contrasenya = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("sss", $usuario, $correo, $pass);
+      $result->execute();
+      $rows = $result->get_result();
+      if($rows->num_rows > 0){
          $con->close();
 		 return true;
       }

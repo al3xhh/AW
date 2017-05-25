@@ -64,7 +64,7 @@
                            <div class="fb-profile-text">
 								<h1>'.$resultado[0]["nombreusuario"].'</h1>
                            </div>
-                        <div class="fb-profile-text">';
+                        <div class="fb-profile-text"></div></div>';
                ?>
                 </div>
             </div> <!-- /container fluid-->
@@ -166,7 +166,7 @@
 											foreach ($resultado as $fila) {
 												echo '<div class="user-resume">
 														<div>
-															<img class="user-resume-img" src="../img/'.cargar_caratula_por_defecto($fila["caratula"]).'" width="64" height="64" alt="Imagen usuario">
+															<img class="user-resume-img" src="../img/'.cargar_caratula_por_defecto($fila["caratula"]).'width="64" height="64" alt="Imagen usuario">
 														</div>
 														<div class="user-resume-info">
 															<h3>'.$fila["titulo"].'</h3>
@@ -179,15 +179,8 @@
 										}
 									?>
                                 </div>
-                                <div class="tab-pane" id="form_editar_Perfil">
-                                    <form class="form-horizontal" id="perfil">
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label">Nombre de usuario:</label>
-                                            <div class="col-lg-8">
-                                                <input id="id_nuevo_usuario" class="form-control" type="text" name="nuevo_nombre_usuario">
-                                            </div>
-											<div class="alert alert-danger alertas-registro" id="ID_error_nuevo_usuario"></div>
-                                        </div>
+                                <div class="tab-pane" id="Editar_Perfil">
+                                    <form class="form-horizontal" id="form_editar_Perfil" method="post">
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Email:</label>
                                             <div class="col-lg-8">
@@ -198,7 +191,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Imagen de perfil:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" type="file" name="nueva_imagen_perfil">
+                                                <input id="nueva_imagen_perfil" class="form-control" type="file" name="nuevo_perfil">
                                             </div>
 											<div class="alert alert-danger alertas-registro" id="ID_error_perfil"></div>
                                         </div>
@@ -212,11 +205,11 @@
 										<div class="form-group">
                                             <label class="col-lg-2 control-label">Descripcion:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" type="text" name="nueva_descripcion">
+                                                <input class="form-control" type="text" name="nueva_descripcion" id="id_descripcion">
                                             </div>
 											<div class="alert alert-danger alertas-registro" id="ID_error_descripcion"></div>
                                         </div>
-                                        <button type="submit" class="btn btn-danger btn-block">Guardar cambios</button>
+                                        <button id="cambiar_perfil" class="btn btn-primary btn-block">Guardar cambios</button>
                                     </form>
                                 </div>
                             </div>
@@ -231,63 +224,28 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12" id="panelGustos">
-                                    <div class="form-group">
-                                        <label>Pop:</label>
-										<p>Caca</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Rock</label>
-										<p></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hip-Hop</label>
-										<p></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Reagge</label>
-										<p></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>House</label>
-										<p></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Música clásica</label>
-										<p></p>
-                                    </div>
-                                    <button id="habilitar_edicion" class="btn btn-danger btn-block">Editar gustos musicales</button>
+                                    <?php
+
+                                        $resultado = obtener_gustos_musicales(validar_entrada($_SESSION['usuario']));
+
+                                        foreach ($resultado as $fila) {
+                                            echo '<div class="form-group">
+                                                    <label>'.$fila["genero"].'</label>
+                                                    </div>';
+                                        }
+                                    ?>
+                                    <button id="habilitar_edicion" class="btn btn-primary btn-block">Editar gustos musicales</button>
                                 </div>
                                 <form class="form-horizontal" id="form_gustos">
 									<div class="col-lg-12" id="editarGustos">
-										<div class="form-group">
+										<!--<div class="form-group">
 											<label>Pop:</label>
 											<input class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Rock:</label>
-											<input class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Hip-Hop:</label>
-											<input class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Reagge:</label>
-											<input class="form-control">
-										</div>
-										<div class="form-group">
-											<label>House:</label>
-											<input class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Musica clasica:</label>
-											<input class="form-control">
-										</div>
-
-										<button id="guardar_cambios" type="submit" class="btn btn-danger btn-block">Guardar</button>
-										<button id="cancelar" class="btn btn-danger btn-block">Cancelar</button>
+										</div>-->
+										<button id="guardar_cambios" type="submit" class="btn-primary btn-block">Guardar</button>
+										<button id="cancelar" class="btn btn-primary btn-block">Cancelar</button>
 									</div>
-								</footer>
+								</form>
                             </div>
                         </div>
                     </div>

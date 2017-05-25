@@ -59,8 +59,8 @@ ID_Error_Imagen
             return false;
         }
 		else if(imagen.size > 31457280){
-			document.getElementById("ID_Error_Archivo_Cancion").style.display = "block";
-            document.getElementById("ID_Error_Archivo_Cancion").innerHTML = "El archivo no puede superar los 30MB";
+			document.getElementById("ID_Error_Imagen").style.display = "block";
+            document.getElementById("ID_Error_Imagen").innerHTML = "El archivo no puede superar los 30MB";
             return false;
 		}
         else{
