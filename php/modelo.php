@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'root', 'joseubuntu', 'webmusic');
+   return new mysqli('127.0.0.1', 'root', '', 'webmusic');
 }
 
 //Función para limpiar la entrada de cualquier caracter raro.
@@ -249,7 +249,7 @@ function tusTopSocial($usuario) {
 
 //Función que obtiene los gustos musicales del usuario.
 function obtenerGustosMusicales($usuario) {
-   $mysqli = conectar();
+   /*$mysqli = conectar();
    $array = array();
 
    errorMysql($mysqli);
@@ -275,7 +275,21 @@ function obtenerGustosMusicales($usuario) {
    $stmt->close();
    $mysqli->close();
 
-   return $array;
+   return $array;*/
+   $mysqli = conectar();
+	$stmt = $mysqli->prepare("SELECT genero
+            FROM gustos
+            WHERE usuario = ?");
+	$stmt->bind_param("s", $usuario);
+	$stmt->execute();
+	$stmt->bind_result($col1);
+	$ret = array();
+   while($stmt->fetch())
+      array_push($ret, $col1);
+	$stmt->close();
+	$mysqli->close();
+
+	return $ret;
 }
 
 //Función que obtiene la foto, el encabezado y la descripción del usuario
@@ -458,6 +472,27 @@ function sigueA($seguidor, $seguido) {
    return $ret;
 }
 
+function borrarGenerosUsuario($usuario){
+
+	$mysqli = conectar();
+	if($mysqli != NULL){
+		$stmt = $mysqli->prepare("DELETE FROM gustos WHERE usuario = ?");
+		$stmt->bind_param("s", $usuario);
+		$stmt->execute();
+		$mysqli->close();
+		return true;
+	}
+	return false;
+}
+
+function insertarNuevoGeneroUsuario($usuario, $genero){
+	$mysqli = conectar();
+	$stmt = $mysqli->prepare("INSERT INTO gustos (usuario, genero) VALUES (?,?)");
+	$stmt->bind_param("ss", $usuario, $genero);
+	$stmt->execute();
+	$mysqli->close();
+}
+
 function getInfoCancion($titulo){
    $mysqli = conectar();
    $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo FROM cancion WHERE titulo = ?");
@@ -536,6 +571,34 @@ function autenticarUsuarioConCorreo($usuario, $correo, $pass){
    }
 }
 
+function cambiarEmail($usuario, $correo){
+	$con = conectar();
+	if($con != NULL){
+      	$sql = "UPDATE usuarios SET email = ? WHERE nombreusuario = ?";
+      	$result = $con->prepare($sql);
+      	$result->bind_param("ss", $correo, $usuario);
+      	$result->execute();
+		return true;
+   }
+   else{
+		return false;
+   }
+}
+
+function cambiarDescripcion($usuario, $descripcion){
+	$con = conectar();
+	if($con != NULL){
+      	$sql = "UPDATE usuarios SET descripcion = ? WHERE nombreusuario = ?";
+      	$result = $con->prepare($sql);
+      	$result->bind_param("ss", $descripcion, $usuario);
+      	$result->execute();
+		return true;
+    }
+	else{
+		return false;
+	}
+}
+
 function cargarRutaFotoEncabezado($ruta){
 	
 	if($ruta == ""){
@@ -569,9 +632,50 @@ function cargarCaratulaPorDefecto($ruta){
 function subirArchivo($archivo, $directorioTemporal, $directorioSubida){
 
 	$fichero_subido = $directorioSubida . basename($archivo);
-	if (move_uploaded_file($directorioTemporal, $fichero_subido)) {
+	if (move_uploaded_file($directorioTemporal, $fichero_subido)){
 		return true;
 	} else {
+		return false;
+	}
+}
+
+function actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
+	
+	$fichero_subido = $directorioSubida . basename($archivo);
+	if (move_uploaded_file($directorioTemporal, $fichero_subido)){
+		if(rename($fichero_subido, $directorioSubida.basename($nuevoNombre)))
+			return true;
+		else
+			return false;
+	} else {
+		return false;
+	}
+}
+
+function cambiarFotoDePerfil($usuario, $archivo){
+	$con = conectar();
+	if($con != NULL){
+      	$sql = "UPDATE usuarios SET foto = ? WHERE nombreusuario = ?";
+      	$result = $con->prepare($sql);
+      	$result->bind_param("ss", $archivo, $usuario);
+      	$result->execute();
+		return true;
+    }
+	else{
+		return false;
+	}
+}
+
+function cambiarFotoEncabezado($usuario, $archivo){
+	$con = conectar();
+	if($con != NULL){
+      	$sql = "UPDATE usuarios SET encabezado = ? WHERE nombreusuario = ?";
+      	$result = $con->prepare($sql);
+      	$result->bind_param("ss", $archivo, $usuario);
+      	$result->execute();
+		return true;
+    }
+	else{
 		return false;
 	}
 }

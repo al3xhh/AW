@@ -28,6 +28,61 @@
         <script src="../js/miPerfil.js"></script>
     </head>
     <body>
+	<?php
+	$errorCorreo = $errorDescripcion = $errorPerfil = $errorEncabezado = "";
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		require_once('../php/controlador.php');
+		$nuevoCorreo = $nuevaDescripcion = $nuevaImagenPerfil = $nuevoEncabezado = "";
+		if(isset($_POST['nuevo_email'])){
+			$nuevoCorreo = validar_entrada($_POST['nuevo_email']);
+			//meto el nuevo correo
+			if($nuevoCorreo != "")
+			if(!cambiar_email($_SESSION['usuario'], $nuevoCorreo)){
+				$errorCorreo = true;
+			}
+		}
+		if(isset($_POST['nueva_descripcion'])){
+			//meto la nueva descripcion
+			$nuevaDescripcion = validar_entrada($_POST['nueva_descripcion']);
+			if($nuevaDescripcion != "")
+			if(!cambiar_descripcion($_SESSION['usuario'], $nuevaDescripcion)){
+				$errorDescripcion = true;
+			}
+		}
+		if(isset($_FILES['nuevo_perfil'])){
+			//meto la nueva foto de perfil
+			$nuevaImagenPerfil = $_FILES['nuevo_perfil'];
+			if(!actualizar_perfil($nuevaImagenPerfil['name'], $nuevaImagenPerfil['tmp_name'], "../img/", $_SESSION['usuario']."_perfil.png")){
+				$errorPerfil = true;
+			}
+			else{
+				if(!cambiar_foto_perfil($_SESSION['usuario'], $_SESSION['usuario']."_perfil.png")){
+					$errorPerfil = true;
+				}
+			}
+		}
+		if(isset($_FILES['nueva_imagen_encabezado'])){
+			//meto la nueva foto de encabezado
+			$nuevoEncabezado = $_FILES['nueva_imagen_encabezado'];
+			if(!actualizar_perfil($nuevoEncabezado['name'], $nuevoEncabezado['tmp_name'], "../img/", $_SESSION['usuario']."_encabezado.png")){
+				$errorEncabezado = true;
+			}
+			else{
+				if(!cambiar_foto_encabezado($_SESSION['usuario'], $_SESSION['usuario']."_encabezado.png")){
+					$errorEncabezado = true;
+				}
+			}
+		}
+		if(isset($_POST['generosSeleccionados'])){
+			borrar_generos_usuario($_SESSION['usuario']);
+			$generosNuevos = $_POST['generosSeleccionados'];
+			foreach($generosNuevos as $genero){
+				insertar_nuevo_genero_usuario($_SESSION['usuario'], $genero);
+			}
+		}
+		header('Location:'.htmlspecialchars($_SERVER['PHP_SELF']));
+	}
+	?>
         <div id="container-principal">
 
            <!-- Barra superior de la página -->
@@ -180,27 +235,42 @@
 									?>
                                 </div>
                                 <div class="tab-pane" id="Editar_Perfil">
-                                    <form class="form-horizontal" id="form_editar_Perfil" method="post">
+                                    <form class="form-horizontal" id="form_editar_Perfil" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Email:</label>
                                             <div class="col-lg-8">
                                                 <input id="id_nuevo_email" class="form-control" type="text" name="nuevo_email">
                                             </div>
 											<div class="alert alert-danger alertas-registro" id="ID_error_email"></div>
+											<?php
+												if($errorCorreo != "" && $errorCorreo){
+													echo "<div class='alert alert-danger alertas-registro' id='ID_error_email'>No se pudo guardar el correo</div>";
+												}
+											?>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Imagen de perfil:</label>
                                             <div class="col-lg-8">
-                                                <input id="nueva_imagen_perfil" class="form-control" type="file" name="nuevo_perfil">
+                                                <input id="nueva_imagen_perfil" class="form-control" type="file" name="nuevo_perfil" enctype="multipart/form-data">
                                             </div>
 											<div class="alert alert-danger alertas-registro" id="ID_error_perfil"></div>
+											<?php
+												if($errorPerfil != "" && $errorPerfil){
+													echo "<div class='alert alert-danger alertas-registro' id='ID_error_perfil'>No se pudo guardar la nueva imagen</div>";
+												}
+											?>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Imagen de encabezado:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" type="file" name="nueva_imagen_encabezado">
+                                                <input class="form-control" type="file" name="nueva_imagen_encabezado" id="nuevo_encabezado" enctype="multipart/form-data">
                                             </div>
 											<div class="alert alert-danger alertas-registro" id="ID_error_encabezado"></div>
+											<?php
+												if($errorEncabezado != "" && $errorEncabezado){
+													echo "<div class='alert alert-danger alertas-registro' id='ID_error_encabezado'>No se pudo guardar el encabezado</div>";
+												}
+											?>
                                         </div>
 										<div class="form-group">
                                             <label class="col-lg-2 control-label">Descripcion:</label>
@@ -208,6 +278,11 @@
                                                 <input class="form-control" type="text" name="nueva_descripcion" id="id_descripcion">
                                             </div>
 											<div class="alert alert-danger alertas-registro" id="ID_error_descripcion"></div>
+											<?php
+												if($errorDescripcion != "" && $errorDescripcion){
+													echo "<div class='alert alert-danger alertas-registro' id='ID_error_descripcion'>No se pudo guardar la descripcion</div>";
+												}
+											?>
                                         </div>
                                         <button id="cambiar_perfil" class="btn btn-primary btn-block">Guardar cambios</button>
                                     </form>
@@ -230,19 +305,32 @@
 
                                         foreach ($resultado as $fila) {
                                             echo '<div class="form-group">
-                                                    <label>'.$fila["genero"].'</label>
+                                                    <label>'.$fila.'</label>
                                                     </div>';
                                         }
                                     ?>
                                     <button id="habilitar_edicion" class="btn btn-primary btn-block">Editar gustos musicales</button>
                                 </div>
-                                <form class="form-horizontal" id="form_gustos">
+                                <form class="form-horizontal" id="form_gustos" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
 									<div class="col-lg-12" id="editarGustos">
-										<!--<div class="form-group">
-											<label>Pop:</label>
-											<input class="form-control">
-										</div>-->
-										<button id="guardar_cambios" type="submit" class="btn-primary btn-block">Guardar</button>
+										<?php
+										$resultado = obtener_gustos_musicales(validar_entrada($_SESSION['usuario']));
+										$generos = obtener_generos();
+										foreach($generos as $genero){
+											if(!in_array($genero, $resultado)){
+												echo "<div class='checkbox'>";
+												echo "<label><input type='checkbox' name='generosSeleccionados[]' value=".$genero.">".$genero."</label>";
+												echo "</div>";
+												
+											}
+											else{
+												echo "<div class='checkbox'>";
+												echo "<label><input name='generosSeleccionados[]' value=".$genero." type='checkbox' checked>".$genero."</label>";
+												echo "</div>";
+											}
+										}
+										?>
+										<button id="guardar_cambios" class="btn-primary btn-block">Guardar</button>
 										<button id="cancelar" class="btn btn-primary btn-block">Cancelar</button>
 									</div>
 								</form>

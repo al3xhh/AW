@@ -79,8 +79,24 @@ function autenticar_con_correo($usuario, $correo, $pass){
 	return autenticarUsuarioConCorreo($usuario, $correo, $pass);
 }
 
+function borrar_generos_usuario($usuario){
+	return borrarGenerosUsuario($usuario);
+}
+
+function insertar_nuevo_genero_usuario($usuario, $genero){
+	insertarNuevoGeneroUsuario($usuario, $genero);
+}
+
 function conseguir_usuario_correo($correo){
 	
+}
+
+function cambiar_email($usuario, $correo){
+	return cambiarEmail($usuario, $correo);
+}
+
+function cambiar_descripcion($usuario, $descripcion){
+	return cambiarDescripcion($usuario, $descripcion);
 }
 
 function cargar_Ruta_Foto_Encabezado($ruta){
@@ -96,5 +112,18 @@ function cargar_caratula_por_defecto($ruta){
 }
 function subir_archivo($archivo, $directorioTemporal, $directorioSubida){
 	return subirArchivo($archivo, $directorioTemporal, $directorioSubida);
+}
+
+function actualizar_perfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
+	return actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre);
+	
+}
+
+function cambiar_foto_perfil($usuario, $archivo){
+	return cambiarFotoDePerfil($usuario, $archivo);
+}
+
+function cambiar_foto_encabezado($usuario, $archivo){
+	return cambiarFotoEncabezado($usuario, $archivo);
 }
 ?>

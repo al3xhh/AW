@@ -20,7 +20,7 @@
 						//autentico
 						if(autenticar_con_correo($usuario, $pass)){
 							session_start();
-							$_SESSION['usuario']=conseguir_usuario_correo($usuario);
+							$_SESSION['usuario']=conseguir_usuario_correo($usuario);//HACER
 							header('Location: miPerfil.php');
 						}
 						else{

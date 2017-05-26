@@ -21,10 +21,6 @@ function ocultarEdicionGustos() {
     mostrar("panelGustos");
 }
 
-function actualizarGustos(){
-	//script de ajax
-}
-
 //funciones para validar el formulario de editar perfil
 function borrarCampos(){
 	$("#form_editar_Perfil").find("input").text("");
@@ -44,16 +40,6 @@ function validarCorreo(){
       document.getElementById("ID_error_email").innerHTML = "El formato del correo es erróneo";
       return false;
    } else {
-      $.post("../php/cambiar_correo.php",
-        {
-          correo_nuevo: correo_val
-        },
-        function(data){
-          document.getElementById("ID_error_email").style.display = "block";
-          document.getElementById("ID_error_email").innerHTML = data;
-          return false;
-        }
-        );
       document.getElementById("ID_error_email").style.display = "none";
       return true;
    }
@@ -71,16 +57,7 @@ function validarDescripcion(){
       document.getElementById("ID_error_descripcion").innerHTML = "La descripcion no puede superar los 140 caracteres";
   }
   else{
-      $.post("../php/cambiar_descripcion.php",
-        {
-          nueva_descripcion: descripcion
-       },
-        function(data){
-          document.getElementById("ID_error_email").style.display = "block";
-          document.getElementById("ID_error_email").innerHTML = data;
-          return false;
-        }
-        );
+      document.getElementById("ID_error_descripcion").style.display = "none";
       return true;
   }
 }
@@ -93,9 +70,9 @@ function validarNuevaFotoPerfil(){
         if(uploadImg.trim() === ""){
             return true;
         }
-        else if(!(/\.(jpg|png)$/i).test(uploadImg)){
+        else if(!(/\.(jpg)$/i).test(uploadImg)){
             document.getElementById("ID_error_perfil").style.display = "block";
-            document.getElementById("ID_error_perfil").innerHTML = "La extension del archivo no se soporta. Solo jpg y png";
+            document.getElementById("ID_error_perfil").innerHTML = "La extension del archivo no se soporta. Solo jpg.";
             return false;
         }
         else if(imagen.size > 31457280){
@@ -104,29 +81,38 @@ function validarNuevaFotoPerfil(){
             return false;
         }
         else{
-            $.post("../php/cambiar_imagenPerfil.php",
-                {   //indice de post
-                    nueva_imagen: uploadImg
-                },
-                function(data){
-                    document.getElementById("ID_error_perfil").style.display = "block";
-                    document.getElementById("ID_error_perfil").innerHTML = data;
-                    return false;
-                }
-            );
-            document.getElementById("ID_error_perfil").style.display = "none";
+			document.getElementById("ID_error_perfil").style.display = "none";
+			return true;
+        }
+}
+
+function validarEncabezado(){
+	"use strict";
+    
+    var imagen = document.getElementById("nuevo_encabezado");
+     var uploadImg = imagen.value;
+        if(uploadImg.trim() === ""){
+            return true;
+        }
+        else if(!(/\.(jpg)$/i).test(uploadImg)){
+            document.getElementById("ID_error_encabezado").style.display = "block";
+            document.getElementById("ID_error_encabezado").innerHTML = "La extension del archivo no se soporta. Solo jpg.";
+            return false;
+        }
+        else if(imagen.size > 31457280){
+            document.getElementById("ID_error_encabezado").style.display = "block";
+            document.getElementById("ID_error_encabezado").innerHTML = "El archivo no puede superar los 30MB";
+            return false;
+        }
+        else{
+            document.getElementById("ID_error_encabezado").style.display = "none";
             return true;
         }
 }
 
 function validarDatosEditarPerfil(event){
 	"use_strict";
-	/*
-	imagenPerfil
-	ImagenEncabezado
-	Descripcion
-	*/
-	var ret = (validarCorreo() & validarDescripcion() & validarNuevaFotoPerfil());
+	var ret = (validarCorreo() & validarDescripcion() & validarNuevaFotoPerfil() & validarEncabezado());
     
     if (ret === 0) {
         event.preventDefault();
@@ -142,14 +128,14 @@ $( document ).ready(function() {
 	var edicion = false;
     $("#habilitar_edicion").on("click", function () {
         if(!edicion){
-			     ocultarGustos();
-			     edicion = true;
-		    }
+			ocultarGustos();
+			edicion = true;
+		}
     });
 	$("#guardar_cambios").on("click", function () {
 		edicion = false;
 		ocultarEdicionGustos();
-		actualizarGustos();
+		return true;
     });
 	$("#cancelar").on("click", function () {
 		edicion = false;
