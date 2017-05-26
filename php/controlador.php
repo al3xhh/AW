@@ -95,4 +95,20 @@ function obtener_info_comentarios_cancion($cancion, $usuario){
    return obtenerInfoComentariosCancion($cancion, $usuario);
 }
 
+function existe_cancion($titulo, $autor){
+   return existeCancion($titulo, $autor);
+}
+
+function get_siguiente_cancion($titulo, $autor, $lista){
+   return getSiguienteCancion($titulo, $autor, $lista);
+}
+
+function get_cancion_anterior($titulo, $autor, $lista){
+   return getCancionAnterior($titulo, $autor, $lista);
+}
+
+function aumentar_reproducciones($titulo, $autor){
+   aumentarReproducciones($titulo, $autor);
+}
+
 ?>

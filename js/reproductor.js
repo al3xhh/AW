@@ -42,7 +42,7 @@ $(document).ready(function() {
    });
 
    $("#selList").change(function(){
-      $.post("../php/aniadir_a_lista.php", {'lista' : $("#selList :selected").text(), 'cancion' : $("#nombre_cancion").text(), 'autor' : $("#autor").text(), 'usuario' : $("#nombre_usuario").text()}, function(data){
+      $.post("../php/aniadir_a_lista.php", {'lista' : $("#selList :selected").val(), 'cancion' : $("#nombre_cancion").text(), 'autor' : $("#autor").text(), 'usuario' : $("#nombre_usuario").text()}, function(data){
          $("#selList").val("title");
       })
 

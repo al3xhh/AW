@@ -531,7 +531,7 @@ function getInfoCancion($titulo, $autor){
    $stmt->execute();
    $stmt->bind_result($col1, $col2, $col3, $col4, $col5);
    $stmt->fetch();
-   $ret = array("autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4, "caratula" => $col5);
+   $ret = array("autor" => $autor ,"titulo" => $titulo, "autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4, "caratula" => $col5);
 
    desconectar($mysqli);
 
@@ -592,14 +592,16 @@ function aumentarReproducciones($titulo, $autor){
 function obtenerListasReproduccionUsuario($usuario){
    $mysqli = conectar();
    //cogemos el numero de reproducciones
-   $stmt = $mysqli->prepare("SELECT nombre FROM listareproduccion WHERE usuario = ?");
+   $stmt = $mysqli->prepare("SELECT nombre, id FROM listareproduccion WHERE usuario = ?");
    $stmt->bind_param("s", $usuario);
    $stmt->execute();
-   $stmt->bind_result($listas);
+   $stmt->bind_result($listas, $id_listas);
    $array = array();
 
-   while($stmt->fetch())
-      array_push($array, $listas);
+   while($stmt->fetch()){
+      $row = array("id" => $id_listas, "nombre" => $listas);
+      array_push($array, $row);
+   }
 
 
    $stmt->close();
@@ -667,22 +669,56 @@ function obtenerIdCancion($titulo, $autor){
 }
 
 function aniadirCancionALista($cancion, $lista, $usuario){
-   //sacamos el id de la lista
    $mysqli = conectar();
-   $stmt = $mysqli->prepare("SELECT id FROM listareproduccion WHERE usuario = ? AND nombre = ?");
-   $stmt->bind_param("ss", $usuario, $lista);
-   $stmt->execute();
-   $stmt->bind_result($lista);
-   $stmt->fetch();
-   $stmt->close();
-
-   //insetamos la cancion en la lista
    $stmt = $mysqli->prepare("INSERT INTO listareproduccioncancion VALUES (?, ?)");
    $stmt->bind_param("ss", $lista, $cancion);
    $stmt->execute();
    $stmt->close();
 
    desconectar($mysqli);
+}
+
+function existeCancion($titulo, $autor){
+   $mysqli = conectar();
+   $stmt = $mysqli->prepare("SELECT * FROM cancion WHERE titulo = ? AND autor = ?");
+   $stmt->bind_param("ss", $titulo, $autor);
+   $stmt->execute();
+   $stmt->store_result();
+
+   if ($stmt->num_rows > 0){
+      $stmt->close();
+      return true;
+   }
+   $stmt->close();
+   return false;
+}
+
+function getSiguienteCancion($titulo, $autor, $lista){
+   $cancion_id = obtenerIdCancion($titulo, $autor);
+   $mysqli = conectar();
+   $stmt = $mysqli->prepare("SELECT titulo, autor FROM cancion WHERE id = (SELECT cancion FROM listareproduccioncancion WHERE lista = ? AND cancion > ? ORDER BY 1 LIMIT 1)");
+   $stmt->bind_param("ii", $lista, $cancion_id);
+   $stmt->execute();
+   $stmt->bind_result($col1, $col2);
+
+    if ($stmt->fetch())
+      return getInfoCancion($col1, $col2);
+   else 
+      return false;
+}
+
+function getCancionAnterior($titulo, $autor, $lista){
+   $cancion_id = obtenerIdCancion($titulo, $autor);
+   $mysqli = conectar();
+   $stmt = $mysqli->prepare("SELECT titulo, autor FROM cancion WHERE id = (SELECT cancion FROM listareproduccioncancion WHERE lista = ? AND cancion < ? ORDER BY 1 DESC LIMIT 1)");
+   $stmt->bind_param("ii", $lista, $cancion_id);
+   $stmt->execute();
+   $stmt->bind_result($col1, $col2);
+
+   if ($stmt->fetch())
+      return getInfoCancion($col1, $col2);
+   else 
+      return false;
 }
 
 ?>
