@@ -123,11 +123,7 @@
                <!-- Barra de estado de la cancion -->
                <div id="info-player">
                   <p id="reproducido" class="info-player-time">0:0</p>
-                  <div id="player-progres" class="progress">
-                     <div id="myBar" class="progress-bar" role="progressbar" aria-valuenow="70"
-                          aria-valuemin="0" aria-valuemax="100">
-                     </div>
-                  </div>
+                   <input id="player-progres" type="range" value="0" max="">
                   <p class="info-player-time" id="duracion"><?php echo  floor($info["duracion"] / 60), ":", $info["duracion"] % 60; ?></p>
                </div>
             </div>
