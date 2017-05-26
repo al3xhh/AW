@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <?php
-   session_start();
-   $_SESSION["usuario"] = "christian";
+session_start();
+if (!isset($_SESSION["usuario"])){
+   session_unset();
+   session_destroy();
+}
 ?>
 <html lang="es">
    <head>
@@ -60,7 +63,16 @@
                <div>
                   <?php
                   require_once("../php/controlador.php");
-                  $info = info_cancion($_GET["titulo"], $_GET["usuario"]);
+                  require_once("../php/modelo.php");
+                  $titulo = validarEntrada($_GET["titulo"]);
+                  $autor = validarEntrada($_GET["usuario"]);
+
+                  if (existe_cancion($titulo, $autor)){
+                     $info = info_cancion($titulo, $autor);
+                     aumentar_reproducciones($titulo, $autor);
+                  }
+                  else
+                     header("Location: accesodenegado.html");
 
                   if ($info["caratula"])
                      echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
@@ -81,21 +93,32 @@
 
                   <div class="form-group">
                      <label for="selList">Añadir a lista:</label>
-                     <form action="addGusto.php" method="POST" id="addList-form">
-                        <div class="col-md-12">
-                           <select id="selList" class="form-control" form="addList-form" name="genero" type="submit">
-                              <option value="title">Añadir a lista</option>
-                              <?php
-                              $listas = obtener_listas_reproduccion_usuario($_SESSION["usuario"]);
+                     <div class="col-md-12">
+                        <select id="selList" class="form-control" form="addList-form" name="genero" type="submit">
+                           <option value="title">Añadir a lista</option>
+                           <?php
+                           $listas = obtener_listas_reproduccion_usuario($_SESSION["usuario"]);
 
-                              foreach($listas as $lista)
-                                 echo "<option>".$lista."</option>";
+                           foreach($listas as $lista)
+                              echo "<option value='".$lista["id"]."'>".$lista["nombre"]."</option>";
 
-                              ?>
-                           </select>
-                        </div>
-                     </form>
+                           ?>
+                        </select>
+                     </div>
                   </div>
+
+                  <?php if(isset($_SESSION["premium"]) && ($_SESSION["premium"] == true)) : ?>
+                  <div class="form-group">
+                     <label for="selList">Descargar:</label>
+                     <div class="col-md-12 container-fluid">
+                        <a href="../songs/<?php echo $info["archivo"] ?>" download>
+                           <button id="btn-descargar" type="button" class="btn btn-default" aria-label="Left Align">
+                              <span class="glyphicon glyphicon glyphicon-save" aria-hidden="true"></span>
+                           </button>
+                        </a>
+                     </div>
+                  </div>
+                  <?php endif; ?>
                   <?php endif; ?>
                </div>
             </div>
@@ -105,9 +128,28 @@
                <!-- Botones para el control del reproducotor -->
                <div id="player-buttons">
                   <!-- Boton para volver a la cancion anterior -->
-                  <button type="button" class="btn btn-default" aria-label="Left Align">
-                     <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-                  </button>
+                  <?php
+                  if (isset($_GET["lista"]))
+                     $lista = validarEntrada($_GET["lista"]);
+                  else
+                     $lista = false;
+
+                  $anterior = get_cancion_anterior(validarEntrada($_GET["titulo"]), validarEntrada($_GET["usuario"]), $lista);
+                  if(!$lista || !$anterior)
+                     echo '<button type="button" class="btn btn-default" aria-label="Left Align" disabled>
+                        <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                        </button>';
+                  else{
+                     echo '<form id="previous-song" method="get" action="reproductor.php">
+                     <input type="hidden" name="titulo" value="'.$anterior["titulo"].'">
+                     <input type="hidden" name="usuario" value="'.$anterior["autor"].'">
+                     <input type="hidden" name="lista" value="'.$lista.'">
+                     </form> 
+                     <button type="submit" form="previous-song" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                     </button>';
+                  }
+                  ?>
 
                   <!-- Boton de play/pause -->
                   <button id="playPauseButton"type="button" class="btn btn-default" aria-label="Left Align">
@@ -115,19 +157,30 @@
                   </button>
 
                   <!-- Boton para pasar a la siguiente cancion -->
-                  <button type="button" class="btn btn-default" aria-label="Left Align">
+                  <?php 
+                  $siguiente = get_siguiente_cancion(validarEntrada($_GET["titulo"]), validarEntrada($_GET["usuario"]), $lista);
+                  if(!$lista || !$siguiente)
+                     echo '<button type="button" class="btn btn-default" aria-label="Left Align" disabled>
                      <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-                  </button>
-               </div>
+                     </button>';
+                  else{
+                     echo '<form id="next-song" method="get" action="reproductor.php">
+                     <input type="hidden" name="titulo" value="'.$siguiente["titulo"].'">
+                     <input type="hidden" name="usuario" value="'.$siguiente["autor"].'">
+                     <input type="hidden" name="lista" value="'.$lista.'">
+                     </form> 
+                     <button type="submit" form="next-song" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                     </button>';
+                  }
+                  ?>
 
+
+               </div>
                <!-- Barra de estado de la cancion -->
                <div id="info-player">
                   <p id="reproducido" class="info-player-time">0:0</p>
-                  <div id="player-progres" class="progress">
-                     <div id="myBar" class="progress-bar" role="progressbar" aria-valuenow="70"
-                          aria-valuemin="0" aria-valuemax="100">
-                     </div>
-                  </div>
+                  <input id="player-progres" type="range" value="0" max="">
                   <p class="info-player-time" id="duracion"><?php echo  floor($info["duracion"] / 60), ":", $info["duracion"] % 60; ?></p>
                </div>
             </div>
@@ -138,7 +191,13 @@
                <div class="row">
                   <div class="panel panel-primary">
                      <div class="panel-heading comment-heading">
-                        <img src="../img/FotoUsuarioPorDefecto.png" class="img-circle img-responsive comment-img" alt="user profile image">
+                        <?php
+                        $infoUsuario = obtener_informacion_usuario($_SESSION["usuario"]);
+                        if ($infoUsuario[0]["foto"])
+                           echo "<img src='../img/".$infoUsuario["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
+                        else 
+                           echo '<img src="../img/FotoUsuarioPorDefecto.png" class="img-circle img-responsive comment-img" alt="user profile image">';
+                        ?>
                         <div>
                            <h4 id="nombre_usuario"><?php echo $_SESSION["usuario"] ?></h4>
                         </div>
