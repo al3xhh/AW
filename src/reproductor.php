@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <?php
 session_start();
-$_SESSION["usuario"] = "christian";
-$_SESSION["premium"] = true;
-//session_unset();
-//session_destroy();
+if (!isset($_SESSION["usuario"])){
+   session_unset();
+   session_destroy();
+}
 ?>
 <html lang="es">
    <head>
