@@ -67,8 +67,6 @@
                 } else {
                    header("Location: ../src/home.php");
                 }
-             } else {
-                 header("Location: ".htmlspecialchars($_SERVER{"PHP_SELF"}));
              }
             }
           }
