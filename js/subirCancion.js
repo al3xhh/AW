@@ -53,7 +53,7 @@ ID_Error_Imagen
             document.getElementById("ID_Error_Imagen").innerHTML = "Si no subes foto, se pondra una por defecto";
             return true;
 		}
-        else if(!(/\.(jpg|png)$/i).test(uploadImg)){
+        else if(!(/\.(jpg)$/i).test(uploadImg)){
             document.getElementById("ID_Error_Imagen").style.display = "block";
             document.getElementById("ID_Error_Imagen").innerHTML = "La extension del archivo no se soporta. Solo jpg y png";
             return false;

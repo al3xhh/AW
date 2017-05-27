@@ -639,6 +639,25 @@ function subirArchivo($archivo, $directorioTemporal, $directorioSubida){
 	}
 }
 
+function conseguirUsuarioCorreo($correo){
+	$con = conectar();
+   if($con != NULL){
+
+      $sql = "SELECT contrasenya FROM usuarios WHERE email = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("s", $correo);
+      $result->execute();
+      $rows = $result->get_result();
+      if($rows->num_rows > 0){
+		$row = $result->fetch_assoc();
+		return $row['contrasenya'];
+      }
+      else{
+		return NULL;
+      }
+   }
+}
+
 function actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
 	
 	$fichero_subido = $directorioSubida . basename($archivo);

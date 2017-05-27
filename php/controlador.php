@@ -88,7 +88,7 @@ function insertar_nuevo_genero_usuario($usuario, $genero){
 }
 
 function conseguir_usuario_correo($correo){
-	
+	return conseguirUsuarioCorreo($correo);
 }
 
 function cambiar_email($usuario, $correo){

@@ -19,9 +19,23 @@
 					else{
 						//autentico
 						if(autenticar_con_correo($usuario, $pass)){
-							session_start();
-							$_SESSION['usuario']=conseguir_usuario_correo($usuario);//HACER
-							header('Location: miPerfil.php');
+							$pos = strpos($usuario, '@');
+							if($pos === false){
+								session_start();
+								$_SESSION['usuario']=$usuario;//HACER
+								header('Location: miPerfil.php');
+							}
+							else{
+								$auxUsuario = conseguir_usuario_correo($usuario);
+								if($auxUsuario != NULL){
+									session_start();
+									$_SESSION['usuario']=$auxUsuario;//HACER
+									header('Location: miPerfil.php');
+								}
+								else{
+									$errorUsuario = true;
+								}
+							}
 						}
 						else{
 							$errorAutenticacion = true;
