@@ -96,15 +96,20 @@
                       $resultado = obtener_novedades();
                       $i = 1;
 
-                      foreach ($resultado as $fila) {
-                        echo '<div class="col-md-3 col-lg-3">
-                                 <figure>
-                                     <figcaption>
-                                         <h4>'.$fila["titulo"].' - '.$fila["autor"].'</h4>
-                                     </figcaption>
-                                     <a href="src/reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'"><img class="img-responsive" src="img/'.$fila["caratula"].'" alt="img" title="image" height="200" width="200"/></a>
-                                 </figure>
-                             </div>';
+                     if(empty($resultado)) {
+                        echo '<p class="text-center"><h2>En estos momentos no hay canciones</h2></p>';
+
+                     } else {
+                        foreach ($resultado as $fila) {
+                          echo '<div class="col-md-3 col-lg-3">
+                                   <figure>
+                                       <figcaption>
+                                           <h4>'.$fila["titulo"].' - '.$fila["autor"].'</h4>
+                                       </figcaption>
+                                       <a href="src/reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'"><img class="img-responsive" src="img/'.$fila["caratula"].'" alt="img" title="image" height="200" width="200"/></a>
+                                   </figure>
+                               </div>';
+                       }
                      }
                     ?>
                 </div>
@@ -120,15 +125,20 @@
                       $resultado = obtener_top();
                       $i = 1;
 
-                      foreach ($resultado as $fila) {
-                        echo '<div class="col-md-3 col-lg-3">
-                                 <figure>
-                                     <figcaption>
-                                         <h4>'.$fila["titulo"].' - '.$fila["autor"].'</h4>
-                                     </figcaption>
-                                     <a href="src/reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'"><img class="img-responsive" src="img/'.$fila["caratula"].'" alt="img" title="image" height="200" width="200"/></a>
-                                 </figure>
-                             </div>';
+                      if(empty($resultado)) {
+                        echo '<p class="text-center"><h2>En estos momentos no hay canciones</h2></p>';
+
+                     } else {
+                         foreach ($resultado as $fila) {
+                           echo '<div class="col-md-3 col-lg-3">
+                                    <figure>
+                                        <figcaption>
+                                            <h4>'.$fila["titulo"].' - '.$fila["autor"].'</h4>
+                                        </figcaption>
+                                        <a href="src/reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'"><img class="img-responsive" src="img/'.$fila["caratula"].'" alt="img" title="image" height="200" width="200"/></a>
+                                    </figure>
+                                </div>';
+                       }
                     }
                     ?>
                 </div>

@@ -18,9 +18,9 @@ function navbar() {
    }
 
    if(in_array("index.php", $componentes))
-      $logo = "img/logo.png";
+      $logo = "img/Logo.png";
    else
-      $logo = "../img/logo.png";
+      $logo = "../img/Logo.png";
 
    echo '<a class="navbar-brand" href='.$enlace.'>Webmusic</a>';
    echo '<div class="navbar-header">';
