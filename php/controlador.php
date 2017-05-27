@@ -39,7 +39,7 @@ function aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $ti
    if (existeUsuario($usuario)){
       if (autenticarUsuario($usuario, $pass))
          return aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium);
-      else 
+      else
          return false;
    }
    else
@@ -109,6 +109,38 @@ function get_cancion_anterior($titulo, $autor, $lista){
 
 function aumentar_reproducciones($titulo, $autor){
    aumentarReproducciones($titulo, $autor);
+}
+
+function lista_reproduccion($usuario){
+  return listaReproduccion($usuario);
+}
+
+function lista_reproduccion_canciones($id){
+  return listaReproduccionCanciones($id);
+}
+
+function buscar($tipo, $busqueda){
+  return buscar_cancion($tipo, $busqueda);
+}
+
+function aniadir_lista($lista, $usuario){
+  return aniadirLista($lista, $usuario);
+}
+
+function borrar_lista($id){
+  return borrarLista($id);
+}
+
+function sacar_foto($usuario){
+  return sacarFoto($usuario);
+}
+
+function borrar_cancion_lista($id, $cancion){
+  return borrarCancionLista($id, $cancion);
+}
+
+function aniadir_cancion_lista($autor, $titulo_cancion, $lista){
+  return aniadirCancionLista($autor, $titulo_cancion, $lista);
 }
 
 ?>

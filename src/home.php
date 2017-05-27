@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+   if($_SERVER["REQUEST_METHOD"] == "POST")
+      header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
+?>
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -18,7 +22,7 @@
         <?php
           session_start();
           //TODO eliminar esto, está forzado para hacer pruebas.
-          $_SESSION['usuario'] = 'juan';
+          $_SESSION['usuario'] = 'alex';
           require_once('../php/controlador.php');
         ?>
 
@@ -34,12 +38,14 @@
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
                         <div id="imaginary_container">
-                            <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control"  placeholder="Buscar" >
-                                <span class="input-group-addon">
-                                    <a href="buscar_registrado.html" class="link-home-carousel-and-search"><span class="glyphicon glyphicon-search"></span></a>
-                                </span>
-                            </div>
+                           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
+                               <div class="input-group stylish-input-group">
+                                   <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                                   <span class="input-group-addon">
+                                      <button class="glyphicon glyphicon-search" type="submit"></button>
+                                   </span>
+                               </div>
+                            </form>
                         </div>
                     </div>
                 </div>

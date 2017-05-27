@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <?php
-session_start();
-if (!isset($_SESSION["usuario"])){
-   session_unset();
-   session_destroy();
-}
+   session_start();
+   if (!isset($_SESSION["usuario"])){
+      session_unset();
+      session_destroy();
+   }
+   if($_SERVER["REQUEST_METHOD"] == "POST")
+      header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
 ?>
 <html lang="es">
    <head>
@@ -44,18 +46,20 @@ if (!isset($_SESSION["usuario"])){
          <div class="container-fluid">
             <!-- Barra de búsqueda -->
             <div class="container">
-               <div class="row">
-                  <div class="col-sm-6 col-sm-offset-3">
-                     <div id="imaginary_container">
-                        <div class="input-group stylish-input-group">
-                           <input type="text" class="form-control"  placeholder="Buscar" >
-                           <span class="input-group-addon">
-                              <a href="buscar_registrado.html" class="link-home-carousel-and-search"><span class="glyphicon glyphicon-search"></span></a>
-                           </span>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div id="imaginary_container">
+                           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
+                               <div class="input-group stylish-input-group">
+                                   <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                                   <span class="input-group-addon">
+                                      <button class="glyphicon glyphicon-search" type="submit"></button>
+                                   </span>
+                               </div>
+                            </form>
                         </div>
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div><!-- Fin barra de búsqueda -->
 
             <!-- Cabecera del reproductor-->
@@ -144,7 +148,7 @@ if (!isset($_SESSION["usuario"])){
                      <input type="hidden" name="titulo" value="'.$anterior["titulo"].'">
                      <input type="hidden" name="usuario" value="'.$anterior["autor"].'">
                      <input type="hidden" name="lista" value="'.$lista.'">
-                     </form> 
+                     </form>
                      <button type="submit" form="previous-song" class="btn btn-default" aria-label="Left Align">
                         <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
                      </button>';
@@ -157,7 +161,7 @@ if (!isset($_SESSION["usuario"])){
                   </button>
 
                   <!-- Boton para pasar a la siguiente cancion -->
-                  <?php 
+                  <?php
                   $siguiente = get_siguiente_cancion(validarEntrada($_GET["titulo"]), validarEntrada($_GET["usuario"]), $lista);
                   if(!$lista || !$siguiente)
                      echo '<button type="button" class="btn btn-default" aria-label="Left Align" disabled>
@@ -168,7 +172,7 @@ if (!isset($_SESSION["usuario"])){
                      <input type="hidden" name="titulo" value="'.$siguiente["titulo"].'">
                      <input type="hidden" name="usuario" value="'.$siguiente["autor"].'">
                      <input type="hidden" name="lista" value="'.$lista.'">
-                     </form> 
+                     </form>
                      <button type="submit" form="next-song" class="btn btn-default" aria-label="Left Align">
                         <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
                      </button>';
@@ -193,10 +197,7 @@ if (!isset($_SESSION["usuario"])){
                      <div class="panel-heading comment-heading">
                         <?php
                         $infoUsuario = obtener_informacion_usuario($_SESSION["usuario"]);
-                        if ($infoUsuario[0]["foto"])
-                           echo "<img src='../img/".$infoUsuario["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
-                        else 
-                           echo '<img src="../img/FotoUsuarioPorDefecto.png" class="img-circle img-responsive comment-img" alt="user profile image">';
+                           echo "<img src='../img/".$infoUsuario[0]["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
                         ?>
                         <div>
                            <h4 id="nombre_usuario"><?php echo $_SESSION["usuario"] ?></h4>

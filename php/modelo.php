@@ -14,7 +14,7 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'root', '', 'WebMusic');
+   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'WebMusic');
 }
 
 //TODO quitarla de aquí y corregir todas las llamadas que se hagan
@@ -591,7 +591,6 @@ function aumentarReproducciones($titulo, $autor){
 
 function obtenerListasReproduccionUsuario($usuario){
    $mysqli = conectar();
-   //cogemos el numero de reproducciones
    $stmt = $mysqli->prepare("SELECT nombre, id FROM listareproduccion WHERE usuario = ?");
    $stmt->bind_param("s", $usuario);
    $stmt->execute();
@@ -703,7 +702,7 @@ function getSiguienteCancion($titulo, $autor, $lista){
 
     if ($stmt->fetch())
       return getInfoCancion($col1, $col2);
-   else 
+   else
       return false;
 }
 
@@ -717,8 +716,192 @@ function getCancionAnterior($titulo, $autor, $lista){
 
    if ($stmt->fetch())
       return getInfoCancion($col1, $col2);
-   else 
+   else
       return false;
 }
 
+function listaReproduccion($usuario) {
+	$mysqli = conectar();
+	$array = array();
+	$sql = "SELECT nombre, usuario, id
+   			FROM listareproduccion
+   			WHERE usuario = ?";
+
+	$stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+   $stmt->execute();
+	$stmt->bind_result($col1, $col2, $col3);
+
+   while ($stmt->fetch()){
+      $row = array("nombre" => $col1,
+                     "usuario" => $col2,
+                     "id" => $col3);
+      array_push($array, $row);
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+  }
+
+function listaReproduccionCanciones($id){
+   $mysqli = conectar();
+   $array = array();
+   $sql = "SELECT titulo, autor, fecha, duracion, id
+            FROM cancion
+            JOIN listareproduccioncancion ON cancion = id
+            WHERE lista = ?
+            ORDER BY titulo";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("i", $id);
+   $stmt->execute();
+   $stmt->bind_result($col1, $col2, $col3, $col4, $col5);
+
+   while ($stmt->fetch()){
+      $row = array("titulo" => $col1,
+                     "autor" => $col2,
+                     "fecha" => $col3,
+                     "duracion" => $col4,
+                     "id" => $col5);
+      array_push($array, $row);
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+}
+
+
+function buscar_cancion($tipo, $busqueda){
+   $mysqli = conectar();
+   $array = array();
+   $sol = "%".$busqueda."%";
+
+   if ($tipo == 1) {//CANCION
+      $sql = "SELECT caratula, titulo, autor, DATE(fecha)
+               FROM cancion
+               WHERE titulo LIKE ?";
+   } else if($tipo == 2) {//ARTISTA
+      $sql = "SELECT caratula, titulo, autor, DATE(fecha)
+               FROM cancion
+               WHERE autor LIKE ?";
+   } else if($tipo == 3) {//FECHA
+      $sql = "SELECT caratula, titulo, autor, DATE(fecha)
+               FROM cancion
+               WHERE fecha LIKE ?";
+   }
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $sol);
+   $stmt->execute();
+   $stmt->bind_result($col1, $col2, $col3, $col4);
+
+   while ($stmt->fetch()){
+      $row = array("caratula" => $col1,
+                     "titulo" => $col2,
+                     "autor" => $col3,
+                     "fecha" => $col4,);
+      array_push($array, $row);
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $array;
+}
+
+function aniadirLista($lista, $usuario){
+   $mysqli = conectar();
+   $ret = true;
+   $sql = "INSERT INTO listareproduccion (usuario, nombre) values (?, ?)";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $usuario, $lista);
+
+   if (!$stmt->execute()) {
+      $ret = False;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
+}
+
+function borrarLista($id){
+   $mysqli = conectar();
+   $usuario = $_SESSION['username'];
+   $ret = true;
+   $sql = "DELETE FROM listareproduccion
+            WHERE id = ?";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("i", $id);
+
+   if (!$stmt->execute()) {
+      $ret = False;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
+}
+
+function borrarCancionLista($id, $cancion){
+   $mysqli = conectar();
+   $usuario = $_SESSION['username'];
+   $ret = true;
+   $sql = "DELETE FROM listareproduccioncancion
+            WHERE lista = ? AND cancion = ?";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ii", $id, $cancion);
+
+   if (!$stmt->execute()) {
+      $ret = False;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
+}
+
+function sacarFoto($usuario){
+   $mysqli = conectar();
+   $sql = "SELECT foto
+            FROM usuarios
+            WHERE nombreusuario = ?";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+   $stmt->execute();
+   $stmt->bind_result($col1);
+   $stmt->fetch();
+   $stmt->close();
+   $mysqli->close();
+
+   return $col1;
+}
+
+function aniadirCancionLista ($autor, $titulo_cancion, $lista){
+   $mysqli = conectar();
+   $ret = true;
+   $slq1 = "INSERT INTO listareproduccioncancion
+            SELECT 14, id
+            FROM cancion
+            WHERE autor = ? AND titulo = ?";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $autor, $titulo_cancion);
+
+   if (!$stmt->execute()) {
+      $ret = False;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
+
+}
 ?>
