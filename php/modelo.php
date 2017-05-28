@@ -12,6 +12,13 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
    }
 }
 
+//Función para cerrar sesión en la página
+function cerrarSesion(){
+   session_start();
+   session_unset();
+   session_destroy();
+}
+
 //Función para conectar con la base de datos.
 function conectar() {
    //return new mysqli('127.0.0.1', 'id1792365_webmusic', 'webmusic', 'id1792365_webmusic');

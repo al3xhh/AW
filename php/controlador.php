@@ -6,6 +6,10 @@ function validar_entrada($dato) {
    return validarEntrada($dato);
 }
 
+function cerrar_sesion() {
+   cerrarSesion();
+}
+
 function existe_usuario($usuario) {
    return existeUsuario($usuario);
 }

@@ -42,7 +42,7 @@ function navbar() {
       if (!in_array("miperfil.php", $componentes))
          echo '<li><a href="miperfil.php"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>';
 
-      echo'<li><a href="../index.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>';
+      echo'<li><a href="../php/cerrar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>';
    } else {
       echo '<li><a href="src/registro.php"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
       <li><a href="src/login.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>';
