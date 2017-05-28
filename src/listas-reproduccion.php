@@ -2,7 +2,7 @@
 session_start();
 require_once("../php/controlador.php");
 
-if(!isset($SESSION["usuario"]))
+if(!isset($_SESSION["usuario"]))
    header("Location: accesodenegado.html");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $lista = validare_entrada($_POST["listanueva"]);
