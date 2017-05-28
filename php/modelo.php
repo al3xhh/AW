@@ -87,6 +87,7 @@ function registraUsuario($usuario, $correo, $contrasenya) {
    } else {
       session_start();
       $_SESSION['usuario'] = $usuario;
+      $_SESSION['premium'] = false;
    }
 
    $stmt->close();
