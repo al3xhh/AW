@@ -80,9 +80,9 @@ function validarArchivoCancion(){
             document.getElementById("ID_Error_Archivo_Cancion").innerHTML = "Debes subir una cancion";
             return false;
 		}
-        else if(!(/\.(mp3|mp4|wav)$/i).test(uploadCancion)){
+        else if(!(/\.(mp3)$/i).test(uploadCancion)){
             document.getElementById("ID_Error_Archivo_Cancion").style.display = "block";
-            document.getElementById("ID_Error_Archivo_Cancion").innerHTML = "La extension de la cancion no se soporta. Solo mp3, mp4 y wav";
+            document.getElementById("ID_Error_Archivo_Cancion").innerHTML = "La extension de la cancion no se soporta. Solo mp3";
             return false;
         }
 		else if(cancion.size > 31457280){

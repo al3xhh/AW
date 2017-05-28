@@ -148,13 +148,13 @@
                                        ?>
                                     </select>
                                     <?php
-                                    if($premium){
-                                       echo "<div class='form-group'>";
-                                       echo "<div class='checkbox'>";
-                                       echo "<label><input type='checkbox' name='premium'>Haz premium tu cancion</label>";
-                                       echo "</div>";
-                                       echo "</div>";
-                                    }
+										if($premium){
+										   echo "<div class='form-group'>";
+										   echo "<div class='checkbox'>";
+										   echo "<label><input type='checkbox' name='premium'>Haz premium tu cancion</label>";
+										   echo "</div>";
+										   echo "</div>";
+										}
                                     ?>
                                     <div class="form-group">
                                        <p>Los campos con * son obligatorios</p>

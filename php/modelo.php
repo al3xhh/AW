@@ -242,26 +242,19 @@ function tusTopSocial($usuario) {
 //Función que obtiene los gustos musicales del usuario.
 function obtenerGustosMusicales($usuario) {
    $mysqli = conectar();
-   $array = array();
-   $sql = "SELECT genero
+	$stmt = $mysqli->prepare("SELECT genero
             FROM gustos
-            WHERE usuario = ?";
+            WHERE usuario = ?");
+	$stmt->bind_param("s", $usuario);
+	$stmt->execute();
+	$stmt->bind_result($col1);
+	$ret = array();
+   while($stmt->fetch())
+      array_push($ret, $col1);
+	$stmt->close();
+	$mysqli->close();
 
-   $stmt = $mysqli->prepare($sql);
-   $stmt->bind_param("s", $usuario);
-   $stmt->execute();
-
-   $stmt->bind_result($col1);
-
-   while ($stmt->fetch()){
-      $row = array("genero" => $col1);
-      array_push($array, $row);
-   }
-
-   $stmt->close();
-   $mysqli->close();
-
-   return $array;
+	return $ret;
 }
 
 //Función que obtiene la foto, el encabezado y la descripción del usuario
@@ -305,13 +298,13 @@ function obtenerDescripcionUsuario($usuario) {
 }
 
 //Función que obtiene los seguidores del usuario
-function obtenerSeguidores($usuario, $limite) {
+function obtenerSeguidores($usuario) {
    $mysqli = conectar();
    $array = array();
    $sql = "SELECT seguidor, foto
             FROM sigue
             JOIN usuarios ON nombreusuario = seguidor
-            WHERE seguido = ? " . $limite;
+            WHERE seguido = ? ";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -332,13 +325,13 @@ function obtenerSeguidores($usuario, $limite) {
 }
 
 //Función que obtiene los seguidos del usuario
-function obtenerSeguidos($usuario, $limite) {
+function obtenerSeguidos($usuario) {
    $mysqli = conectar();
    $array = array();
    $sql = "SELECT seguido, foto
             FROM sigue
             JOIN usuarios ON nombreusuario = seguido
-            WHERE seguidor = ? " . $limite;
+            WHERE seguidor = ? ";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -359,12 +352,12 @@ function obtenerSeguidos($usuario, $limite) {
 }
 
 //Función para obtener las canciones subidas por el usuario
-function obtenerCancionesUsuario($usuario, $limite) {
+function obtenerCancionesUsuario($usuario) {
    $mysqli = conectar();
    $array = array();
    $sql = "SELECT titulo, caratula
             FROM cancion
-            WHERE autor = ? " .$limite;
+            WHERE autor = ? ";
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -559,6 +552,27 @@ function aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $tit
 
 function desconectar($conexion){
    $conexion->close();
+}
+
+function borrarGenerosUsuario($usuario){
+
+	$mysqli = conectar();
+	if($mysqli != NULL){
+		$stmt = $mysqli->prepare("DELETE FROM gustos WHERE usuario = ?");
+		$stmt->bind_param("s", $usuario);
+		$stmt->execute();
+		$mysqli->close();
+		return true;
+	}
+	return false;
+}
+
+function insertarNuevoGeneroUsuario($usuario, $genero){
+	$mysqli = conectar();
+	$stmt = $mysqli->prepare("INSERT INTO gustos (usuario, genero) VALUES (?,?)");
+	$stmt->bind_param("ss", $usuario, $genero);
+	$stmt->execute();
+	$mysqli->close();
 }
 
 function aumentarReproducciones($titulo, $autor){

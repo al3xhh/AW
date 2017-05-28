@@ -8,7 +8,7 @@
 		  require_once("../php/controlador.php");
 		  session_start();
 		  if(!isset($_SESSION['usuario']))
-			 header('Location: login.php');
+			header('Location: login.php');
 			$premium = false;
 		  if(es_premium($_SESSION['usuario'])){
 			 $premium = true;
