@@ -34,6 +34,10 @@ function info_cancion($titulo) {
    return getInfoCancion($titulo);
 }
 
+function es_premium($usuario){
+	return esPremium($usuario);
+}
+
 function aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium) {
 
    return aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium);
@@ -114,9 +118,16 @@ function subir_archivo($archivo, $directorioTemporal, $directorioSubida){
 	return subirArchivo($archivo, $directorioTemporal, $directorioSubida);
 }
 
+function insertar_cancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium){
+	return insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium);
+}
+
 function actualizar_perfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
 	return actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre);
-	
+}
+
+function actualizar_premium($usuario, $cuenta, $cvv, $fechaCad, $titular, $meses, $caducidadPremium){
+	return actualizarPremium($usuario, $cuenta, $cvv, $fechaCad, $titular, $meses, $caducidadPremium);
 }
 
 function cambiar_foto_perfil($usuario, $archivo){

@@ -97,12 +97,28 @@ function validarArchivoCancion(){
  
 }
 
+function validarGenero(){
+
+	var genero = document.getElementById("genero_cancion");
+	
+		var indice = genero.selectedIndex;
+		if(indice < 0 || indice > genero.lenght){
+			document.getElementById("ID_Error_Genero").style.display = "block";
+			document.getElementById("ID_Error_Genero").innerHTML = "Tienes que seleccionar un genero";
+			return false;
+		}
+		else{
+			return true;
+		}
+}
+
 function validarFormCancion(){
     "use strict";
 
-    var ok = (validarCancion() & validarArtista() & validarImagen() & validarArchivoCancion());
+    var ok = (validarCancion() & validarArtista() & validarImagen() & validarArchivoCancion() & validarGenero());
 
     if(ok == 0){
+		event.preventDefault();
         return false;
     }
     else{
@@ -110,3 +126,26 @@ function validarFormCancion(){
     }
 
 }
+/*
+
+*/
+$( document ).ready(function() {
+    $("#ID_Cancion").bind("change", function () {
+        validarCancion();
+    });
+    $("#ID_Artista").bind("change", function () {
+        validarArtista();
+    });
+    $("#ID_Imagen").bind("change", function () {
+        validarImagen();
+    });
+	$("#ID_Archivo_Cancion").bind("change", function () {
+        validarArchivoCancion();
+    });
+	$("#genero_cancion").bind("change", function () {
+        validarGenero();
+    });
+    $("form").bind("submit", function () {
+        validarFormCancion(event);
+    });
+});

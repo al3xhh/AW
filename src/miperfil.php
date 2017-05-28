@@ -5,11 +5,14 @@
             <meta http-equiv="refresh" content="0" url="errorJS.html">
         </noscript>
 		<?php
+			require_once("../php/controlador.php");
 			session_start();
-			/*if(!isset($_SESSION['usuario']))
-				header('Location: login.php');*/
-			
-			$_SESSION['usuario'] = "alex";
+			if(!isset($_SESSION['usuario']))
+				header('Location: login.php');
+			$premium = false;
+			if(es_premium($_SESSION['usuario'])){
+				$premium = true;
+			}
 		?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,10 +29,19 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/miPerfil.js"></script>
+		<?php
+			if($premium){
+				echo "<script src='../js/comprobarPremiumPerfil.js'></script>";
+			}
+		?>
     </head>
     <body>
 	<?php
 	$errorCorreo = $errorDescripcion = $errorPerfil = $errorEncabezado = "";
+	
+	//para los campos de premium
+	$cuenta = $cvv = $fechaCad = $titular = $meses = "";
+	$errorCuenta = $errorCvv = $errorFechaCad = $errorTitular = $errorMeses = false;
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		require_once('../php/controlador.php');
 		$nuevoCorreo = $nuevaDescripcion = $nuevaImagenPerfil = $nuevoEncabezado = "";
@@ -52,11 +64,11 @@
 		if(isset($_FILES['nuevo_perfil'])){
 			//meto la nueva foto de perfil
 			$nuevaImagenPerfil = $_FILES['nuevo_perfil'];
-			if(!actualizar_perfil($nuevaImagenPerfil['name'], $nuevaImagenPerfil['tmp_name'], "../img/", $_SESSION['usuario']."_perfil.png")){
+			if(!actualizar_perfil($nuevaImagenPerfil['name'], $nuevaImagenPerfil['tmp_name'], "../img/", $_SESSION['usuario']."_perfil.jpg")){
 				$errorPerfil = true;
 			}
 			else{
-				if(!cambiar_foto_perfil($_SESSION['usuario'], $_SESSION['usuario']."_perfil.png")){
+				if(!cambiar_foto_perfil($_SESSION['usuario'], $_SESSION['usuario']."_perfil.jpg")){
 					$errorPerfil = true;
 				}
 			}
@@ -64,11 +76,11 @@
 		if(isset($_FILES['nueva_imagen_encabezado'])){
 			//meto la nueva foto de encabezado
 			$nuevoEncabezado = $_FILES['nueva_imagen_encabezado'];
-			if(!actualizar_perfil($nuevoEncabezado['name'], $nuevoEncabezado['tmp_name'], "../img/", $_SESSION['usuario']."_encabezado.png")){
+			if(!actualizar_perfil($nuevoEncabezado['name'], $nuevoEncabezado['tmp_name'], "../img/", $_SESSION['usuario']."_encabezado.jpg")){
 				$errorEncabezado = true;
 			}
 			else{
-				if(!cambiar_foto_encabezado($_SESSION['usuario'], $_SESSION['usuario']."_encabezado.png")){
+				if(!cambiar_foto_encabezado($_SESSION['usuario'], $_SESSION['usuario']."_encabezado.jpg")){
 					$errorEncabezado = true;
 				}
 			}
@@ -79,6 +91,46 @@
 			foreach($generosNuevos as $genero){
 				insertar_nuevo_genero_usuario($_SESSION['usuario'], $genero);
 			}
+		}
+		if($premium){
+			
+			$cuenta = $cvv = $fechaCad = $titular = $meses = "";
+			
+			$cuenta = validar_entrada($_POST['ID_Cuenta']);
+			$cvv = validar_entrada($_POST['ID_CVV']);
+			$fechaCad = validar_entrada($_POST['ID_Fecha_Cad']);
+			$titular = validar_entrada($_POST['ID_Titular']);
+			$meses = validar_entrada($_POST['ID_Num_meses']);
+			
+			
+			if(empty($cuenta) && trim($cuenta) == ""){
+				//error cuenta
+				$errorCuenta = true;
+			}
+			else if(empty($cvv) && trim($cvv) == ""){
+				//error cvv
+				$errorCvv = false;
+			}
+			else if(empty($fechaCad) && trim($fechaCad) == ""){
+				//error fechaCad
+				$errorFechaCad = false;
+			}
+			else if(empty($titular) && trim($titular) == ""){
+				//error titular
+				$errorTitular = false;
+			}
+			else if(empty($meses) && trim($meses) == ""){
+				//error meses
+				$errorMeses = false;
+			}
+			else{}
+			
+			if(!$errorCuenta && !$errorCvv && !$errorFechaCad && !$errorTitular && !$errorMeses){
+				//actualizo la informacion de la tarjeta
+				$fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + $meses, date("d"), date("Y")));
+				actualizar_premium($_SESSION['usuario'], $cuenta, $cvv, $fechaCad, $titular, $meses);
+			}
+			
 		}
 		header('Location:'.htmlspecialchars($_SERVER['PHP_SELF']));
 	}
@@ -144,6 +196,13 @@
                                 <li>
                                     <a href="#Editar_Perfil" data-toggle="tab">Editar Perfil</a>
                                 </li>
+								<?php
+									if($premium){
+										echo "<li>";
+										echo "<a href='#Editar_Premium' data-toggle='tab'>Premium</a>";
+										echo "</li>";
+									}
+								?>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="Descripcion">
@@ -219,17 +278,17 @@
 											echo '<h4 class="text-center">El usuario no ha subido aún ninguna canción.</h4>';
 										} else {
 											foreach ($resultado as $fila) {
-												echo '<div class="user-resume">
+												echo "<div class='user-resume'>
 														<div>
-															<img class="user-resume-img" src="../img/'.cargar_caratula_por_defecto($fila["caratula"]).'width="64" height="64" alt="Imagen usuario">
+															<img class='user-resume-img' src='../img/".cargar_caratula_por_defecto($fila['caratula'])."' width='64' height='64' alt='Imagen usuario'>
 														</div>
-														<div class="user-resume-info">
-															<h3>'.$fila["titulo"].'</h3>
+														<div class='user-resume-info'>
+															<h3>".$fila['titulo']."</h3>
 														</div>
-														<div class="user-resume-button">
-															<a href="reproductor.php?titulo='.$fila["titulo"].'"><button type="button" class="btn btn-primary pull-right glyphicon glyphicon-play" data-toggle="tooltip" title="escuchar canción"></button></a>
+														<div class='user-resume-button'>
+															<a href='reproductor.php?titulo='".$fila['titulo']."'><button type='button' class='btn btn-primary pull-right glyphicon glyphicon-play' data-toggle='tooltip' title='escuchar canción'></button></a>
 														</div>
-													</div>';
+													</div>";
 											}
 										}
 									?>
@@ -287,6 +346,70 @@
                                         <button id="cambiar_perfil" class="btn btn-primary btn-block">Guardar cambios</button>
                                     </form>
                                 </div>
+								<?php
+								echo "<div class='tab-pane' id='Editar_Premium'>";
+									echo "<form class='form-horizontal' id='form_editar_premium' method='post' action=".htmlspecialchars($_SERVER['PHP_SELF']).">";
+										echo "<div class='form-group'>";
+											echo "<div class='input-group'>";
+											   echo "<span class='input-group-addon'><i class='glyphicon glyphicon-euro'></i></span>";
+											   echo "<input class='form-control' placeholder='Número de cuenta *' name='ID_Cuenta' id='ID_Cuenta' type='text'>";
+											echo "</div>";
+											echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Cuenta'>Tienes que introducir el numero de cuenta</div>";
+											if($errorCuenta){
+												echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Cuenta'>Tienes que introducir el numero de cuenta</div>";
+											}
+										 echo "</div>";
+											
+										 echo "<div class='form-group'>";
+											echo "<div class='input-group'>";
+											   echo "<span class='input-group-addon'><i class='glyphicon glyphicon-euro'></i></span>";
+											   echo "<input class='form-control' placeholder='CVV*' name='ID_CVV' id='ID_CVV' type='text'>";
+											echo "</div>";
+											echo "<div class='alert alert-danger alertas-registro' id='ID_Error_CVV'>Tienes que introducir el CVV</div>";
+											if($errorCvv){
+												echo "<div class='alert alert-danger alertas-registro' id='ID_Error_CVV'>Tienes que introducir el CVV</div>";
+											}
+										 echo "</div>";
+										 
+										 echo "<div class='form-group'>";
+											echo "<div class='input-group'>";
+											   echo "<span class='input-group-addon'><i class='glyphicon glyphicon-euro'></i></span>";
+											   echo "<input class='form-control' placeholder='Fecha de caducidad*' name='ID_Fecha_Cad' id='ID_Fecha_Cad' type='text'>";
+											echo "</div>";
+											echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Fecha_Cad'>tienes que introducir una fecha de caducidad</div>";
+											if($errorFechaCad){
+												echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Fecha_Cad'>tienes que introducir una fecha de caducidad</div>";
+											}
+										 echo "</div>";
+										 
+										 echo "<div class='form-group'>";
+											echo "<div class='input-group'>";
+											   echo "<span class='input-group-addon'><i class='glyphicon glyphicon-euro'></i></span>";
+											   echo "<input class='form-control' placeholder='Nombre del titular de la cuenta*' name='ID_Titular' id='ID_Titular' type='text'>";
+											echo "</div>";
+											echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Titular'>Tienes que introducir un titular</div>";
+											if($errorTitular){
+												echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Titular'>Tienes que introducir un titular</div>";
+											}
+										 echo "</div>";
+										 
+										 echo "<div class='form-group'>";
+											echo "<div class='input-group'>";
+											   echo "<span class='input-group-addon'><i class='glyphicon glyphicon-calendar'></i></span>";
+											   echo "<input class='form-control' placeholder='Número de meses *' name='ID_Num_meses' id='ID_Num_meses' type='text' onchange='validarMeses()'>";
+											echo "</div>";
+											echo "<div class='alert alert-danger alertas-registro' id='ID_Error_meses'>Tienes que introducir los meses</div>";
+											if($errorMeses){
+												echo "<div class='alert alert-danger alertas-registro' id='ID_Error_meses'>Tienes que introducir los meses</div>";
+											}
+										 echo "</div>";
+										 
+										 echo "<div class='form-group'>";
+											echo "<input type='submit' class='btn btn-primary center-block' id='cambiar_premium'>";
+										 echo "</div>";
+									echo "</form>";
+								echo "</div>";
+								?>
                             </div>
                         </div>
                     </div>

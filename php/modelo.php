@@ -442,6 +442,28 @@ function obtenerCancionesUsuario($usuario) {
    return $array;
 }
 
+function esPremium($usuario){
+	$mysqli = conectar();
+   $ret = False;
+
+   $sql = "SELECT usuario
+            FROM premium
+            WHERE usuario = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+   $stmt->execute();
+   $resultado = $stmt->get_result();
+
+   if ($resultado->num_rows > 0) {
+      $ret = True;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+   return $ret;
+}
+
 //Función que indica si un usuario sigue a otro
 function sigueA($seguidor, $seguido) {
    $mysqli = conectar();
@@ -658,6 +680,27 @@ function conseguirUsuarioCorreo($correo){
    }
 }
 
+function insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium){
+
+	$con = conectar();
+   if($con != NULL){
+	   $sql = "INSERT INTO cancion(autor, titulo, caratula, duracion, genero, archivo, premium) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	   $result = $con->prepare($sql);
+	   if($premium == "on")
+		   $premium = true;
+		else
+			$premium = false;
+	
+	$result->bind_param("sssssss", $autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium);
+	$result->execute();
+	$rows = $result->get_result();
+    return true;
+   }
+   else{
+	   return false;
+   }
+}
+
 function actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
 	
 	$fichero_subido = $directorioSubida . basename($archivo);
@@ -667,6 +710,20 @@ function actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nue
 		else
 			return false;
 	} else {
+		return false;
+	}
+}
+
+function actualizarPremium($usuario, $cuenta, $cvv, $fechaCad, $titular, $meses, $caducidadPremium){
+	$con = conectar();
+	if($con != NULL){
+      	$sql = "UPDATE premium SET numerotarjeta = ?, cvv = ?, fechacaducidad = ?, $titular = ?, periodo = ?, fechacaducidadpremium = ? WHERE usuario = ?";
+      	$result = $con->prepare($sql);
+      	$result->bind_param("sssssss", $cuenta, $cvv, $fechaCad, $titular, $caducidadPremium, $meses, $usuario);
+      	$result->execute();
+		return true;
+    }
+	else{
 		return false;
 	}
 }

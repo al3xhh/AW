@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                           <input class="form-control" placeholder="Nombre de usuario o correo electronico*" name"ID_Usuario" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                           <input class="form-control" placeholder="Nombre de usuario o correo electronico*" name="ID_Usuario" id="ID_Usuario" type="text" onchange="validarUsuario()">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
                      </div>
