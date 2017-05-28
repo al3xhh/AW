@@ -1,15 +1,13 @@
 <?php
-require_once('modelo.php');
+   require_once('modelo.php');
 
-$con = conectarBBDD();
+   $usuario = validarEntrada($_GET['usuario']);
 
-if($con != NULL){
-   $usu = testearDato($_GET['usuario']);
-   $result = $con->query("SELECT nombreusuario from usuarios where nombreusuario = '$usu'");
-
-   if($result->num_rows == 0){
-      echo "Usuario no registrado";
+   if(strpos($usuario, "@" ) !== false) {
+      if(!existeCorreo($usuario))
+         echo "Usuario no registrado";
+   } else {
+      if(!existeUsuario($usuario))
+         echo "Usuario no registrado";
    }
-}
-desconectarBBDD($con);
 ?>

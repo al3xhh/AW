@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <?php
-   session_start();
-   if (!isset($_SESSION["usuario"])){
-      session_unset();
-      session_destroy();
-   }
-   if($_SERVER["REQUEST_METHOD"] == "POST")
-      header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
+session_start();
+if (!isset($_SESSION["usuario"])){
+   session_unset();
+   session_destroy();
+}
+if($_SERVER["REQUEST_METHOD"] == "POST")
+   header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
 ?>
 <html lang="es">
    <head>
@@ -46,42 +46,42 @@
          <div class="container-fluid">
             <!-- Barra de búsqueda -->
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <div id="imaginary_container">
-                           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
-                               <div class="input-group stylish-input-group">
-                                   <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
-                                   <span class="input-group-addon">
-                                      <button class="glyphicon glyphicon-search" type="submit"></button>
-                                   </span>
-                               </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+               <div class="row">
+                  <div class="col-sm-6 col-sm-offset-3">
+                     <div id="imaginary_container">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
+                           <div class="input-group stylish-input-group">
+                              <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                              <span class="input-group-addon">
+                                 <button class="glyphicon glyphicon-search" type="submit"></button>
+                              </span>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
             </div><!-- Fin barra de búsqueda -->
 
             <!-- Cabecera del reproductor-->
             <div id="player-header" class="col-md-10 col-md-push-2">
                <div>
                   <?php
-                  require_once("../php/controlador.php");
-                  require_once("../php/modelo.php");
-                  $titulo = validarEntrada($_GET["titulo"]);
-                  $autor = validarEntrada($_GET["usuario"]);
+   require_once("../php/controlador.php");
+                              require_once("../php/modelo.php");
+                              $titulo = validarEntrada($_GET["titulo"]);
+                              $autor = validarEntrada($_GET["usuario"]);
 
-                  if (existe_cancion($titulo, $autor)){
-                     $info = info_cancion($titulo, $autor);
-                     aumentar_reproducciones($titulo, $autor);
-                  }
-                  else
-                     header("Location: accesodenegado.html");
+                              if (existe_cancion($titulo, $autor)){
+                                 $info = info_cancion($titulo, $autor);
+                                 aumentar_reproducciones($titulo, $autor);
+                              }
+                              else
+                                 header("Location: accesodenegado.html");
 
-                  if ($info["caratula"])
-                     echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
-                  else
-                     echo "<img src='../img/CaratulaPorDefecto.jpg' width='150' height='150' alt='Imagen usuario'>";
+                              if ($info["caratula"])
+                                 echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
+                              else
+                                 echo "<img src='../img/CaratulaPorDefecto.jpg' width='150' height='150' alt='Imagen usuario'>";
                   ?>
 
                </div>
@@ -197,7 +197,7 @@
                      <div class="panel-heading comment-heading">
                         <?php
                         $infoUsuario = obtener_informacion_usuario($_SESSION["usuario"]);
-                           echo "<img src='../img/".$infoUsuario[0]["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
+                        echo "<img src='../img/".$infoUsuario[0]["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
                         ?>
                         <div>
                            <h4 id="nombre_usuario"><?php echo $_SESSION["usuario"] ?></h4>
@@ -247,7 +247,7 @@
          <footer class="footer-bs" id="footer">
             <div class="row">
                <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                  <a href="index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
+                  <img class="img img-responsive" alt="WebMusic" src="../img/Logo.png" width="180" height="180">
                </div>
                <div class="col-md-10 footer-nav animated fadeInUp">
                   <div class="col-md-3">
@@ -266,10 +266,9 @@
                   <div class="col-md-4 col-md-push-2">
                      <h4>Enlaces</h4>
                      <ul class="list">
-                        <li><a href="#">Mapa del sitio</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Explicación diseño</a></li>
-                        <li><a href="#">Guía de usuario</a></li>
+                        <li><a href="mapa.php">Mapa del sitio</a></li>
+                        <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
+                        <li><a href="#">Memoria</a></li>
                      </ul>
                   </div>
                </div>

@@ -143,4 +143,70 @@ function aniadir_cancion_lista($autor, $titulo_cancion, $lista){
   return aniadirCancionLista($autor, $titulo_cancion, $lista);
 }
 
+function obtener_generos(){
+	return getGeneros();
+}
+
+function autenticar_con_correo($correo, $pass){
+	return autenticarUsuarioConCorreo($correo, $pass);
+}
+
+function borrar_generos_usuario($usuario){
+	return borrarGenerosUsuario($usuario);
+}
+
+function insertar_nuevo_genero_usuario($usuario, $genero){
+	insertarNuevoGeneroUsuario($usuario, $genero);
+}
+
+function conseguir_usuario_correo($correo){
+	return conseguirUsuarioCorreo($correo);
+}
+
+function cambiar_email($usuario, $correo){
+	return cambiarEmail($usuario, $correo);
+}
+
+function cambiar_descripcion($usuario, $descripcion){
+	return cambiarDescripcion($usuario, $descripcion);
+}
+
+function cargar_Ruta_Foto_Encabezado($ruta){
+	return cargarRutaFotoEncabezado($ruta);
+}
+
+function cargar_Ruta_Foto_Perfil($ruta){
+	return cargarRutaFotoPerfil($ruta);
+}
+
+function cargar_caratula_por_defecto($ruta){
+	return cargarCaratulaPorDefecto($ruta);
+}
+function subir_archivo($archivo, $directorioTemporal, $directorioSubida){
+	return subirArchivo($archivo, $directorioTemporal, $directorioSubida);
+}
+
+function insertar_cancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium){
+	return insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium);
+}
+
+function actualizar_perfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
+	return actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre);
+}
+
+function actualizar_premium($usuario, $cuenta, $cvv, $fechaCad, $titular, $meses, $caducidadPremium){
+	return actualizarPremium($usuario, $cuenta, $cvv, $fechaCad, $titular, $meses, $caducidadPremium);
+}
+
+function cambiar_foto_perfil($usuario, $archivo){
+	return cambiarFotoDePerfil($usuario, $archivo);
+}
+
+function cambiar_foto_encabezado($usuario, $archivo){
+	return cambiarFotoEncabezado($usuario, $archivo);
+}
+
+function es_premium($usuario){
+	return esPremium($usuario);
+}
 ?>

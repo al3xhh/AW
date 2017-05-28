@@ -168,8 +168,8 @@
                         <div class="col-md-4 col-md-push-2">
                             <h4>Enlaces</h4>
                             <ul class="list">
-                                <li><a href="#">Mapa del sitio</a></li>
-                                <li><a href="#">GitHub</a></li>
+                                <li><a href="src/mapa.php">Mapa del sitio</a></li>
+                                <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
                                 <li><a href="#">Memoria</a></li>
                             </ul>
                         </div>

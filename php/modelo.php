@@ -14,7 +14,8 @@ function obtenerArray($stmt, &$array, $col1_n, $col2_n, $col3_n) {
 
 //Función para conectar con la base de datos.
 function conectar() {
-   return new mysqli('127.0.0.1', 'id1792365_webmusic', 'webmusic', 'id1792365_webmusic');
+   //return new mysqli('127.0.0.1', 'id1792365_webmusic', 'webmusic', 'id1792365_webmusic');
+   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'webmusic');
 }
 
 //TODO quitarla de aquí y corregir todas las llamadas que se hagan
@@ -552,23 +553,6 @@ function desconectar($conexion){
    $conexion->close();
 }
 
-function autenticarUsuario($usuario, $pass){
-
-   $con = conectar();
-   if($con != NULL){
-
-      $sql = "SELECT nombreusuario, contrasenya FROM usuarios where nombreusuario = '$usuario'AND contrasenya = '$pass'";
-
-      $result = $con->query($sql);
-      if($result->num_rows > 0){
-         return true;
-      }
-      else{
-         return false;
-      }
-   }
-}
-
 function aumentarReproducciones($titulo, $autor){
    $mysqli = conectar();
    //cogemos el numero de reproducciones
@@ -700,7 +684,7 @@ function getSiguienteCancion($titulo, $autor, $lista){
    $stmt->execute();
    $stmt->bind_result($col1, $col2);
 
-    if ($stmt->fetch())
+   if ($stmt->fetch())
       return getInfoCancion($col1, $col2);
    else
       return false;
@@ -721,21 +705,21 @@ function getCancionAnterior($titulo, $autor, $lista){
 }
 
 function listaReproduccion($usuario) {
-	$mysqli = conectar();
-	$array = array();
-	$sql = "SELECT nombre, usuario, id
+   $mysqli = conectar();
+   $array = array();
+   $sql = "SELECT nombre, usuario, id
    			FROM listareproduccion
    			WHERE usuario = ?";
 
-	$stmt = $mysqli->prepare($sql);
+   $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
    $stmt->execute();
-	$stmt->bind_result($col1, $col2, $col3);
+   $stmt->bind_result($col1, $col2, $col3);
 
    while ($stmt->fetch()){
       $row = array("nombre" => $col1,
-                     "usuario" => $col2,
-                     "id" => $col3);
+                   "usuario" => $col2,
+                   "id" => $col3);
       array_push($array, $row);
    }
 
@@ -743,7 +727,7 @@ function listaReproduccion($usuario) {
    $mysqli->close();
 
    return $array;
-  }
+}
 
 function listaReproduccionCanciones($id){
    $mysqli = conectar();
@@ -761,10 +745,10 @@ function listaReproduccionCanciones($id){
 
    while ($stmt->fetch()){
       $row = array("titulo" => $col1,
-                     "autor" => $col2,
-                     "fecha" => $col3,
-                     "duracion" => $col4,
-                     "id" => $col5);
+                   "autor" => $col2,
+                   "fecha" => $col3,
+                   "duracion" => $col4,
+                   "id" => $col5);
       array_push($array, $row);
    }
 
@@ -801,9 +785,9 @@ function buscar_cancion($tipo, $busqueda){
 
    while ($stmt->fetch()){
       $row = array("caratula" => $col1,
-                     "titulo" => $col2,
-                     "autor" => $col3,
-                     "fecha" => $col4,);
+                   "titulo" => $col2,
+                   "autor" => $col3,
+                   "fecha" => $col4,);
       array_push($array, $row);
    }
 
@@ -903,5 +887,225 @@ function aniadirCancionLista ($autor, $titulo_cancion, $lista){
 
    return $ret;
 
+}
+
+function autenticarUsuario($usuario, $pass){
+   $pass = hash('sha256', validar_entrada($pass));
+   $con = conectar();
+   if($con != NULL){
+
+      $sql = "SELECT nombreusuario, contrasenya FROM usuarios where nombreusuario = ? AND contrasenya = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("ss", $usuario, $pass);
+      $result->execute();
+      $rows = $result->get_result();
+      if($rows->num_rows > 0){
+         $con->close();
+         return true;
+      }
+      else{
+         $con->close();
+         return false;
+      }
+   }
+}
+
+function getGeneros(){
+
+   $mysqli = conectar();
+   $stmt = $mysqli->prepare("SELECT nombre FROM generos");
+   $stmt->execute();
+   $stmt->bind_result($col1);
+   $ret = array();
+   while($stmt->fetch())
+      array_push($ret, $col1);
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
+}
+
+function autenticarUsuarioConCorreo($correo, $pass){
+   $pass = hash('sha256', validarEntrada($pass));
+   $con = conectar();
+   if($con != NULL){
+
+      $sql = "SELECT nombreusuario, email, contrasenya FROM usuarios where (nombreusuario = ? OR email = ?) AND contrasenya = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("sss", $correo, $correo, $pass);
+      $result->execute();
+      $rows = $result->get_result();
+      if($rows->num_rows > 0){
+         $con->close();
+         return true;
+      }
+      else{
+         $con->close();
+         return false;
+      }
+   }
+}
+
+function cambiarEmail($usuario, $correo){
+   $con = conectar();
+   if($con != NULL){
+      $sql = "UPDATE usuarios SET email = ? WHERE nombreusuario = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("ss", $correo, $usuario);
+      $result->execute();
+      return true;
+   }
+   else{
+      return false;
+   }
+}
+
+function cambiarDescripcion($usuario, $descripcion){
+   $con = conectar();
+   if($con != NULL){
+      $sql = "UPDATE usuarios SET descripcion = ? WHERE nombreusuario = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("ss", $descripcion, $usuario);
+      $result->execute();
+      return true;
+   }
+   else{
+      return false;
+   }
+}
+
+function cargarRutaFotoEncabezado($ruta){
+
+   if($ruta == ""){
+      return "EncabezadoPorDefecto.png";
+   }
+   else{
+      return $ruta;
+   }
+}
+
+function cargarRutaFotoPerfil($ruta){
+
+   if($ruta == ""){
+      return "FotoUsuarioPorDefecto.png";
+   }
+   else{
+      return $ruta;
+   }
+}
+
+function cargarCaratulaPorDefecto($ruta){
+
+   if($ruta == ""){
+      return "CaratulaPorDefecto.jpg";
+   }
+   else{
+      return $ruta;
+   }
+}
+
+function subirArchivo($archivo, $directorioTemporal, $directorioSubida){
+
+   $fichero_subido = $directorioSubida . basename($archivo);
+   if (move_uploaded_file($directorioTemporal, $fichero_subido)){
+      return true;
+   } else {
+      return false;
+   }
+}
+
+function conseguirUsuarioCorreo($correo){
+   $mysqli = conectar();
+   $sql = "SELECT nombreusuario
+            FROM usuarios
+            WHERE email = ?";
+
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $correo);
+   $stmt->execute();
+
+   $stmt->bind_result($col1);
+   $stmt->fetch();
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $col1;
+}
+
+function insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium){
+
+   $con = conectar();
+   if($con != NULL){
+      $sql = "INSERT INTO cancion(autor, titulo, caratula, duracion, genero, archivo, premium) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      $result = $con->prepare($sql);
+      if($premium == "on")
+         $premium = true;
+      else
+         $premium = false;
+
+      $result->bind_param("sssssss", $autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium);
+      $result->execute();
+      $rows = $result->get_result();
+      return true;
+   }
+   else{
+      return false;
+   }
+}
+
+function actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
+
+   $fichero_subido = $directorioSubida . basename($archivo);
+   if (move_uploaded_file($directorioTemporal, $fichero_subido)){
+      if(rename($fichero_subido, $directorioSubida.basename($nuevoNombre)))
+         return true;
+      else
+         return false;
+   } else {
+      return false;
+   }
+}
+
+function actualizarPremium($usuario, $cuenta, $cvv, $fechaCad, $titular, $meses, $caducidadPremium){
+   $con = conectar();
+   if($con != NULL){
+      $sql = "UPDATE premium SET numerotarjeta = ?, cvv = ?, fechacaducidad = ?, $titular = ?, periodo = ?, fechacaducidadpremium = ? WHERE usuario = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("sssssss", $cuenta, $cvv, $fechaCad, $titular, $caducidadPremium, $meses, $usuario);
+      $result->execute();
+      return true;
+   }
+   else{
+      return false;
+   }
+}
+
+function cambiarFotoDePerfil($usuario, $archivo){
+   $con = conectar();
+   if($con != NULL){
+      $sql = "UPDATE usuarios SET foto = ? WHERE nombreusuario = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("ss", $archivo, $usuario);
+      $result->execute();
+      return true;
+   }
+   else{
+      return false;
+   }
+}
+
+function cambiarFotoEncabezado($usuario, $archivo){
+   $con = conectar();
+   if($con != NULL){
+      $sql = "UPDATE usuarios SET encabezado = ? WHERE nombreusuario = ?";
+      $result = $con->prepare($sql);
+      $result->bind_param("ss", $archivo, $usuario);
+      $result->execute();
+      return true;
+   }
+   else{
+      return false;
+   }
 }
 ?>

@@ -8,7 +8,6 @@ function validarUsuario() {
     "use strict";
 
     var reg_usuario = /^[a-z0-9].{1,15}$/i;
-	var reg_correo = /^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}$/;
     
 	var usuario = document.getElementById("ID_Usuario");
     var usuario_val = usuario.value;

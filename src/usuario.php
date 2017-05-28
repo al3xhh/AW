@@ -1,12 +1,10 @@
 <?php
-   session_start();
-   //TODO eliminar esto, está forzado para hacer pruebas.
-   $_SESSION['usuario'] = 'alex';
+session_start();
 
-   if(!isset($_SESSION["usuario"]))
-      header("Location: ../src/accesodenegado.html");
-   if($_SERVER["REQUEST_METHOD"] == "POST")
-      header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
+if(!isset($_SESSION["usuario"]))
+   header("Location: ../src/accesodenegado.html");
+if($_SERVER["REQUEST_METHOD"] == "POST")
+   header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
 ?>
 
 <!DOCTYPE html>
@@ -17,10 +15,10 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <?php
-         require_once('../php/controlador.php');
-         echo '<title>';
-         echo validar_entrada($_GET['usuario']);
-         echo '</title>';
+      require_once('../php/controlador.php');
+      echo '<title>';
+      echo validar_entrada($_GET['usuario']);
+      echo '</title>';
       ?>
 
       <link rel="icon" type="image/png" href="../img/Logo.png"/>
@@ -38,45 +36,45 @@
       <div id="container-principal">
          <!-- Barra superior de la página -->
          <?php
-            require_once("../php/navbar.php");
-            navbar();
+         require_once("../php/navbar.php");
+         navbar();
          ?>
          <!-- Fin barra superior -->
 
          <!-- Barra de búsqueda -->
          <div class="container">
-             <div class="row">
-                 <div class="col-sm-6 col-sm-offset-3">
-                     <div id="imaginary_container">
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
-                            <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
-                                <span class="input-group-addon">
-                                   <button class="glyphicon glyphicon-search" type="submit"></button>
-                                </span>
-                            </div>
-                         </form>
-                     </div>
-                 </div>
-             </div>
+            <div class="row">
+               <div class="col-sm-6 col-sm-offset-3">
+                  <div id="imaginary_container">
+                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
+                        <div class="input-group stylish-input-group">
+                           <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                           <span class="input-group-addon">
+                              <button class="glyphicon glyphicon-search" type="submit"></button>
+                           </span>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
          </div><!-- Fin barra de búsqueda -->
-         
+
          <div class="container-fluid">
             <div class="row">
                <?php
-                  $resultado = obtener_informacion_usuario(validar_entrada($_GET['usuario']));
+   $resultado = obtener_informacion_usuario(validar_entrada($_GET['usuario']));
 
-                  echo '<div class="fb-profile">
+                           echo '<div class="fb-profile">
                            <img class="img img-responsive fb-image-lg" src="../img/'.$resultado[0]["encabezado"].'" alt="Profile image example" width= 400 height=400>
                            <img class="img img-responsive fb-image-profile thumbnail" src="../img/'.$resultado[0]["foto"].'" alt="Profile image example">
                            <div class="fb-profile-text">
                                <h1 id="nombreusuario">'.$resultado[0]["nombreusuario"].'</h1>
                            </div>
                         <div class="fb-profile-text" id="tesigue">';
-                        if(sigueA(validar_entrada($resultado[0]["nombreusuario"]), validar_entrada($_SESSION['usuario']))) {
-                           echo 'Te sigue!';
-                        }
-                        echo '</div>
+                           if(sigueA(validar_entrada($resultado[0]["nombreusuario"]), validar_entrada($_SESSION['usuario']))) {
+                              echo 'Te sigue!';
+                           }
+                           echo '</div>
                               </div>';
                ?>
             </div>
@@ -103,13 +101,13 @@
                      <div class="tab-content">
                         <div class="tab-pane active" id="tab_default_1">
                            <?php
-                              $resultado = obtener_descripcion_usuario(validar_entrada($_GET['usuario']));
+                           $resultado = obtener_descripcion_usuario(validar_entrada($_GET['usuario']));
 
-                              if($resultado == "") {
-                                 echo '<div class="text-center"><h4>El usuario no ha puesto una descripción</h4></div>';
-                              } else {
-                                 echo '<p>'.$resultado.'</p>';
-                              }
+                           if($resultado == "") {
+                              echo '<div class="text-center"><h4>El usuario no ha puesto una descripción</h4></div>';
+                           } else {
+                              echo '<p>'.$resultado.'</p>';
+                           }
                            ?>
                         </div>
                         <div class="tab-pane" id="tab_default_2"></div>
@@ -142,11 +140,11 @@
                            if(validar_entrada($_GET['usuario']) != validar_entrada($_SESSION['usuario'])) {
                               echo '<button value="';echo $_GET["usuario"];echo'"type="submit" class="btn btn-primary btn-block" id="Seguir">';
 
-                                 if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($_GET['usuario']))) {
-                                    echo 'Siguiendo';
-                                 } else {
-                                    echo 'Seguir';
-                                 }
+                              if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($_GET['usuario']))) {
+                                 echo 'Siguiendo';
+                              } else {
+                                 echo 'Seguir';
+                              }
                               echo '</button>';
                            }
                            ?>
@@ -182,10 +180,9 @@
                   <div class="col-md-4 col-md-push-2">
                      <h4>Enlaces</h4>
                      <ul class="list">
-                        <li><a href="#">Mapa del sitio</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Explicación diseño</a></li>
-                        <li><a href="#">Guía de usuario</a></li>
+                        <li><a href="mapa.php">Mapa del sitio</a></li>
+                        <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
+                        <li><a href="#">Memoria</a></li>
                      </ul>
                   </div>
                </div>

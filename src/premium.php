@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       echo "<div class='alert alert-danger text-center'>
                 <h4>Se producido un erro. Revisa los datos introducidos</h4>
             </div>";
-   else 
+   else
       header("Location: ".htmlspecialchars($_SERVER["PHP_SELF"]));
 }
 ?>
@@ -171,13 +171,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
          </div>
       </div>
-
       <!-- Container que contiene el footer de la página -->
       <div class="footer-container">
          <footer class="footer-bs" id="footer">
             <div class="row">
                <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                  <a href="index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
+                  <img class="img img-responsive" alt="WebMusic" src="../img/Logo.png" width="180" height="180">
                </div>
                <div class="col-md-10 footer-nav animated fadeInUp">
                   <div class="col-md-3">
@@ -196,10 +195,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                   <div class="col-md-4 col-md-push-2">
                      <h4>Enlaces</h4>
                      <ul class="list">
-                        <li><a href="#">Mapa del sitio</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Explicación diseño</a></li>
-                        <li><a href="#">Guía de usuario</a></li>
+                        <li><a href="mapa.php">Mapa del sitio</a></li>
+                        <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
+                        <li><a href="#">Memoria</a></li>
                      </ul>
                   </div>
                </div>
