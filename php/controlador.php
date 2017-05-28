@@ -1,8 +1,13 @@
 <?php
+
 require_once("modelo.php");
 
 function validar_entrada($dato) {
    return validarEntrada($dato);
+}
+
+function cerrar_sesion() {
+   cerrarSesion();
 }
 
 function existe_usuario($usuario) {
@@ -29,18 +34,20 @@ function tus_top_social($usuario) {
    return tusTopSocial($usuario);
 }
 
-function info_cancion($titulo) {
+function info_cancion($titulo, $autor) {
 
-   return getInfoCancion($titulo);
+   return getInfoCancion($titulo, $autor);
 }
 
-function es_premium($usuario){
-	return esPremium($usuario);
-}
-
-function aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium) {
-
-   return aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium);
+function aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium, $pass) {
+   if (existeUsuario($usuario)){
+      if (autenticarUsuario($usuario, $pass))
+         return aniadirPremium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium);
+      else
+         return false;
+   }
+   else
+      return false;
 }
 
 function autenticar($usuario, $pass) {
@@ -75,12 +82,77 @@ function sigue_a($seguidor, $seguido) {
    return sigueA($seguidor, $seguido);
 }
 
+function obtener_top() {
+   return obtenerTop();
+}
+
+function obtener_novedades() {
+   return obtenerNovedades();
+}
+
+function obtener_listas_reproduccion_usuario($usuario){
+   return obtenerListasReproduccionUsuario($usuario);
+}
+
+function obtener_info_comentarios_cancion($cancion, $usuario){
+
+   return obtenerInfoComentariosCancion($cancion, $usuario);
+}
+
+function existe_cancion($titulo, $autor){
+   return existeCancion($titulo, $autor);
+}
+
+function get_siguiente_cancion($titulo, $autor, $lista){
+   return getSiguienteCancion($titulo, $autor, $lista);
+}
+
+function get_cancion_anterior($titulo, $autor, $lista){
+   return getCancionAnterior($titulo, $autor, $lista);
+}
+
+function aumentar_reproducciones($titulo, $autor){
+   aumentarReproducciones($titulo, $autor);
+}
+
+function lista_reproduccion($usuario){
+  return listaReproduccion($usuario);
+}
+
+function lista_reproduccion_canciones($id){
+  return listaReproduccionCanciones($id);
+}
+
+function buscar($tipo, $busqueda){
+  return buscar_cancion($tipo, $busqueda);
+}
+
+function aniadir_lista($lista, $usuario){
+  return aniadirLista($lista, $usuario);
+}
+
+function borrar_lista($id){
+  return borrarLista($id);
+}
+
+function sacar_foto($usuario){
+  return sacarFoto($usuario);
+}
+
+function borrar_cancion_lista($id, $cancion){
+  return borrarCancionLista($id, $cancion);
+}
+
+function aniadir_cancion_lista($autor, $titulo_cancion, $lista){
+  return aniadirCancionLista($autor, $titulo_cancion, $lista);
+}
+
 function obtener_generos(){
 	return getGeneros();
 }
 
-function autenticar_con_correo($usuario, $correo, $pass){
-	return autenticarUsuarioConCorreo($usuario, $correo, $pass);
+function autenticar_con_correo($correo, $pass){
+	return autenticarUsuarioConCorreo($correo, $pass);
 }
 
 function borrar_generos_usuario($usuario){
@@ -136,5 +208,9 @@ function cambiar_foto_perfil($usuario, $archivo){
 
 function cambiar_foto_encabezado($usuario, $archivo){
 	return cambiarFotoEncabezado($usuario, $archivo);
+}
+
+function es_premium($usuario){
+	return esPremium($usuario);
 }
 ?>

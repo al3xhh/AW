@@ -1,4 +1,6 @@
 <?php
+
+//Fnción que crea la barra superior de la página dependiendo del usuario y del sitio.
 function navbar() {
    $URIDirectorio = htmlspecialchars($_SERVER["PHP_SELF"]);
    $path = parse_url($URIDirectorio, PHP_URL_PATH);
@@ -33,14 +35,14 @@ function navbar() {
              <ul class="nav navbar-nav navbar-right">';
 
    if (session_status() == PHP_SESSION_ACTIVE) {
-      if (!in_array("listas-reproduccion.html", $componentes))
-         echo '<li><a href="listas-reproduccion.html"><span class="glyphicon glyphicon-music"></span> Lista reproducción</a></li>';
-      if (!in_array("subirCancion.html", $componentes))
-         echo '<li><a href="subirCancion.html"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>';
-      if (!in_array("miperfil.html", $componentes))
-         echo '<li><a href="miperfil.html"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>';
+      if (!in_array("listas-reproduccion.php", $componentes))
+         echo '<li><a href="listas-reproduccion.php"><span class="glyphicon glyphicon-music"></span> Lista reproducción</a></li>';
+      if (!in_array("subirCancion.php", $componentes))
+         echo '<li><a href="subirCancion.php"><span class="glyphicon glyphicon-upload"></span> Subir canción</a></li>';
+      if (!in_array("miperfil.php", $componentes))
+         echo '<li><a href="miperfil.php"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>';
 
-      echo'<li><a href="../index.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>';
+      echo'<li><a href="../php/cerrar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>';
    } else {
       echo '<li><a href="src/registro.php"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
       <li><a href="src/login.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>';
@@ -50,4 +52,5 @@ function navbar() {
    echo "</div>\n";
    echo "</nav>\n";
 }
+
 ?>

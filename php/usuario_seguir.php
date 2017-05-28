@@ -1,22 +1,14 @@
 <?php
-require_once("modelo.php");
-session_start();
 
-$mysqli = conectar();
-$seguidor = validarEntrada($_SESSION['usuario']);
-$seguido =  validarEntrada($_GET['usuario']);
+   //Script php utilizado por ajax para seguir a un usuario.
+   require_once("modelo.php");
+   session_start();
 
-errorMysql($mysqli);
+   if(isset($_POST['usuario'])) {
+      $seguidor = validarEntrada($_SESSION['usuario']);
+      $seguido =  validarEntrada($_POST['usuario']);
 
-$sql = "INSERT INTO sigue VALUES (?, ?)";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("ss", $seguidor, $seguido);
-
-if (!$stmt->execute()) {
-   echo $mysqli->error;
-}
-
-$stmt->close();
-$mysqli->close();
+      seguir($seguidor, $seguido);
+   }
 
 ?>

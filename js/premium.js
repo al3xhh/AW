@@ -107,11 +107,11 @@ function validarFechaCad() {
 
     var fecha = document.getElementById("ID_Fecha_Cad"),
         fecha_val = fecha.value,
-        reg_fecha = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/,
-        tokens = fecha_val.split("/"),
-        day = tokens[0],
+        reg_fecha = /^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/,
+        tokens = fecha_val.split("-"),
+        day = tokens[2],
         month = tokens[1],
-        year = tokens[2],
+        year = tokens[0],
         date = new Date(year, month - 1, day),
         monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ],
         today = new Date();
@@ -157,7 +157,11 @@ function validarTitular(){
         document.getElementById("ID_Error_Titular").style.display = "block";
         document.getElementById("ID_Error_Titular").innerHTML = "El nombre del titular solo debe contener letras";
         return false;
+    } else {
+        document.getElementById("ID_Error_Titular").style.display = "none";
+        return true;
     }
+
 }
 
 function validarMeses() {

@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+   if($_SERVER["REQUEST_METHOD"] == "POST")
+      header("Location: src/buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
+?>
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -23,24 +27,25 @@
            <?php
              require_once("php/navbar.php");
              navbar();
-           ?>
-           <!-- Fin barra superior -->
+           ?><!-- Fin barra superior -->
 
-            <!-- Barra de búsqueda -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <div id="imaginary_container">
-                            <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control"  placeholder="Buscar" >
-                                <span class="input-group-addon">
-                                    <a href="src/buscar_registrado.html" class="link-home-carousel-and-search"><span class="glyphicon glyphicon-search"></span></a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- Fin barra de búsqueda -->
+           <!-- Barra de búsqueda -->
+           <div class="container">
+               <div class="row">
+                   <div class="col-sm-6 col-sm-offset-3">
+                       <div id="imaginary_container">
+                          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
+                              <div class="input-group stylish-input-group">
+                                  <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                                  <span class="input-group-addon">
+                                     <button class="glyphicon glyphicon-search" type="submit"></button>
+                                  </span>
+                              </div>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+           </div><!-- Fin barra de búsqueda -->
 
             <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
 
@@ -63,7 +68,7 @@
                     <div class="item slides">
                         <div class="slide-2"></div>
                         <div class="hero">
-                            <a href="src/premium.html" class="link-index-carousel">
+                            <a href="src/premium.php" class="link-index-carousel">
                                 <h1>Hazte premium</h1>
                                 <h3>Descubre todas sus ventajas pinchando aquí</h3>
                             </a>
@@ -72,7 +77,7 @@
                     <div class="item slides">
                         <div class="slide-3"></div>
                         <div class="hero">
-                            <a href="src/registro.html" class="link-index-carousel">
+                            <a href="src/registro.php" class="link-index-carousel">
                                 <h1>Únete</h1>
                                 <h3>Registrate gratis y empieza a disfrutar</h3>
                             </a>
@@ -86,38 +91,27 @@
                     <h3 class="panel-title">Novedades</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
+                   <?php
+                      require_once('php/controlador.php');
+                      $resultado = obtener_novedades();
+                      $i = 1;
+
+                     if(empty($resultado)) {
+                        echo '<p class="text-center"><h2>En estos momentos no hay canciones</h2></p>';
+
+                     } else {
+                        foreach ($resultado as $fila) {
+                          echo '<div class="col-md-3 col-lg-3">
+                                   <figure>
+                                       <figcaption>
+                                           <h4>'.$fila["titulo"].' - '.$fila["autor"].'</h4>
+                                       </figcaption>
+                                       <a href="src/reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'"><img class="img-responsive" src="img/'.$fila["caratula"].'" alt="img" title="image" height="200" width="200"/></a>
+                                   </figure>
+                               </div>';
+                       }
+                     }
+                    ?>
                 </div>
             </div>
 
@@ -126,38 +120,27 @@
                     <h3 class="panel-title">Top</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/>
-                        </figure>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <figure>
-                            <figcaption>
-                                <h4>Canción - Artista</h4>
-                            </figcaption>
-                            <a href="src/reproductor.html"><img  class="img-responsive" src="img/DiscoPortada.jpg" alt="img" title="image" height="200" width="200"/></a>
-                        </figure>
-                    </div>
+                   <?php
+                      require_once('php/controlador.php');
+                      $resultado = obtener_top();
+                      $i = 1;
+
+                      if(empty($resultado)) {
+                        echo '<p class="text-center"><h2>En estos momentos no hay canciones</h2></p>';
+
+                     } else {
+                         foreach ($resultado as $fila) {
+                           echo '<div class="col-md-3 col-lg-3">
+                                    <figure>
+                                        <figcaption>
+                                            <h4>'.$fila["titulo"].' - '.$fila["autor"].'</h4>
+                                        </figcaption>
+                                        <a href="src/reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'"><img class="img-responsive" src="img/'.$fila["caratula"].'" alt="img" title="image" height="200" width="200"/></a>
+                                    </figure>
+                                </div>';
+                       }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -166,7 +149,7 @@
             <footer class="footer-bs" id="footer">
                 <div class="row">
                     <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                        <a href="index.html"><img alt="WebMusic" src="img/Logo.png" width="180" height="180"></a>
+                        <img class="img img-responsive" alt="WebMusic" src="img/Logo.png" width="180" height="180">
                     </div>
                     <div class="col-md-10 footer-nav animated fadeInUp">
                         <div class="col-md-3">
@@ -185,10 +168,9 @@
                         <div class="col-md-4 col-md-push-2">
                             <h4>Enlaces</h4>
                             <ul class="list">
-                                <li><a href="#">Mapa del sitio</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Explicación diseño</a></li>
-                                <li><a href="#">Guía de usuario</a></li>
+                                <li><a href="src/mapa.php">Mapa del sitio</a></li>
+                                <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
+                                <li><a href="#">Memoria</a></li>
                             </ul>
                         </div>
                     </div>

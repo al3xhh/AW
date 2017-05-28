@@ -1,7 +1,13 @@
 <?php
-require_once('modelo.php');
+   require_once('modelo.php');
 
-if(!existeUsuario(validarEntrada($_GET['usuario'])) && !existeCorreo(validarEntrada($_GET['usuario']))){
-	echo "Usuario/correo no registrado";
-}
+   $usuario = validarEntrada($_GET['usuario']);
+
+   if(strpos($usuario, "@" ) !== false) {
+      if(!existeCorreo($usuario))
+         echo "Usuario no registrado";
+   } else {
+      if(!existeUsuario($usuario))
+         echo "Usuario no registrado";
+   }
 ?>

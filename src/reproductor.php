@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION["usuario"])){
+   session_unset();
+   session_destroy();
+}
+if($_SERVER["REQUEST_METHOD"] == "POST")
+   header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
+?>
 <html lang="es">
    <head>
       <meta charset="utf-8">
@@ -19,7 +28,7 @@
       <script src="../js/reproductor.js"></script>
    </head>
    <body>
-      <?php if(isset($_GET["titulo"])) : ?>
+      <?php if(isset($_GET["titulo"]) && isset($_GET["usuario"])) : ?>
       <div id="container-principal">
          <!-- En caso de que no haya JavaScript avisamos al usuario de que la pagina podria ir mal pero no redirigimos a error ya que no podrian introducir datos maliciosos por falta de validaciones -->
          <noscript>
@@ -29,8 +38,8 @@
          </noscript>
          <!-- Barra superior de la página -->
          <?php
-           require_once("../php/navbar.php");
-           navbar();
+         require_once("../php/navbar.php");
+         navbar();
          ?>
          <!-- Fin barra superior -->
 
@@ -40,12 +49,14 @@
                <div class="row">
                   <div class="col-sm-6 col-sm-offset-3">
                      <div id="imaginary_container">
-                        <div class="input-group stylish-input-group">
-                           <input type="text" class="form-control"  placeholder="Buscar" >
-                           <span class="input-group-addon">
-                              <a href="buscar_registrado.html" class="link-home-carousel-and-search"><span class="glyphicon glyphicon-search"></span></a>
-                           </span>
-                        </div>
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
+                           <div class="input-group stylish-input-group">
+                              <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                              <span class="input-group-addon">
+                                 <button class="glyphicon glyphicon-search" type="submit"></button>
+                              </span>
+                           </div>
+                        </form>
                      </div>
                   </div>
                </div>
@@ -54,25 +65,65 @@
             <!-- Cabecera del reproductor-->
             <div id="player-header" class="col-md-10 col-md-push-2">
                <div>
-                  <img src="../img/DiscoPortada.jpg" width="150" height="150" alt="Imagen usuario">
+                  <?php
+   require_once("../php/controlador.php");
+                              require_once("../php/modelo.php");
+                              $titulo = validarEntrada($_GET["titulo"]);
+                              $autor = validarEntrada($_GET["usuario"]);
+
+                              if (existe_cancion($titulo, $autor)){
+                                 $info = info_cancion($titulo, $autor);
+                                 aumentar_reproducciones($titulo, $autor);
+                              }
+                              else
+                                 header("Location: accesodenegado.html");
+
+                              if ($info["caratula"])
+                                 echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
+                              else
+                                 echo "<img src='../img/CaratulaPorDefecto.jpg' width='150' height='150' alt='Imagen usuario'>";
+                  ?>
+
                </div>
                <div id="player-header-info">
                   <?php
-                  require_once("../php/controlador.php");
-                  $info = info_cancion($_GET["titulo"]);
-                  echo "<audio src=".$info["archivo"]." id='song'></audio>";
-                  echo "<p>".$_GET["titulo"]."</p>\n";
-                  echo "<p>".$info["autor"]."</p>";
-                  echo "<p>Nº reproducciones: ".$info["nreproducciones"]."</p>"
+                  echo "<audio src=../songs/".$info["archivo"]." id='song'></audio>";
+                  echo "<p id='nombre_cancion'>".$_GET["titulo"]."</p>\n";
+                  echo "<p id='autor'>".$info["autor"]."</p>";
+                  echo "<p>Nº reproducciones: ".$info["nreproducciones"]."</p>";
                   ?>
-                  <div class="dropdown">
-                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Añadir a lista <span class="caret"></span></button>
-                     <ul class="dropdown-menu">
-                        <li><a href="#">Lista 1</a></li>
-                        <li><a href="#">Lista 2</a></li>
-                        <li><a href="#">Lista 3</a></li>
-                     </ul>
+
+                  <?php if(isset($_SESSION["usuario"])) : ?>
+
+                  <div class="form-group">
+                     <label for="selList">Añadir a lista:</label>
+                     <div class="col-md-12">
+                        <select id="selList" class="form-control" form="addList-form" name="genero" type="submit">
+                           <option value="title">Añadir a lista</option>
+                           <?php
+                           $listas = obtener_listas_reproduccion_usuario($_SESSION["usuario"]);
+
+                           foreach($listas as $lista)
+                              echo "<option value='".$lista["id"]."'>".$lista["nombre"]."</option>";
+
+                           ?>
+                        </select>
+                     </div>
                   </div>
+
+                  <?php if(isset($_SESSION["premium"]) && ($_SESSION["premium"] == true)) : ?>
+                  <div class="form-group">
+                     <label for="selList">Descargar:</label>
+                     <div class="col-md-12 container-fluid">
+                        <a href="../songs/<?php echo $info["archivo"] ?>" download>
+                           <button id="btn-descargar" type="button" class="btn btn-default" aria-label="Left Align">
+                              <span class="glyphicon glyphicon glyphicon-save" aria-hidden="true"></span>
+                           </button>
+                        </a>
+                     </div>
+                  </div>
+                  <?php endif; ?>
+                  <?php endif; ?>
                </div>
             </div>
 
@@ -81,9 +132,28 @@
                <!-- Botones para el control del reproducotor -->
                <div id="player-buttons">
                   <!-- Boton para volver a la cancion anterior -->
-                  <button type="button" class="btn btn-default" aria-label="Left Align">
-                     <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-                  </button>
+                  <?php
+                  if (isset($_GET["lista"]))
+                     $lista = validarEntrada($_GET["lista"]);
+                  else
+                     $lista = false;
+
+                  $anterior = get_cancion_anterior(validarEntrada($_GET["titulo"]), validarEntrada($_GET["usuario"]), $lista);
+                  if(!$lista || !$anterior)
+                     echo '<button type="button" class="btn btn-default" aria-label="Left Align" disabled>
+                        <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                        </button>';
+                  else{
+                     echo '<form id="previous-song" method="get" action="reproductor.php">
+                     <input type="hidden" name="titulo" value="'.$anterior["titulo"].'">
+                     <input type="hidden" name="usuario" value="'.$anterior["autor"].'">
+                     <input type="hidden" name="lista" value="'.$lista.'">
+                     </form>
+                     <button type="submit" form="previous-song" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                     </button>';
+                  }
+                  ?>
 
                   <!-- Boton de play/pause -->
                   <button id="playPauseButton"type="button" class="btn btn-default" aria-label="Left Align">
@@ -91,59 +161,83 @@
                   </button>
 
                   <!-- Boton para pasar a la siguiente cancion -->
-                  <button type="button" class="btn btn-default" aria-label="Left Align">
+                  <?php
+                  $siguiente = get_siguiente_cancion(validarEntrada($_GET["titulo"]), validarEntrada($_GET["usuario"]), $lista);
+                  if(!$lista || !$siguiente)
+                     echo '<button type="button" class="btn btn-default" aria-label="Left Align" disabled>
                      <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-                  </button>
-               </div>
+                     </button>';
+                  else{
+                     echo '<form id="next-song" method="get" action="reproductor.php">
+                     <input type="hidden" name="titulo" value="'.$siguiente["titulo"].'">
+                     <input type="hidden" name="usuario" value="'.$siguiente["autor"].'">
+                     <input type="hidden" name="lista" value="'.$lista.'">
+                     </form>
+                     <button type="submit" form="next-song" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                     </button>';
+                  }
+                  ?>
 
+
+               </div>
                <!-- Barra de estado de la cancion -->
                <div id="info-player">
                   <p id="reproducido" class="info-player-time">0:0</p>
-                  <div id="player-progres" class="progress">
-                     <div id="myBar" class="progress-bar" role="progressbar" aria-valuenow="70"
-                          aria-valuemin="0" aria-valuemax="100">
-                     </div>
-                  </div>
+                  <input id="player-progres" type="range" value="0" max="">
                   <p class="info-player-time" id="duracion"><?php echo  floor($info["duracion"] / 60), ":", $info["duracion"] % 60; ?></p>
                </div>
             </div>
 
             <h3 id="comment-title" class="col-md-10 col-md-push-2">Comentarios</h3>
-
+            <?php if(isset($_SESSION["usuario"])) : ?>
             <div class="comment-content col-xs-12 col-md-8 col-md-push-2">
                <div class="row">
                   <div class="panel panel-primary">
                      <div class="panel-heading comment-heading">
-                        <img src="../img/FotoPerfil.jpg" class="img-circle img-responsive comment-img" alt="user profile image">
+                        <?php
+                        $infoUsuario = obtener_informacion_usuario($_SESSION["usuario"]);
+                        echo "<img src='../img/".$infoUsuario[0]["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
+                        ?>
                         <div>
-                           <h4>Nombre usuario</h4>
+                           <h4 id="nombre_usuario"><?php echo $_SESSION["usuario"] ?></h4>
                         </div>
                      </div>
                      <div class="panel-body">
-                        <form action="#" id="comment-form">
-                           <textarea class="col-md-12 form-control" form="comment-form"></textarea>
-                           <input type="submit" id="comment-btn" value="Comentar" class="btn btn-primary pull-right">
-                        </form>
+                        <textarea id="texto" class="col-md-12 form-control" form="comment-form"></textarea>
+                        <button type="submit" id="comment-btn" class="btn btn-primary pull-right">Comentar</button>
                      </div>
                   </div>
                </div>
             </div>
+            <?php endif; ?>
+            <div id="comentarios">
+               <?php
+               $comentarios = obtener_info_comentarios_cancion($_GET["titulo"], $_GET["usuario"]);
+               foreach($comentarios as $comentario){
+                  echo "<div class='comment-content col-md-8 col-md-push-2 col-xs-12'>
+                           <div class='row'>
+                              <div class='panel panel-primary'>
+                                 <div class='panel-heading comment-heading'>";
+                  if ($comentario["foto"])
+                     echo "         <img src='../img/".$comentario["foto"]."' class='img-circle img-responsive comment-img' alt='user profile image'>";
+                  else
+                     echo "         <img src='../img/FotoUsuarioPorDefecto.png' class='img-circle img-responsive comment-img' alt='user profile image'>";
 
-            <div class="comment-content col-md-8 col-md-push-2 col-xs-12">
-               <div class="row">
-                  <div class="panel panel-primary">
-                     <div class="panel-heading comment-heading">
-                        <img src="../img/FotoPerfil.jpg" class="img-circle img-responsive comment-img" alt="user profile image">
-                        <div>
-                           <h4>Nombre usuario</h4>
-                           <h6>hace 1 minuto</h6>
+                  echo "            <div>
+                                       <h4>".$comentario["usuario"]."</h4>
+                                       <h6>".$comentario["fecha"]."</h6>
+                                    </div>
+                                 </div>
+                              <div class='panel-body'>
+                                 <p>".$comentario["texto"]."</p>
+                              </div>
+                           </div>
                         </div>
-                     </div>
-                     <div class="panel-body">
-                        <p>Esta página es la mejor!</p>
-                     </div>
-                  </div>
-               </div>
+                     </div>";
+               }
+
+               ?>
             </div>
          </div>
       </div>
@@ -153,7 +247,7 @@
          <footer class="footer-bs" id="footer">
             <div class="row">
                <div class="margin-logo-footer col-md-2 footer-brand animated fadeInLeft">
-                  <a href="index.html"><img alt="WebMusic" src="../img/Logo.png" width="180" height="180"></a>
+                  <img class="img img-responsive" alt="WebMusic" src="../img/Logo.png" width="180" height="180">
                </div>
                <div class="col-md-10 footer-nav animated fadeInUp">
                   <div class="col-md-3">
@@ -172,10 +266,9 @@
                   <div class="col-md-4 col-md-push-2">
                      <h4>Enlaces</h4>
                      <ul class="list">
-                        <li><a href="#">Mapa del sitio</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Explicación diseño</a></li>
-                        <li><a href="#">Guía de usuario</a></li>
+                        <li><a href="mapa.php">Mapa del sitio</a></li>
+                        <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
+                        <li><a href="#">Memoria</a></li>
                      </ul>
                   </div>
                </div>
