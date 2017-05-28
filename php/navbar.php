@@ -44,8 +44,13 @@ function navbar() {
 
       echo'<li><a href="../php/cerrar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>';
    } else {
-      echo '<li><a href="src/registro.php"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
-      <li><a href="src/login.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>';
+      if(in_array("index.php", $componentes)) {
+         echo '<li><a href="src/registro.php"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
+         <li><a href="src/login.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>';
+      } else {
+         echo '<li><a href="registro.php"><span class="glyphicon glyphicon-plus"></span> Registrarse</a></li>
+         <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>';
+      }
    }
 
    echo "</ul>\n";
