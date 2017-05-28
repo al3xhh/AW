@@ -286,7 +286,7 @@
 															<h3>".$fila['titulo']."</h3>
 														</div>
 														<div class='user-resume-button'>
-															<a href='reproductor.php?titulo='".$fila['titulo']."'><button type='button' class='btn btn-primary pull-right glyphicon glyphicon-play' data-toggle='tooltip' title='escuchar canción'></button></a>
+															<a href='reproductor.php?titulo='".$fila['titulo'].";'><button type='button' class='btn btn-primary pull-right glyphicon glyphicon-play' data-toggle='tooltip' title='escuchar canción'></button></a>
 														</div>
 													</div>";
                               }

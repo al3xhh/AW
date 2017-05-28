@@ -298,13 +298,13 @@ function obtenerDescripcionUsuario($usuario) {
 }
 
 //Función que obtiene los seguidores del usuario
-function obtenerSeguidores($usuario) {
+function obtenerSeguidores($usuario, $limite) {
    $mysqli = conectar();
    $array = array();
    $sql = "SELECT seguidor, foto
             FROM sigue
             JOIN usuarios ON nombreusuario = seguidor
-            WHERE seguido = ? ";
+            WHERE seguido = ? " . $limite;
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
@@ -325,13 +325,13 @@ function obtenerSeguidores($usuario) {
 }
 
 //Función que obtiene los seguidos del usuario
-function obtenerSeguidos($usuario) {
+function obtenerSeguidos($usuario, $limite){
    $mysqli = conectar();
    $array = array();
    $sql = "SELECT seguido, foto
             FROM sigue
             JOIN usuarios ON nombreusuario = seguido
-            WHERE seguidor = ? ";
+            WHERE seguidor = ? " . $limite;
 
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
