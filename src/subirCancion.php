@@ -37,7 +37,7 @@
 
          require_once("../php/controlador.php");
 
-         $nombreCancionUsuario = validar_entrada($_POST['nombreCancion']);
+         $nombreCancionUsuario = str_replace(" ", "_", validar_entrada($_POST['nombreCancion']));
          $genero = validar_entrada($_POST['genero']);
          $cancion = $_FILES['cancion']['name'];
          $dirTemporalCancion = $_FILES['cancion']['tmp_name'];
@@ -48,29 +48,22 @@
          $dirTemporalCaratula = $_FILES['imagenCancion']['tmp_name'];
 
 
-         $nombreCancion = preg_split(".", $nombreCancionUsuario)[0] . "_" . $_SESSION['usuario'].preg_split(".", $nombreCancionUsuario)[1];
+         $nombreCancion = $nombreCancionUsuario."_".$_SESSION["usuario"].".mp3";
          //inserto en la base de datos la cancion
          //subir_archivo($archivo, $directorioTemporal, $directorioSubida)
          //subir_archivo_renombrar($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre)
 
          if($caratula == ""){
-            if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
-               //inserto en la bbdd
-               //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
-               insertar_cancion($_SESSION['usuario'], $nombreCancionUsuario, "", "0:00", $genero, $nombreCancion, $premium);
-            }
+            $caratula = "CaratulaPorDefecto.jpg";
 
          }
-         else{
-            if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCaratula)){
+            if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCancionUsuario."_".$_SESSION['usuario']."_caratula.jpg")){
                if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
                   //inserto en la bbdd
                   //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
-                  insertar_cancion($_SESSION['usuario'], $nomCancion, $nombreCaratula, "0:00", $genero, $nombreCancion, $premium);
+                  insertar_cancion($_SESSION['usuario'], $nomCancion, $nombreCancionUsuario."_".$_SESSION['usuario']."_caratula.jpg", "0", $genero, $nombreCancion, $premium);
                }
             }
-         //header('Location:'.htmlspecialchars($_SERVER['PHP_SELF']));
-         }
       }
       ?>
       <div id="container-principal">

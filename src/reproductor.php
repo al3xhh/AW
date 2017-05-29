@@ -41,45 +41,46 @@ if (!isset($_SESSION["usuario"])){
          ?>
          <!-- Fin barra superior -->
 
-         <!-- Barra de búsqueda -->
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-6 col-sm-offset-3">
-                  <div id="imaginary_container">
-                     <form action="buscar.php" method="get" id="ID_Formulario">
-                        <div class="input-group stylish-input-group">
-                           <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
-                           <input type="hidden" value="1" name="tipo">
-                           <span class="input-group-addon">
-                              <button class="glyphicon glyphicon-search" type="submit"></button>
-                           </span>
-                        </div>
-                     </form>
+         <div class="container-fluid">
+            <!-- Barra de búsqueda -->
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-6 col-sm-offset-3">
+                     <div id="imaginary_container">
+                        <form action="buscar.php" method="get" id="ID_Formulario">
+                           <div class="input-group stylish-input-group">
+                              <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                              <input type="hidden" value="1" name="tipo">
+                              <span class="input-group-addon">
+                                 <button class="glyphicon glyphicon-search" type="submit"></button>
+                              </span>
+                           </div>
+                        </form>
+                     </div>
                   </div>
                </div>
-            </div>
-         </div><!-- Fin barra de búsqueda -->
+            </div><!-- Fin barra de búsqueda -->
 
             <!-- Cabecera del reproductor-->
             <div id="player-header" class="col-md-10 col-md-push-2">
                <div>
                   <?php
-   require_once("../php/controlador.php");
-                              require_once("../php/modelo.php");
-                              $titulo = validarEntrada($_GET["titulo"]);
-                              $autor = validarEntrada($_GET["usuario"]);
+                  require_once("../php/controlador.php");
+                  require_once("../php/modelo.php");
+                  $titulo = validarEntrada($_GET["titulo"]);
+                  $autor = validarEntrada($_GET["usuario"]);
 
-                              if (existe_cancion($titulo, $autor)){
-                                 $info = info_cancion($titulo, $autor);
-                                 aumentar_reproducciones($titulo, $autor);
-                              }
-                              else
-                                 header("Location: accesodenegado.html");
+                  if (existe_cancion($titulo, $autor)){
+                     $info = info_cancion($titulo, $autor);
+                     aumentar_reproducciones($titulo, $autor);
+                  }
+                  else
+                     header("Location: accesodenegado.html");
 
-                              if ($info["caratula"])
-                                 echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
-                              else
-                                 echo "<img src='../img/CaratulaPorDefecto.jpg' width='150' height='150' alt='Imagen usuario'>";
+                  if ($info["caratula"])
+                     echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
+                  else
+                     echo "<img src='../img/CaratulaPorDefecto.jpg' width='150' height='150' alt='Imagen usuario'>";
                   ?>
 
                </div>
