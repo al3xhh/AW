@@ -37,24 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          ?>
          <!-- Fin barra superior -->
 
-         <div class="container-fluid">
-            <div class="row">
-               <div class="separar-filas-abajo">
-                  <div class="col-md-4 col-md-push-1">
-                     <h1>Listas de reproduccion</h1>
-                  </div>
-               </div>
-            </div>
-         </div>
-
-         <!--Este contenedor se usa para ver las siguientes categorias en las que separamos las listas de reproduccion-->
-         <div class="container-fluid">
-            <div class="separar-filas">
-               <div class="col-md-4 col-md-push-4">Nombre</div>
-               <div class="col-md-4 col-md-push-4">Autor</div>
-            </div>
-         </div>
-
          <!--Contenedo que tiene una lista de reproduccion con sus caracteristicas-->
          <div class="container-fluid">
             <div class="separar-filas">
@@ -62,22 +44,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                <?PHP
                require_once("../php/controlador.php");
                $resultado = lista_reproduccion($_SESSION["usuario"]);
-               foreach ($resultado as $fila) {
-                  echo
-                     "<div class='item active'>
-							  <blockquote>
-								<hr class='separador-fino'>
-									<div class='col-md-4 col-md-push-4'> <a class='link-home-carousel-and-search' href='lista-reproduccion-canciones.php?lista=".$fila['id']."&autor=".$fila['usuario']."&nombre=".$fila['nombre']."'>".$fila['nombre']."</a></div>
-									<div class='col-md-4 col-md-push-4'>".$fila['usuario']."</div>
-									<div class='col-md-4 col-md-push-2'>
-										<form action='borrar_lista.php' method='post'>
-											<input type='hidden' name='id' value='".$fila['id']."' />
-											<button type='submit' class='btn btn-danger btn-xs' data-title='Delete' data-toggle='modal' data-target='#delete' ><span class='glyphicon glyphicon-trash'></span></button>
-										</form>
-									</div>
 
-							  </blockquote>
-						  </div>";
+               if(empty($resultado)) {
+                  echo '<div class="text-center"><h3>No tienes listas de reproducción</h3></div>';
+               } else {
+                  echo '<div class="container-fluid">
+                     <div class="separar-filas">
+                        <div class="col-md-4 col-md-push-4">Nombre</div>
+                        <div class="col-md-4 col-md-push-4">Autor</div>
+                     </div>
+                  </div>';
+
+                  foreach ($resultado as $fila) {
+                     echo
+                        "<div class='item active'>
+   							  <blockquote>
+   								<hr class='separador-fino'>
+   									<div class='col-md-4 col-md-push-4'> <a class='link-home-carousel-and-search' href='lista-reproduccion-canciones.php?lista=".$fila['id']."&autor=".$fila['usuario']."&nombre=".$fila['nombre']."'>".$fila['nombre']."</a></div>
+   									<div class='col-md-4 col-md-push-4'>".$fila['usuario']."</div>
+   									<div class='col-md-4 col-md-push-2'>
+   										<form action='../php/borrar_lista.php' method='post'>
+   											<input type='hidden' name='id' value='".$fila['id']."' />
+   											<button type='submit' class='btn btn-danger btn-xs' data-title='Delete' data-toggle='modal' data-target='#delete' ><span class='glyphicon glyphicon-trash'></span></button>
+   										</form>
+   									</div>
+
+   							  </blockquote>
+   						  </div>";
+                  }
                }
                ?>
             </div>

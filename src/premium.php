@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <?php
 session_start();
+if (!isset($_SESSION["usuario"])){
+   session_unset();
+   session_destroy();
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
    if (isset($_POST["ID_Cuenta"])){
       require_once("../php/controlador.php");

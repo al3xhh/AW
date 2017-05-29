@@ -5,14 +5,14 @@
          <meta http-equiv="refresh" content="0" url="errorJS.html">
       </noscript>
       <?php
-      require_once("../php/controlador.php");
-      session_start();
-      if(!isset($_SESSION['usuario']))
-         header('Location: login.php');
-      $premium = false;
-      if(es_premium($_SESSION['usuario'])){
-         $premium = true;
-      }
+		  require_once("../php/controlador.php");
+		  session_start();
+		  if(!isset($_SESSION['usuario']))
+			header('Location: login.php');
+			$premium = false;
+		  if(es_premium($_SESSION['usuario'])){
+			 $premium = true;
+		  }
       ?>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,9 +30,9 @@
       <script src="../js/bootstrap.min.js"></script>
       <script src="../js/miPerfil.js"></script>
       <?php
-   if($premium){
-      echo "<script src='../js/comprobarPremiumPerfil.js'></script>";
-   }
+		  if($premium){
+			  echo "<script src='../js/comprobarPremiumPerfil.js'></script>";
+		  }
       ?>
    </head>
    <body>
@@ -286,7 +286,7 @@
 															<h3>".$fila['titulo']."</h3>
 														</div>
 														<div class='user-resume-button'>
-															<a href='reproductor.php?titulo='".$fila['titulo']."'><button type='button' class='btn btn-primary pull-right glyphicon glyphicon-play' data-toggle='tooltip' title='escuchar canción'></button></a>
+															<a href='reproductor.php?titulo='".$fila['titulo'].";'><button type='button' class='btn btn-primary pull-right glyphicon glyphicon-play' data-toggle='tooltip' title='escuchar canción'></button></a>
 														</div>
 													</div>";
                               }

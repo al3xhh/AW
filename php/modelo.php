@@ -210,7 +210,7 @@ function tusTop($usuario) {
 function tusTopSocial($usuario) {
    $mysqli = conectar();
    $array = array();
-   $sql = "SELECT cancion.titulo, reproducciones.usuario, reproducciones.fecha, autor
+   $sql = "SELECT cancion.titulo, reproducciones.usuario, date(reproducciones.fecha), autor
             FROM cancion
             JOIN reproducciones ON cancion.id = reproducciones.cancion
             WHERE reproducciones.usuario IN (SELECT seguido

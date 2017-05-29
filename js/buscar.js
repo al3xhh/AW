@@ -17,7 +17,7 @@ $(document).ready(function() {
 			 split = res.split(":"),
 			 autor = split[0],
 			 titulo = split[1];
-		$.post("../php/aniadir_a_lista.php", {'lista' : $(".aniadeLista :selected").val(), 'cancion' : titulo, 'autor' : autor, 'usuario' : $("#nombre_usuario").val()}, function(data){
+		$.post("../php/aniadir_a_lista.php", {'lista' : $("#" + id +" :selected").val(), 'cancion' : titulo, 'autor' : autor, 'usuario' : $("#nombre_usuario").val()}, function(data){
          $(".aniadeLista").val("title");
 		});
 	}

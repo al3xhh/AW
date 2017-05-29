@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         <div class="negrita">
                            <select name="tipo">
                               <option value="1">Cancion</option>
-                              <option value="2">Artista</option>
+                              <option value="2">Canciones por artista</option>
                               <option value="3">Fecha de lanzamiento</option>
                            </select>
                         </div>

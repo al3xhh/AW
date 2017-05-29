@@ -63,35 +63,40 @@ if(!isset($_SESSION["usuario"])) {
             </div>
          </div>
          <div class="container-fluid">
-            <div class='separar-filas-arriba'>
-               <div class="col-md-2 col-md-push-2">Titulo</div>
-               <div class="col-md-1 col-md-push-2">Autor</div>
-               <div class="col-md-2 col-md-push-2">Fecha</div>
-               <div class="col-md-1 col-md-push-2">Duracion</div>
-            </div>
             <?PHP
             require_once("../php/controlador.php");
             $resultado = lista_reproduccion_canciones($id);
-            foreach ($resultado as $fila) {
-               echo
-                  "<div class='item active'>
-						  <blockquote>
-							 <hr class='separador-fino'>
-								<div class='col-md-2 col-md-push-2'><a class='link-home-carousel-and-search' href='reproductor.php?titulo=".$fila['titulo']."&usuario=".$fila['autor']."&lista=".$nombre."'>".$fila['titulo']."</a></div>
-								<div class='col-md-1 col-md-push-2'><a class='link-home-carousel-and-search' href='usuario.php'>".$fila['autor']."</a></div>
-								<div class='col-md-2 col-md-push-2'>".$fila['fecha']."</div>
-								<div class='col-md-1 col-md-push-2'>".$fila['duracion']."</div>
-								<div class='col-md-1 col-md-push-2'>
-									<form action='../php/borrar_cancion_lista.php' method='post'>
-										<input type='hidden' name='id' value='".$id."' />
-										<input type='hidden' name='autor' value='".$autor."' />
-										<input type='hidden' name='nombrelista' value='".$nombre."' />
-										<input type='hidden' name='cancion' value='".$fila['id']."' />
-										<button type='submit' class='btn btn-danger btn-xs' data-title='Delete' data-toggle='modal' data-target='#delete' ><span class='glyphicon glyphicon-trash'></span></button>
-									</form>
-								</div>
-						  </blockquote>
-					  </div>";
+
+            if(empty($resultado)) {
+               echo '<div class="text-center"><h3>La lista no tiene canciones</h3></div>';
+            } else {
+               echo '<div class="separar-filas-arriba">
+                        <div class="col-md-2 col-md-push-2">Titulo</div>
+                        <div class="col-md-1 col-md-push-2">Autor</div>
+                        <div class="col-md-2 col-md-push-2">Fecha</div>
+                        <div class="col-md-1 col-md-push-2">Duracion</div>
+                     </div>';
+               foreach ($resultado as $fila) {
+                  echo
+                     "<div class='item active'>
+   						  <blockquote>
+   							 <hr class='separador-fino'>
+   								<div class='col-md-2 col-md-push-2'><a class='link-home-carousel-and-search' href='reproductor.php?titulo=".$fila['titulo']."&usuario=".$fila['autor']."&lista=".$nombre."'>".$fila['titulo']."</a></div>
+   								<div class='col-md-1 col-md-push-2'><a class='link-home-carousel-and-search' href='usuario.php'>".$fila['autor']."</a></div>
+   								<div class='col-md-2 col-md-push-2'>".$fila['fecha']."</div>
+   								<div class='col-md-1 col-md-push-2'>".$fila['duracion']."</div>
+   								<div class='col-md-1 col-md-push-2'>
+   									<form action='../php/borrar_cancion_lista.php' method='post'>
+   										<input type='hidden' name='id' value='".$id."' />
+   										<input type='hidden' name='autor' value='".$autor."' />
+   										<input type='hidden' name='nombrelista' value='".$nombre."' />
+   										<input type='hidden' name='cancion' value='".$fila['id']."' />
+   										<button type='submit' class='btn btn-danger btn-xs' data-title='Delete' data-toggle='modal' data-target='#delete' ><span class='glyphicon glyphicon-trash'></span></button>
+   									</form>
+   								</div>
+   						  </blockquote>
+   					  </div>";
+               }
             }
             ?>
 

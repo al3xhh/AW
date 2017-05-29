@@ -173,13 +173,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                  echo '<h4 class="col-md-3">#</h4>
                                               <h4 class="col-md-3">Título</h4>
                                               <h4 class="col-md-3">Autor</h4>
-                                              <h4 class="col-md-3">Fecha publicación</h4>
+                                              <h4 class="col-md-3">Escuchado el</h4>
                                               <hr class="separator">';
 
                                  foreach ($resultado as $fila) {
-                                    $fecha = new DateTime($fila["fecha"]);
+                                    /*$fecha = new DateTime($fila["fecha"]);
                                     $ahora = new DateTime();
-                                    $tiempo = $fecha->diff($ahora)->format("%m meses, %d días, %h horas and %i minutos");
+                                    $tiempo = $fecha->diff($ahora)->format("%m meses, %d días, %h horas and %i minutos");*/
 
                                     echo '<div class="item active">
                                                     <blockquote>
@@ -187,7 +187,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                                               <h5 class="col-md-3">'.$i.'</h5>
                                                               <a href="reproductor.php?titulo='.$fila["titulo"].'&usuario='.$fila["autor"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["titulo"].'</h5></a>
                                                               <a href="usuario.php?usuario='.$fila["usuario"].'" class="link-home-carousel-and-search"><h5 class="col-md-3">'.$fila["usuario"].'</h5></a>
-                                                              <h5 class="col-md-3">'.$tiempo.'</h5>
+                                                              <h5 class="col-md-3">'.$fila["fecha"].'</h5>
                                                         </div>
                                                     </blockquote>
                                                 </div>';
