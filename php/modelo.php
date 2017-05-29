@@ -23,6 +23,7 @@ function cerrarSesion(){
 function conectar() {
    //return new mysqli('127.0.0.1', 'id1792365_webmusic', 'webmusic', 'id1792365_webmusic');
    return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'webmusic');
+   //return new mysqli('sql301.byethost11.com', 'b11_20160063', 'proyecto1995', 'b11_20160063_webmusic');
 }
 
 //TODO quitarla de aquí y corregir todas las llamadas que se hagan
@@ -1062,7 +1063,7 @@ function insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, 
    }
 }
 
-function actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
+function subirArchivoRenombrar($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
 
    $fichero_subido = $directorioSubida . basename($archivo);
    if (move_uploaded_file($directorioTemporal, $fichero_subido)){

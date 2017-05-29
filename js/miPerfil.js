@@ -124,6 +124,51 @@ function validarDatosEditarPerfil(event){
 
 //fin funciones para validar el formulario de editar perfil
 
+//Función para el botón de seguir en la lista de seguidores de un usuario.
+function seguidoresSeguir(id){
+	if($("#" + id).html() == "Seguir"){
+		$.post("../php/usuario_seguir.php",
+		
+		{'usuario' : $("#" + id).val()},
+		
+		function (data){
+			$("#" + id).html("Siguiendo");
+		});
+	}
+	else{
+		$.post("../php/usuario_dejar_seguir.php", 
+		
+		{'usuario' : $("#" + id).val()}, 
+		
+		function(data) {
+            $("#" + id).html("Seguir");
+        });
+	}
+}
+
+//Función para el botón de seguir en la lista de seguidos de un usuario.
+function seguidosSeguir(id) {
+	if($("#" + id).html() == "Seguir") {
+		$.post("../php/usuario_seguir.php", 
+		 
+		{'usuario' : $("#" + id).val()}, 
+		 
+		function(data) {
+           $("#" + id).html("Siguiendo");
+        });
+		 
+    } 
+	else {
+        $.post("../php/usuario_dejar_seguir.php", 
+		
+		{'usuario' : $("#" + id).val()}, 
+		
+		function(data) {
+			$("#" + id).html("Seguir");
+        });
+    }
+}
+
 $( document ).ready(function() {
 	var edicion = false;
     $("#habilitar_edicion").on("click", function () {
@@ -148,88 +193,76 @@ $( document ).ready(function() {
         validarDatosEditarPerfil(event);
     });
 
-    //Función para el botón de seguir en la lista de seguidores de un usuario.
-   function seguidoresSeguir(id) {
-      if($("#" + id).html() == "Seguir") {
-         $.post("../php/usuario_seguir.php", {'usuario' : $("#" + id).val()}, function(data) {
-            $("#" + id).html("Siguiendo");
-         });
-      } else {
-         $.post("../php/usuario_dejar_seguir.php", {'usuario' : $("#" + id).val()}, function(data) {
-            $("#" + id).html("Seguir");
-         });
-      }
-   }
-
-   //Función para el botón de seguir en la lista de seguidos de un usuario.
-   function seguidosSeguir(id) {
-      if($("#" + id).html() == "Seguir") {
-         $.post("../php/usuario_seguir.php", {'usuario' : $("#" + id).val()}, function(data) {
-            $("#" + id).html("Siguiendo");
-         });
-      } else {
-         $.post("../php/usuario_dejar_seguir.php", {'usuario' : $("#" + id).val()}, function(data) {
-            $("#" + id).html("Seguir");
-         });
-      }
-   }
-
+   //ajax, seguidores y seguidos
+   
    //Listener para el botón de seguir a un usuario.
-   $("#Seguir").click(function() {
-      if($("#Seguir").html() == "Seguir") {
-         $.post("../php/usuario_seguir.php", {'usuario' : $("#Seguir").val()}, function(data) {
-            $("#Seguir").html("Siguiendo");
-         });
-      } else {
-         $.post("../php/usuario_dejar_seguir.php", {'usuario' : $("#Seguir").val()}, function(data) {
-            $("#Seguir").html("Seguir");
-         });
-      }
+	$("#Seguir").click(function() {
+		if($("#Seguir").html() == "Seguir") {
+			$.post("../php/usuario_seguir.php", 
+		 
+			{'usuario' : $("#Seguir").val()}, 
+		
+			function(data) {
+				$("#Seguir").html("Siguiendo");
+			});
+		} 
+		else {
+			$.post("../php/usuario_dejar_seguir.php", {'usuario' : $("#Seguir").val()}, function(data) {
+				$("#Seguir").html("Seguir");
+			});
+		}
    });
-
-   //Listener para las pestañas del perfil de un usuario, para actualizarlas con ajax.
-   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      var target = $(e.target).attr("href");
-
-      if(target == "#tab_default_2") {
-         $.post("../php/usuario_seguidores.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
-            $("#tab_default_2").html(data);
-            $(".SeguidoresSeguir").bind("click", function () {
-               seguidoresSeguir(this.id);
-            });
-            $("#todosSeguidores").click(function () {
+   
+	//Listener para las pestañas del perfil de un usuario, para actualizarlas con ajax.
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		var target = $(e.target).attr("href");
+			
+		if(target == "#Seguidores") {
+			$.post("../php/usuario_seguidores.php", 
+				{'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"},
+					function(data) {
+						$("#Seguidores").html(data);
+						$(".SeguidoresSeguir").bind("click", 
+							function () {
+								seguidoresSeguir(this.id);
+							});
+            
+			$("#todosSeguidores").click(function () {
                $.post("../php/usuario_seguidores.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
-                  $("#tab_default_2").html(data);
+                  $("#Seguidores").html(data);
                   $(".SeguidoresSeguir").bind("click", function () {
                      seguidoresSeguir(this.id);
                   });
                });
             });
          });
-      } else if (target == "#tab_default_3") {
+      } else if (target == "#Seguidos") {
          $.post("../php/usuario_seguidos.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
-            $("#tab_default_3").html(data);
+            $("#Seguidos").html(data);
             $(".SeguidosSeguir").bind("click", function () {
                seguidosSeguir(this.id);
             });
-            $("#todosSeguidos").click(function () {
+            $("#Seguidos").click(function () {
                $.post("../php/usuario_seguidos.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
-                  $("#tab_default_3").html(data);
+                  $("#Seguidos").html(data);
                   $(".SeguidosSeguir").bind("click", function () {
                      seguidosSeguir(this.id);
                   });
                });
             });
          });
-      } else if (target == "#tab_default_4") {
+      } else if (target == "#Canciones") {
          $.post("../php/usuario_canciones.php", {'usuario' : $("#nombreusuario").html(), 'limite' : "LIMIT 10"}, function(data) {
-            $("#tab_default_4").html(data);
+            $("#Canciones").html(data);
             $("#todasCanciones").click(function () {
                $.post("../php/usuario_canciones.php", {'usuario' : $("#nombreusuario").html(), 'limite' : ""}, function(data) {
-                  $("#tab_default_4").html(data);
+                  $("#Canciones").html(data);
                   });
                });
             });
       }
    });
+   
+   
+   
 });

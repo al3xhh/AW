@@ -5,8 +5,6 @@ if (!isset($_SESSION["usuario"])){
    session_unset();
    session_destroy();
 }
-if($_SERVER["REQUEST_METHOD"] == "POST")
-   header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
 ?>
 <html lang="es">
    <head>
@@ -43,24 +41,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
          ?>
          <!-- Fin barra superior -->
 
-         <div class="container-fluid">
-            <!-- Barra de búsqueda -->
-            <div class="container">
-               <div class="row">
-                  <div class="col-sm-6 col-sm-offset-3">
-                     <div id="imaginary_container">
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
-                           <div class="input-group stylish-input-group">
-                              <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
-                              <span class="input-group-addon">
-                                 <button class="glyphicon glyphicon-search" type="submit"></button>
-                              </span>
-                           </div>
-                        </form>
-                     </div>
+         <!-- Barra de búsqueda -->
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-6 col-sm-offset-3">
+                  <div id="imaginary_container">
+                     <form action="buscar.php" method="get" id="ID_Formulario">
+                        <div class="input-group stylish-input-group">
+                           <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                           <input type="hidden" value="1" name="tipo">
+                           <span class="input-group-addon">
+                              <button class="glyphicon glyphicon-search" type="submit"></button>
+                           </span>
+                        </div>
+                     </form>
                   </div>
                </div>
-            </div><!-- Fin barra de búsqueda -->
+            </div>
+         </div><!-- Fin barra de búsqueda -->
 
             <!-- Cabecera del reproductor-->
             <div id="player-header" class="col-md-10 col-md-push-2">

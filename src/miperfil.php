@@ -9,10 +9,7 @@
 		  session_start();
 		  if(!isset($_SESSION['usuario']))
 			header('Location: login.php');
-			$premium = false;
-		  if(es_premium($_SESSION['usuario'])){
-			 $premium = true;
-		  }
+		  $premium = es_premium($_SESSION['usuario']);
       ?>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -64,7 +61,7 @@
          if(isset($_FILES['nuevo_perfil'])){
             //meto la nueva foto de perfil
             $nuevaImagenPerfil = $_FILES['nuevo_perfil'];
-            if(!actualizar_perfil($nuevaImagenPerfil['name'], $nuevaImagenPerfil['tmp_name'], "../img/", $_SESSION['usuario']."_perfil.jpg")){
+            if(!subir_archivo_renombrar($nuevaImagenPerfil['name'], $nuevaImagenPerfil['tmp_name'], "../img/", $_SESSION['usuario']."_perfil.jpg")){
                $errorPerfil = true;
             }
             else{
@@ -76,7 +73,7 @@
          if(isset($_FILES['nueva_imagen_encabezado'])){
             //meto la nueva foto de encabezado
             $nuevoEncabezado = $_FILES['nueva_imagen_encabezado'];
-            if(!actualizar_perfil($nuevoEncabezado['name'], $nuevoEncabezado['tmp_name'], "../img/", $_SESSION['usuario']."_encabezado.jpg")){
+            if(!subir_archivo_renombrar($nuevoEncabezado['name'], $nuevoEncabezado['tmp_name'], "../img/", $_SESSION['usuario']."_encabezado.jpg")){
                $errorEncabezado = true;
             }
             else{
@@ -152,7 +149,7 @@
                      <div class="input-group stylish-input-group">
                         <input type="text" class="form-control"  placeholder="Buscar" >
                         <span class="input-group-addon">
-                           <a href="buscar_registrado.html" class="link-home-carousel-and-search"><span class="glyphicon glyphicon-search"></span></a>
+                           <a href="buscar_registrado.php" class="link-home-carousel-and-search"><span class="glyphicon glyphicon-search"></span></a>
                         </span>
                      </div>
                   </div>
@@ -169,7 +166,7 @@
                            <img class="fb-image-lg" src="../img/'.cargar_Ruta_Foto_Encabezado($resultado[0]["encabezado"]).'" alt="Profile image example" height=400>
                            <img class="fb-image-profile thumbnail" src="../img/'.cargar_Ruta_Foto_Perfil($resultado[0]["foto"]).'" alt="Profile image example">
                            <div class="fb-profile-text">
-								<h1>'.$resultado[0]["nombreusuario"].'</h1>
+								<h1  id="nombreusuario">'.$resultado[0]["nombreusuario"].'</h1>
                            </div>
                         <div class="fb-profile-text"></div></div>';
                ?>
@@ -211,88 +208,9 @@
                            echo '<p>'.$resultado.'</p>';
                            ?>
                         </div>
-                        <div class="tab-pane" id="Seguidores">
-                           <?php
-                           $resultado = obtener_seguidores(validar_entrada($_SESSION['usuario']));
-
-                           foreach ($resultado as $fila){
-                              if($_SESSION['usuario'] != $fila["seguidor"]) {
-                                 echo '<div class="user-resume">
-														<div>
-															<img class="user-resume-img" src="../img/'.cargar_Ruta_Foto_Perfil($fila["foto"]).'" width="64" height="64" alt="Imagen usuario">
-														</div>
-														<div class="user-resume-info">
-															<h3>'.$fila["seguidor"].'</h3>
-														</div>
-														<div class="user-resume-button">
-														<button value="';
-                                 echo $fila["seguidor"];
-                                 echo '"type="submit" class="btn btn-primary pull-right" id="SeguidoresSeguir">';
-                                 if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguidor"]))) {
-                                    echo 'Siguiendo';
-                                 }
-                                 else {
-                                    echo 'Seguir';
-                                 }
-                                 echo '</button>
-                                                       </div>
-                                                       </div>';
-                              }
-                           }
-                           ?>
-                        </div>
-                        <div class="tab-pane" id="Seguidos">
-                           <?php
-                           $resultado = obtener_seguidos(validar_entrada($_SESSION['usuario']));
-
-                           foreach ($resultado as $fila) {
-                              if($_SESSION['usuario'] != $fila["seguido"]) {
-                                 echo '<div class="user-resume">
-														<div>
-															<img class="user-resume-img" src="../img/'.cargar_Ruta_Foto_Perfil($fila["foto"]).'" width="64" height="64" alt="Imagen usuario">
-														</div>
-														<div class="user-resume-info">
-															<h3>'.$fila["seguido"].'</h3>
-														</div>
-														<div class="user-resume-button">
-															<button <button value="';
-                                 echo $fila["seguido"];
-                                 echo '"type="submit" class="btn btn-primary pull-right" id="SeguidosSeguir">';
-                                 if(sigueA(validar_entrada($_SESSION['usuario']), validar_entrada($fila["seguido"]))){
-                                    echo 'Siguiendo';
-                                 } else {
-                                    echo 'Seguir';
-                                 }
-                                 echo '</button>
-                                                      </div>
-                                                      </div>';
-                              }
-                           }
-                           ?>
-                        </div>
-                        <div class="tab-pane" id="Canciones">
-                           <?PHP
-                           $resultado = obtener_canciones_usuario(validar_entrada($_SESSION['usuario']));
-
-                           if (empty($resultado)) {
-                              echo '<h4 class="text-center">El usuario no ha subido aún ninguna canción.</h4>';
-                           } else {
-                              foreach ($resultado as $fila) {
-                                 echo "<div class='user-resume'>
-														<div>
-															<img class='user-resume-img' src='../img/".cargar_caratula_por_defecto($fila['caratula'])."' width='64' height='64' alt='Imagen usuario'>
-														</div>
-														<div class='user-resume-info'>
-															<h3>".$fila['titulo']."</h3>
-														</div>
-														<div class='user-resume-button'>
-															<a href='reproductor.php?titulo='".$fila['titulo'].";'><button type='button' class='btn btn-primary pull-right glyphicon glyphicon-play' data-toggle='tooltip' title='escuchar canción'></button></a>
-														</div>
-													</div>";
-                              }
-                           }
-                           ?>
-                        </div>
+						<div class="tab-pane" id="Seguidores"></div>
+                        <div class="tab-pane" id="Seguidos"></div>
+                        <div class="tab-pane" id="Canciones"></div>
                         <div class="tab-pane" id="Editar_Perfil">
                            <form class="form-horizontal" id="form_editar_Perfil" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" enctype="multipart/form-data">
                               <div class="form-group">
@@ -302,9 +220,9 @@
                                  </div>
                                  <div class="alert alert-danger alertas-registro" id="ID_error_email"></div>
                                  <?php
-   if($errorCorreo != "" && $errorCorreo){
-      echo "<div class='alert alert-danger alertas-registro' id='ID_error_email'>No se pudo guardar el correo</div>";
-   }
+									   if($errorCorreo != "" && $errorCorreo){
+										  echo "<div class='alert alert-danger alertas-registro' id='ID_error_email'>No se pudo guardar el correo</div>";
+									   }
                                  ?>
                               </div>
                               <div class="form-group">
@@ -345,6 +263,10 @@
                               </div>
                               <button id="cambiar_perfil" class="btn btn-primary btn-block">Guardar cambios</button>
                            </form>
+                           <hr>
+                           <?php if(!$premium) {
+                              echo '<a href="premium.php"><button class="btn btn-primary btn-block">Hacerme premium</button></a>';
+                           }?>
                         </div>
                         <?php
                         echo "<div class='tab-pane' id='Editar_Premium'>";
@@ -428,7 +350,7 @@
 
                            foreach ($resultado as $fila) {
                               echo '<div class="form-group">
-                                                    <label>'.$fila.'</label>
+                                                    <label>'.$fila["genero"].'</label>
                                                     </div>';
                            }
                            ?>

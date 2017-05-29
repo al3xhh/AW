@@ -34,9 +34,10 @@
       <?php
       $okcancion = $okimagen = "";
       if($_SERVER["REQUEST_METHOD"] == "POST"){
+
          require_once("../php/controlador.php");
-         $nombreCancion = validar_entrada($_POST['nombreCancion']).".mp3";
-         $artista = validar_entrada($_POST['artista']);
+
+         $nombreCancionUsuario = validar_entrada($_POST['nombreCancion']);
          $genero = validar_entrada($_POST['genero']);
          $cancion = $_FILES['cancion']['name'];
          $dirTemporalCancion = $_FILES['cancion']['tmp_name'];
@@ -47,16 +48,29 @@
          $dirTemporalCaratula = $_FILES['imagenCancion']['tmp_name'];
 
 
+         $nombreCancion = preg_split(".", $nombreCancionUsuario)[0] . "_" . $_SESSION['usuario'].preg_split(".", $nombreCancionUsuario)[1];
          //inserto en la base de datos la cancion
          //subir_archivo($archivo, $directorioTemporal, $directorioSubida)
-         //actualizar_perfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre)
-         if(subir_archivo($caratula, $dirTemporalCaratula, $dirSubidaImagen)){
-            if(actualizar_perfil($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
+         //subir_archivo_renombrar($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre)
+
+         if($caratula == ""){
+            if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
                //inserto en la bbdd
-               insertar_cancion($_SESSION['usuario'], $nombreCancion, $caratula, "0:00", $genero, $dirSubidaCancion.$nombreCancion, $premium);
+               //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
+               insertar_cancion($_SESSION['usuario'], $nombreCancionUsuario, "", "0:00", $genero, $nombreCancion, $premium);
             }
+
          }
+         else{
+            if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCaratula)){
+               if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
+                  //inserto en la bbdd
+                  //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
+                  insertar_cancion($_SESSION['usuario'], $nomCancion, $nombreCaratula, "0:00", $genero, $nombreCancion, $premium);
+               }
+            }
          //header('Location:'.htmlspecialchars($_SERVER['PHP_SELF']));
+         }
       }
       ?>
       <div id="container-principal">
@@ -87,13 +101,6 @@
                                        <input class="form-control" placeholder="Cancion *" id="ID_Cancion" type="text" name="nombreCancion">
                                     </div>
                                     <div class="alert alert-danger alertas-registro" id="ID_Error_Cancion"></div>
-                                 </div>
-                                 <div class="form-group">
-                                    <div class="input-group">
-                                       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                       <input class="form-control" placeholder="Artista *" id="ID_Artista" type="text" name="artista">
-                                    </div>
-                                    <div class="alert alert-danger alertas-registro" id="ID_Error_Artista"></div>
                                  </div>
                                  <div class="form-group">
                                     <div class="input-group">
@@ -148,13 +155,13 @@
                                        ?>
                                     </select>
                                     <?php
-                                    if($premium){
-                                       echo "<div class='form-group'>";
-                                       echo "<div class='checkbox'>";
-                                       echo "<label><input type='checkbox' name='premium'>Haz premium tu cancion</label>";
-                                       echo "</div>";
-                                       echo "</div>";
-                                    }
+										if($premium){
+										   echo "<div class='form-group'>";
+										   echo "<div class='checkbox'>";
+										   echo "<label><input type='checkbox' name='premium'>Haz premium tu cancion</label>";
+										   echo "</div>";
+										   echo "</div>";
+										}
                                     ?>
                                     <div class="form-group">
                                        <p>Los campos con * son obligatorios</p>

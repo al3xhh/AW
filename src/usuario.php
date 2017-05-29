@@ -3,8 +3,6 @@ session_start();
 
 if(!isset($_SESSION["usuario"]))
    header("Location: ../src/accesodenegado.html");
-if($_SERVER["REQUEST_METHOD"] == "POST")
-   header("Location: buscar.php?tipo=1&busqueda=".$_POST["busqueda"]);
 ?>
 
 <!DOCTYPE html>
@@ -46,9 +44,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             <div class="row">
                <div class="col-sm-6 col-sm-offset-3">
                   <div id="imaginary_container">
-                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" id="ID_Formulario">
+                     <form action="buscar.php" method="get" id="ID_Formulario">
                         <div class="input-group stylish-input-group">
                            <input type="text" class="form-control"  placeholder="Buscar" name="busqueda">
+                           <input type="hidden" value="1" name="tipo">
                            <span class="input-group-addon">
                               <button class="glyphicon glyphicon-search" type="submit"></button>
                            </span>

@@ -21,23 +21,6 @@ function validarCancion() {
     }
 }
 
-function validarArtista() {
-    "use strict";
-    
-	var artista = document.getElementById("ID_Artista");
-    var artista_val = artista.value;
-
-    if (artista_val.trim() === "") {
-        document.getElementById("ID_Error_Artista").style.display = "block";
-        document.getElementById("ID_Error_Artista").innerHTML = "Debes introducir el nombre del artista";
-        return false;
-    }
-	else {
-        document.getElementById("ID_Error_Artista").style.display = "none";
-        return true;
-    }
-}
-
 function validarImagen(){
 
 /*
@@ -80,9 +63,9 @@ function validarArchivoCancion(){
             document.getElementById("ID_Error_Archivo_Cancion").innerHTML = "Debes subir una cancion";
             return false;
 		}
-        else if(!(/\.(mp3|mp4|wav)$/i).test(uploadCancion)){
+        else if(!(/\.(mp3)$/i).test(uploadCancion)){
             document.getElementById("ID_Error_Archivo_Cancion").style.display = "block";
-            document.getElementById("ID_Error_Archivo_Cancion").innerHTML = "La extension de la cancion no se soporta. Solo mp3, mp4 y wav";
+            document.getElementById("ID_Error_Archivo_Cancion").innerHTML = "La extension de la cancion no se soporta. Solo mp3";
             return false;
         }
 		else if(cancion.size > 31457280){
@@ -115,7 +98,7 @@ function validarGenero(){
 function validarFormCancion(){
     "use strict";
 
-    var ok = (validarCancion() & validarArtista() & validarImagen() & validarArchivoCancion() & validarGenero());
+    var ok = (validarCancion() & validarImagen() & validarArchivoCancion() & validarGenero());
 
     if(ok == 0){
 		event.preventDefault();
@@ -132,9 +115,6 @@ function validarFormCancion(){
 $( document ).ready(function() {
     $("#ID_Cancion").bind("change", function () {
         validarCancion();
-    });
-    $("#ID_Artista").bind("change", function () {
-        validarArtista();
     });
     $("#ID_Imagen").bind("change", function () {
         validarImagen();

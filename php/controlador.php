@@ -194,8 +194,8 @@ function insertar_cancion($autor, $nombreCancion, $caratula, $duracion, $genero,
 	return insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium);
 }
 
-function actualizar_perfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
-	return actualizarPerfil($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre);
+function subir_archivo_renombrar($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){
+	return subirArchivoRenombrar($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre);
 }
 
 function actualizar_premium($usuario, $cuenta, $cvv, $fechaCad, $titular, $meses, $caducidadPremium){

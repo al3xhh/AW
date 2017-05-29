@@ -27,12 +27,14 @@
             if($pos === false) {
                session_start();
                $_SESSION['usuario'] = $correo;//HACER
+               $_SESSION['premium'] = es_premium($correo);//HACER
                header('Location: home.php');
             } else {
                $auxUsuario = conseguir_usuario_correo($correo);
                if($auxUsuario != NULL) {
                   session_start();
                   $_SESSION['usuario']=$auxUsuario;//HACER
+                  $_SESSION['premium'] = es_premium($auxUsuario);//HACER
                   header('Location: home.php');
                } else {
                   $errorUsuario = true;
