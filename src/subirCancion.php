@@ -56,14 +56,17 @@
          if($caratula == ""){
             $caratula = "CaratulaPorDefecto.jpg";
 
+         } else {
+            $caratula = $nombreCancionUsuario."_".$_SESSION['usuario']."_caratula.jpg";
          }
-            if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCancionUsuario."_".$_SESSION['usuario']."_caratula.jpg")){
-               if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
-                  //inserto en la bbdd
-                  //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
-                  insertar_cancion($_SESSION['usuario'], $nomCancion, $nombreCancionUsuario."_".$_SESSION['usuario']."_caratula.jpg", "0", $genero, $nombreCancion, $premium);
-               }
+         if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCancionUsuario."_".$_SESSION['usuario']."_caratula.jpg")){
+            if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
+               //inserto en la bbdd
+               //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
+
+               insertar_cancion($_SESSION['usuario'], $nombreCancionUsuario, $caratula, "0", $genero, $nombreCancion, $premium);
             }
+         }
       }
       ?>
       <div id="container-principal">
