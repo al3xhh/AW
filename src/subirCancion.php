@@ -37,7 +37,8 @@
 
          require_once("../php/controlador.php");
 
-         $nombreCancionUsuario = str_replace(" ", "_", validar_entrada($_POST['nombreCancion']));
+         $nombreCancionUsuario = validar_entrada($_POST['nombreCancion']);
+         $nombreCancionCaratulaArchivo = str_replace(" ", "_", validar_entrada($_POST['nombreCancion']));
          $genero = validar_entrada($_POST['genero']);
          $cancion = $_FILES['cancion']['name'];
          $dirTemporalCancion = $_FILES['cancion']['tmp_name'];
@@ -48,7 +49,7 @@
          $dirTemporalCaratula = $_FILES['imagenCancion']['tmp_name'];
 
 
-         $nombreCancion = $nombreCancionUsuario."_".$_SESSION["usuario"].".mp3";
+         $nombreCancion = $nombreCancionCaratulaArchivo."_".$_SESSION["usuario"].".mp3";
          //inserto en la base de datos la cancion
          //subir_archivo($archivo, $directorioTemporal, $directorioSubida)
          //subir_archivo_renombrar($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre)
@@ -57,9 +58,9 @@
             $caratula = "CaratulaPorDefecto.jpg";
 
          } else {
-            $caratula = $nombreCancionUsuario."_".$_SESSION['usuario']."_caratula.jpg";
+            $caratula = $nombreCancionCaratulaArchivo."_".$_SESSION['usuario']."_caratula.jpg";
          }
-         if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCancionUsuario."_".$_SESSION['usuario']."_caratula.jpg")){
+         if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCancionCaratulaArchivo."_".$_SESSION['usuario']."_caratula.jpg")){
             if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
                //inserto en la bbdd
                //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
