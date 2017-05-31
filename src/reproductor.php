@@ -73,6 +73,9 @@ if (!isset($_SESSION["usuario"])){
                   if (existe_cancion($titulo, $autor)){
                      $info = info_cancion($titulo, $autor);
                      aumentar_reproducciones($titulo, $autor);
+                     if (session_status() == PHP_SESSION_ACTIVE)
+                        aniadir_reproduccion($titulo, $autor, $_SESSION["usuario"]);
+                     
                   }
                   else
                      header("Location: accesodenegado.html");

@@ -22,8 +22,8 @@ function cerrarSesion(){
 //Función para conectar con la base de datos.
 function conectar() {
    //return new mysqli('127.0.0.1', 'id1792365_webmusic', 'webmusic', 'id1792365_webmusic');
-   //return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'webmusic');
-   return new mysqli('sql301.byethost11.com', 'b11_20160063', 'proyecto1995', 'b11_20160063_webmusic');
+   return new mysqli('127.0.0.1', 'root', '', 'webmusic');
+   //return new mysqli('sql301.byethost11.com', 'b11_20160063', 'proyecto1995', 'b11_20160063_webmusic');
 }
 
 //TODO quitarla de aquí y corregir todas las llamadas que se hagan
@@ -1117,4 +1117,24 @@ function cambiarFotoEncabezado($usuario, $archivo){
       return false;
    }
 }
+
+function aniadirReproduccion($titulo, $autor, $usuario){
+   $mysqli = conectar();
+   //cogemos el ID de la cancion
+   $stmt = $mysqli->prepare("SELECT id FROM cancion WHERE titulo = ? AND autor = ?");
+   $stmt->bind_param("ss", $titulo, $autor);
+   $stmt->execute();
+   $stmt->bind_result($id_cancion);
+   $stmt->fetch();
+   $stmt->close();
+   //insertamos la reproduccion
+   $stmt2 = $mysqli->prepare("INSERT INTO reproducciones (usuario, cancion) VALUES (?, ?)");
+   $stmt2->bind_param("si", $usuario, $id_cancion);
+   $stmt2->execute();
+   $stmt2->close();
+
+   desconectar($mysqli);
+
+}
+
 ?>

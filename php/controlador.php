@@ -213,4 +213,9 @@ function cambiar_foto_encabezado($usuario, $archivo){
 function es_premium($usuario){
 	return esPremium($usuario);
 }
+
+function aniadir_reproduccion($titulo, $autor, $usuario){
+   return aniadirReproduccion($titulo, $autor, $usuario);
+}
+
 ?>
