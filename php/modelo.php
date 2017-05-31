@@ -514,7 +514,7 @@ function esPremium($usuario) {
    $sql = "SELECT nombreusuario
             FROM usuarios
             JOIN premium ON usuario = nombreusuario
-            WHERE nombreusuario = ?";
+            WHERE nombreusuario = ? AND fechacaducidadpremium < (SELECT CURDATE())";
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
 
@@ -536,12 +536,12 @@ function esPremium($usuario) {
 
 function getInfoCancion($titulo, $autor){
    $mysqli = conectar();
-   $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo, caratula FROM cancion WHERE titulo = ? AND autor = ?");
+   $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo, caratula, premium FROM cancion WHERE titulo = ? AND autor = ?");
    $stmt->bind_param("ss", $titulo, $autor);
    $stmt->execute();
-   $stmt->bind_result($col1, $col2, $col3, $col4, $col5);
+   $stmt->bind_result($col1, $col2, $col3, $col4, $col5, $col6);
    $stmt->fetch();
-   $ret = array("autor" => $autor ,"titulo" => $titulo, "autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4, "caratula" => $col5);
+   $ret = array("titulo" => $titulo, "autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4, "caratula" => $col5, "premium" => $col6);
 
    desconectar($mysqli);
 
@@ -1135,6 +1135,43 @@ function aniadirReproduccion($titulo, $autor, $usuario){
 
    desconectar($mysqli);
 
+}
+
+function haSidoPremium($usuario) {
+   $mysqli = conectar();
+   $ret = False;
+   $sql = "SELECT nombreusuario
+            FROM usuarios
+            JOIN premium ON usuario = nombreusuario
+            WHERE nombreusuario = ?";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("s", $usuario);
+
+   if (!$stmt->execute()) {
+      $ret = false;
+   }
+
+   $resultado = $stmt->get_result();
+
+   if ($resultado->num_rows > 0) {
+      $ret = true;
+   }
+
+   $stmt->close();
+   $mysqli->close();
+
+   return $ret;
+}
+
+function pruebaPremium($usuario, $fecha_caducidad){
+   $mysqli = conectar();
+   $sql = "INSERT INTO premium (usuario, fechacaducidadpremium) VALUES (?, ?)";
+   $stmt = $mysqli->prepare($sql);
+   $stmt->bind_param("ss", $usuario, $fecha_caducidad);
+   $stmt->execute();
+
+   $stmt->close();
+   $mysqli->close();
 }
 
 ?>

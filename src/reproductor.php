@@ -72,6 +72,8 @@ if (!isset($_SESSION["usuario"])){
 
                   if (existe_cancion($titulo, $autor)){
                      $info = info_cancion($titulo, $autor);
+                     if ($info["premium"] && ((session_status() != PHP_SESSION_ACTIVE) || !$_SESSION["premium"]))
+                        echo "<script>window.location.replace('accesodenegado.html');</script>";
                      aumentar_reproducciones($titulo, $autor);
                      if (session_status() == PHP_SESSION_ACTIVE)
                         aniadir_reproduccion($titulo, $autor, $_SESSION["usuario"]);

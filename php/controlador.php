@@ -218,4 +218,12 @@ function aniadir_reproduccion($titulo, $autor, $usuario){
    return aniadirReproduccion($titulo, $autor, $usuario);
 }
 
+function ha_sido_premium($usuario){
+   return haSidoPremium($usuario);
+}
+
+function prueba_premium($usuario, $fecha_caducidad){
+   return pruebaPremium($usuario, $fecha_caducidad);
+}
+
 ?>

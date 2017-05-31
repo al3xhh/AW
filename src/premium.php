@@ -5,8 +5,9 @@ if (!isset($_SESSION["usuario"])){
    session_unset();
    session_destroy();
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-   if (isset($_POST["ID_Cuenta"])){
+   if (isset($_POST["ID_Usuario"]) && isset($_POST["ID_Cuenta"]) && isset($_POST["ID_CVV"]) && isset($_POST["ID_Fecha_Cad"]) && isset($_POST["ID_Titular"]) && isset($_POST["ID_Pass"]) && isset($_POST["ID_Num_meses"])){
       require_once("../php/controlador.php");
       $usuario = validarEntrada($_POST["ID_Usuario"]);
       $n_cuenta = validarEntrada($_POST["ID_Cuenta"]);
@@ -16,17 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       $contraseña = validarEntrada($_POST["ID_Pass"]);
       $n_meses = validarEntrada($_POST["ID_Num_meses"]);
       $fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + $n_meses, date("d"), date("Y")));
-   } else if (isset($_SESSION["usuario"])){
-      $usuario = validarEntrada($_POST["ID_Usuario"]);
-      $fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + 1, date("d"), date("Y")));
-   }
 
-   if (!aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium, $contraseña))
+      if (!aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium, $contraseña))
+         echo "<div class='alert alert-danger text-center'>
+                <h4>Se producido un erro. Revisa los datos introducidos</h4>
+            </div>";
+      else
+         header("Location: ".htmlspecialchars($_SERVER["PHP_SELF"]));
+   } 
+   else
       echo "<div class='alert alert-danger text-center'>
                 <h4>Se producido un erro. Revisa los datos introducidos</h4>
             </div>";
-   else
-      header("Location: ".htmlspecialchars($_SERVER["PHP_SELF"]));
 }
 ?>
 
@@ -95,10 +97,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             <div id="prueba-premium">
                <h2 class="title-premium">¡Pruebalo gratis durante un mes!</h2>
                <p class="premium-text-font p-premium">Si estas dudando si hacerte premium o no prueba gratis todas las ventajas que te ofrecemos durante un mes y convencete.</p>
+               <?php if(session_status() == PHP_SESSION_ACTIVE) : ?>
                <p class="premium-text-font p-premium">Solo tienes que pinchar en este botón.</p>
                <div class="col-sm-2 col-md-2 col-md-push-5 col-sm-push-5">
-                  <input type="submit" id="prueba-premium-btn" class="btn center-block btn-primary col-md-12" value="Prueba premium !">
+                  <form action="../php/prueba_premium.php" method="post">
+                     <input type="hidden" value="<?php echo $_SESSION['usuario'];?>" name="usuario">
+                     <input type="submit" id="prueba-premium-btn" class="btn center-block btn-primary col-md-12" value="Prueba premium !">
+                  </form>
                </div>
+               <?php else : ?>
+               <p class="premium-text-font p-premium">Debes <a href="login.php">iniciar sesion</a> para poder obtener el mes de prueba</p>
+               <?php endif; ?>
             </div>
             <!-- Fin prueba gratuita -->
 
@@ -111,11 +120,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                <p class="premium-text-font p-premium">Para hacerte premium ya, solo necesitas rellenar el siguiente formulario.</p>
                <div class="panel-body">
                   <form class="col-md-4 col-md-push-4" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return validarPremium()" id="premium-form">
-                     <!-- Campo de Nombre de usuario o correo elctronico -->
+                     <!-- Campo de Nombre de usuario -->
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                           <input form="premium-form" class="form-control" placeholder="Nombre de usuario o correo electronico*" name="ID_Usuario" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                           <input form="premium-form" class="form-control" placeholder="Nombre de usuario*" name="ID_Usuario" id="ID_Usuario" type="text" onchange="validarUsuario()">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
                      </div>
