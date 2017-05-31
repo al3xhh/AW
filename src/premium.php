@@ -7,9 +7,11 @@ if (!isset($_SESSION["usuario"])){
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
+   //comprobamos si tenemos todos los parametros
    if (isset($_POST["ID_Usuario"]) && isset($_POST["ID_Cuenta"]) && isset($_POST["ID_CVV"]) && isset($_POST["ID_Fecha_Cad"]) && isset($_POST["ID_Titular"]) && isset($_POST["ID_Pass"]) && isset($_POST["ID_Num_meses"])){
       require_once("../php/utils.php");
       require_once("../php/modelo.php");
+      //validamos los parametros
       $usuario = validarEntrada($_POST["ID_Usuario"]);
       $n_cuenta = validarEntrada($_POST["ID_Cuenta"]);
       $cvv =  validarEntrada($_POST["ID_CVV"]);
@@ -21,8 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       
       if (validarUsuario($usuario) && validarContrasenya($contraseña) && (strlen($n_cuenta) == 16) && (strlen($cvv) == 3) && checkdate($tokens_fecha[1], $tokens_fecha[2], $tokens_fecha[0]) && ($n_meses > 0) && (n_meses < 13)){
          require_once("../php/controlador.php");
+         //generamos la fecha de caducidad de la suscripcion
          $fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + $n_meses, date("d"), date("Y")));
 
+         //añadimos al usuario como premium
          if (!aniadir_premium($usuario, $n_cuenta, $cvv, $fecha_caducidad_cuenta, $titular, $n_meses, $fecha_caducidad_premium, $contraseña))
             echo "<div class='alert alert-danger text-center'>
                 <h4>Se producido un erro. Revisa los datos introducidos</h4>

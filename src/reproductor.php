@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
+//comprabamos si esta bien definida la session y si no la cerramos
 if (!isset($_SESSION["usuario"])){
    session_unset();
    session_destroy();
@@ -67,21 +68,29 @@ if (!isset($_SESSION["usuario"])){
                   <?php
                   require_once("../php/controlador.php");
                   require_once("../php/modelo.php");
+                  //cogemos el titulo y el autor de la cancion a reproducir
                   $titulo = validarEntrada($_GET["titulo"]);
                   $autor = validarEntrada($_GET["usuario"]);
 
+                  //comprobamos si existe la cancion
                   if (existe_cancion($titulo, $autor)){
                      $info = info_cancion($titulo, $autor);
+                     //comprobamos si el usuario puede reproducir esta cancion en concreto (si la cancion es premium y el usuario tambien)
                      if ($info["premium"] && ((session_status() != PHP_SESSION_ACTIVE) || !$_SESSION["premium"]))
                         echo "<script>window.location.replace('accesodenegado.html');</script>";
-                     aumentar_reproducciones($titulo, $autor);
-                     if (session_status() == PHP_SESSION_ACTIVE)
-                        aniadir_reproduccion($titulo, $autor, $_SESSION["usuario"]);
-                     
+                     //si la puede reproducir
+                     else{
+                        //aumentamos las reproducciones de la cancion
+                        aumentar_reproducciones($titulo, $autor);
+                        if (session_status() == PHP_SESSION_ACTIVE) //si el usuario esta registrado
+                           //añadimos la informacion de que ha escuchado esta cancion
+                           aniadir_reproduccion($titulo, $autor, $_SESSION["usuario"]);
+                     }
                   }
                   else
                      header("Location: accesodenegado.html");
-
+                  
+                  //mostramos la caratula de la cancion
                   if ($info["caratula"])
                      echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
                   else
@@ -90,7 +99,9 @@ if (!isset($_SESSION["usuario"])){
 
                </div>
                <div id="player-header-info">
+                  
                   <?php
+                  //cargamos el audio y mostramos la informacion de la cancion
                   echo "<audio src=../songs/".$info["archivo"]." id='song'></audio>";
                   echo "<p id='nombre_cancion'>".$_GET["titulo"]."</p>\n";
                   echo "<p id='autor'>".$info["autor"]."</p>";
@@ -98,7 +109,7 @@ if (!isset($_SESSION["usuario"])){
                   ?>
 
                   <?php if(isset($_SESSION["usuario"])) : ?>
-
+                  <!-- Si el usuario esta registrado mostramos la opcion de añadir la cancion a sus listas de reproduccion -->
                   <div class="form-group">
                      <label for="selList">Añadir a lista:</label>
                      <div class="col-md-12">
@@ -116,6 +127,7 @@ if (!isset($_SESSION["usuario"])){
                   </div>
 
                   <?php if(isset($_SESSION["premium"]) && ($_SESSION["premium"] == true)) : ?>
+                  <!-- Si el usuario es premium le damos la opcion de descargar la cancion -->
                   <div class="form-group">
                      <label for="selList">Descargar:</label>
                      <div class="col-md-12 container-fluid">
@@ -194,6 +206,7 @@ if (!isset($_SESSION["usuario"])){
             </div>
 
             <h3 id="comment-title" class="col-md-10 col-md-push-2">Comentarios</h3>
+            
             <?php if(isset($_SESSION["usuario"])) : ?>
             <div class="comment-content col-xs-12 col-md-8 col-md-push-2">
                <div class="row">
@@ -215,6 +228,7 @@ if (!isset($_SESSION["usuario"])){
                </div>
             </div>
             <?php endif; ?>
+            
             <div id="comentarios">
                <?php
                $comentarios = obtener_info_comentarios_cancion($_GET["titulo"], $_GET["usuario"]);
@@ -240,7 +254,6 @@ if (!isset($_SESSION["usuario"])){
                         </div>
                      </div>";
                }
-
                ?>
             </div>
          </div>
