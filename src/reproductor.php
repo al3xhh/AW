@@ -89,7 +89,7 @@ if (!isset($_SESSION["usuario"])){
                   }
                   else
                      header("Location: accesodenegado.html");
-                  
+
                   //mostramos la caratula de la cancion
                   if ($info["caratula"])
                      echo "<img src='../img/".$info["caratula"]."' width='150' height='150' alt='Imagen usuario'>";
@@ -99,7 +99,7 @@ if (!isset($_SESSION["usuario"])){
 
                </div>
                <div id="player-header-info">
-                  
+
                   <?php
                   //cargamos el audio y mostramos la informacion de la cancion
                   echo "<audio src=../songs/".$info["archivo"]." id='song'></audio>";
@@ -206,7 +206,7 @@ if (!isset($_SESSION["usuario"])){
             </div>
 
             <h3 id="comment-title" class="col-md-10 col-md-push-2">Comentarios</h3>
-            
+
             <?php if(isset($_SESSION["usuario"])) : ?>
             <div class="comment-content col-xs-12 col-md-8 col-md-push-2">
                <div class="row">
@@ -228,7 +228,7 @@ if (!isset($_SESSION["usuario"])){
                </div>
             </div>
             <?php endif; ?>
-            
+
             <div id="comentarios">
                <?php
                $comentarios = obtener_info_comentarios_cancion($_GET["titulo"], $_GET["usuario"]);
@@ -285,7 +285,7 @@ if (!isset($_SESSION["usuario"])){
                      <ul class="list">
                         <li><a href="mapa.php">Mapa del sitio</a></li>
                         <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
-                        <li><a href="#">Memoria</a></li>
+                        <li><a href="../Memoria_Grupo05_Webmusic.pdf" download>Memoria</a></li>
                      </ul>
                   </div>
                </div>

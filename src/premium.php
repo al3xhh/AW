@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       $titular = validarEntrada($_POST["ID_Titular"]);
       $contraseña = validarEntrada($_POST["ID_Pass"]);
       $n_meses = validarEntrada($_POST["ID_Num_meses"]);
-      
+
       if (validarUsuario($usuario) && validarContrasenya($contraseña) && (strlen($n_cuenta) == 16) && (strlen($cvv) == 3) && checkdate($tokens_fecha[1], $tokens_fecha[2], $tokens_fecha[0]) && ($n_meses > 0) && (n_meses < 13)){
          require_once("../php/controlador.php");
          //generamos la fecha de caducidad de la suscripcion
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
          echo "<div class='alert alert-danger text-center'>
                 <h4>Se producido un erro. Revisa los datos introducidos</h4>
             </div>";
-   } 
+   }
    else
       echo "<div class='alert alert-danger text-center'>
                 <h4>Se producido un erro. Revisa los datos introducidos</h4>
@@ -224,7 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      <ul class="list">
                         <li><a href="mapa.php">Mapa del sitio</a></li>
                         <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
-                        <li><a href="#">Memoria</a></li>
+                        <li><a href="../Memoria_Grupo05_Webmusic.pdf" download>Memoria</a></li>
                      </ul>
                   </div>
                </div>

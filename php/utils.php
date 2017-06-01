@@ -43,9 +43,4 @@
       }
    }
 
-   //Función para limpiar la entrada de cualquier caracter raro.
-   /*function validarEntrada($dato) {
-      return htmlspecialchars(trim(strip_tags($dato)));
-   }*/
-
  ?>

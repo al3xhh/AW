@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 require_once("../php/controlador.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                      <ul class="list">
                         <li><a href="mapa.php">Mapa del sitio</a></li>
                         <li><a href="https://github.com/christian7007/AW.git">GitHub</a></li>
-                        <li><a href="#">Memoria</a></li>
+                        <li><a href="../Memoria_Grupo05_Webmusic.pdf" download>Memoria</a></li>
                      </ul>
                   </div>
                </div>

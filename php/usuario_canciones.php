@@ -1,4 +1,6 @@
 <?PHP
+
+   //Script php utilizado por ajax para obtener las canciones del usuario dentro del perfil.
    require_once("modelo.php");
 
    if(isset($_POST['usuario']) && isset($_POST['limite'])) {
@@ -20,7 +22,7 @@
                    </div>
                 </div>';
          }
-         
+
          if($_POST['limite'] != "")
             echo '<p class="alert alert-info text-center" id="todasCanciones">Mostrar todas las canciones</p>';
       }
