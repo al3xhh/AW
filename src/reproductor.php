@@ -201,7 +201,7 @@ if (!isset($_SESSION["usuario"])){
                <div id="info-player">
                   <p id="reproducido" class="info-player-time">0:0</p>
                   <input id="player-progres" type="range" value="0" max="">
-                  <p class="info-player-time" id="duracion"><?php echo  floor($info["duracion"] / 60), ":", $info["duracion"] % 60; ?></p>
+                  <p class="info-player-time" id="duracion"></p>
                </div>
             </div>
 

@@ -2,7 +2,14 @@
 $(document).ready(function() {
    var path = $("#song").attr("src");
    var song = new Audio(path);
-   var duration = getDuration();
+   var duration;
+
+   $("#song").on("canplaythrough", function(e){
+      duration = Math.floor(e.currentTarget.duration);
+      minutes = Math.floor(duration / 60);
+      seconds = duration % 60;
+      $("#duracion").text(minutes + ":" + seconds);
+   });
 
    $("#playPauseButton").click(function(e) {
       e.preventDefault();
@@ -18,14 +25,14 @@ $(document).ready(function() {
          song.pause();
       }
    });
-   
+
    //si modificamos la posicion de la barra tambien modificamos el attr currentTime de la cancion
    $("#player-progres").change(function() {
       a = $("#player-progres").val();
       song.currentTime = a;
       $("#player-progres").attr("max", duration);
    });
-   
+
    //cada vez que se actualiza el tiempo de la cancion (se va reproduciendo) vamos moviendo la barra
    song.addEventListener("timeupdate", function() {
       curtime = parseInt(song.currentTime, 10);
@@ -34,7 +41,7 @@ $(document).ready(function() {
       seconds = curtime % 60;
       $("#reproducido").text(minutes + ":" + seconds)
    });
-   
+
    //cada vez que pulsamos el boton de enviar comentarios hacemos una peticion con ajax para añadirlo
    $("#comment-btn").click(function() {
       $.post("../php/enviar_comentario.php", {'texto' : $("#texto").val(), 'usuario' : $("#nombre_usuario").text(), 'cancion' : $("#nombre_cancion").text(), 'autor' : $("#autor").text()}, function(data){
@@ -44,7 +51,7 @@ $(document).ready(function() {
 
       return false;
    });
-   
+
    //cada vez que seleccionamos una lista de reproduccion hacemos una peticion con ajax para añadir la cancion a la lista
    $("#selList").change(function(){
       $.post("../php/aniadir_a_lista.php", {'lista' : $("#selList :selected").val(), 'cancion' : $("#nombre_cancion").text(), 'autor' : $("#autor").text(), 'usuario' : $("#nombre_usuario").text()}, function(data){
@@ -55,18 +62,6 @@ $(document).ready(function() {
    });
 
 });
-
-
-function getDuration(){
-   //obtenemos la duracion de la cancion
-   var tokens = $("#duracion").text().split(":"),
-       minutos = parseInt(tokens[0]),
-       segundos = parseInt(tokens[1]);
-
-   return minutos * 60 + segundos;
-
-}
-
 
 
 

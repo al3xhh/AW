@@ -22,7 +22,7 @@ function cerrarSesion(){
 //Función para conectar con la base de datos.
 function conectar() {
    //return new mysqli('127.0.0.1', 'id1792365_webmusic', 'webmusic', 'id1792365_webmusic');
-   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'webmusic');
+   return new mysqli('127.0.0.1', 'root', '', 'webmusic');
    //return new mysqli('sql301.byethost11.com', 'b11_20160063', 'proyecto1995', 'b11_20160063_webmusic');
 }
 
@@ -536,12 +536,12 @@ function esPremium($usuario) {
 
 function getInfoCancion($titulo, $autor){
    $mysqli = conectar();
-   $stmt = $mysqli->prepare("SELECT autor, duracion, numeroreproducciones, archivo, caratula, premium FROM cancion WHERE titulo = ? AND autor = ?");
+   $stmt = $mysqli->prepare("SELECT autor, numeroreproducciones, archivo, caratula, premium FROM cancion WHERE titulo = ? AND autor = ?");
    $stmt->bind_param("ss", $titulo, $autor);
    $stmt->execute();
-   $stmt->bind_result($col1, $col2, $col3, $col4, $col5, $col6);
+   $stmt->bind_result($col1, $col3, $col4, $col5, $col6);
    $stmt->fetch();
-   $ret = array("titulo" => $titulo, "autor"=>$col1, "duracion" => $col2, "nreproducciones" => $col3, "archivo" => $col4, "caratula" => $col5, "premium" => $col6);
+   $ret = array("titulo" => $titulo, "autor"=>$col1, "nreproducciones" => $col3, "archivo" => $col4, "caratula" => $col5, "premium" => $col6);
 
    desconectar($mysqli);
 
