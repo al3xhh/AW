@@ -74,7 +74,6 @@ if(!isset($_SESSION["usuario"])) {
                         <div class="col-md-2 col-md-push-2">Titulo</div>
                         <div class="col-md-1 col-md-push-2">Autor</div>
                         <div class="col-md-2 col-md-push-2">Fecha</div>
-                        <div class="col-md-1 col-md-push-2">Duracion</div>
                      </div>';
                foreach ($resultado as $fila) {
                   echo
@@ -84,7 +83,6 @@ if(!isset($_SESSION["usuario"])) {
    								<div class='col-md-2 col-md-push-2'><a class='link-home-carousel-and-search' href='reproductor.php?titulo=".$fila['titulo']."&usuario=".$fila['autor']."&lista=".$id."'>".$fila['titulo']."</a></div>
    								<div class='col-md-1 col-md-push-2'><a class='link-home-carousel-and-search' href='usuario.php'>".$fila['autor']."</a></div>
    								<div class='col-md-2 col-md-push-2'>".$fila['fecha']."</div>
-   								<div class='col-md-1 col-md-push-2'>".$fila['duracion']."</div>
    								<div class='col-md-1 col-md-push-2'>
    									<form action='../php/borrar_cancion_lista.php' method='post'>
    										<input type='hidden' name='id' value='".$id."' />

@@ -741,7 +741,7 @@ function listaReproduccion($usuario) {
 function listaReproduccionCanciones($id){
    $mysqli = conectar();
    $array = array();
-   $sql = "SELECT titulo, autor, fecha, duracion, id
+   $sql = "SELECT titulo, autor, fecha, id
             FROM cancion
             JOIN listareproduccioncancion ON cancion = id
             WHERE lista = ?
@@ -750,14 +750,13 @@ function listaReproduccionCanciones($id){
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("i", $id);
    $stmt->execute();
-   $stmt->bind_result($col1, $col2, $col3, $col4, $col5);
+   $stmt->bind_result($col1, $col2, $col3, $col4);
 
    while ($stmt->fetch()){
       $row = array("titulo" => $col1,
                    "autor" => $col2,
                    "fecha" => $col3,
-                   "duracion" => $col4,
-                   "id" => $col5);
+                   "id" => $col4);
       array_push($array, $row);
    }
 
