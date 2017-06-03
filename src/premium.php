@@ -133,12 +133,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                <h2 class="title-premium">¡Hazte premium ya!</h2>
                <p class="premium-text-font p-premium">Para hacerte premium ya, solo necesitas rellenar el siguiente formulario.</p>
                <div class="panel-body">
-                  <form class="col-md-4 col-md-push-4" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return validarPremium()" id="premium-form">
+                  <form class="col-md-4 col-md-push-4" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="premium-form">
                      <!-- Campo de Nombre de usuario -->
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                           <input form="premium-form" class="form-control" placeholder="Nombre de usuario*" name="ID_Usuario" id="ID_Usuario" type="text" onchange="validarUsuario()">
+                           <input form="premium-form" class="form-control" placeholder="Nombre de usuario*" name="ID_Usuario" id="ID_Usuario" type="text">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
                      </div>
@@ -146,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                           <input form="premium-form" class="form-control" placeholder="Número de cuenta *" name="ID_Cuenta" id="ID_Cuenta" type="text" onchange="validarCuenta()">
+                           <input form="premium-form" class="form-control" placeholder="Número de cuenta *" name="ID_Cuenta" id="ID_Cuenta" type="text">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_Cuenta"></div>
                      </div>
@@ -154,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                           <input form="premium-form" class="form-control" placeholder="CVV*" name="ID_CVV" id="ID_CVV" type="text" onchange="validarCVV()">
+                           <input form="premium-form" class="form-control" placeholder="CVV*" name="ID_CVV" id="ID_CVV" type="text">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_CVV"></div>
                      </div>
@@ -162,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                           <input form="premium-form" class="form-control" placeholder="Fecha de caducidad*" name="ID_Fecha_Cad" id="ID_Fecha_Cad" type="date" onchange="validarFechaCad()">
+                           <input form="premium-form" class="form-control" placeholder="Fecha de caducidad*" name="ID_Fecha_Cad" id="ID_Fecha_Cad" type="date">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_Fecha_Cad"></div>
                      </div>
@@ -170,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                           <input form="premium-form" class="form-control" placeholder="Nombre del titular de la cuenta*" name="ID_Titular" id="ID_Titular" type="text" onchange="validarTitular()">
+                           <input form="premium-form" class="form-control" placeholder="Nombre del titular de la cuenta*" name="ID_Titular" id="ID_Titular" type="text">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_Titular"></div>
                      </div>
@@ -178,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                           <input form="premium-form" class="form-control" placeholder="Contraseña *" name="ID_Pass" id="ID_Pass" type="password" onchange="validarContrasenya()">
+                           <input form="premium-form" class="form-control" placeholder="Contraseña *" name="ID_Pass" id="ID_Pass" type="password">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_Pass"></div>
                      </div>
@@ -186,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      <div class="form-group">
                         <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                           <input form="premium-form" class="form-control" placeholder="Número de meses *" name="ID_Num_meses" id="ID_Num_meses" type="text" onchange="validarMeses()">
+                           <input form="premium-form" class="form-control" placeholder="Número de meses *" name="ID_Num_meses" id="ID_Num_meses" type="text">
                         </div>
                         <div class="alert alert-danger alertas-registro" id="ID_Error_meses"></div>
                      </div>
