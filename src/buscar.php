@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../php/controlador.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
