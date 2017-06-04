@@ -42,5 +42,34 @@
          return False;
       }
    }
-
+   
+	//funcion para validar una foto por la extension
+	function validarFoto($nombre){
+		$patron = "%\.(jpg)$%i"; 
+		if(preg_match($patron, $nombre)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	function validarDescripcion($descripcion){
+		if(strlen($descripcion) > 130){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	function validarCancion($cancion){
+		$patron = "%\.(mp3)$%i";
+		if(preg_match($patron, $cancion)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
  ?>
