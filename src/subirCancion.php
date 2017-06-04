@@ -6,10 +6,8 @@
       session_start();
       if(!isset($_SESSION['usuario']))
          header('Location: login.php');
-      $premium = false;
-      if(es_premium($_SESSION['usuario'])){
-         $premium = true;
-      }
+      
+	  $premium = es_premium($_SESSION['usuario']);
       ?>
       <noscript>
          <meta http-equiv="refresh" content="0" url="errorJS.html">
@@ -33,9 +31,10 @@
    <body>
       <?php
       $okcancion = $okimagen = "";
+	  $nocaratula = false;
       if($_SERVER["REQUEST_METHOD"] == "POST"){
-
          require_once("../php/controlador.php");
+		 require_once("../php/utils.php");
 
          $nombreCancionUsuario = validar_entrada($_POST['nombreCancion']);
          $nombreCancionCaratulaArchivo = str_replace(" ", "_", validar_entrada($_POST['nombreCancion']));
@@ -44,7 +43,7 @@
          $dirTemporalCancion = $_FILES['cancion']['tmp_name'];
          $dirSubidaCancion = "../songs/";
 
-         $caratula = $_FILES['imagenCancion']['name'];
+         $caratula = validar_entrada($_FILES['imagenCancion']['name']);
          $dirSubidaImagen = "../img/";
          $dirTemporalCaratula = $_FILES['imagenCancion']['tmp_name'];
 
@@ -54,20 +53,27 @@
          //subir_archivo($archivo, $directorioTemporal, $directorioSubida)
          //subir_archivo_renombrar($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre)
 
-         if($caratula == ""){
-            $caratula = "CaratulaPorDefecto.jpg";
-
-         } else {
-            $caratula = $nombreCancionCaratulaArchivo."_".$_SESSION['usuario']."_caratula.jpg";
-         }
-         if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCancionCaratulaArchivo."_".$_SESSION['usuario']."_caratula.jpg")){
-            if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
-               //inserto en la bbdd
-               //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
-
-               insertar_cancion($_SESSION['usuario'], $nombreCancionUsuario, $caratula, "0", $genero, $nombreCancion, $premium);
-            }
-         }
+		 if(validarCancion($cancion)){
+			if($caratula == ""){
+				$caratula = "CaratulaPorDefecto.jpg";
+				$nocaratula = true;
+				$okimagen = true;
+			} 
+			else {
+				if(validarFoto($caratula)){
+					$caratula = $nombreCancionCaratulaArchivo."_".$_SESSION['usuario']."_caratula.jpg";
+					$okimagen = true;
+				}
+				else{
+					$okimagen = false;
+				}
+				
+			}
+			$okcancion = true;
+		 }
+		 else{
+			$okcancion = false;
+		 }
       }
       ?>
       <div id="container-principal">
@@ -79,7 +85,7 @@
          <!-- Fin barra superior -->
 
          <div><!-- Container principal que contiene todos los campos de inicio de sesion -->
-            <div class="row">
+			<div class="row">
                <div class="col-md-4 col-md-push-4">
                   <div class="panel panel-default">
                      <div class="panel-heading">Subir Cancion</div>
@@ -104,13 +110,13 @@
                                        <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
                                        <input class="form-control" id="ID_Imagen" type="file" name="imagenCancion" enctype="multipart/form-data">
                                     </div>
-                                    <div class="alert alert-danger alertas-registro" id="ID_Error_Imagen"></div>
+                                    <div class="alert alert-danger alertas-registro" id="ID_Error_Imagen">Si no pones imagen, se pondra una por defecto</div>
                                     <?php
-   if($okimagen != ""){
-      if(!$okimagen){
-         echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Imagen'>No se pudo subir la imagen</div>";
-      }
-   }
+									   if($okimagen != ""){
+										  if(!$okimagen){
+											 echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Imagen'>No se pudo subir la imagen</div>";
+										  }
+									   }
                                     ?>
                                  </div>
                                  <div class="form-group">
@@ -129,12 +135,29 @@
                                              echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Archivo_Cancion'>No se pudo subir la cancion</div>";
                                           }
                                           else{
-                                             //aqui se sube la cancion
-
+                                            if(!$nocaratula){
+												if(subir_archivo_renombrar($caratula, $dirTemporalCaratula, $dirSubidaImagen, $nombreCancionCaratulaArchivo."_".$_SESSION['usuario']."_caratula.jpg")){
+													if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
+													   //inserto en la bbdd
+													   //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
+													   insertar_cancion($_SESSION['usuario'], $nombreCancionUsuario, $caratula, $genero, $nombreCancion, $premium);
+													}
+												}
+											}
+											else{
+												if(subir_archivo_renombrar($cancion, $dirTemporalCancion, $dirSubidaCancion, $nombreCancion)){
+												   //inserto en la bbdd
+												   //insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium)
+												   insertar_cancion($_SESSION['usuario'], $nombreCancionUsuario, $caratula, $genero, $nombreCancion, $premium);
+												}
+											}												
                                           }
                                        }
                                     }
                                     ?>
+									<div class="input-group">
+											<audio class="form-control" id="duracion_cancion" name="duracion"></audio>
+									</div>
                                  </div>
                                  <div class="form-group">
                                     <label for="genero_cancion">Generos:</label>

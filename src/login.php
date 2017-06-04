@@ -11,7 +11,7 @@
       $pass = validar_entrada($_POST['password']);
       $correo = validar_entrada($_POST['usuario']);
 
-      if(strpos($correo, "@" ) !== false) {
+      if(strpos($correo, "@" ) !== false){
          if(!existeCorreo($correo))
             $errorUsuario = true;
       } else {
@@ -19,8 +19,7 @@
             $errorUsuario = true;
       }
 
-      if(!$errorUsuario)
-      {
+      if(!$errorUsuario){
          //autentico
          if(autenticar_con_correo($correo, $pass)) {
             $pos = strpos($correo, '@');
@@ -93,9 +92,9 @@
                                     </div>
                                     <div class="alert alert-danger alertas-registro" id="ID_Error_Usuario"></div>
                                     <?php
-   if($errorUsuario){
-      echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Usuario'>Correo/Usuario no registrado</div>";
-   }
+									   if($errorUsuario){
+										  echo "<div class='alert alert-danger alertas-registro' id='ID_Error_Usuario'>Correo/Usuario no registrado</div>";
+									   }
                                     ?>
                                  </div>
                                  <div class="form-group">
