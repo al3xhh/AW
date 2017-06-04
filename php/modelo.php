@@ -22,7 +22,7 @@ function cerrarSesion(){
 //Función para conectar con la base de datos.
 function conectar() {
    //return new mysqli('127.0.0.1', 'id1792365_webmusic', 'webmusic', 'id1792365_webmusic');
-   return new mysqli('127.0.0.1', 'root', '', 'webmusic');
+   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'webmusic');
    //return new mysqli('sql301.byethost11.com', 'b11_20160063', 'proyecto1995', 'b11_20160063_webmusic');
 }
 
