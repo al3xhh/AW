@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       $contraseña = validarEntrada($_POST["ID_Pass"]);
       $n_meses = validarEntrada($_POST["ID_Num_meses"]);
 
-      if (validarUsuario($usuario) && validarContrasenya($contraseña) && (strlen($n_cuenta) == 16) && (strlen($cvv) == 3) && checkdate($tokens_fecha[1], $tokens_fecha[2], $tokens_fecha[0]) && ($n_meses > 0) && (n_meses < 13)){
+      if (validarUsuario($usuario) && validarContrasenya($contraseña) && (strlen($n_cuenta) == 16) && (strlen($cvv) == 3) && checkdate($tokens_fecha[1], $tokens_fecha[2], $tokens_fecha[0]) && ($n_meses > 0) && ($n_meses < 13)){
          require_once("../php/controlador.php");
          //generamos la fecha de caducidad de la suscripcion
          $fecha_caducidad_premium = date("Y-m-d", mktime(0, 0, 0, date("m") + $n_meses, date("d"), date("Y")));

@@ -36,7 +36,6 @@ $(document).ready(function() {
    });
    
    $("#premium-form").submit( function(e){
-      e.preventDefault();
       return validarPremium();
    });
    
