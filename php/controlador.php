@@ -190,8 +190,8 @@ function subir_archivo($archivo, $directorioTemporal, $directorioSubida){
 	return subirArchivo($archivo, $directorioTemporal, $directorioSubida);
 }
 
-function insertar_cancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium){
-	return insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium);
+function insertar_cancion($autor, $nombreCancion, $caratula, $genero, $archivo, $premium){
+	return insertarCancion($autor, $nombreCancion, $caratula, $genero, $archivo, $premium);
 }
 
 function subir_archivo_renombrar($archivo, $directorioTemporal, $directorioSubida, $nuevoNombre){

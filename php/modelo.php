@@ -22,8 +22,8 @@ function cerrarSesion(){
 //Función para conectar con la base de datos.
 function conectar() {
    //return new mysqli('127.0.0.1', 'id1792365_webmusic', 'webmusic', 'id1792365_webmusic');
-   return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'webmusic');
-   //return new mysqli('sql301.byethost11.com', 'b11_20160063', 'proyecto1995', 'b11_20160063_webmusic');
+   //return new mysqli('127.0.0.1', 'webmusic', 'webmusic', 'webmusic');
+   return new mysqli('sql301.byethost11.com', 'b11_20160063', 'proyecto1995', 'b11_20160063_webmusic');
 }
 
 //TODO quitarla de aquí y corregir todas las llamadas que se hagan
@@ -242,7 +242,7 @@ function tusTopSocial($usuario) {
 
 //Función que obtiene los gustos musicales del usuario.
 function obtenerGustosMusicales($usuario) {
-   $mysqli = conectar();
+     $mysqli = conectar();
    $array = array();
    $sql = "SELECT genero
             FROM gustos
@@ -253,16 +253,15 @@ function obtenerGustosMusicales($usuario) {
    $stmt->execute();
 
    $stmt->bind_result($col1);
-
+	$ret = array();
    while ($stmt->fetch()){
-      $row = array("genero" => $col1);
-      array_push($array, $row);
+	array_push($ret, $col1);
    }
 
    $stmt->close();
    $mysqli->close();
 
-   return $array;
+   return $ret;
 }
 
 //Función que obtiene la foto, el encabezado y la descripción del usuario
@@ -450,15 +449,27 @@ function obtenerTop() {
    $stmt = $mysqli->prepare($sql);
    $stmt->execute();
 
-   obtenerArray($stmt, $array, "titulo", "autor", "caratula");
+   $resultado = $stmt->get_result();
 
-   $sql = "SELECT titulo, autor, caratula
-            FROM cancion
-            WHERE autor NOT IN (SELECT usuario
-                                 FROM premium
-                                 WHERE usuario = autor)
-            ORDER BY numeroreproducciones DESC
-            LIMIT 2";
+   if ($resultado->num_rows > 0) {
+      obtenerArray($stmt, $array, "titulo", "autor", "caratula");
+
+      $sql = "SELECT titulo, autor, caratula
+               FROM cancion
+               WHERE autor NOT IN (SELECT usuario
+                                    FROM premium
+                                    WHERE usuario = autor)
+               ORDER BY numeroreproducciones DESC
+               LIMIT 2";
+   } else {
+      $sql = "SELECT titulo, autor, caratula
+               FROM cancion
+               WHERE autor NOT IN (SELECT usuario
+                                    FROM premium
+                                    WHERE usuario = autor)
+               ORDER BY numeroreproducciones DESC
+               LIMIT 4";
+   }
 
    $stmt = $mysqli->prepare($sql);
    $stmt->execute();
@@ -486,15 +497,28 @@ function obtenerNovedades() {
    $stmt = $mysqli->prepare($sql);
    $stmt->execute();
 
-   obtenerArray($stmt, $array, "titulo", "autor", "caratula");
+   $resultado = $stmt->get_result();
 
-   $sql = "SELECT titulo, autor, caratula
-            FROM cancion
-            WHERE autor NOT IN (SELECT usuario
-                                 FROM premium
-                                 WHERE usuario = autor)
-            ORDER BY fecha DESC
-            LIMIT 2";
+   if ($resultado->num_rows > 0) {
+
+      obtenerArray($stmt, $array, "titulo", "autor", "caratula");
+
+      $sql = "SELECT titulo, autor, caratula
+               FROM cancion
+               WHERE autor NOT IN (SELECT usuario
+                                    FROM premium
+                                    WHERE usuario = autor)
+               ORDER BY fecha DESC
+               LIMIT 2";
+   } else {
+      $sql = "SELECT titulo, autor, caratula
+               FROM cancion
+               WHERE autor NOT IN (SELECT usuario
+                                    FROM premium
+                                    WHERE usuario = autor)
+               ORDER BY fecha DESC
+               LIMIT 4";
+   }
 
    $stmt = $mysqli->prepare($sql);
    $stmt->execute();
@@ -514,7 +538,7 @@ function esPremium($usuario) {
    $sql = "SELECT nombreusuario
             FROM usuarios
             JOIN premium ON usuario = nombreusuario
-            WHERE nombreusuario = ? AND fechacaducidadpremium < (SELECT CURDATE())";
+            WHERE nombreusuario = ? AND fechacaducidadpremium > (SELECT CURDATE())";
    $stmt = $mysqli->prepare($sql);
    $stmt->bind_param("s", $usuario);
 
@@ -954,6 +978,14 @@ function autenticarUsuarioConCorreo($correo, $pass){
    }
 }
 
+function insertarNuevoGeneroUsuario($usuario, $genero){
+	$mysqli = conectar();
+	$stmt = $mysqli->prepare("INSERT INTO gustos (usuario, genero) VALUES (?,?)");
+	$stmt->bind_param("ss", $usuario, $genero);
+	$stmt->execute();
+	$mysqli->close();
+}
+
 function cambiarEmail($usuario, $correo){
    $con = conectar();
    if($con != NULL){
@@ -1041,18 +1073,18 @@ function conseguirUsuarioCorreo($correo){
    return $col1;
 }
 
-function insertarCancion($autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium){
+function insertarCancion($autor, $nombreCancion, $caratula, $genero, $archivo, $premium){
 
    $con = conectar();
    if($con != NULL){
-      $sql = "INSERT INTO cancion(autor, titulo, caratula, duracion, genero, archivo, premium) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO cancion(autor, titulo, caratula, genero, archivo, premium) VALUES (?, ?, ?, ?, ?, ?)";
       $result = $con->prepare($sql);
       if($premium == "on")
          $premium = true;
       else
          $premium = false;
 
-      $result->bind_param("sssssss", $autor, $nombreCancion, $caratula, $duracion, $genero, $archivo, $premium);
+      $result->bind_param("ssssss", $autor, $nombreCancion, $caratula, $genero, $archivo, $premium);
       $result->execute();
       $rows = $result->get_result();
       return true;
@@ -1115,6 +1147,18 @@ function cambiarFotoEncabezado($usuario, $archivo){
    else{
       return false;
    }
+}
+
+function borrarGenerosUsuario($usuario){
+	$mysqli = conectar();
+	if($mysqli != NULL){
+		$stmt = $mysqli->prepare("DELETE FROM gustos WHERE usuario = ?");
+		$stmt->bind_param("s", $usuario);
+		$stmt->execute();
+		$mysqli->close();
+		return true;
+	}
+	return false;
 }
 
 function aniadirReproduccion($titulo, $autor, $usuario){
